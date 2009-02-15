@@ -1,0 +1,24 @@
+02-09-2009 15:26:51 | --------------------------------------------
+02-09-2009 15:26:51 | Truevision3D Debug/Log File
+02-09-2009 15:26:51 | --------------------------------------------
+02-09-2009 15:26:51 | Engine Version : 6.5
+02-09-2009 15:26:51 | ENGINE INFO : DLL Compilation time Nov 18 2008 18:58:52
+02-09-2009 15:26:51 | DEVICE INIT : Initialize Depth
+02-09-2009 15:26:51 | DEVICE INIT : Initializing the device in windowed mode, with a render surface size of 426x259, format 22, depthbuffer 75
+02-09-2009 15:26:51 | VIEWPORT MANAGER : Main viewport initialization
+02-09-2009 15:26:51 | VIEWPORT MANAGER : Main viewport initialized (426x259)
+02-09-2009 15:26:51 | DEVICE INIT : Initialization successful !
+02-09-2009 15:26:51 | DEVICE INFO :  3D Card : NVIDIA GeForce 9600 GT  | Card ID : 1570 | Driver ID : 728720
+02-09-2009 15:26:51 | DEVICE INFO : Available texture memory : 722 MB
+02-09-2009 15:26:51 | DEVICE INFO : Vertex Shaders 3.0 supported in hardware.
+02-09-2009 15:26:51 | Debug info : vs fffe0300  ps ffff0300 
+02-09-2009 15:26:51 | DEVICE INFO : Pixel Shaders 3.0 supported in hardware.
+02-09-2009 15:26:51 | DEVICE INFO : Driver used is a DirectX9-level driver 'nv4_disp.dll'. Excellent
+02-09-2009 15:26:51 | DEVICE INFO : Card Type Geforce6xxx/7xxx/8xxx/ATIRadeonX1xxx  Level card, third generation of programmable card
+02-09-2009 15:26:51 | TEXTURE MANAGER : Loading of 'smallGrid.bmp' successful 'Grid' on index 2 
+02-09-2009 15:26:51 | TEXTURE MANAGER : Loading of 'smallGridWall.bmp' successful 'Wall' on index 3 
+02-09-2009 15:26:52 | TEXTURE MANAGER : Loading of 'cinza.bmp' successful 'cinza.bmp' on index 4 
+02-09-2009 15:26:52 | TEXTURE MANAGER : Loading of 'nokia.bmp' successful 'nokia.bmp' on index 5 
+02-09-2009 15:26:52 | TEXTURE MANAGER : Loading of 'teclas.bmp' successful 'teclas.bmp' on index 6 
+02-09-2009 15:26:52 | TEXTURE MANAGER : Loading of 'cam_pekena.bmp' successful 'cam_pekena.bmp' on index 7 
+02-09-2009 15:26:52 | MESH MANAGER : Loading of mesh file 'N70.X' succeeded in 1266 ms ( 87750 faces, 61942 vertices ) ID 1
