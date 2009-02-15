@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>ChartFX.WinForms.Adornments</name>
+  </assembly>
+  <members>
+    <member name="P:ChartFX.WinForms.Adornments.GradientBackground.Angle">
+      <summary>Sets the gradient angle when using the 'Angled' gradient background.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Adornments.GradientBackground.Colors">
+      <summary>Gets or sets the colors to be used for a gradient background.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Adornments.GradientBackground.ColorFrom">
+      <summary>Gets or sets the beginning color of a gradient.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Adornments.GradientBackground.ColorTo">
+      <summary>Ending color of a gradient.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Adornments.GradientBackground.EffectArea">
+      <summary>Gets or sets a value indicating the percentage of chart area affected by a GradientBackground.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Adornments.GradientBackground.Factor">
+      <summary>Specifies the percentages of the starting color and the ending color to use at the corresponding position for two color gradients.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Adornments.GradientBackground.Position">
+      <summary>Allows you to specify positions along the gradient background to correspond with color and factor attributes.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Adornments.GradientBackground.Type">
+      <summary>Sets the style of the gradient for a selected gradient background.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.Adornments.GradientBackground.Draw(System.Drawing.Graphics,System.Drawing.Rectangle,System.Drawing.Color)">
+      <summary>Draws a Chart FX GradientBackground on a selected device context.</summary>
+      <param name="g">A Graphics object is associated with a specific device context.</param>
+      <param name="r">A Rectangle object specifying the desired position and size of the gradient.</param>
+      <param name="clrExternal">The external color for the gradient.</param>
+    </member>
+    <member name="P:ChartFX.WinForms.Adornments.ImageBackground.BackColor">
+      <summary>Gets or sets the background color when an ImageBackground object uses a picture with transparency.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Adornments.ImageBackground.Image">
+      <summary>Gets or sets a image for the ImageBackground object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Adornments.ImageBackground.Mode">
+      <summary>Gets or sets the rendering style for the image used as the ImageBackground.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.Adornments.ImageBackground.Draw(System.Drawing.Graphics,System.Drawing.Rectangle,System.Drawing.Color)">
+      <summary>Draws a Chart FX ImageBackground on a selected device context.</summary>
+      <param name="g">A Graphics object is associated with a specific device context.</param>
+      <param name="r">A Rectangle object specifying the desired position and size of the border.</param>
+      <param name="clrExternal">The external color for the Image Background.</param>
+    </member>
+    <member name="P:ChartFX.WinForms.Adornments.ImageBorder.Color">
+      <summary>Gets or sets the color of the border.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Adornments.ImageBorder.Type">
+      <summary>Gets or sets the type for the image border.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.Adornments.ImageBorder.Draw(System.Drawing.Graphics,System.Drawing.Rectangle,System.Drawing.Color)">
+      <summary>Draws a Chart FX ImageBorder on a selected device context.</summary>
+      <param name="g">A Graphics object is associated with a specific device context.</param>
+      <param name="r">A Rectangle object specifying the desired position and size of the border.</param>
+      <param name="clrExternal">The color for the Image border.</param>
+    </member>
+  </members>
+</doc>

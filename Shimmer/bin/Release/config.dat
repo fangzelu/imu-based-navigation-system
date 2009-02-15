@@ -1,0 +1,10 @@
+device(0-SensorNode, 1-Wiimote, 2-MotionNode): 2
+data buffer size:128
+sensor data length in one package:6
+package number in one receive time:3
+gyro calibration count:128
+gyro anchor window size:128
+accel calibration count:128
+accel anchor window size:128
+mag calibration count:512
+mag anchor window size:128

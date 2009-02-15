@@ -1,0 +1,1564 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>ChartFX.WinForms</name>
+  </assembly>
+  <members>
+    <member name="P:ChartFX.WinForms.Attributes3D.AngleX">
+      <summary>Gets or Sets the 3D rotation angle around the X-axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Attributes3D.AngleY">
+      <summary>Gets or Sets a 3D rotation angle around the Y-axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Attributes3D.BoxThickness">
+      <summary>Gets or Sets the thickness for the box surrounding the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Attributes3D.Cluster">
+      <summary>Displays a z-clustered 3D chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Attributes3D.Depth">
+      <summary>Gets or Sets the thickness along the Z-axis for the series.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Attributes3D.Enabled">
+      <summary>Gets or Sets a value indicating whether 3D effects should be applied.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Attributes3D.Perspective">
+      <summary>Allows you to set a 3D perspective to control the view of the chart depth. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Attributes3D.Rotated">
+      <summary>Gets or Sets a value indicating the chart is Rotated.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Attributes3D.Shadow">
+      <summary>Gets or Sets a value indicating the type of shading to display when rotating the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.AutoScale">
+      <summary>Instructs Chart FX to always recalculate the specified Axis scale values (Min, Max) when new values are set to the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.AutoScroll">
+      <summary>Enables or disables scrolling in an Axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.CustomSteps">
+      <summary>Allows you to set a custom step for the selected axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.CustomGridLines">
+      <summary>Gets the collection of CustomGridLines that belong to the Chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.DataFormat">
+      <summary>Used to format the data displayed on point labels and tool tips shown at a mouseover.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.FirstLabel">
+      <summary>Gets or sets a value used to customize the first label displayed on a selected axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.Font">
+      <summary>Allows you to change the label Font attributes of the selected axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.ForceZero">
+      <summary>Used to set the minimum value of a numerical axis to zero even if the data minimum value does not start at zero.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.Horizontal">
+      <summary>Returns a boolean value specifying whether the select axis is a horizontal or vertical axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.Inverted">
+      <summary>Sets a selected numerical axis max value lesser than the min value.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.KeyLabels">
+      <summary>Used to assign a key (short) legend to tickmarks in a categorical axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.LabelAngle">
+      <summary>Sets the text rotation for the labels in the selected axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.Labels">
+      <summary>Allows you to get or set tick marks labels for the selected axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.LabelsFormat">
+      <summary>Used to format the labels displayed on the selected axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.LabelValue">
+      <summary>Allows you to set associate text labels to major tick marks in a numerical axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.Line">
+      <summary>Allows you to apply supported Line class members to a selected axis line.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.LineSpacing">
+      <summary>Gets or sets a value indicating the LineSpacing for an axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.LogBase">
+      <summary>Used to set a logarithmic scale for a numerical axis and recalculate the values as powers equal to the setting of this property.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.Max">
+      <summary>Defines the maximum value of a specific axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.Min">
+      <summary>Defines the minimum value of a selected axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.MinorStep">
+      <summary>Specifies the increment you want between minor tick marks and minor gridlines (if they are displayed) on the selected axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.Notify">
+      <summary>Used to enable or disable the GetAxisLabel event so you can customize labels on the specified axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.PixelsPerUnit">
+      <summary>Gives you the ability to control how many pixels per unit are there in the selected axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.Position">
+      <summary>Specifies the placement of the axis labels and tick marks relative to the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.ScaleUnit">
+      <summary>Returns or sets the scale unit of a selected axis. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.ScrollPosition">
+      <summary>Allows you to set the starting scroll position when a chart is scrollable.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.ScrollSize">
+      <summary>Returns the number of scrolls in a chart based on the scroll view configuration.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.Sections">
+      <summary>Returns a selected AxisSection object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.Separation">
+      <summary>Allows you to specify a gap in pixels between multiple axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.Staggered">
+      <summary>Alternates the level of the axis labels for the selected axis labels.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.Step">
+      <summary>Specifies the interval of major tick marks and gridlines on the selected axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.Style">
+      <summary>Allows you to add additional styles to the selected axis.   </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.Title">
+      <summary>Gets or sets the title for a specific axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Axis.Visible">
+      <summary>Shows or hides the lines, labels, tick marks and grids for the selected axis.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.Axis.AdjustScale">
+      <summary>Adjusts the selected axis to "nice" scale values.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.Axis.GetScrollView(System.Double,System.Double)">
+      <summary>Used to retrieve values set by the SetScrollView method.</summary>
+      <param name="min">Variable (passed by reference) that will store the min value or where the scroll bar begins.</param>
+      <param name="max">Variable (passed by reference) that will store the max value or where the view (scroll bar) ends.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Axis.PixelToValue(System.Int32)">
+      <summary>Converts a position in pixels in the chart area to its representation on the respective axis.</summary>
+      <param name="xyPixel">An integer specifying the pixel value to be converted.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Axis.ResetScale">
+      <summary>Prepares the selected axis to receive new data by resetting scale values.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.Axis.SetScrollView(System.Double,System.Double)">
+      <summary>Creates a scroll bar to view a portion of the selected axis.</summary>
+      <param name="min">Where the view (scroll bar) begins.</param>
+      <param name="max">Where the view (scroll bar) ends.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Axis.ValueToPixel(System.Double)">
+      <summary>Converts a value to its position in pixels on a selected axis.</summary>
+      <param name="value">A double specifying the point value to be converted.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Axis.Zoom(System.Double,System.Double)">
+      <summary>Allows you to specify a min and max zoom value for a selected axis.  </summary>
+      <param name="min">Starting point of the zoom range.</param>
+      <param name="max">Ending point of the zoom range.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Axis.ZoomOff">
+      <summary>Allows you to ignore any zoom attributes set using the Zoom method and return to the default axis view.  </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.AxisSection.BackColor">
+      <summary>Gets or Sets the AxisSection background color.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.AxisSection.FontStyle">
+      <summary>Gets or Sets additional font attributes to the axis section.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.AxisSection.From">
+      <summary>Gets or sets a value indicating the beginning value of the range for a selected AxisSection object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.AxisSection.Point">
+      <summary>Gets or sets a value indicating the point a AxisSection is associated.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.AxisSection.Series">
+      <summary>Gets or Sets a value indicating the series a AxisSection is associated.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.AxisSection.Text">
+      <summary>Gets or Sets the text string for a selected BaseAxisSection object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.AxisSection.To">
+      <summary>Gets or Sets a value indicating the ending value of the range the axis section.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.AxisSection.Visible">
+      <summary>Shows or hides the selected axis section.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.AxisSectionBase.Grids">
+      <summary>Allows customization of grid lines by providing access to the supported members of the Grids class.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.AxisSectionBase.Link">
+      <summary>Gets the Link object for a selected BaseAxisSection item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.AxisSectionBase.TextColor">
+      <summary>Gets or Sets the color for text of a selected BaseAxisSection object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.AxisY.Pane">
+      <summary>Gets or sets an integer value specifying the Pane for an Y Axis object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.BorderAttributes.BetweenSegments">
+      <summary>Gets or Sets a property which makes the border to be shown between segments.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.BorderAttributes.Color">
+      <summary>Gets or Sets the color of the border of a point marker.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.BorderAttributes.Effect">
+      <summary>Gets or Sets a BorderEffect for point marker border.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.BorderAttributes.Style">
+      <summary>Gets or Sets a DashStyle for the point marker border</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.BorderAttributes.UseForLines">
+      <summary>Get or set a property which applies the Border attributes to the lines of a line chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.BorderAttributes.Visible">
+      <summary>Gets or Sets a value making the border visible or not.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.BorderAttributes.Width">
+      <summary>Gets or Sets a value setting the width in pixels.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Bubble.MaximumBubbleSize">
+      <summary>Gets or Sets the maximum size a bubble can be in the Bubble chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CellAttributes.BackColor">
+      <summary>Sets the background color for a particular Cell or entire Row in the DataGrid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CellAttributes.BorderColor">
+      <summary>Allows you to set the color of the border for a particular Cell or entire Row in the DataGrid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CellAttributes.BorderWidth">
+      <summary>Allows you to set the width of the Cell border in pixels for a particular Cell or entire Row in the DataGrid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CellAttributes.FontStyle">
+      <summary>Allows you to set the style of the font for a particular Cell or entire Row in the DataGrid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CellAttributes.TextColor">
+      <summary>Allows you to set the text color for a particular Cell or entire Row in the DataGrid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.AllowChanges">
+      <summary>Enables or prevents the end user from altering data.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.AllowDrag">
+      <summary>Enables or prevents the end user from dragging a marker with the mouse to change its value.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.AllSeries">
+      <summary>Gets the global attributes which are shared across the series of the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Antialiasing">
+      <summary>Gives a smooth visual effect to the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.AxesStyle">
+      <summary>Used to change the style of the axes.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.AxesX">
+      <summary>Returns the collection of the X axes of the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.AxesY">
+      <summary>Returns the collection of the Y axes of the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.AxisX">
+      <summary>Assigns properties specifically to the primary X axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.AxisY">
+      <summary>Assigns properties specifically to the primary Y axis of the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.AxisY2">
+      <summary>Assigns properties specifically to the secondary Y axis of the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.BackColor">
+      <summary>Gets or sets the background color of the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Background">
+      <summary>Allows you to assign a gradient to the background of a chart. FillMode needs to be set to Gradient.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Border">
+      <summary>Gets or Sets a default or image border to the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.ChartAreaRectangle">
+      <summary>Gets the rectangle object for the chart area.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Commands">
+      <summary>Gets the list of commands associated with the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.ConditionalAttributes">
+      <summary>Returns the collection of  ConditionalAttributes objects.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.ContextMenus">
+      <summary>Allows you to enable or disable context sensitive menus when the user right clicks a particular Chart FX element.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Crosshairs">
+      <summary>Enables or Disables the cross-hairs marker in the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Culture">
+      <summary>Allows you to localize charts for a specific language and region.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Data">
+      <summary>Allows you to set the y values. Altarnativelly, the y-values can be access through the &lt;a href="DataValues_Y"&gt;Y property of the &lt;a href="DataValues"&gt;DataValues&lt;class&gt;Text&lt;/class&gt;.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.DataGrid">
+      <summary>Gets the Data Grid of the chart. The Data Gird is a spreadsheet that shows the data points in tabular format.  When shown, it allows the user to see both the chart and the grid at the same time.  </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.DataSource">
+      <summary>Gets or Sets the source containing the values used to populate the chart. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.DataSourceSettings">
+      <summary>Used to assign data related attributes to your chart applications.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Dirty">
+      <summary>Returns a boolean specifying if the chart has been modified by the user.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.ExportImageSize">
+      <summary>Gets or sets the image dimensions for exported chart images.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Extensions">
+      <summary>Collection used to add, clear and assign Chart FX extension objects.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.ExtraStyle">
+      <summary>Allows you to set additional visual attributes in the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.FileContents">
+      <summary>Gets or sets the attributes to save in chart files (Export method).</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Font">
+      <summary>Gets or Sets the font type which will be used by default in the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.ForeColor">
+      <summary>Gets or Sets the default font color of the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Gallery">
+      <summary>Sets the gallery type of the chart. The gallery type can also be accessed through the AllSeries property.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.GalleryAttributes">
+      <summary>Used to create a gallery object to assign additional attributes to the selected gallery type of the chart. The gallery attribute can also be accessed through the AllSeries property.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Highlight">
+      <summary>Allows you to customized how all the series of the chart are highlighted. To highlight a series in a chart, simply hover the mouse over a desired series while this property is set to true.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.LegendBox">
+      <summary>Allows you to acces the legend box of the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.MainPane">
+      <summary>Gets the default pane of the chart. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.MenuBar">
+      <summary>Allows you to access the menu bar of the chart. Alternativelly, you can access the tool bar of the chart using ToolBar.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.PageColor">
+      <summary>Allows you to specify a form background color needed to fill areas around image border shadowing.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Palette">
+      <summary>Allows you to set a Chart FX pre-defined palette. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Panes">
+      <summary>Returns the collection of the defined panes of the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Personalize">
+      <summary>Allows you to set the preferences for saving and loading personalized charts.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.PlotAreaBackground">
+      <summary>Allows you to assign a gradient to the inside area of a chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.PlotAreaColor">
+      <summary>Gets and Sets the color of the PlotAreaBackground. Alternatively, the color can be access using the Color property of the PlotAreaBackground object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.PlotAreaMargin">
+      <summary>Gets and Sets the top, bottom, left and right gaps of the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Points">
+      <summary>Assigns properties directly to a specific point in the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Printer">
+      <summary>Allows you to set properties of the printer object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.RealTime">
+      <summary>Allows access to the RealTimeSettings class supported members used to create real-time charts.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Series">
+      <summary>Assigns properties directly to the selected series in the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.TemplateContents">
+      <summary>Gets or sets the attributes to save in personalization features and template files (Export method).</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Titles">
+      <summary>Returns the collection of titles defined in the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.ToolBar">
+      <summary>Allow to acces the tool bar of the chart.  Alternativelly, you can access the tool bar of the chart using MenuBar.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.ToolTipFormat">
+      <summary>Allows you to control the information to be displayed in the tooltip when the user positions the mouse over a particular data point in the chart.  Alternativelly, this property can be access through the PointLabels property of the AllSeries property.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.ToolTips">
+      <summary>Allows you to enable or disable tooltips when the user positions the mouse over a particular Chart FX element in the chart area only. Tooltips allow the user to easily recognize the appropriate Chart FX element.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.View3D">
+      <summary>Allows you to enable or disable 3D view of the chart.  Also permits to customize the 3D view.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Chart.Zoom">
+      <summary>Allows you to select a section of the chart using the mouse cursor and zoom in that area.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.ExpandMacros(System.String,System.Int32,System.Int32,System.Boolean)">
+      <summary>Returns the mask string for a selected point or line in a chart.</summary>
+      <param name="mask">Speicifies the mask string.  (May be null value.)</param>
+      <param name="series">Specifies the Series.</param>
+      <param name="point">Specifies the Point.</param>
+      <param name="inPoint">Specifies to return the mask of the Point or the line between the Points.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.Export(ChartFX.WinForms.FileFormat,System.String)">
+      <summary>Allows you to export the chart to a data file or stream.</summary>
+      <param name="format">The available formats the export can handle.</param>
+      <param name="fileName">The location of the file where to export the chart.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.Export(ChartFX.WinForms.FileFormat)">
+      <summary>Allows you to export the chart to a data file or stream.</summary>
+      <param name="format">The available formats the export can handle.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.Export(ChartFX.WinForms.FileFormat,System.IO.Stream)">
+      <summary>Allows you to export the chart to a data file or stream.</summary>
+      <param name="format">The available formats the export can handle.</param>
+      <param name="stream">A stream where to store the exported chart.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.Export(System.IO.Stream)">
+      <summary>Allows you to export the chart to a data file or stream.</summary>
+      <param name="stream">A stream where to store the exported chart.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.Focus">
+      <summary>Returns a boolean specifying if the chart has the focus in your application.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.HitTest(System.Int32,System.Int32)">
+      <summary>Used to simulate a mouse click on a specific X, Y coordinate of the chart to check which element is found on that particular position.</summary>
+      <param name="x">An integer specifying the X coordinate where you want to simulate the mouse click.</param>
+      <param name="y">An integer specifying the Y coordinate where you want to simulate the mouse click.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.HitTest(System.Int32,System.Int32,System.Boolean)">
+      <summary>Used to simulate a mouse click on a specific X, Y coordinate of the chart to check which element is found on that particular position.</summary>
+      <param name="x">An integer specifying the X coordinate where you want to simulate the mouse click.</param>
+      <param name="y">An integer specifying the Y coordinate where you want to simulate the mouse click.</param>
+      <param name="screenCoordinates">If true, the X and Y coordinates are related to the screen. Otherwise, the coordinates are related to the chart.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.Import(ChartFX.WinForms.FileFormat,System.String)">
+      <summary>Allows you to import a chart from a file or stream.</summary>
+      <param name="format">The available formats the export can handle.</param>
+      <param name="fileName">The location of the file where to import the chart.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.Import(System.IO.Stream)">
+      <summary>Allows you to import a chart from a file or stream.</summary>
+      <param name="stream">A stream where to import the exported chart.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.Import(ChartFX.WinForms.FileFormat,System.IO.Stream)">
+      <summary>Allows you to import a chart from a file or stream.</summary>
+      <param name="format">The available formats the export can handle.</param>
+      <param name="stream">A stream where to store the exported chart.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.MarkerToPixel(System.Int32,System.Int32)">
+      <summary>Returns a point storing the position in pixel of a specified chart marker.</summary>
+      <param name="series">An integer specifying the series.</param>
+      <param name="point">An integer specifying the point.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.Paint(System.Drawing.Graphics,System.Drawing.Rectangle,ChartFX.WinForms.PaintFlags)">
+      <summary>Allows you to paint the chart in a given device context.</summary>
+      <param name="g">Indicates the Graphics object used to paint.</param>
+      <param name="r">Rectangle to be painted.</param>
+      <param name="paintFlags">The style used to paint the area.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.RecalculateScale">
+      <summary>Resets and recalculates all scale values.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.Reset">
+      <summary>Resets the chart to its orgininal state.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.SetMessageText(System.String,System.String)">
+      <summary>Allows you to customize default Chart FX strings which are displayed in the chart.</summary>
+      <param name="key">Pre-defined message identifier.</param>
+      <param name="message">The new string value for the message.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.ShowPropertiesDialog(System.Object,System.Int32)">
+      <summary>Prompts the chart property dialog at run-time.</summary>
+      <param name="context">Object context to open the properties dialog.</param>
+      <param name="pageNumber">Tab index in the dialog to display.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.UpdateSizeNow">
+      <summary>Allows you to force a scale calculation before the chart is drawn.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.Chart.ZoomToPercentage(System.Int32)">
+      <summary>Zooms the chart to center based on configured percentage value.</summary>
+      <param name="percentage">The percentage to zoom.</param>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.ChangedByUser">
+      <summary>Occurs when a user changes any attribute in the chart via the tool bar, the &lt;a href="Chart_MenuBar"&gt;menu bar, or the context menu of the &lt;a href="Chart"&gt;chart.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.ConditionalAttributesCallback">
+      <summary>Occurs when conditions are re-evaluated within the ConditionalAttributes object.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.DataChangedByUser">
+      <summary>Occurs when data or labels are changed by the user through the DataGrid.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.DoubleClick">
+      <summary>Occurs when the control is double-clicked.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.GetAxisLabel">
+      <summary>Occurs before an axis label is painted.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.GetPointLabel">
+      <summary>Occurs before a point label is painted.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.GetTip">
+      <summary>Occurs before a tooltip is about to appear in the chart area.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.Highlighting">
+      <summary>Occurs when a chart element is highlighting.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.InternalCommand">
+      <summary>Occurs when the user presses any of the default commands of the ToolBar, MenuBar, or context menu of the Chart.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.MouseClick">
+      <summary>Occurs when the mouse pointer is over the control and a mouse button is clicked.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.MouseDoubleClick">
+      <summary>Occurs when the mouse pointer is over the control and a mouse button is double clicked.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.MouseDown">
+      <summary>Occurs when the mouse pointer is over the control and a mouse button is pressed.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.MouseMove">
+      <summary>Occurs when the mouse pointer is moved over the control.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.MouseUp">
+      <summary>Occurs when the mouse pointer is over the control and a mouse button is released.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.PaintMarker">
+      <summary>Occurs when a marker is being painted.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.PostPaint">
+      <summary>Occurs right after the chart control is redrawn.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.PrePaint">
+      <summary>Occurs right before the chart control is redrawn.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.PrePaintMarker">
+      <summary>Occurs before a marker is going to be painted.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.ProcessUrl">
+      <summary>Occurs when a URL is being processed in the chart.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.UserCommand">
+      <summary>Occurs when the user interacts with proprietary items in the ToolBar or the &lt;a href="Chart_MenuBar"&gt;MenuBar.  Proprietary items being commands created by the programmer, not a default Chart FX command.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.UserScroll">
+      <summary>Occurs when the end user presses any of the scroll bar arrows or drags the thumb to a desired position.</summary>
+    </member>
+    <member name="E:ChartFX.WinForms.Chart.UserZoom">
+      <summary>Occurs when user zooms on chart.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.ColorBlender.NextColor">
+      <summary>Gets the next available gradient color from the blend.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.ColorBlender.StartBlending">
+      <summary>Resets the blender.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Command.Checked">
+      <summary>Gets or Sets a value used to check or uncheck a command in the commands list.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Command.Enabled">
+      <summary>Gets or Sets a value to enable or disable a command from the commands list.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Command.ID">
+      <summary>Gets the unique identifier of the command item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Command.ImageIndex">
+      <summary>Gets or Sets the picture (icon) associated with a command.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Command.Predefined">
+      <summary>Gets a value specifying if a command is pre-defined or user-defined.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Command.Script">
+      <summary>Gets or sets the name of a client side JavaScript function to call for a custom command.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Command.Style">
+      <summary>Allows you to set the style for a command item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Command.SubCommands">
+      <summary>Returns the SubCommandCollection for a command.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Command.Text">
+      <summary>Gets or Sets the text associated with the command.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Condition.Active">
+      <summary>Gets or Sets a value indicating whether the specified ConditionalAttribute is enabled or disabled.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Condition.DataElement">
+      <summary>Gets or sets the data value that the specified ConditionalAttribute will evaluate.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Condition.From">
+      <summary>Gets or Sets a value indicating the beginning value of the conditional range for a selected ConditionalAttributes object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Condition.FromOpen">
+      <summary>Gets or Sets a value indicating whether or not to include the configured From value in the range.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Condition.Inverse">
+      <summary>Gets or Sets a value indicating whether to reverse the configured To and From attributes for a selected ConditionalAttributes object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Condition.To">
+      <summary>Gets or Sets a value indicating the ending value of the conditional range for a selected ConditionalAttributes object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Condition.ToOpen">
+      <summary>Gets or Sets a value indicating whether or not to include the configured To value in the range.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.Condition.Evaluate(System.Double)">
+      <summary>Returns a boolean indicating whether or not the configured condition is met for a specified value.</summary>
+      <param name="value">Value to Evaluate.</param>
+    </member>
+    <member name="P:ChartFX.WinForms.ConditionalAttributes.Condition">
+      <summary>Returns a Condition object for the specified ConditionalAttributes object.  </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ConditionalAttributes.Series">
+      <summary>Gets or Sets a value indicating which series index the ConditionalAttribute will be applied.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ConditionalHighlightAttributes.Condition">
+      <summary>Sets the condition to highlight points in the chart relative to the value of the CustomGridLine.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ConditionalHighlightAttributes.Point">
+      <summary>Sets  a specific point to be highlighted by the CustomGridLine</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ConditionalHighlightAttributes.Series">
+      <summary>Sets the  series that will be highlighted by the CustomGridLine  </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Curve.Native">
+      <summary>When sets to false, ChartFX internal algorithm will be used to draw curves. Otherwise, the Text&lt;/env&gt; native algorithm will be used.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Curve.Tension">
+      <summary>Gets or sets the Tension variable for the Cubic Spline curve algorithm.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomGridLine.Alignment">
+      <summary>Sets or get the Alignment for the Label in the CustomGridLine.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomGridLine.Font">
+      <summary>Gets or Sets the Font utilized for the Label within the CustomGridLine.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomGridLine.Highlight">
+      <summary>Returns a HighlightCustomGridLineAttributes object for a CustomGridLine.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomGridLine.LineAlignment">
+      <summary>Gets or Sets the alignment for the Text line relative to the CustomeGridLine.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomGridLine.Link">
+      <summary>Gets the Link Object for a selected CustomGridLine.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomGridLine.OutsideText">
+      <summary>Gets or Set the OutsideText which controls the positioning of the CustomGridLine label outside the chart area.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomGridLine.ShowLine">
+      <summary>Gets or Set the ShowLine, which shows or hides the CustomGridLine line.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomGridLine.ShowText">
+      <summary>Gets or Set the Showtext, which shows or hides the CustomGridLine text.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomGridLine.Text">
+      <summary>Gets or Set the Text for a label in a CustomGridLine.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomGridLine.TextColor">
+      <summary>Gets or Set the Text Colot for a label in a CustomGridLine.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomGridLine.Value">
+      <summary>Gets or Sets the Value for the CustomGridLine;</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomLegendItem.AlternateColor">
+      <summary>Gets or Sets the background color of a custom legend item marker when a pattern is configured using the MarkerShape  property. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomLegendItem.Attributes">
+      <summary>Gets or Sets the PointAttributes object for the custom legend item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomLegendItem.Border">
+      <summary>Gets a BorderAttributes object allowing you to modify the border properties for this CustomLegendItem.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomLegendItem.Color">
+      <summary>Gets or Sets the Color for the marker of the Custoem Legend Item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomLegendItem.Link">
+      <summary>Gets a Link object allowing you to associate a url to the Custom legend box item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomLegendItem.MarkerShape">
+      <summary>Gets or Sets the shape of the marker.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomLegendItem.Pattern">
+      <summary>Gets or Sets a HatchStyle pattern for the marker of the custom item. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomLegendItem.Picture">
+      <summary>Gets or Sets an image to be used as a marker for the legend item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomLegendItem.ShowLine">
+      <summary>Gets or Sets a value used to display a line marker for the custom item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.CustomLegendItem.Text">
+      <summary>Gets or Sets the text string of the custom legend item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.BackColorData">
+      <summary>Sets the background color of the cells on the data grid.  </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.BackColorDataAlternate">
+      <summary>Assigns the alternate color for displaying the DataGrid rows or columns.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.BackColorHeader">
+      <summary>Sets the background color of the header for the Data Editor.  </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.Cells">
+      <summary>Gets the collection of CellAttributes that belong to the DataGrid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.ContentLayout">
+      <summary>Allows you to align the data editor in the bottom of the chart area.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.Font">
+      <summary>Allows you to set the font used throughout the data grid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.HideXValues">
+      <summary>Used to hide the XValues in the data editor of an XY plot chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.Highlight">
+      <summary>Returns a HighlightDataGridAttributes object for the DataGrid.  </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.HorizontalGridColor">
+      <summary>Allows you to set the Horizontal color for the gridlines displayed in the data grid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.Interlaced">
+      <summary>Alternates the background color of on the data grid to improve readability.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.MaxSizePercentage">
+      <summary>Allows you to specify the maximum percentage of the chart area the data editor may occupy.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.ReadOnly">
+      <summary>Permits values to be changed through the data grid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.ScrollPosition">
+      <summary>Scrolls the data horizontally to the specific column in the Grid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.ScrollSize">
+      <summary>Returns the number of scrolls in the DataEditor based on the scroll view configuration.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.ShowHeader">
+      <summary>Gets or Sets a value indicating the header of the columns should be visible or not.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.ShowHiddenSeries">
+      <summary>Gets or Sets a value indicating hidden series should be visible in data editor.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.ShowMarkers">
+      <summary>Gets or Sets a value indicating if serie markers should be visible in the serie headers.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.TextColorData">
+      <summary>Sets the text color of the cells on the data grid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.TextColorDataAlternate">
+      <summary>Sets the alternate text color for text in the data grid cells.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.TextColorHeader">
+      <summary>Gets or Sets the text color of the headers on the data editor. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.UseRawData">
+      <summary>Gets or sets a value indicating whether to use raw data or use calculated values in the DataEditor.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.VerticalGridColor">
+      <summary>Allows you to select the Vertical line color for the gridline displayed at the data editor box.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataGrid.XValuesAsHeaders">
+      <summary>Gets or sets a value instructing that XValues be used as the headers in the data editor.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataSourceSettings.DataSource">
+      <summary>Gets or Sets the source containing the values used to populate the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataSourceSettings.Fields">
+      <summary> Returns a collection of FieldMap objects. Those objects allows you to configure how ChartFX will store the data provided by the DataProvider.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataSourceSettings.LabelSeparator">
+      <summary>Gets or Sets a value defining the label separator character used when concatenating labels.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataSourceSettings.Style">
+      <summary>Controls how Chart FX plots the fields in the resultset.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.DataSourceSettings.ReloadData">
+      <summary>Reloads the chart data from the current configured datasource.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataValues.AggressiveAllocation">
+      <summary>Gets or Sets a value indicating ChartFX should agreesively allocate space for future values.  This increases performance at the cost of additional memory usage.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataValues.Compacted">
+      <summary>Gets a value indicating whether or not the data is compacted.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataValues.CompactedBy">
+      <summary>Gets or sets a value indicating the interval of units to compress data.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataValues.InitializeHidden">
+      <summary>Gets or Sets a value indicating to intialize all non-initialized values to hidden value.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataValues.InterpolateHidden">
+      <summary>Gets or sets a value specifying to draw a connecting line over a missing data point.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataValues.Item">
+      <summary>Provides access to the Y value for the specific series and point.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataValues.Labels">
+      <summary>Provides access to label collection of the main x-axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataValues.Points">
+      <summary>Gets or Sets a value indicating the number of series allocated for the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataValues.Series">
+      <summary>Gets or Sets a value indicating the number of series allocated for the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataValues.X">
+      <summary>Allows you to set X-Values for specific point of XY plots.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataValues.Y">
+      <summary>Allows you to access the Y coordinates of the data points.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DataValues.YFrom">
+      <summary>Allows you to set the starting Y-value for a specific value on the chart.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.DataValues.Clear">
+      <summary>Clears all the data values in the chart.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.DataValues.CommitChanges">
+      <summary>Finalizes chart data and invokes selected data related tasks.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.DataValues.Compact(System.Double)">
+      <summary>Compacts the data in order to display more summarized information.</summary>
+      <param name="step">The number of points to agregate while compacting data.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.DataValues.RecalcScale">
+      <summary>Recalculates the scale of the chart based on the data available.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.DataValues.UndoCompact">
+      <summary>If the data is compacted, this method uncompacts the data and shows all values.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DockableBar.AutoSize">
+      <summary>Allows Chart FX to calculate the best size according to the tool position.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DockableBar.BackColor">
+      <summary>Gets or Sets a value for the background color of a dockable bar.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DockableBar.Border">
+      <summary>Allows the developer to specify the border style.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DockableBar.Dock">
+      <summary>Sets the position of the data grid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DockableBar.Height">
+      <summary>Gets or Sets the height of the dockable bar in pixels.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DockableBar.Visible">
+      <summary>Gets or Sets a value indicating the Dockablebar object should be shown or not.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DockableBar.Width">
+      <summary>Sets the height in pixels.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.DockableBar.ZOrder">
+      <summary>Gets or sets the z-order for a dockable bar.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.FieldMap.DisplayName">
+      <summary>Gets or sets the name of the field which will be displayed by the Chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.FieldMap.Name">
+      <summary>Gets or sets the name of the ResultSet's field related to the FieldMap. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.FieldMap.Usage">
+      <summary>Gets or sets the usage of the related column of the ResultSet.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.GlobalAttributes.AlternateColor">
+      <summary>Gets or sets the Alternate Color for a all the Series.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.GlobalAttributes.AxisX">
+      <summary>Assigns properties specifically to the primary X axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.GlobalAttributes.AxisY">
+      <summary>Assigns properties specifically to the Y axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.GlobalAttributes.Color">
+      <summary>Gets or sets the color for all series.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.GlobalAttributes.Gallery">
+      <summary>Gets and sets the chart type for all Series. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.GlobalAttributes.Horizontal">
+      <summary>Gets or sets a value specifying to transpose X and Y axes in a chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.GlobalAttributes.Link">
+      <summary>Gets the Link object for the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.GlobalAttributes.MultipleColors">
+      <summary>Gets and sets the Multiple colors to allow for independently colored data points.  </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.GlobalAttributes.Pane">
+      <summary>Gets or sets the Pane which will be used by the series by default.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.GlobalAttributes.Pattern">
+      <summary>Gets or sets the Pattern for all the series in a chart.  </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.GlobalAttributes.PointLabelOrganizer">
+      <summary>Gets a PointLabelOrganizer object for point label customization.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.GlobalAttributes.Stacked">
+      <summary>Gets or sets the Stacked style in the chart. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.GridLine.TickMark">
+      <summary>Gets or sets the style for the tick marks of an GridLine object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.GridLine.Visible">
+      <summary>Gets or sets a value indicating whether the grid line for the selected Gridline will be visible.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Grids.Interlaced">
+      <summary>Creates a grid of alternating colors for a selected axis to improve chart readability.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Grids.InterlacedColor">
+      <summary>Gets or sets the AlternateColor for a selected Grids object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Grids.Major">
+      <summary>Provides access to the GridLine class to customize the Mayor Grid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Grids.Minor">
+      <summary>Provides access to the GridLine class to customize the Minor Grid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HighlightAttributes.Dimmed">
+      <summary>Gets or sets a value indicating whether the non-selected series will dim (in color) when a series is highlighted.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HighlightAttributes.Enabled">
+      <summary>Gets or sets a value indicating whether the highlighting feature will be enabled in the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HighlightAttributes.PointAttributes">
+      <summary>Returns the PointAttributes object for a highlighted series.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HighlightAttributes.Speed">
+      <summary>Gets or sets a value indicating the time delay before action is taken to show the highlighted state of a series.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.HighlightAttributes.ClearHighlight(System.Object)">
+      <summary>Remove any highlighting applied to the chart.</summary>
+      <param name="sender">that is the source of the event.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.HighlightAttributes.Dispose">
+      <summary>Releases the unmanaged resources used by the object. If the object is disposed,  the attributes will no longer be stored in memory.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.HighlightAttributes.HighlightItem(System.Object,ChartFX.WinForms.HighlightEventArgs)">
+      <summary>Highlights a selected chart element by configuring the args parameter.</summary>
+      <param name="sender">Gets the source of the event.</param>
+      <param name="args">Gets the data related to the event.</param>
+    </member>
+    <member name="P:ChartFX.WinForms.HighlightCustomGridLineAttributes.HighlightValues">
+      <summary>Gets or sets a value specifying what chart values are highlighted when a Highlight event is raised for a CustomGridLine object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HighlightCustomGridLineAttributes.Point">
+      <summary>Gets or sets the point index to highlight when the Highlight event is raised for a CustomGridLine object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HighlightCustomGridLineAttributes.Series">
+      <summary>Gets or sets the series index to highlight when the Highlight event is raised for a CustomGridLine object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HighlightDataGridAttributes.BorderColor">
+      <summary>Gets or sets the BorderColor for the hightlighted point's grid cell in the data grid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HighlightDataGridAttributes.Color">
+      <summary>Gets or sets the Color for the hightlighted grid cell in the data grid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HighlightDataGridAttributes.DataCells">
+      <summary>Gets or sets a value indicating the what will be highlighted in the chart when a cell in the DataEditor is highlighted.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HighlightDataGridAttributes.DimText">
+      <summary>Gets or sets a value indicating whether the text in the non-selected data cells will be dimmed when the other data cells are highlighted.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HighlightDataGridAttributes.FontStyle">
+      <summary>Gets or sets additional font attributes to a highlighted cell of the data grid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HighlightDataGridAttributes.Immediate">
+      <summary>Gets or sets a value indicating that the highlight action will occur immediately.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HighlightDataGridAttributes.TextColor">
+      <summary>Gets or sets the color for text of a highlighted cell of the data grid.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HighlightLegendAttributes.Enabled">
+      <summary>Gets or sets a value indicating whether the highlighting feature will be enabled in the selected ChartFX tool.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HitTestEventArgs.AbsoluteLocation">
+      <summary>Gets the Point value hit when the event occurred.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HitTestEventArgs.Handled">
+      <summary>Gets or sets a value specifying if the developer has handled the raised event.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HitTestEventArgs.HitType">
+      <summary>Gets the element type hit when the event occurred.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HitTestEventArgs.Object">
+      <summary>Gets the object hit when the event occurred.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HitTestEventArgs.Point">
+      <summary>Gets the Point index hit when the event occurred.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HitTestEventArgs.Series">
+      <summary>Gets the Series index hit when the event occurred.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.HitTestEventArgs.Value">
+      <summary>Gets the value of the hit when and the HitType is Axis.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ImageSettings.EmbeddedMap">
+      <summary>Allow you to render an image map embedded with the displayed image.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ImageSettings.Interactive">
+      <summary>Allow you to render dynamic html combined with a image.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ImageSettings.Sizeable">
+      <summary>Allows to stretch the generated image if the image dimension and the dimension at the Chart level differ.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ImageSettings.ToolTips">
+      <summary>Allows you to control how ToolTip will appear in the chart area.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LegendBox.ContentLayout">
+      <summary>Allows you to align the content for the legend box. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LegendBox.CustomItems">
+      <summary>Returns the collection of the custom items in the legend box.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LegendBox.Font">
+      <summary>Gets or Sets the font of the Legend Box.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LegendBox.Highlight">
+      <summary>Returns a HighlightLegendAttributes object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LegendBox.ItemAttributes">
+      <summary>Returns a collection of LegendItemAttributes.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LegendBox.MarginX">
+      <summary>Gets or sets a value specifying the margin width for a LegendBox.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LegendBox.MarginY">
+      <summary>Gets or sets a value specifying the margin height for a LegendBox.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LegendBox.PlotAreaOnly">
+      <summary>Allows the legend box margins to go outside of the chart's drawing area.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LegendBox.Style">
+      <summary>Gets or Sets the style of the legend box.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LegendBox.TextColor">
+      <summary>Gets or Sets the color used for the text in the legend box.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LegendBox.Titles">
+      <summary>Returns or sets a title object for the legend box.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.LegendBox.SizeToFit">
+      <summary>Calculates and sets the best-fit size for the legend box.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LegendItemAttributes.FontStyle">
+      <summary>Gets or Sets the font style for the legend box item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LegendItemAttributes.Inverted">
+      <summary>Gets or Sets a value allowing you to invert the order of the LegendBox Items.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LegendItemAttributes.OrderIndex">
+      <summary>Gets or Sets the index for ordering the legend  box items.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LegendItemAttributes.TextColor">
+      <summary>Gets or Sets a value allowing you to set the text color for the legend item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LegendItemAttributes.Visible">
+      <summary>Gets or Sets a value allowing you hide or show the legend item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Line.Color">
+      <summary>Sets or Gets the line color for a selected line.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Line.EndCap">
+      <summary>Gets or Sets a marker shape at the ending of a selected line.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Line.StartCap">
+      <summary>Gets or Sets a marker shape at the beginning of a selected line.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Line.Style">
+      <summary>Gets or Sets the line style for a selected line.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Line.Width">
+      <summary>Gets or Sets the line width for a selected line.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LineAttributes.EndCap">
+      <summary>Gets or Sets a marker shape at the end of a PointAttribute's Line.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LineAttributes.StartCap">
+      <summary>Gets or Sets a marker shape at the start of a PointAttribute's Line.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LineAttributes.Style">
+      <summary>Gets or Sets the style for a PointAttribute's Line.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.LineAttributes.Width">
+      <summary>Gets or Sets the width for a PointAttribute's Line.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Link.Url">
+      <summary>Gets or sets a URL for a Link object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Margins.Bottom">
+      <summary>Gets or Sets the distance in pixels between the bottom border of the bounding rectangle and the bottom border of the plot area of the chart.  </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Margins.Left">
+      <summary>Gets or Sets the distance in pixels between the left border of the bounding rectangle and the left border of the plot area of the chart.  </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Margins.Right">
+      <summary>Gets or Sets the distance in pixels between the right border of the bounding rectangle and the right border of the plot area of the chart.  </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Margins.Top">
+      <summary>Gets or Sets the distance in pixels between the top border of the bounding rectangle and the top border of the plot area of the chart.  </summary>
+    </member>
+    <member name="M:ChartFX.WinForms.Margins.Reset">
+      <summary>Resets the margings between the bounding rectangle and the plot area of the chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pane.Axes">
+      <summary>Provides access to the Y Axis Collection for the selected Pane.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pane.AxisY">
+      <summary>Provides access to the members of the main Y Axis for the selected Pane.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pane.BackColor">
+      <summary>Gets or sets the inside color for the selected pane.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pane.Background">
+      <summary>Gets or sets an ImageBackground or GradientBackground object for a pane.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pane.BoundingRectangle">
+      <summary>Returns a rectangle object that contains attributes for the selected pane.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pane.Proportion">
+      <summary>Gets or sets a value indicating the proportional size of the selected pane.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pane.Separation">
+      <summary>Gets or sets a value indicating the space in between panes.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pane.Title">
+      <summary>Gets the Title object for a selected chart pane.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pane.Visible">
+      <summary>Gets or Sets a value indicating the Pane object should be shown or not.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PersonalizeAttributes.AutoLoad">
+      <summary>Allow you to enable or disable the automatic loading of the chart personalization. When AutoLoad is set to True, the personalized features are automatically loaded when the chart is created. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PersonalizeAttributes.AutoSave">
+      <summary>Gets or Sets a value indicating to enable or disable the automatic saving of the chart attributes. When AutoSave&lt;/bold&gt; is set to True, the personalized features are automatically saved when the chart is destroyed. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PersonalizeAttributes.CanRestore">
+      <summary>Returns True if the original chart can be restored. By default, returns False but it will return True as soon as the end-user modifies any attribute of the chart or a saved chart is loaded.  </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PersonalizeAttributes.EnableRestore">
+      <summary>Allow you to enable the restoration of the chart. When the user makes the first visual change to the chart through the UI, the original chart is saved in memory if EnableRestore is set to True.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PersonalizeAttributes.Name">
+      <summary>Allows you to set the personalization name of the chart.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.PersonalizeAttributes.Dispose">
+      <summary>Releases the unmanaged resources used by the object. If the object is disposed,  the attributes will no longer be stored in memory.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.PersonalizeAttributes.Load">
+      <summary>Apply any previously saved personalizations to the chart. Returns False if there are no personalizations saved, returns True otherwise.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.PersonalizeAttributes.RestoreDefault">
+      <summary>Clears all the transformations made by the end-user and resets the chart to the default personalization settings.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.PersonalizeAttributes.Save">
+      <summary>Saves any </summary>
+    </member>
+    <member name="M:ChartFX.WinForms.PersonalizeAttributes.SetAsDefault">
+      <summary>Sets the current personalization to the default personalization.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pie.DoughnutThickness">
+      <summary>Controls the thickness of the doughnut as a percentage of the outside radius.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pie.ExplodingMode">
+      <summary>Allows you to set how the slices of a pie chart are displayed.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pie.LabelLineBreak">
+      <summary>Controls how the line which connects the label and the pie/doughnut chart is broken. Notice that the LabelsInside property should be set to false.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pie.LabelsInside">
+      <summary>Instructs ChartFX to try to paint the point labels directly on the corresponding slice of a Pie chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pie.MaximumLabelMargin">
+      <summary>Gets or Sets the maximium allowed margin (in pixels) between the labels and the borders of the pie chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pie.Shadows">
+      <summary>Adds a shadow effect to a 2D pie chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pie.ShowLines">
+      <summary>Shows or hides lines which connect the point labels to a a Pie chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pie.SliceSeparation">
+      <summary>Gets or sets the pie slice separation (in pixels) when using the ExplodingMode property.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pie.Square">
+      <summary>Forces Pie charts to be contained in a perfect square (no matter the window proportion).</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pie.Stacked">
+      <summary>Gets or sets a Boolean value specifying whether or not to stack a pie/doughnut chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Pie.StartAngle">
+      <summary>Gets or sets a value specifying the starting angle of the first slice in a pie chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointAttributes.AlternateColor">
+      <summary>Gets or Sets the alternate color for a selected item when using gradient FillMode.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointAttributes.BarShape">
+      <summary>Gets or Sets the Shape for the Bars.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointAttributes.Border">
+      <summary>Provides access to the border attributes object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointAttributes.Color">
+      <summary>Allows you to set a color for the selected item. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointAttributes.FillMode">
+      <summary>Gets or Sets a value indicating how Chart FX should fill the area representing the point.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointAttributes.Line">
+      <summary>Gets the LineAttributes object for the particular point.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointAttributes.Link">
+      <summary>Gets the Link object for a selected PointAttributes item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointAttributes.MarkerShape">
+      <summary>Gets or Sets the the type used to paint markers for the selected item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointAttributes.MarkerSize">
+      <summary>Gets or Sets a value controlling the size of the markers for the selected item.     </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointAttributes.Pattern">
+      <summary>Gets or Sets a value specifying the pattern for the selected item.  </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointAttributes.Picture">
+      <summary>Gets or Sets a value specifying the picture associated to the selected item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointAttributes.PointLabels">
+      <summary>Provides access to PointLabelAttributes allowing for the manipulation of attributes pertaining to the point label.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointAttributes.SeparateSlice">
+      <summary>Gets or Sets a value allowing you to separate a slice of a Pie or Doughnut chart for a selected item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointAttributes.Tag">
+      <summary>Gets or Sets and object for the specific item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointAttributes.Text">
+      <summary>Gets or Sets a value for labeling the point or series attribute.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointAttributes.Volume">
+      <summary>Gets or Sets a value indicating a volume for a data point markers in supported galleries.  By adjusting the volume, you can modify the amount of space you want between the items.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointLabelAttributes.Alignment">
+      <summary>Gets or Sets the vertical alignment for the point label.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointLabelAttributes.Angle">
+      <summary>Gets or Sets the angle of the point label. The default rotation angle is 0 degree (i.e., horizontal). Use a positive number to rotate the labels from lower left to upper right. Use negative degrees to rotate text from upper left to lower right. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointLabelAttributes.BackColor">
+      <summary>Gets or Sets the backgrond color of the point label.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointLabelAttributes.BorderColor">
+      <summary>Gets or Sets the border color of the point label.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointLabelAttributes.BorderWidth">
+      <summary>Gets or Sets a value indicating the width of the border surrounding the point label.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointLabelAttributes.Font">
+      <summary>Gets or Sets a Font object to use as rendering font for the point label.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointLabelAttributes.Format">
+      <summary>Gets or Sets a string pattern mask used to format the label.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointLabelAttributes.LineAlignment">
+      <summary>Gets or Sets the horizontal alignment for the point label.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointLabelAttributes.Offset">
+      <summary>Allows you to customize the point label position by configuring its coordinates.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointLabelAttributes.RichText">
+      <summary>Sets or Gets a value indicating the Text will be treated as RichText</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointLabelAttributes.TextColor">
+      <summary>Gets or Sets a value for the point label color.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointLabelAttributes.Visible">
+      <summary>Gets or Sets a value indicating if point label should be displayed or not.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointLabelOrganizer.AutoArrange">
+      <summary>Gets or sets a value specifying to use internal alogrithms to arrange point labels.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointLabelOrganizer.Cache">
+      <summary>Gets or sets a value specifying to save PointLabels in memory.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointLabelOrganizer.Enabled">
+      <summary>Gets or sets a value specifying if the PointLabelOrganizer feature is enabled.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointLabelOrganizer.MaximumCollisions">
+      <summary>Gets or sets a acceptable percentage rate of collisions (clipped or overlapping labels).</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.PointLabelOrganizer.MaximumTime">
+      <summary>Gets or sets a value specifying the maximum time limit used to arrange point labels.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Printer.Compress">
+      <summary>Forces Chart FX to print the chart in one page regardless of scrolling.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Printer.DrawBackground">
+      <summary>Used to instruct Chart FX to include the Background when printing a chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Printer.ForceColors">
+      <summary>Allows you to force color printing (matching) even when the printer is B&amp;amp;W.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Printer.Margins">
+      <summary>Gets or sets the margins, in hundredths of an inch.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Printer.Orientation">
+      <summary>Allows you to select a paper orientation when printing charts.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Printer.UsePrinterResolution">
+      <summary>Forces the printer to use maximum resolution when printing charts.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Radar.Circular">
+      <summary>Gets or sets a value specifying to draw the Radar chart in a round or polygonal shape.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Radar.Clockwise">
+      <summary>Gets or sets a value indicating to plot points in a clockwise or counter-clockwise direction.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Radar.Closed">
+      <summary>Gets or sets a value indicating whether or not to connect the first and last points in a radar chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Radar.FillArea">
+      <summary>Fills the inside areas of a Radar chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Radar.Shadows">
+      <summary>Gets or sets a value indicating whether or not shadowing is applied for a 2D radar chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Radar.ShowLines">
+      <summary>Shows or Hides the lines connecting eqch point in the radar Chart.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.RealTimeSettings.BufferSize">
+      <summary>Gets or Sets the buffer size for real-time charts. When setting this property, the data array will be cleared.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.RealTimeSettings.FastScroll">
+      <summary>Gets or Sets the Fast Scrolling feature.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.RealTimeSettings.IsBufferFull">
+      <summary>Gets the status of the Buffer to see if it is full.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.RealTimeSettings.LoopMarker">
+      <summary>Allows you to apply the supported Line class members to the real-time loop marker. LoopBack should be set to true in order to display the marker.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.RealTimeSettings.Mode">
+      <summary>Sets or Gets the RealTime Mode.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.RealTimeSettings.BeginAddData(System.Int32,System.Boolean)">
+      <summary>Add points in the real-time chart. This function needs to be called before EndAddData.</summary>
+      <param name="points">Number of points to add in the real-time chart.</param>
+      <param name="append">If True, append points in the end of the chart. Insert points in the beginning of the chart, otherwise.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.RealTimeSettings.EndAddData(System.Boolean,System.Boolean)">
+      <summary>Refreshs the real-time chart after having added the points using BeginAddData.</summary>
+      <param name="scrollLabels">If True, allows the scrolling of the temproral axis.</param>
+      <param name="scrollToEnd">If True, scroll to the last acquired point.</param>
+    </member>
+    <member name="P:ChartFX.WinForms.SeriesAttributes.AxisX">
+      <summary>Gets or Sets a value indicating the AxisX the series is connected to.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.SeriesAttributes.AxisY">
+      <summary>Gets or Sets a value indicating the AxisY the series is connected to.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.SeriesAttributes.Color">
+      <summary>Gets or Sets a Color for the selected series.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.SeriesAttributes.Gallery">
+      <summary>Gets or Sets a gallery type for a particular series.  All chart types are available in both 2D and 3D modes.    </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.SeriesAttributes.MarkerFont">
+      <summary>Gets or Sets a wingding font for use as marker shapes.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.SeriesAttributes.MarkerStep">
+      <summary>Controls how frequently point markers are shown in the selected series.  </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.SeriesAttributes.OriginalPosition">
+      <summary>Returns the original position of the item in the SeriesAttributes Collection.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.SeriesAttributes.Pane">
+      <summary>Gets or Sets the Pane which the series belongs to.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.SeriesAttributes.Stacked">
+      <summary>Gets or Sets a value allowing you to stack the selected series with the previous series to achieve multi-stacked charts.  </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.SeriesAttributes.Visible">
+      <summary>Gets or Sets a value allowing you to show or hide the series.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.SeriesAttributes.BringToFront">
+      <summary>Sends a SeriesAttributes to the first position in the SeriesAttributes Collection.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.SeriesAttributes.DrawMarker(System.Drawing.Graphics,System.Drawing.Point,System.Int32,System.Int32,System.Boolean)">
+      <summary>Used to draw a marker on a selected device context.</summary>
+      <param name="g">A Graphics object associated with a specific device context.</param>
+      <param name="pt">A Point object with the desired X and Y coordinates where the marker will be drawn. </param>
+      <param name="item">Index of the marker item you wish to draw. (If a specific point index has been assigned special attributes you want to use, i.e. MarkerShape) Set to -1 to use default series assignments. </param>
+      <param name="radius">Controls the size of the markershape. </param>
+      <param name="drawLine">Specifies if the markers will have a line on either side of the marker. (Simulate markers in a line chart) </param>
+    </member>
+    <member name="M:ChartFX.WinForms.SeriesAttributes.SendToBack">
+      <summary>Sends a SeriesAttributes to the last position in the SeriesAttributes Collection.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.SimpleBorder.Color">
+      <summary>Sets the color of the border.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.SimpleBorder.InternalOpposite">
+      <summary>Sets the internal tool borders opposite of the configured default border when present.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.SimpleBorder.Type">
+      <summary>Gets or sets the type of the Simple border object.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.SimpleBorder.Draw(System.Drawing.Graphics,System.Drawing.Rectangle,System.Drawing.Color)">
+      <summary>Draws a Chart FX SimpleBorder on a selected device context.</summary>
+      <param name="g">A Graphics object is associated with a specific device context.</param>
+      <param name="r">A Rectangle object specifying the desired position and size of the border.</param>
+      <param name="clrExternal">The external color for the border.</param>
+    </member>
+    <member name="P:ChartFX.WinForms.SolidBackground.Color">
+      <summary>Gets or sets the color of the background.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.SolidBackground.Draw(System.Drawing.Graphics,System.Drawing.Rectangle,System.Drawing.Color)">
+      <summary>Draws a Chart FX SolidBackground on a selected device context.</summary>
+      <param name="g">A Graphics object associated with a specific device context.</param>
+      <param name="r">A Rectangle object specifying the desired position and size of the SolidBackground.</param>
+      <param name="clrExternal">The Color for the Background.</param>
+    </member>
+    <member name="P:ChartFX.WinForms.Surface.Colors">
+      <summary>Gets or Sets a collection of colors to be used for the colors of the surface plot.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Surface.ShowContourLines">
+      <summary>Shows or hides the contour lines for Contour charts.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Surface.ShowGridLines">
+      <summary>Shows or hides the Grid lines of surface charts in the chart area.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Surface.Step">
+      <summary>Gets or set the Step for a Surface chart. The lower the Step, the smother the surface.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.TextProvider.Culture">
+      <summary>Gets or Sets a value allowing you to localize the text provider for language and region specific data.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.TextProvider.DateFormat">
+      <summary>Gets or Sets a value allowing you to customize the default date format of the TextProvider.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.TextProvider.Separators">
+      <summary>Gets or Sets a value specifying the delimiter character for the TextProvider.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.TextProvider.Close">
+      <summary>Used to close the connection to the text datasource linked to the TextProvider object.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.TextProvider.Open(System.IO.TextReader)">
+      <summary>Used to open the connection to a text datasource linked to the TextProvider object.</summary>
+      <param name="reader">A TextReader object to be used as a datasource.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.TextProvider.Open(System.String)">
+      <summary>Used to open the connection to a text datasource linked to the TextProvider object.</summary>
+      <param name="fileName">A string specifying the path and or filename of a text file used as a datasource.</param>
+    </member>
+    <member name="P:ChartFX.WinForms.Title.Alignment">
+      <summary>Allows you to set the alignment of the specified title.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Title.BackColor">
+      <summary>Gets or sets the color background of the specified title. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Title.Font">
+      <summary>Assigns a font to the specified title.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Title.Indentation">
+      <summary>Specify the space in pixels to the front and back of the selected title when read from top to bottom.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Title.LineAlignment">
+      <summary>Gets or sets the vertical alignment for the lines of the chart title.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Title.Link">
+      <summary>Gets the Link object for a selected title item.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Title.RichText">
+      <summary>Sets or Get the RichText property for the selected Title.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Title.Separation">
+      <summary>Specify the space in pixels above and below the selected title text when read from right to left.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Title.Text">
+      <summary>Gets or sets the text for the selected title.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Title.TextColor">
+      <summary>Sets the color of text for the specified title.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.TitleDockable.Dock">
+      <summary>Sets or Gets the Dock property, which allows set where the title will be docked.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.TitleDockable.PlotAreaOnly">
+      <summary>Gets or sets a value indicating whether the title may use the entire length of the chart, or only above the plot area.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ToolBar.Commands">
+      <summary>Returns the CommandCollection for the ToolBar object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ToolBar.Item">
+      <summary>Gets or sets a ToolBarItem for a selected index in the Toolbar object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ToolBar.Length">
+      <summary>Gets the total number of ToolBarItems for a toolbar object.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ToolBar.ShowImages">
+      <summary>Gets or sets a value indicating whether to show or hide images for ToolBarItems.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.ToolBar.Clear">
+      <summary>Clears all items from the toolbar object.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.ToolBar.Insert(System.Int32,ChartFX.WebForms.ToolBarItem)">
+      <summary>Used to insert a ToolBarItem into a ToolBar at a selected position.</summary>
+      <param name="position">Position in the toolbar to insert the ToolBarItem.</param>
+      <param name="item">ToolBarItem to insert.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.ToolBar.RemoveAt(System.Int32,System.Int32)">
+      <summary>Used to remove ToolBarItems from a ToolBar.</summary>
+      <param name="position">Position of the ToolBarItem to begin removing. </param>
+      <param name="count">Number of ToolBarItems to remove after the configured position.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.ToolBar.RemoveAt(System.Int32)">
+      <summary>Used to remove ToolBarItems from a ToolBar.</summary>
+      <param name="position">Position before the ToolBarItem to remove. </param>
+    </member>
+    <member name="P:ChartFX.WinForms.ToolBarItem.CommandId">
+      <summary>Gets or sets the Command ID of the ToolBarItem. </summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ValueFormat.Culture">
+      <summary>Allows you to localize labels and data for a specific language and region.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ValueFormat.CustomFormat">
+      <summary>Gets or sets a custom format to the selected label, mouseover tip or value.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ValueFormat.Decimals">
+      <summary>Gets or sets the number of decimals for the selected label, mouseover tip or value.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ValueFormat.Format">
+      <summary>Used to format the selected label, mouseover tip or value to numbers, date, time, scientific or currency.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ValueFormat.IsDate">
+      <summary>Returns a value indicating whether or not a value is a Date.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ValueFormat.IsDateTime">
+      <summary>Returns a value indicating whether or not a value is a DateTime.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ValueFormat.IsPercentage">
+      <summary>Returns a value indicating whether or not a value is a Percentage.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.ValueFormat.IsTime">
+      <summary>Returns a value indicating whether or not a value is a Time.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.ValueFormat.FormatDateTime(System.DateTime)">
+      <summary>Returns an expression formatted as a date or time.</summary>
+      <param name="dt">Date expression to be formatted.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.ValueFormat.FormatNumber(System.Double)">
+      <summary>Returns an expression formatted as a number.</summary>
+      <param name="d">Expression to be formatted.</param>
+    </member>
+    <member name="M:ChartFX.WinForms.ValueFormat.Parse(System.String)">
+      <summary>Converts a formatted expression to a number.</summary>
+      <param name="s">Formatted expression to be parsed.</param>
+    </member>
+  </members>
+</doc>

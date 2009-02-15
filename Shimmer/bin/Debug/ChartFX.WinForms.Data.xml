@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>ChartFX.WinForms.Data</name>
+  </assembly>
+  <members>
+    <member name="P:ChartFX.WinForms.Data.CrosstabDataProvider.Culture">
+      <summary>Allows you to localize the Crosstab provider for language and region specific data.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Data.CrosstabDataProvider.DataSource">
+      <summary>Used to instruct the Crosstab provider to retrieve the information from an external data provider.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Data.CrosstabDataProvider.DateFormat">
+      <summary>Instructs Chart FX how to format the dates when a column specified as a Row Heading is a date.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Data.CrosstabDataProvider.NullColumnHeading">
+      <summary>Instructs Chart FX to use the configured string value when a null column heading is encountered.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Data.CrosstabDataProvider.RowHeadingSettings">
+      <summary>Gets or sets a value indicating whether or not to use Row Headings XValues.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Data.CrosstabDataProvider.Separator">
+      <summary>Sets the separator between two or more fields that form the point label, when more than one Row Heading is present.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Data.ListProvider.List">
+      <summary>Gets or sets an IList object providing access to CollectionBase members used modify the ListProvider list.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Data.XmlDataProvider.Culture">
+      <summary>Allows you to localize data for a specific language and region.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Data.XmlDataProvider.DateFormat">
+      <summary>Allows you to customize the default date format for the Chart FX XmlDataProvider.</summary>
+    </member>
+    <member name="P:ChartFX.WinForms.Data.XmlDataProvider.RowValueTag">
+      <summary>Gets or sets a value indicating if the xml will include a value tag in rows.</summary>
+    </member>
+    <member name="M:ChartFX.WinForms.Data.XmlDataProvider.Load(System.String)">
+      <summary>Specifies the path to the XML file.</summary>
+      <param name="sPath">XML as string</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Data.XmlDataProvider.Load(System.IO.Stream)">
+      <summary>Specifies the path to the XML file.</summary>
+      <param name="stream">Stream as System.IO</param>
+    </member>
+    <member name="M:ChartFX.WinForms.Data.XmlDataProvider.LoadXml(System.String)">
+      <summary>Used to pass the XML as a string.</summary>
+      <param name="sXML">Xml as String</param>
+    </member>
+  </members>
+</doc>
