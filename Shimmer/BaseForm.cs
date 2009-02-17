@@ -70,9 +70,9 @@ namespace SensorNode
         const float MOTIONNODE_ONEG = 505.34164883f;
         const float MOTIONNODE_FREQ = 1.0f / 60.0f;
 
-        Axis axisX = new Axis(16);
-        Axis axisY = new Axis(16);
-        Axis axisZ = new Axis(16);
+        Axis axisX = new Axis(0, 16);
+        Axis axisY = new Axis(1, 16);
+        Axis axisZ = new Axis(2, 16);
 
         private List<float> accX = new List<float>();
         private List<float> accY = new List<float>();
@@ -404,6 +404,36 @@ namespace SensorNode
                     Lights.SetLightPosition(IDLight, targetVector.x, targetVector.y, targetVector.z + 150.0f);
                     Lights.SetLightRange(IDLight, 250.0f);
                     Lights.SetLightPosition(IDBackLight, targetVector.x, targetVector.y, targetVector.z - 150.0f);
+                    Lights.SetLightRange(IDBackLight, 250.0f);
+                    Cam.LookAtMesh(SensorNode);
+                    break;
+                case Keys.D5:
+                case Keys.NumPad5:
+                    targetVector = Room.GetWorldPosition(SensorNode.GetPosition());
+                    Cam.SetPosition(targetVector.x, targetVector.y, targetVector.z - 150.0f);
+                    Lights.SetLightPosition(IDLight, targetVector.x, targetVector.y, targetVector.z - 150.0f);
+                    Lights.SetLightRange(IDLight, 250.0f);
+                    Lights.SetLightPosition(IDBackLight, targetVector.x, targetVector.y, targetVector.z + 150.0f);
+                    Lights.SetLightRange(IDBackLight, 250.0f);
+                    Cam.LookAtMesh(SensorNode);
+                    break;
+                case Keys.D6:
+                case Keys.NumPad6:
+                    targetVector = Room.GetWorldPosition(SensorNode.GetPosition());
+                    Cam.SetPosition(targetVector.x - 150.0f, targetVector.y, targetVector.z);
+                    Lights.SetLightPosition(IDLight, targetVector.x - 150.0f, targetVector.y, targetVector.z);
+                    Lights.SetLightRange(IDLight, 250.0f);
+                    Lights.SetLightPosition(IDBackLight, targetVector.x + 150.0f, targetVector.y, targetVector.z);
+                    Lights.SetLightRange(IDBackLight, 250.0f);
+                    Cam.LookAtMesh(SensorNode);
+                    break;
+                case Keys.D7:
+                case Keys.NumPad7:
+                    targetVector = Room.GetWorldPosition(SensorNode.GetPosition());
+                    Cam.SetPosition(targetVector.x + 150.0f, targetVector.y, targetVector.z);
+                    Lights.SetLightPosition(IDLight, targetVector.x + 150.0f, targetVector.y, targetVector.z);
+                    Lights.SetLightRange(IDLight, 250.0f);
+                    Lights.SetLightPosition(IDBackLight, targetVector.x - 150.0f, targetVector.y, targetVector.z);
                     Lights.SetLightRange(IDBackLight, 250.0f);
                     Cam.LookAtMesh(SensorNode);
                     break;
@@ -978,82 +1008,193 @@ namespace SensorNode
                     temp += (s.gyro[3] + 2 * s.gyro[0] + 2 * s.gyro[1] + s.gyro[2]) * MOTIONNODE_FREQ / 6;
                     break;
             }
+
             s.angle += temp * 2.0f;
 
             return true;
+        }
+
+        private int GetMaxG(ref Axis s1, ref Axis s2, ref Axis s3)
+        {
+            if (Math.Abs(s1.accel) >= Math.Abs(s2.accel) && Math.Abs(s1.accel) >= Math.Abs(s3.accel))
+                return s1.index;
+
+            if (Math.Abs(s2.accel) >= Math.Abs(s1.accel) && Math.Abs(s2.accel) >= Math.Abs(s3.accel))
+                return s2.index;
+
+            if (Math.Abs(s3.accel) >= Math.Abs(s1.accel) && Math.Abs(s3.accel) >= Math.Abs(s2.accel))
+                return s3.index;
+
+            return -1;
+        }
+
+        private void UpdateRollAngle(ref Axis s1, ref Axis s2, ref Axis target)
+        {
+            if ((s1.state & 1) == 0 && (s2.state & 1) == 0 && (target.state & 1) == 0)
+            {
+                int maxGIndex = GetMaxG(ref s1, ref s2, ref target);
+
+                switch(maxGIndex)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                    case 2:
+                        if (s1.accel == 0.0f)
+                        {
+                            if (s2.accel >= 0)
+                                target.angle = 90.0f;
+                            else
+                                target.angle = -90.0f;
+                        }
+                        else
+                        {
+                            target.angle = Math.Abs((float)(Math.Atan(s2.accel / s1.accel) * 180.0f / Math.PI));
+                            if (s1.accel >= 0)
+                                target.angle = 180.0f - target.angle;
+                            if (s2.accel <= 0)
+                                target.angle = -target.angle;
+                        }
+
+                        target.angle += 180.0f;
+                        if (target.angle > 180.0f)
+                            target.angle -= 360.0f;
+
+                        if(target.mag < 0)
+                        {
+                            target.angle -= 180.0f;
+                            if (target.angle < -180.0f)
+                                target.angle += 360.0f;
+                        }
+
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+            return;
+        }
+        private void UpdatePitchAngle(ref Axis s1, ref Axis s2, ref Axis target)
+        {
+            if ((s1.state & 1) == 0 && (s2.state & 1) == 0 && (target.state & 1) == 0)
+            {
+                int maxGIndex = GetMaxG(ref s1, ref s2, ref target);
+
+                switch(maxGIndex)
+                {
+                    case 0:
+                    case 1:
+                        if (s1.accel == 0.0f)
+                        {
+                            if (s2.accel >= 0)
+                                target.angle = 90.0f;
+                            else
+                                target.angle = -90.0f;
+                        }
+                        else
+                        {
+                            target.angle = Math.Abs((float)(Math.Atan(s2.accel / s1.accel) * 180.0f / Math.PI));
+                            if (s1.accel >= 0)
+                                target.angle = 180.0f - target.angle;
+                            if (s2.accel <= 0)
+                                target.angle = -target.angle;
+                        }
+
+                        target.angle -= 90.0f;
+                        if (target.angle < -180.0f)
+                            target.angle += 360.0f;
+
+                        break;
+                    case 2:
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+            return;
         }
         private bool UpdateAccelAngle(ref Axis s1, ref Axis s2, ref Axis target)
         {
             if ((s1.state & 1) == 0 && (s2.state & 1) == 0)
             {
-                if((s1.state & (1 << 1)) == (1 << 1))
+                if (s1.accel == 0.0f)
                 {
-                    if (s2.accel == 0.0f)
-                    {
-                        if (s1.accel >= 0)
-                            target.angle = 90.0f;
-                        else
-                            target.angle = -90.0f;
-                    }
+                    if (s2.accel >= 0)
+                        target.angle = 90.0f;
                     else
-                    {
-                        target.angle = Math.Abs((float)(Math.Atan(s1.accel / s2.accel) * 180.0f / Math.PI));
-                        if (s2.accel >= 0)
-                            target.angle = 180.0f - target.angle;
-                        if (s1.accel <= 0)
-                            target.angle = -target.angle;
-                    }
-                    target.state |= (1 << 2);
+                        target.angle = -90.0f;
                 }
-                else if((s2.state & (1 << 1)) == (1 << 1))
+                else
                 {
-                    if (s1.accel == 0.0f)
-                    {
-                        if (s2.accel >= 0)
-                            target.angle = 90.0f;
-                        else
-                            target.angle = -90.0f;
-                    }
-                    else
-                    {
-                        target.angle = Math.Abs((float)(Math.Atan(s2.accel / s1.accel) * 180.0f / Math.PI));
-                        if (s1.accel >= 0)
-                            target.angle = 180.0f - target.angle;
-                        if (s2.accel <= 0)
-                            target.angle = -target.angle;
-                    }
-                    target.state |= (1 << 2);
+                    target.angle = Math.Abs((float)(Math.Atan(s2.accel / s1.accel) * 180.0f / Math.PI));
+                    if (s1.accel >= 0)
+                        target.angle = 180.0f - target.angle;
+                    if (s2.accel <= 0)
+                        target.angle = -target.angle;
                 }
+                
+                if(target.index == 0)
+                {
+                    target.angle += 180.0f;
+                    if (target.angle > 180.0f)
+                        target.angle -= 360.0f;
+
+                    if(target.mag < 0)
+                    {
+                        target.angle -= 180.0f;
+                        if (target.angle < -180.0f)
+                            target.angle += 360.0f;
+                    }
+                }
+                
+                if (target.index == 2)
+                {
+                    target.angle -= 90.0f;
+                    if (target.angle < -180.0f)
+                        target.angle += 360.0f;
+                }
+                
+                target.state |= (1 << 2);
 
                 return true;
             }
-            else
-                target.state &= ~(1 << 2);
+
+            target.state &= ~(1 << 2);
 
             return false;
         }
         private bool UpdateMagneticAngle(ref Axis s1, ref Axis s2, ref Axis target)
         {
-            if((target.state & (1 << 1)) == (1<<1))
+            if((s1.state & 1) == 0 && (s2.state & 1)==0)
             {
                 if (s1.mag == 0.0f)
-                    //target.mAngle = 0.0f;
-                    target.angle = 0.0f;
+                    target.mAngle = 0.0f;
                 else
                 {
-                    //target.mAngle = Math.Abs((float)(Math.Atan(s2.mag / s1.mag) * 180.0f / Math.PI));
-                    target.angle = Math.Abs((float)(Math.Atan(s2.mag / s1.mag) * 180.0f / Math.PI));
+                    target.mAngle = (float)(Math.Atan(s2.mag / s1.mag) * 180.0f / Math.PI);
+                    
+                    /*
+                    target.mAngle = Math.Abs((float)(Math.Atan(s2.mag / s1.mag) * 180.0f / Math.PI));
                     if (s1.mag > 0)
-                        //target.mAngle = 180.0f - target.mAngle;
-                        target.angle = 180.0f - target.angle;
+                        target.mAngle = 180.0f - target.mAngle;
                     if (s2.mag < 0)
-                        //target.mAngle = -(target.mAngle);
-                        target.angle = -(target.angle);
+                        target.mAngle = -(target.mAngle);
+                    */
                 }
+
                 target.state |= (1 << 3);
+
+                return true;
             }
 
-            return true;
+            target.state &= ~(1 << 3);
+
+            
+            return false;
         }
         private void ReadData()
         {
@@ -1183,17 +1324,20 @@ namespace SensorNode
                                             axisY.updateSensor(itr.Value.getAccelerometer()[1], itr.Value.getGyroscope()[1], itr.Value.getMagnetometer()[1]);
                                             axisZ.updateSensor(itr.Value.getAccelerometer()[2], itr.Value.getGyroscope()[2], itr.Value.getMagnetometer()[2]);
 
-                                            UpdateAccelAngle(ref axisX, ref axisY, ref axisZ);
-                                            UpdateAccelAngle(ref axisZ, ref axisY, ref axisX);
-                                            UpdateAccelAngle(ref axisX, ref axisZ, ref axisY);
+                                            //UpdateAccelAngle(ref axisX, ref axisY, ref axisZ);
+                                            //UpdateAccelAngle(ref axisY, ref axisZ, ref axisX);
+                                            //UpdateAccelAngle(ref axisZ, ref axisX, ref axisY);
 
                                             UpdateMagneticAngle(ref axisX, ref axisY, ref axisZ);
                                             UpdateMagneticAngle(ref axisY, ref axisZ, ref axisX);
-                                            UpdateMagneticAngle(ref axisX, ref axisZ, ref axisY);
+                                            UpdateMagneticAngle(ref axisZ, ref axisX, ref axisY);
 
                                             UpdateGyroAngle(ref axisX);
-                                            UpdateGyroAngle(ref axisY);
+                                            //UpdateGyroAngle(ref axisY);
                                             UpdateGyroAngle(ref axisZ);
+
+                                            UpdateRollAngle(ref axisY, ref axisZ, ref axisX);
+                                            UpdatePitchAngle(ref axisX, ref axisY, ref axisZ);
 
                                             this.Invoke(new MethodInvoker(delegate()
                                             {
@@ -1209,9 +1353,9 @@ namespace SensorNode
                                                 this.MagnetoYData.Text = itr.Value.getMagnetometer()[1].ToString();
                                                 this.MagnetoZData.Text = itr.Value.getMagnetometer()[2].ToString();
 
-                                                this.VelocityXData.Text = axisX.stdev.ToString();
-                                                this.VelocityYData.Text = axisY.stdev.ToString();
-                                                this.VelocityZData.Text = axisZ.stdev.ToString();
+                                                this.VelocityXData.Text = axisX.mAngle.ToString();
+                                                this.VelocityYData.Text = axisY.mAngle.ToString();
+                                                this.VelocityZData.Text = axisZ.mAngle.ToString();
 
                                                 this.PositionXData.Text = axisX.state.ToString();
                                                 this.PositionYData.Text = axisY.state.ToString();
@@ -1310,6 +1454,8 @@ namespace SensorNode
             SensorNode.LoadXFile("N70.X", true, true);
             SensorNode.SetParent(CONST_TV_NODETYPE.TV_NODETYPE_MESH, Room.GetIndex(), 1);
             SensorNode.SetPosition(0.0f, 150.0f, 0.0f);
+            TV_3DVECTOR oriScale = SensorNode.GetScale();
+            SensorNode.SetScale(oriScale.x, oriScale.y * 0.4f, oriScale.z * 3.0f);
             SensorNode.SetLightingMode(CONST_TV_LIGHTINGMODE.TV_LIGHTING_NORMAL, 0, 1);
             SensorNode.SetRotation(90.0f, 0.0f, 0.0f);
             //SensorNode.GetBoundingBox(ref Min, ref Max, true);
@@ -1385,7 +1531,7 @@ namespace SensorNode
                     break;
                 case Rule.MotionNode:
                     //SensorNode.SetRotation(0.0f, axisY.mAngle, axisZ.angle);
-                    SensorNode.SetRotation(axisX.angle, axisY.angle, axisZ.angle);
+                    SensorNode.SetRotation(axisX.angle, axisY.mAngle, axisZ.angle);
                     break;
                 case Rule.Wiimote:
                     break;
@@ -1530,6 +1676,7 @@ namespace SensorNode
     // 5th bit - magenetometer use(1) or not(0)
     public class Axis
     {
+        public short index;
         public short state;
         public int avgSum;
         public int devSum;
@@ -1545,8 +1692,9 @@ namespace SensorNode
         public float accAngle;
         public float eulerAngle;
         public float stdev;
-        public Axis(int input)
+        public Axis(short i, int input)
         {
+            index = i;
             state = 0; avgSum = 0; devSum = 0; sumIndex = 0; gyroIndex = 0; accel = 0.0f; mag = 0.0f; angle = 0.0f; mAngle = 0.0f;
             accAngle = 0.0f;
             eulerAngle = 0.0f;
