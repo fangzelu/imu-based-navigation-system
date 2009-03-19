@@ -1,4 +1,4 @@
-device(0-SensorNode, 1-Wiimote, 2-MotionNode): 2
+device(0-SensorNode, 1-Wiimote, 2-MotionNode): 0
 data buffer size:128
 sensor data length in one package:6
 package number in one receive time:3

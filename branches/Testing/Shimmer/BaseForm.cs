@@ -68,8 +68,25 @@ namespace SensorNode
         const float MOTIONNODE_RAWRANGE = 4095.0f;
         const float MOTIONNODE_ZEROG = 1273.21844731f;
         const float MOTIONNODE_ONEG = 505.34164883f;
-        const float MOTIONNODE_FREQ = 1.0f / 60.0f;
+        const float MOTIONNODE_FREQ = 1.0f / 50.0f;
+        const float G_VALUE = 9.80665f;
 
+        float[][] r = new float[3][];
+        float[] al = new float[3];
+        float[][] aw = new float[4][];
+        float[] awSum = new float[3];
+        float[] awZero = new float[3];
+        float[][] vw = new float[4][];
+        float[][] pos = new float[2][];
+        int awIndex = 0;
+        int awSize = 16;
+        int awSumIndex = 0;
+        int vwIndex = 0;
+        int posIndex = 0;
+        float[][] awHistory = new float[16][];
+        bool zuptFlag = false;
+        bool posLogFlag = false;
+        TextWriter posLog = new StreamWriter("positionLog.dat");
         Axis axisX = new Axis(0, 16);
         Axis axisY = new Axis(1, 16);
         Axis axisZ = new Axis(2, 16);
@@ -95,7 +112,7 @@ namespace SensorNode
         private List<int> gAngleYQ = new List<int>();
         private List<int> gAngleZQ = new List<int>();
 
-        //*** accelrometer sensor value : acceleration -> velocity -> position
+        //*** accelerometer sensor value : acceleration -> velocity -> position
         private List<int> accelXQ = new List<int>();
         private List<int> accelYQ = new List<int>();
         private List<int> accelZQ = new List<int>();
@@ -187,6 +204,8 @@ namespace SensorNode
 
         private void ConButton_Click(object sender, EventArgs e)
         {
+            //Thread.Sleep(10000);
+
             switch (DeviceRule)
             {
                 case Rule.SensorNode:
@@ -224,6 +243,12 @@ namespace SensorNode
         private void DisconButton_Click(object sender, EventArgs e)
         {
             dataFlag = false;
+            posLog.Flush();
+            posLog.WriteLine("End");
+            posLog.Close();
+
+            readThread.Join();
+
 
             this.ScanButton.Enabled = true;
             this.DisconButton.Enabled = false;
@@ -249,8 +274,7 @@ namespace SensorNode
 
             InitData();
 
-            readThread.Join();
-            serialPort.Close();
+            //serialPort.Close();
         }
 
         private void PortScan()
@@ -455,6 +479,17 @@ namespace SensorNode
                 case Keys.N:
                     SensorNode.RotateX(-5.0f, true);
                     break;
+                case Keys.O:
+                    posLog.WriteLine("Break Point");
+                    break;
+                case Keys.K:
+                    posLogFlag = true;
+                    posLog.WriteLine("Logging Start");
+                    break;
+                case Keys.L:
+                    posLogFlag = false;
+                    posLog.WriteLine("Logging End");
+                    break;
                 default:
                     break;
             }
@@ -480,53 +515,91 @@ namespace SensorNode
         {
             loadOptionFromFile();
 
-            switch (DeviceRule)
+            pos[0] = new float[3];
+            pos[1] = new float[3];
+
+            for (int i = 0; i < 3; i++)
             {
-                case Rule.SensorNode:
-                    DATA_BUFFER_SIZE = DATA_LENGTH * PACKAGE_COUNT * sizeof(Int16) + sizeof(Int32);
-
-                    //Chart data binding
-                    this.AccelChartProvider = new ListProvider(AccelChartList);
-                    this.AccelChartProvider.List.Add(accelXQ);
-                    this.AccelChartProvider.List.Add(accelYQ);
-                    this.AccelChartProvider.List.Add(accelZQ);
-
-                    this.GyroChartProvider = new ListProvider(GyroChartList);
-                    this.GyroChartProvider.List.Add(gyroXQ);
-                    this.GyroChartProvider.List.Add(gyroYQ);
-                    this.GyroChartProvider.List.Add(gyroZQ);
-
-                    ChartP.DataSourceSettings.DataSource = this.AccelChartProvider;
-                    ChartA.DataSourceSettings.DataSource = this.GyroChartProvider;
-
-                    break;
-                case Rule.MotionNode:
-                    this.AccelChartProvider = new ListProvider(AccelChartList);
-                    this.AccelChartProvider.List.Add(accX);
-                    this.AccelChartProvider.List.Add(accY);
-                    this.AccelChartProvider.List.Add(accZ);
-
-                    this.GyroChartProvider = new ListProvider(GyroChartList);
-                    this.GyroChartProvider.List.Add(gyroX);
-                    this.GyroChartProvider.List.Add(gyroY);
-                    this.GyroChartProvider.List.Add(gyroZ);
-
-                    this.MagChartProvider = new ListProvider(MagChartList);
-                    this.MagChartProvider.List.Add(magX);
-                    this.MagChartProvider.List.Add(magY);
-                    this.MagChartProvider.List.Add(magZ);
-
-                    ChartP.DataSourceSettings.DataSource = this.AccelChartProvider;
-                    ChartP.AxisY.Max = 2.0f;
-                    ChartP.AxisY.Min = -2.0f;
-
-                    ChartA.DataSourceSettings.DataSource = this.GyroChartProvider;
-                    ChartA.AxisY.Max = 500.0f;
-                    ChartA.AxisY.Min = -500.0f;
-
-                    break;
-
+                r[i] = new float[3];
+                awSum[i] = 0.0f;
+                awZero[i] = 0.0f;
             }
+            
+            for(int i=0; i < 2; i++)
+            {
+                for(int j=0 ; j < 3 ; j++)
+                {
+                    pos[i][j] = 0.0f;
+                }
+            }
+
+            for (int i = 0; i < 4; i++ )
+            {
+                aw[i] = new float[3];
+                vw[i] = new float[3];
+                for(int j = 0 ; j < 3 ; j++)
+                {
+                    aw[i][j] = 0.0f;
+                    vw[i][j] = 0.0f;
+                }
+            }
+
+            for (int i = 0; i < awSize; i ++)
+            {
+                awHistory[i] = new float[3];
+                for(int j=0 ; j < 3 ; j++)
+                {
+                    awHistory[i][j] = 0.0f;
+                }
+            }
+
+                switch (DeviceRule)
+                {
+                    case Rule.SensorNode:
+                        DATA_BUFFER_SIZE = DATA_LENGTH * PACKAGE_COUNT * sizeof(Int16) + sizeof(Int32);
+
+                        //Chart data binding
+                        this.AccelChartProvider = new ListProvider(AccelChartList);
+                        this.AccelChartProvider.List.Add(accelXQ);
+                        this.AccelChartProvider.List.Add(accelYQ);
+                        this.AccelChartProvider.List.Add(accelZQ);
+
+                        this.GyroChartProvider = new ListProvider(GyroChartList);
+                        this.GyroChartProvider.List.Add(gyroXQ);
+                        this.GyroChartProvider.List.Add(gyroYQ);
+                        this.GyroChartProvider.List.Add(gyroZQ);
+
+                        ChartP.DataSourceSettings.DataSource = this.AccelChartProvider;
+                        ChartA.DataSourceSettings.DataSource = this.GyroChartProvider;
+
+                        break;
+                    case Rule.MotionNode:
+                        this.AccelChartProvider = new ListProvider(AccelChartList);
+                        this.AccelChartProvider.List.Add(accX);
+                        this.AccelChartProvider.List.Add(accY);
+                        this.AccelChartProvider.List.Add(accZ);
+
+                        this.GyroChartProvider = new ListProvider(GyroChartList);
+                        this.GyroChartProvider.List.Add(gyroX);
+                        this.GyroChartProvider.List.Add(gyroY);
+                        this.GyroChartProvider.List.Add(gyroZ);
+
+                        this.MagChartProvider = new ListProvider(MagChartList);
+                        this.MagChartProvider.List.Add(magX);
+                        this.MagChartProvider.List.Add(magY);
+                        this.MagChartProvider.List.Add(magZ);
+
+                        ChartP.DataSourceSettings.DataSource = this.AccelChartProvider;
+                        ChartP.AxisY.Max = 2.0f;
+                        ChartP.AxisY.Min = -2.0f;
+
+                        ChartA.DataSourceSettings.DataSource = this.GyroChartProvider;
+                        ChartA.AxisY.Max = 500.0f;
+                        ChartA.AxisY.Min = -500.0f;
+
+                        break;
+
+                }
 
 
             gyroXQ.Clear();
@@ -1011,18 +1084,87 @@ namespace SensorNode
 
             s.angle += temp * 2.0f;
 
+            if (s.angle > 180.0f)
+                s.angle -= 360.0f;
+            else if (s.angle < -180.0f)
+                s.angle += 360.0f;
+
+            return true;
+        }
+
+        private bool UpdateGyroAngle(ref Axis s, ref Axis ds)
+        {
+            float temp = 0.0f;
+            switch (s.gyroIndex)
+            {
+                case 0:
+                    temp += (s.gyro[0] + 2 * s.gyro[1] + 2 * s.gyro[2] + s.gyro[3]) * MOTIONNODE_FREQ / 6;
+                    break;
+                case 1:
+                    temp += (s.gyro[1] + 2 * s.gyro[2] + 2 * s.gyro[3] + s.gyro[0]) * MOTIONNODE_FREQ / 6;
+                    break;
+                case 2:
+                    temp += (s.gyro[2] + 2 * s.gyro[3] + 2 * s.gyro[0] + s.gyro[1]) * MOTIONNODE_FREQ / 6;
+                    break;
+                case 3:
+                    temp += (s.gyro[3] + 2 * s.gyro[0] + 2 * s.gyro[1] + s.gyro[2]) * MOTIONNODE_FREQ / 6;
+                    break;
+            }
+
+            if (ds.accel[ds.accIndex] >= 0)
+                s.angle += temp * 2.0f;
+            else
+                s.angle -= temp * 2.0f;
+
+            if (s.angle > 180.0f)
+                s.angle -= 360.0f;
+            else if (s.angle < -180.0f)
+                s.angle += 360.0f;
+
+            return true;
+        }
+
+        private bool UpdateGyroAngleInTilt(ref Axis s, ref Axis ds)
+        {
+            float temp = 0.0f;
+            switch (s.gyroIndex)
+            {
+                case 0:
+                    temp += (s.gyro[0] + 2 * s.gyro[1] + 2 * s.gyro[2] + s.gyro[3]) * MOTIONNODE_FREQ / 6;
+                    break;
+                case 1:
+                    temp += (s.gyro[1] + 2 * s.gyro[2] + 2 * s.gyro[3] + s.gyro[0]) * MOTIONNODE_FREQ / 6;
+                    break;
+                case 2:
+                    temp += (s.gyro[2] + 2 * s.gyro[3] + 2 * s.gyro[0] + s.gyro[1]) * MOTIONNODE_FREQ / 6;
+                    break;
+                case 3:
+                    temp += (s.gyro[3] + 2 * s.gyro[0] + 2 * s.gyro[1] + s.gyro[2]) * MOTIONNODE_FREQ / 6;
+                    break;
+            }
+
+            if (ds.accel[ds.accIndex] >= 0)
+                s.tiltAngle += temp * 2.0f;
+            else
+                s.tiltAngle -= temp * 2.0f;
+
+            if (s.angle > 180.0f)
+                s.angle -= 360.0f;
+            else if (s.angle < -180.0f)
+                s.angle += 360.0f;
+
             return true;
         }
 
         private int GetMaxG(ref Axis s1, ref Axis s2, ref Axis s3)
         {
-            if (Math.Abs(s1.accel) >= Math.Abs(s2.accel) && Math.Abs(s1.accel) >= Math.Abs(s3.accel))
+            if (Math.Abs(s1.accel[s1.accIndex]) >= Math.Abs(s2.accel[s2.accIndex]) && Math.Abs(s1.accel[s1.accIndex]) >= Math.Abs(s3.accel[s3.accIndex]))
                 return s1.index;
 
-            if (Math.Abs(s2.accel) >= Math.Abs(s1.accel) && Math.Abs(s2.accel) >= Math.Abs(s3.accel))
+            if (Math.Abs(s2.accel[s2.accIndex]) >= Math.Abs(s1.accel[s1.accIndex]) && Math.Abs(s2.accel[s2.accIndex]) >= Math.Abs(s3.accel[s3.accIndex]))
                 return s2.index;
 
-            if (Math.Abs(s3.accel) >= Math.Abs(s1.accel) && Math.Abs(s3.accel) >= Math.Abs(s2.accel))
+            if (Math.Abs(s3.accel[s3.accIndex]) >= Math.Abs(s1.accel[s1.accIndex]) && Math.Abs(s3.accel[s3.accIndex]) >= Math.Abs(s2.accel[s2.accIndex]))
                 return s3.index;
 
             return -1;
@@ -1040,38 +1182,25 @@ namespace SensorNode
                         break;
                     case 1:
                     case 2:
-                        if (s1.accel == 0.0f)
-                        {
-                            if (s2.accel >= 0)
-                                target.angle = 90.0f;
-                            else
-                                target.angle = -90.0f;
-                        }
-                        else
-                        {
-                            target.angle = Math.Abs((float)(Math.Atan(s2.accel / s1.accel) * 180.0f / Math.PI));
-                            if (s1.accel >= 0)
-                                target.angle = 180.0f - target.angle;
-                            if (s2.accel <= 0)
-                                target.angle = -target.angle;
-                        }
+                        target.angle = (float)(Math.Atan2(Math.Sqrt(s1.accel[s1.accIndex]*s1.accel[s1.accIndex]+target.accel[target.accIndex]*target.accel[target.accIndex]), s2.accel[s2.accIndex]) * 180.0f / Math.PI);
 
-                        target.angle += 180.0f;
-                        if (target.angle > 180.0f)
-                            target.angle -= 360.0f;
+                        target.angle -= 90.0f;
+                        if (target.angle < -180.0f)
+                            target.angle += 360.0f;
 
-                        if(target.mag < 0)
+                        target.tiltAngle = target.angle;
+
+                        if (s1.accel[s1.accIndex] < 0)
                         {
-                            target.angle -= 180.0f;
-                            if (target.angle < -180.0f)
-                                target.angle += 360.0f;
+                            target.angle = 180.0f - target.angle;
+                            if (target.angle > 180.0f)
+                                target.angle -= 360.0f;
                         }
-
+                        
                         break;
                     default:
                         break;
                 }
-
             }
 
             return;
@@ -1086,25 +1215,20 @@ namespace SensorNode
                 {
                     case 0:
                     case 1:
-                        if (s1.accel == 0.0f)
+                        /*
+                        if (s1.accel[s1.accIndex] == 0.0f)
                         {
-                            if (s2.accel >= 0)
+                            if (s2.accel[s2.accIndex] >= 0)
                                 target.angle = 90.0f;
                             else
                                 target.angle = -90.0f;
                         }
                         else
                         {
-                            target.angle = Math.Abs((float)(Math.Atan(s2.accel / s1.accel) * 180.0f / Math.PI));
-                            if (s1.accel >= 0)
-                                target.angle = 180.0f - target.angle;
-                            if (s2.accel <= 0)
-                                target.angle = -target.angle;
+                            target.angle = (float)(Math.Atan2(s1.accel[s1.accIndex], s2.accel[s2.accIndex]) * 180.0f / Math.PI);
                         }
-
-                        target.angle -= 90.0f;
-                        if (target.angle < -180.0f)
-                            target.angle += 360.0f;
+                        */
+                        target.angle = (float)(Math.Atan2(s1.accel[s1.accIndex], Math.Sqrt(s2.accel[s2.accIndex]*s2.accel[s2.accIndex]+target.accel[target.accIndex]*target.accel[target.accIndex])) * 180.0f / Math.PI);
 
                         break;
                     case 2:
@@ -1112,28 +1236,74 @@ namespace SensorNode
                     default:
                         break;
                 }
-
             }
 
             return;
+        }
+        private void UpdateYawAngle(ref Axis s1, ref Axis s2, ref Axis target)
+        {
+            if ((s1.state & 1)==0 && (s2.state & 1)==0 && (target.state & 1)==0)
+            {
+                int maxGIndex = GetMaxG(ref s1, ref s2, ref target);
+
+                switch(maxGIndex)
+                {
+                    case 0:
+                    case 2:
+                        break;
+                    case 1:
+                        if (target.accel[target.accIndex] >= 0)
+                            target.angle = target.mAngle;
+                        else
+                            target.angle = -target.mAngle;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private void UpdateTiltCompensation(ref Axis s1, ref Axis s2, ref Axis target)
+        {
+            if ((s1.state & 1) == 0 && (s2.state & 1) == 0)
+            {
+                double magX_prime = s2.mag * cos(s1.angle * Math.PI / 180.0f) + s1.mag * sin(s2.angle * Math.PI / 180.0f) * sin(s1.angle * Math.PI / 180.0f) - target.mag * cos(s2.angle * Math.PI / 180.0f) * sin(s1.angle * Math.PI / 180.0f);
+                double magZ_prime = s1.mag * cos(s2.angle * Math.PI / 180.0f) + target.mag * sin(s1.angle * Math.PI / 180.0f);
+
+                target.mcAngle = (float)(Math.Atan2(magZ_prime, magX_prime) * 180.0f / Math.PI);
+
+                // when use atan method
+                /*
+                if (magZ_prime < 0)
+                    target.mcAngle = 180.0f - target.mcAngle;
+                else if (magZ_prime > 0 && magX_prime < 0)
+                    target.mcAngle = -target.mcAngle;
+                else if (magZ_prime > 0 && magX_prime > 0)
+                    target.mcAngle = 360.0f - target.mcAngle;
+                else if (magZ_prime == 0 && magX_prime < 0)
+                    target.mcAngle = 90.0f;
+                else if (magZ_prime == 0 && magX_prime > 0)
+                    target.mcAngle = 270.0f;
+                */
+            }
+
         }
         private bool UpdateAccelAngle(ref Axis s1, ref Axis s2, ref Axis target)
         {
             if ((s1.state & 1) == 0 && (s2.state & 1) == 0)
             {
-                if (s1.accel == 0.0f)
+                if (s1.accel[s1.accIndex] == 0.0f)
                 {
-                    if (s2.accel >= 0)
+                    if (s2.accel[s2.accIndex] >= 0)
                         target.angle = 90.0f;
                     else
                         target.angle = -90.0f;
                 }
                 else
                 {
-                    target.angle = Math.Abs((float)(Math.Atan(s2.accel / s1.accel) * 180.0f / Math.PI));
-                    if (s1.accel >= 0)
+                    target.angle = Math.Abs((float)(Math.Atan(s2.accel[s2.accIndex] / s1.accel[s1.accIndex]) * 180.0f / Math.PI));
+                    if (s1.accel[s1.accIndex] >= 0)
                         target.angle = 180.0f - target.angle;
-                    if (s2.accel <= 0)
+                    if (s2.accel[s2.accIndex] <= 0)
                         target.angle = -target.angle;
                 }
                 
@@ -1175,15 +1345,14 @@ namespace SensorNode
                     target.mAngle = 0.0f;
                 else
                 {
-                    target.mAngle = (float)(Math.Atan(s2.mag / s1.mag) * 180.0f / Math.PI);
+                    //target.mAngle = (float)(Math.Atan(s2.mag / s1.mag) * 180.0f / Math.PI);
                     
-                    /*
                     target.mAngle = Math.Abs((float)(Math.Atan(s2.mag / s1.mag) * 180.0f / Math.PI));
                     if (s1.mag > 0)
                         target.mAngle = 180.0f - target.mAngle;
                     if (s2.mag < 0)
                         target.mAngle = -(target.mAngle);
-                    */
+                    
                 }
 
                 target.state |= (1 << 3);
@@ -1195,6 +1364,204 @@ namespace SensorNode
 
             
             return false;
+        }
+        private void UpdateEulerAngle(ref Axis x, ref Axis y, ref Axis z)
+        {
+            if((x.state & 1)==0 && (y.state & 1)==0 && (z.state & 1) == 0)
+            {
+                x.angle = x.eulerAngle;
+                y.angle = y.eulerAngle;
+                z.angle = z.eulerAngle;
+            }
+
+            return;
+        }
+        private void UpdateMovement(ref Axis x, ref Axis y, ref Axis z)
+        {
+            if((x.state & 1)==0)
+                vw[vwIndex][0] = 0.0f;
+            if((y.state & 1) == 0)
+                vw[vwIndex][1] = 0.0f;
+            if((z.state & 1)==0)
+                vw[vwIndex][2] = 0.0f;
+
+            if ((x.state & 1) == 0 && (y.state & 1) == 0 && (z.state & 1) == 0)
+            {
+                if (zuptFlag == false)
+                {
+                    posLog.WriteLine("ZUPTs,0,0,0");
+                    zuptFlag = true;
+                }
+                return;
+            }
+            else
+                zuptFlag = false;
+
+            int beforePosIndex = posIndex;
+            posIndex++;
+            if (posIndex >= 2)
+                posIndex = 0;
+
+            for (int i = 0; i < 3; i++)
+            {
+                switch (vwIndex)
+                {
+                    case 0:
+                        pos[posIndex][i] = pos[beforePosIndex][i] + (vw[0][i] + 2 * vw[1][i] + 2 * vw[2][i] + vw[3][i]) * MOTIONNODE_FREQ / 6;
+                        break;
+                    case 1:
+                        pos[posIndex][i] = pos[beforePosIndex][i] + (vw[1][i] + 2 * vw[2][i] + 2 * vw[3][i] + vw[0][i]) * MOTIONNODE_FREQ / 6;
+                        break;
+                    case 2:
+                        pos[posIndex][i] = pos[beforePosIndex][i] + (vw[2][i] + 2 * vw[3][i] + 2 * vw[0][i] + vw[1][i]) * MOTIONNODE_FREQ / 6;
+                        break;
+                    case 3:
+                        pos[posIndex][i] = pos[beforePosIndex][i] + (vw[3][i] + 2 * vw[0][i] + 2 * vw[1][i] + vw[2][i]) * MOTIONNODE_FREQ / 6;
+                        break;
+                }
+            }
+
+            WriteLog(ref x, ref y, ref z);
+        }
+        private double cos_deg(double val)
+        {
+            return Math.Cos(val) * 180.0f / Math.PI;
+        }
+        private double sin_deg(double val)
+        {
+            return Math.Sin(val) * 180.0f / Math.PI;
+        }
+        private double cos(double val)
+        {
+            return Math.Cos(val);
+        }
+        private double sin(double val)
+        {
+            return Math.Sin(val);
+        }
+        private void UpdateRotationMatrix(ref Axis x, ref Axis y, ref Axis z)
+        {
+            double xd = x.angle;
+            double yd = y.angle;
+            double zd = z.angle;
+
+            
+            r[0][0] = (float)(cos(yd) * cos(zd));
+            r[0][1] = (float)(cos(zd) * sin(xd) * sin(yd) - cos(xd) * sin(zd));
+            r[0][2] = (float)(cos(xd) * cos(zd) * sin(yd) + sin(xd) * sin(zd));
+            r[1][0] = (float)(cos(yd) * sin(zd));
+            r[1][1] = (float)(cos(xd) * cos(zd) + sin(xd) * sin(yd) * sin(zd));
+            r[1][2] = (float)(cos(xd) * sin(yd) * sin(zd) - cos(zd) * sin(xd));
+            r[2][0] = (float)(-sin(yd));
+            r[2][1] = (float)(cos(yd) * sin(xd));
+            r[2][2] = (float)(cos(xd) * cos(yd));
+            
+            /*
+            r[0][0] = 1.0f;
+            r[0][1] = 0.0f;
+            r[0][2] = 0.0f;
+            r[1][0] = 0.0f;
+            r[1][1] = 1.0f;
+            r[1][2] = 0.0f;
+            r[2][0] = 0.0f;
+            r[2][1] = 0.0f;
+            r[2][2] = 1.0f;
+             */
+        }
+        private void UpdateAccelVector(ref Axis x, ref Axis y, ref Axis z)
+        {
+            al[0] = x.accel[x.accIndex] * G_VALUE;
+            al[1] = y.accel[y.accIndex] * G_VALUE;
+            al[2] = z.accel[z.accIndex] * G_VALUE;
+
+            awIndex++;
+            if (awIndex >= 4)
+                awIndex = 0;
+                        
+            aw[awIndex][0] = 0.0f;
+            aw[awIndex][1] = 0.0f;
+            aw[awIndex][2] = 0.0f;
+
+            for(int i=0 ; i < 3 ; i++)
+            {
+                aw[awIndex][i] = 0.0f;
+                for(int j=0 ; j < 3 ; j++)
+                {
+                    aw[awIndex][i] += al[j] * r[j][i] ;
+                }
+            }
+
+            aw[awIndex][1] -= G_VALUE;
+
+            //this.Invoke(new MethodInvoker(delegate()
+            //{
+            //    this.GyroXData.Text = aw[awIndex][0].ToString();
+            //    this.GyroYData.Text = aw[awIndex][1].ToString();
+            //    this.GyroZData.Text = aw[awIndex][2].ToString();
+            //}));
+
+            for(int i=0; i < 3 ; i++)
+                awSum[i] -= awHistory[awSumIndex][i];
+            for(int i=0 ; i < 3 ; i++)
+                awHistory[awSumIndex][i] = aw[awIndex][i];
+            for (int i = 0; i < 3; i++)
+                awSum[i] += awHistory[awSumIndex][i];
+            awSumIndex++;
+            if (awSumIndex >= awSize)
+                awSumIndex = 0;
+
+            if ((x.state & 1) == 0 && (y.state & 1) == 0 && (z.state & 1) == 0)
+            {
+                for(int i=0 ; i < 3; i++)
+                {
+                    awZero[i] = awSum[i] / awSize;
+                }
+            }
+
+            //this.Invoke(new MethodInvoker(delegate()
+            //{
+            //    this.AngularXData.Text = awZero[0].ToString();
+            //    this.AngularYData.Text = awZero[1].ToString();
+            //    this.AngularZData.Text = awZero[2].ToString();
+            //}));
+
+            for (int i = 0; i < 3; i++)
+                aw[awIndex][i] -= awZero[i];
+
+            //this.Invoke(new MethodInvoker(delegate()
+            //{
+            //    this.MagnetoXData.Text = aw[awIndex][0].ToString();
+            //    this.MagnetoYData.Text = aw[awIndex][1].ToString();
+            //    this.MagnetoZData.Text = aw[awIndex][2].ToString();
+            //}));
+
+            int beforeVwIndex = vwIndex;
+            vwIndex++;
+            if (vwIndex >= 4)
+                vwIndex = 0;
+
+            for (int i = 0; i < 3; i++)
+            {
+                switch (awIndex)
+                {
+                    case 0:
+                        vw[vwIndex][i] = vw[beforeVwIndex][i] + (aw[0][i] + 2 * aw[1][i] + 2 * aw[2][i] + aw[3][i]) * MOTIONNODE_FREQ / 6;
+                        break;
+                    case 1:
+                        vw[vwIndex][i] = vw[beforeVwIndex][i] + (aw[1][i] + 2 * aw[2][i] + 2 * aw[3][i] + aw[0][i]) * MOTIONNODE_FREQ / 6;
+                        break;
+                    case 2:
+                        vw[vwIndex][i] = vw[beforeVwIndex][i] + (aw[2][i] + 2 * aw[3][i] + 2 * aw[0][i] + aw[1][i]) * MOTIONNODE_FREQ / 6;
+                        break;
+                    case 3:
+                        vw[vwIndex][i] = vw[beforeVwIndex][i] + (aw[3][i] + 2 * aw[0][i] + 2 * aw[1][i] + aw[2][i]) * MOTIONNODE_FREQ / 6;
+                        break;
+                }
+            }
+        }
+        private void WriteLog(ref Axis x, ref Axis y, ref Axis z)
+        {
+            posLog.WriteLine(DateTime.Now.ToString() + "," + pos[posIndex][0].ToString() + "," + pos[posIndex][1].ToString() + "," + pos[posIndex][2].ToString()+","+ (x.angle).ToString() + "," + (y.angle).ToString() + "," + (z.angle).ToString());
         }
         private void ReadData()
         {
@@ -1252,6 +1619,11 @@ namespace SensorNode
 
                                         ManipulateAccelerometer(_accelX, _accelY, _accelZ);
 
+                                        if(posLogFlag)
+                                        {
+                                            posLog.WriteLine(DateTime.Now.ToString() + "," + accelXQ.Last().ToString() + "," + accelYQ.Last().ToString() + "," + accelZQ.Last().ToString() + ","+_gyroX.ToString() + ","+_gyroY.ToString()+","+_gyroZ.ToString());
+                                        }
+
                                         //Display data on the form
                                         this.Invoke(new MethodInvoker(delegate()
                                         {
@@ -1286,7 +1658,36 @@ namespace SensorNode
                                             axisY.updateAccelRaw(itr.Value.getAccelerometer()[1]);
                                             axisZ.updateAccelRaw(itr.Value.getAccelerometer()[2]);
 
+                                            axisX.updateGyroRaw(itr.Value.getGyroscope()[0]);
+                                            axisY.updateGyroRaw(itr.Value.getGyroscope()[1]);
+                                            axisZ.updateGyroRaw(itr.Value.getGyroscope()[2]);
+
+                                            axisX.updateWeight(ref axisY, ref axisZ);
+                                            axisY.updateWeight(ref axisX, ref axisZ);
+                                            axisZ.updateWeight(ref axisX, ref axisY);
+
                                             rawFlag = true;
+                                        }
+                                    }
+                                }
+
+                                if (motionPreview.waitForData())
+                                {
+                                    byte[] previewBuffer = motionPreview.readData();
+                                    if (previewBuffer != null)
+                                    {
+                                        IDictionary<int, MotionNode.SDK.Format.PreviewElement> previewMotion = MotionNode.SDK.Format.Preview(previewBuffer);
+
+                                        foreach (KeyValuePair<int, MotionNode.SDK.Format.PreviewElement> itr in previewMotion)
+                                        {
+
+                                            axisX.updateEulerAngle(itr.Value.getEuler()[0]);
+                                            axisY.updateEulerAngle(itr.Value.getEuler()[1]);
+                                            axisZ.updateEulerAngle(itr.Value.getEuler()[2]);
+
+                                            //axisX.updateGlobalAccel(itr.Value.getAccelerate()[0]);
+                                            //axisY.updateGlobalAccel(itr.Value.getAccelerate()[1]);
+                                            //axisZ.updateGlobalAccel(itr.Value.getAccelerate()[2]);
                                         }
                                     }
                                 }
@@ -1320,7 +1721,7 @@ namespace SensorNode
                                                 magX.RemoveAt(0); magY.RemoveAt(0); magZ.RemoveAt(0);
                                             }
 
-                                            axisX.updateSensor(itr.Value.getAccelerometer()[0], itr.Value.getGyroscope()[0], itr.Value.getMagnetometer()[0]);
+                                            axisX.updateSensor(itr.Value.getAccelerometer()[0], itr.Value.getGyroscope()[0], itr.Value.getMagnetometer()[0] + 20.0f);
                                             axisY.updateSensor(itr.Value.getAccelerometer()[1], itr.Value.getGyroscope()[1], itr.Value.getMagnetometer()[1]);
                                             axisZ.updateSensor(itr.Value.getAccelerometer()[2], itr.Value.getGyroscope()[2], itr.Value.getMagnetometer()[2]);
 
@@ -1333,37 +1734,72 @@ namespace SensorNode
                                             UpdateMagneticAngle(ref axisZ, ref axisX, ref axisY);
 
                                             UpdateGyroAngle(ref axisX);
+                                            UpdateGyroAngleInTilt(ref axisX, ref axisY);
                                             //UpdateGyroAngle(ref axisY);
-                                            UpdateGyroAngle(ref axisZ);
+                                            UpdateGyroAngle(ref axisZ, ref axisY);
 
                                             UpdateRollAngle(ref axisY, ref axisZ, ref axisX);
                                             UpdatePitchAngle(ref axisX, ref axisY, ref axisZ);
+                                            UpdateYawAngle(ref axisZ, ref axisX, ref axisY);
+
+                                            //posLog.Write(DateTime.Now.ToString() + "," + axisX.angle + "," + axisZ.angle + "," + axisY.mAngle + ",");
+
+                                            UpdateTiltCompensation(ref axisZ, ref axisX, ref axisY);
+
+                                            //posLog.Write(axisY.mcAngle + "\n");
+                                            
+                                            //UpdateEulerAngle(ref axisX, ref axisY, ref axisZ);
+
+                                            UpdateRotationMatrix(ref axisX, ref axisY, ref axisZ);
+                                            UpdateAccelVector(ref axisX, ref axisY, ref axisZ);
+
+                                            UpdateMovement(ref axisX, ref axisY, ref axisZ);
 
                                             this.Invoke(new MethodInvoker(delegate()
                                             {
-                                                this.AccelXData.Text = itr.Value.getAccelerometer()[0].ToString();
-                                                this.AccelYData.Text = itr.Value.getAccelerometer()[1].ToString();
-                                                this.AccelZData.Text = itr.Value.getAccelerometer()[2].ToString();
+                                                //this.AccelXData.Text = axisX.accel[axisX.accIndex].ToString();
+                                                //this.AccelYData.Text = axisY.accel[axisY.accIndex].ToString();
+                                                //this.AccelZData.Text = axisZ.accel[axisZ.accIndex].ToString();
+                                                this.AccelXData.Text = aw[awIndex][0].ToString();
+                                                this.AccelYData.Text = aw[awIndex][1].ToString();
+                                                this.AccelZData.Text = aw[awIndex][2].ToString();
 
-                                                this.GyroXData.Text = itr.Value.getGyroscope()[0].ToString();
-                                                this.GyroYData.Text = itr.Value.getGyroscope()[1].ToString();
-                                                this.GyroZData.Text = itr.Value.getGyroscope()[2].ToString();
+                                                this.AngularXData.Text = axisX.gyroStdev.ToString();
+                                                this.AngularYData.Text = axisY.gyroStdev.ToString();
+                                                this.AngularZData.Text = axisZ.gyroStdev.ToString();
 
-                                                this.MagnetoXData.Text = itr.Value.getMagnetometer()[0].ToString();
-                                                this.MagnetoYData.Text = itr.Value.getMagnetometer()[1].ToString();
-                                                this.MagnetoZData.Text = itr.Value.getMagnetometer()[2].ToString();
+                                                this.VelocityXData.Text = vw[vwIndex][0].ToString();
+                                                this.VelocityYData.Text = vw[vwIndex][1].ToString();
+                                                this.VelocityZData.Text = vw[vwIndex][2].ToString();
+                                                //this.VelocityXData.Text = axisX.stdev.ToString();
+                                                //this.VelocityYData.Text = axisY.stdev.ToString();
+                                                //this.VelocityZData.Text = axisZ.stdev.ToString();
 
-                                                this.VelocityXData.Text = axisX.mAngle.ToString();
-                                                this.VelocityYData.Text = axisY.mAngle.ToString();
-                                                this.VelocityZData.Text = axisZ.mAngle.ToString();
+                                                this.PositionXData.Text = pos[posIndex][0].ToString();
+                                                this.PositionYData.Text = pos[posIndex][1].ToString();
+                                                this.PositionZData.Text = pos[posIndex][2].ToString();
+                                                //this.PositionXData.Text = axisX.weightAccel.ToString();
+                                                //this.PositionYData.Text = axisY.weightAccel.ToString();
+                                                //this.PositionZData.Text = axisZ.weightAccel.ToString();
 
-                                                this.PositionXData.Text = axisX.state.ToString();
-                                                this.PositionYData.Text = axisY.state.ToString();
-                                                this.PositionZData.Text = axisZ.state.ToString();
+                                                this.GyroXData.Text = axisX.gyro[axisX.gyroIndex].ToString();
+                                                this.GyroYData.Text = axisY.gyro[axisY.gyroIndex].ToString();
+                                                this.GyroZData.Text = axisZ.gyro[axisZ.gyroIndex].ToString();
+
+                                                this.MagnetoXData.Text = axisX.mag.ToString();
+                                                this.MagnetoYData.Text = axisY.mag.ToString();
+                                                this.MagnetoZData.Text = axisZ.mag.ToString();
+                                                //this.MagnetoXData.Text = axisX.weightGyro.ToString();
+                                                //this.MagnetoYData.Text = axisY.weightGyro.ToString();
+                                                //this.MagnetoZData.Text = axisZ.weightGyro.ToString();
 
                                                 this.RollData.Text = axisX.angle.ToString();
                                                 this.PitchData.Text = axisY.angle.ToString();
                                                 this.YawData.Text = axisZ.angle.ToString();
+
+                                                //this.PositionXData.Text = axisY.angle.ToString();
+                                                //this.PositionYData.Text = axisY.mAngle.ToString();
+                                                //this.PositionZData.Text = axisY.mcAngle.ToString();
 
                                                 ChartP.DataSourceSettings.ReloadData();
                                                 ChartA.DataSourceSettings.ReloadData();
@@ -1372,28 +1808,7 @@ namespace SensorNode
                                     }
                                 }
 
-                                if(motionPreview.waitForData())
-                                {
-                                    byte[] previewBuffer = motionPreview.readData();
-                                    if(previewBuffer != null)
-                                    {
-                                        IDictionary<int, MotionNode.SDK.Format.PreviewElement> previewMotion = MotionNode.SDK.Format.Preview(previewBuffer);
-
-                                        foreach (KeyValuePair<int, MotionNode.SDK.Format.PreviewElement> itr in previewMotion)
-                                        {
-                                            axisX.eulerAngle = itr.Value.getEuler()[0] * 180.0f / (float)Math.PI;
-                                            axisY.eulerAngle = itr.Value.getEuler()[1] * 180.0f / (float)Math.PI;
-                                            axisZ.eulerAngle = itr.Value.getEuler()[2] * 180.0f / (float)Math.PI;
-                                        }
-
-                                        this.Invoke(new MethodInvoker(delegate()
-                                            {
-                                                this.AngularXData.Text = axisX.eulerAngle.ToString();
-                                                this.AngularYData.Text = axisY.eulerAngle.ToString();
-                                                this.AngularZData.Text = axisZ.eulerAngle.ToString();
-                                            }));
-                                    }
-                                }
+                                
                             }
                             break;
                         default:
@@ -1680,27 +2095,54 @@ namespace SensorNode
         public short state;
         public int avgSum;
         public int devSum;
+        public int gyroAvgSum;
+        public int gyroDevSum;
         public int sumIndex;
         public int gyroIndex;
+        public int gyroSumIndex;
+        public int veloIndex;
+        public int accIndex;
         public int size;
         public int[] raw;
-        public float accel;
+        public int[] gyroRaw;
+        public float[] accel;
         public float[] gyro;
         public float mag;
         public float angle;
         public float mAngle;
-        public float accAngle;
+        public float mcAngle;
+        public float tiltAngle;
+        public float[] velocity;
+        public float pos;
         public float eulerAngle;
+        public float globalAcc;
         public float stdev;
+        public float gyroStdev;
+        public float weightAccel;
+        public float weightGyro;
         public Axis(short i, int input)
         {
             index = i;
-            state = 0; avgSum = 0; devSum = 0; sumIndex = 0; gyroIndex = 0; accel = 0.0f; mag = 0.0f; angle = 0.0f; mAngle = 0.0f;
-            accAngle = 0.0f;
+            accIndex = 0;
+            veloIndex = 0;
+            state = 0; avgSum = 0; devSum = 0; sumIndex = 0; gyroIndex = 0; mag = 0.0f; angle = 0.0f; mAngle = 0.0f;
+            gyroAvgSum = 0; gyroDevSum = 0; gyroIndex = 0;
             eulerAngle = 0.0f;
+            globalAcc = 0.0f;
+            mcAngle = 0.0f;
+            pos = 0.0f;
             size = input;
             raw = new int[size];
+            gyroRaw = new int[size];
             gyro = new float[4];
+            accel = new float[4];
+            velocity = new float[4];
+            for(int j=0 ; j < 4 ; j++)
+            {
+                gyro[j] = 0.0f;
+                accel[j] = 0.0f;
+                velocity[j] = 0.0f;
+            }
         }
         public void updateAccelRaw(int input)
         {
@@ -1716,10 +2158,37 @@ namespace SensorNode
                 sumIndex = 0;
 
             stdev = (float)devSum / size - ((float)avgSum / size) * ((float)avgSum / size);
-            if (stdev > 4096.0f)
+            if (stdev > 1024.0f)
                 state |= 1;
             else
                 state &= 0;
+        }
+        public void updateGyroRaw(int input)
+        {
+            gyroAvgSum -= gyroRaw[gyroSumIndex];
+            gyroDevSum -= gyroRaw[gyroSumIndex] * gyroRaw[gyroSumIndex];
+
+            gyroRaw[gyroSumIndex] = input;
+            gyroAvgSum += input;
+            gyroDevSum += input * input;
+
+            gyroSumIndex++;
+            if (gyroSumIndex >= size)
+                gyroSumIndex = 0;
+
+            gyroStdev = (float)gyroDevSum / size - ((float)gyroAvgSum / size) * ((float)gyroAvgSum / size);
+        }
+        public void updateEulerAngle(float val)
+        {
+            eulerAngle = val;
+
+            return;
+        }
+        public void updateGlobalAccel(float val)
+        {
+            globalAcc = val;
+
+            return;
         }
         public void updateSensor(float accVal, float gyroVal, float magVal)
         {
@@ -1729,17 +2198,64 @@ namespace SensorNode
         }
         private void updateAccel(float accVal)
         {
-            accel = accVal;
-            if (Math.Abs(accel) >= 0.65f)
+            int beforeIndex = accIndex;
+
+            accIndex++;
+            if (accVal > 1.0)
+                accVal = 1.0f;
+            else if (accVal < -1.0)
+                accVal = -1.0f;
+
+            if (accIndex >= 4)
+                accIndex = 0;
+
+            float diff = accVal - accel[beforeIndex];
+            accel[accIndex] = accel[beforeIndex] + diff * weightAccel;
+            if (Math.Abs(accVal) >= 0.65f)
                 state |= (1 << 1);
             else
                 state &= ~(1 << 1);
         }
         private void updateGyro(float gyroVal)
         {
-            gyro[gyroIndex++] = gyroVal;
+            int beforeIndex = gyroIndex - 1;
+            if (beforeIndex < 0)
+                beforeIndex = 3;
+            float diff = gyroVal - gyro[beforeIndex];
+
+            gyro[gyroIndex++] = gyro[beforeIndex] + diff * weightGyro;
             if (gyroIndex >= 4)
                 gyroIndex = 0;
+        }
+        public void updateWeight(ref Axis s1, ref Axis s2)
+        {
+            if(s1.stdev + s2.stdev + gyroStdev == 0)
+            {
+                weightGyro = 0.0f;
+            }
+            else
+            {
+                weightGyro = gyroStdev / (s1.stdev + s2.stdev);
+
+                if (weightGyro < 0)
+                    weightGyro = 0.0f;
+                else if (weightGyro > 1)
+                    weightGyro = 1.0f;
+            }
+
+            if(s1.gyroStdev + s2.gyroStdev + stdev == 0)
+            {
+                weightAccel = 0.0f;
+            }
+            else
+            {
+                weightAccel = stdev / (s1.gyroStdev + s2.gyroStdev + stdev);
+
+                if (weightAccel < 0)
+                    weightAccel = 0.0f;
+                else if (weightAccel > 1)
+                    weightAccel = 1.0f;
+            }
         }
         private void updateMag(float magVal)
         {
