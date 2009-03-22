@@ -82,6 +82,7 @@
     <Compile Include="BaseForm.Designer.cs">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="KalmanFilter.cs" />
     <Compile Include="MotionNode\Client.cs" />
     <Compile Include="MotionNode\File.cs" />
     <Compile Include="MotionNode\Format.cs" />
