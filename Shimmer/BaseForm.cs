@@ -91,6 +91,9 @@ namespace SensorNode
         Axis axisY = new Axis(1, 16);
         Axis axisZ = new Axis(2, 16);
 
+        TextWriter kalmanLog = new StreamWriter("kalmanLog.dat");
+        Shimmer.KalmanFilter kalman = new Shimmer.KalmanFilter(6,3,3);
+
         private List<float> accX = new List<float>();
         private List<float> accY = new List<float>();
         private List<float> accZ = new List<float>();
@@ -184,9 +187,42 @@ namespace SensorNode
             InitMenuStrip();
             InitData();
 
+            InitKalman();
+
             PortScan();
         }
+        //*** Kalman Method
+        private void InitKalman()
+        {
+            //double[,] inn_test = { { 1.0f, 2.0f, 3.0f }, { 0.0f, 1.0f, 4.0f }, { 5.0f, 6.0f, 0.0f } };
+            //kalman.inv_test.setValue(inn_test, 3, 3);
+            //kalman.inv_test.inverse().writeLog(kalmanLog, "inn");
 
+            kalman.setT(1.0f / 60.0f);
+
+            double[,] w = {{0.8948568125f},{0.980665f},{0.63743225f} };
+            double[,] z = { {4.0f}, {5.0f}, {3.0f} };
+            //double[,] w = { { 0.4f }, { 0.5f }, { 0.3f } };
+            //double[,] z = { { 2.0f }, { 3.0f }, { 1.5f } };
+            kalman.setZ(z, 3, 1);
+            kalman.setAw(w, 3, 1);
+            kalman.x.setZero();
+            kalman.xhat.setZero();
+            kalman.P = kalman.Sw;
+
+            kalman.A.writeLog(kalmanLog, "A");
+            kalman.B.writeLog(kalmanLog, "B");
+            kalman.C.writeLog(kalmanLog, "C");
+            kalman.Sz.writeLog(kalmanLog, "Sz");
+            kalman.aw.writeLog(kalmanLog, "aw");
+            kalman.w.writeLog(kalmanLog, "w");
+            kalman.Sw.writeLog(kalmanLog, "Sw");
+            kalman.x.writeLog(kalmanLog, "x");
+            kalman.xhat.writeLog(kalmanLog, "xhat");
+            kalman.P.writeLog(kalmanLog, "P");
+            
+            return;
+        }
         //*** Window Form Method
         private void InitMenuStrip()
         {
@@ -242,6 +278,8 @@ namespace SensorNode
 
         private void DisconButton_Click(object sender, EventArgs e)
         {
+            kalmanLog.Close();
+
             dataFlag = false;
             posLog.Flush();
             posLog.WriteLine("End");
@@ -1594,19 +1632,107 @@ namespace SensorNode
                                     //Confirm received data byte size
                                     if (recvBytes >= DATA_BUFFER_SIZE)
                                     {
-                                        for (int i = 0; i < PACKAGE_COUNT; i++)
-                                        {
-                                            _accelX += BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 0);
-                                            _accelY += BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 1);
-                                            _accelZ += BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 2);
-                                            _gyroX += BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 3);
-                                            _gyroY += BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 4);
-                                            _gyroZ += BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 5);
-                                        }
                                         senseT.Add(BitConverter.ToInt32(buffer, DATA_LENGTH * PACKAGE_COUNT * sizeof(Int16)) / 1000.0f);
                                         if (senseT.Count > DATA_BUFFER_MAX)
                                             senseT.RemoveAt(0);
 
+                                        for (int i = 0; i < PACKAGE_COUNT; i++)
+                                        {
+                                            _accelX = BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 0);
+                                            _accelY = BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 1);
+                                            _accelZ = BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 2);
+                                            _gyroX = BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 3);
+                                            _gyroY = BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 4);
+                                            _gyroZ = BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 5);
+
+                                            _accelX = (short)(_accelX * RETOS_REF_VOLTAGE / RETOS_ADC_RANGE);
+                                            _accelY = (short)(_accelY * RETOS_REF_VOLTAGE / RETOS_ADC_RANGE);
+                                            _accelZ = (short)(_accelZ * RETOS_REF_VOLTAGE / RETOS_ADC_RANGE);
+
+                                            axisX.updateAccelRaw(_accelX);
+                                            axisY.updateAccelRaw(_accelY);
+                                            axisZ.updateAccelRaw(_accelZ);
+
+                                            axisX.updateGyroRaw(_gyroX);
+                                            axisY.updateGyroRaw(_gyroY);
+                                            axisZ.updateGyroRaw(_gyroZ);
+
+                                            //axisX.updateWeight(ref axisY, ref axisZ);
+                                            //axisY.updateWeight(ref axisX, ref axisZ);
+                                            //axisZ.updateWeight(ref axisX, ref axisY);
+                                            axisX.updateAccelWeight(ref axisY);
+                                            axisY.updateAccelWeight(ref axisX);
+
+                                            float accelX, accelY, accelZ;
+                                            if((axisX.state & 1) == 0 && (axisY.state & 1)==0 && (axisZ.state & 1)==0)
+                                            {
+                                                kalman.xhat.m[3, 0] = 0.0f;
+                                                kalman.xhat.m[4, 0] = 0.0f;
+                                                kalman.xhat.m[5, 0] = 0.0f;
+                                                kalman.x.m[3, 0] = 0.0f;
+                                                kalman.x.m[4, 0] = 0.0f;
+                                                kalman.x.m[5, 0] = 0.0f;
+
+                                                accelX = 0.0f;
+                                                accelY = 0.0f;
+                                                accelZ = 0.0f;
+
+                                                axisX.updateSensor(accelX, 0.0f, 0.0f);
+                                                axisY.updateSensor(accelY, 0.0f, 0.0f);
+                                                axisZ.updateSensor(accelZ, 0.0f, 0.0f);
+
+                                                
+                                            }
+                                            else
+                                            {
+                                                accelX = (float)((int)_accelX - axisX.accAvg) / 800.0f * G_VALUE;
+                                                accelY = (float)((int)_accelY - axisY.accAvg) / 800.0f * G_VALUE;
+                                                accelZ = (float)((int)_accelZ - axisZ.accAvg) / 800.0f * G_VALUE;
+
+                                                axisX.updateSensor(accelX, 0.0f, 0.0f);
+                                                axisY.updateSensor(accelY, 0.0f, 0.0f);
+                                                axisZ.updateSensor(accelZ, 0.0f, 0.0f);
+
+                                                double[,] u = { { axisX.accel[axisX.accIndex] }, { axisY.accel[axisY.accIndex] }, { axisZ.accel[axisZ.accIndex] } };
+                                                //double[,] u = { { accelX }, { accelY }, { accelZ } };
+                                                kalman.setU(u, 3, 1);
+                                                kalman.u.writeLog(kalmanLog, "u");
+                                                kalman.next(kalmanLog);
+                                            }
+
+                                            //axisX.updateSensor(accelX, 0.0f, 0.0f);
+                                            //axisY.updateSensor(accelY, 0.0f, 0.0f);
+                                            //axisZ.updateSensor(accelZ, 0.0f, 0.0f);
+
+                                            this.Invoke(new MethodInvoker(delegate()
+                                            {
+                                                this.AccelXData.Text = axisX.raw[axisX.sumIndex].ToString();
+                                                this.AccelYData.Text = axisY.raw[axisY.sumIndex].ToString();
+                                                this.AccelZData.Text = axisZ.raw[axisZ.sumIndex].ToString();
+
+                                                this.VelocityXData.Text = accelX.ToString();
+                                                this.VelocityYData.Text = accelY.ToString();
+                                                this.VelocityZData.Text = accelZ.ToString();
+
+                                                this.PositionXData.Text = axisX.accel[axisX.accIndex].ToString();
+                                                this.PositionYData.Text = axisY.accel[axisY.accIndex].ToString();
+                                                this.PositionZData.Text = axisZ.accel[axisZ.accIndex].ToString();
+
+                                                this.GyroXData.Text = kalman.getState()[0, 0].ToString();
+                                                this.GyroYData.Text = kalman.getState()[1, 0].ToString();
+                                                this.GyroZData.Text = kalman.getState()[2, 0].ToString();
+
+                                                this.AngularXData.Text = kalman.getStateHat()[0, 0].ToString();
+                                                this.AngularYData.Text = kalman.getStateHat()[1, 0].ToString();
+                                                this.AngularZData.Text = kalman.getStateHat()[2, 0].ToString();
+
+                                                this.MagnetoXData.Text = kalman.getMeasurement()[0, 0].ToString();
+                                                this.MagnetoYData.Text = kalman.getMeasurement()[1, 0].ToString();
+                                                this.MagnetoZData.Text = kalman.getMeasurement()[2, 0].ToString();
+                                            }));
+                                        }
+
+                                        /*
                                         //Average package data
                                         _gyroX = (Int16)(_gyroX / PACKAGE_COUNT);
                                         _gyroY = (Int16)(_gyroY / PACKAGE_COUNT);
@@ -1621,8 +1747,9 @@ namespace SensorNode
 
                                         if(posLogFlag)
                                         {
-                                            posLog.WriteLine(DateTime.Now.ToString() + "," + accelXQ.Last().ToString() + "," + accelYQ.Last().ToString() + "," + accelZQ.Last().ToString() + ","+_gyroX.ToString() + ","+_gyroY.ToString()+","+_gyroZ.ToString());
+                                            posLog.WriteLine(DateTime.Now.ToString() + "," + senseT.Last().ToString() + "," + accelXQ.Last().ToString() + "," + accelYQ.Last().ToString() + "," + accelZQ.Last().ToString() + ","+_gyroX.ToString() + ","+_gyroY.ToString()+","+_gyroZ.ToString());
                                         }
+                                        
 
                                         //Display data on the form
                                         this.Invoke(new MethodInvoker(delegate()
@@ -1632,6 +1759,7 @@ namespace SensorNode
                                             ChartA.DataSourceSettings.ReloadData();
 
                                         }));
+                                        */
                                     }
                                     else
                                     {
@@ -1662,9 +1790,12 @@ namespace SensorNode
                                             axisY.updateGyroRaw(itr.Value.getGyroscope()[1]);
                                             axisZ.updateGyroRaw(itr.Value.getGyroscope()[2]);
 
-                                            axisX.updateWeight(ref axisY, ref axisZ);
-                                            axisY.updateWeight(ref axisX, ref axisZ);
-                                            axisZ.updateWeight(ref axisX, ref axisY);
+                                            //axisX.updateWeight(ref axisY, ref axisZ);
+                                            //axisY.updateWeight(ref axisX, ref axisZ);
+                                            //axisZ.updateWeight(ref axisX, ref axisY);
+
+                                            axisX.updateAccelWeight(ref axisZ);
+                                            axisZ.updateAccelWeight(ref axisX);
 
                                             rawFlag = true;
                                         }
@@ -1721,6 +1852,46 @@ namespace SensorNode
                                                 magX.RemoveAt(0); magY.RemoveAt(0); magZ.RemoveAt(0);
                                             }
 
+                                            float accelX, accelY, accelZ;
+                                            if ((axisX.state & 1) == 0 && (axisY.state & 1) == 0 && (axisZ.state & 1) == 0)
+                                            {
+                                                kalman.xhat.m[3, 0] = 0.0f;
+                                                kalman.xhat.m[4, 0] = 0.0f;
+                                                kalman.xhat.m[5, 0] = 0.0f;
+                                                kalman.x.m[3, 0] = 0.0f;
+                                                kalman.x.m[4, 0] = 0.0f;
+                                                kalman.x.m[5, 0] = 0.0f;
+
+                                                accelX = 0.0f;
+                                                accelY = 0.0f;
+                                                accelZ = 0.0f;
+
+                                                axisX.updateSensor(accelX, 0.0f, 0.0f);
+                                                axisY.updateSensor(accelY, 0.0f, 0.0f);
+                                                axisZ.updateSensor(accelZ, 0.0f, 0.0f);
+
+                                                axisX.accAvgf = itr.Value.getAccelerometer()[0];
+                                                axisY.accAvgf = itr.Value.getAccelerometer()[1];
+                                                axisZ.accAvgf = itr.Value.getAccelerometer()[2];
+                                            }
+                                            else
+                                            {
+                                                accelX = itr.Value.getAccelerometer()[0] - axisX.accAvgf;
+                                                accelY = itr.Value.getAccelerometer()[1] - axisY.accAvgf;
+                                                accelZ = itr.Value.getAccelerometer()[2] - axisZ.accAvgf;
+
+                                                axisX.updateSensor(accelX, 0.0f, 0.0f);
+                                                axisY.updateSensor(accelY, 0.0f, 0.0f);
+                                                axisZ.updateSensor(accelZ, 0.0f, 0.0f);
+
+                                                double[,] u = { { axisX.accel[axisX.accIndex] }, { axisY.accel[axisY.accIndex] }, { axisZ.accel[axisZ.accIndex] } };
+                                                //double[,] u = { { accelX }, { accelY }, { accelZ } };
+                                                kalman.setU(u, 3, 1);
+                                                kalman.u.writeLog(kalmanLog, "u");
+                                                kalman.next(kalmanLog);
+                                            }
+
+                                            /*
                                             axisX.updateSensor(itr.Value.getAccelerometer()[0], itr.Value.getGyroscope()[0], itr.Value.getMagnetometer()[0] + 20.0f);
                                             axisY.updateSensor(itr.Value.getAccelerometer()[1], itr.Value.getGyroscope()[1], itr.Value.getMagnetometer()[1]);
                                             axisZ.updateSensor(itr.Value.getAccelerometer()[2], itr.Value.getGyroscope()[2], itr.Value.getMagnetometer()[2]);
@@ -1754,9 +1925,11 @@ namespace SensorNode
                                             UpdateAccelVector(ref axisX, ref axisY, ref axisZ);
 
                                             UpdateMovement(ref axisX, ref axisY, ref axisZ);
+                                            */
 
                                             this.Invoke(new MethodInvoker(delegate()
                                             {
+                                                /*
                                                 //this.AccelXData.Text = axisX.accel[axisX.accIndex].ToString();
                                                 //this.AccelYData.Text = axisY.accel[axisY.accIndex].ToString();
                                                 //this.AccelZData.Text = axisZ.accel[axisZ.accIndex].ToString();
@@ -1803,6 +1976,31 @@ namespace SensorNode
 
                                                 ChartP.DataSourceSettings.ReloadData();
                                                 ChartA.DataSourceSettings.ReloadData();
+                                                */
+
+                                                this.AccelXData.Text = axisX.raw[axisX.sumIndex].ToString();
+                                                this.AccelYData.Text = axisY.raw[axisY.sumIndex].ToString();
+                                                this.AccelZData.Text = axisZ.raw[axisZ.sumIndex].ToString();
+
+                                                this.VelocityXData.Text = accelX.ToString();
+                                                this.VelocityYData.Text = accelY.ToString();
+                                                this.VelocityZData.Text = accelZ.ToString();
+
+                                                this.PositionXData.Text = axisX.accel[axisX.accIndex].ToString();
+                                                this.PositionYData.Text = axisY.accel[axisY.accIndex].ToString();
+                                                this.PositionZData.Text = axisZ.accel[axisZ.accIndex].ToString();
+
+                                                this.GyroXData.Text = kalman.getState()[0, 0].ToString();
+                                                this.GyroYData.Text = kalman.getState()[1, 0].ToString();
+                                                this.GyroZData.Text = kalman.getState()[2, 0].ToString();
+
+                                                this.AngularXData.Text = kalman.getStateHat()[0, 0].ToString();
+                                                this.AngularYData.Text = kalman.getStateHat()[1, 0].ToString();
+                                                this.AngularZData.Text = kalman.getStateHat()[2, 0].ToString();
+
+                                                this.MagnetoXData.Text = kalman.getMeasurement()[0, 0].ToString();
+                                                this.MagnetoYData.Text = kalman.getMeasurement()[1, 0].ToString();
+                                                this.MagnetoZData.Text = kalman.getMeasurement()[2, 0].ToString();
                                             }));
                                         }
                                     }
@@ -1942,11 +2140,13 @@ namespace SensorNode
             switch (DeviceRule)
             {
                 case Rule.SensorNode:
-                    SensorNode.SetRotation((float)angleXQ.Last(), (float)angleYQ.Last(), (float)angleZQ.Last());
+                    //SensorNode.SetRotation((float)angleXQ.Last(), (float)angleYQ.Last(), (float)angleZQ.Last());
+                    SensorNode.SetPosition((float)kalman.getState()[0, 0] * 10.0f, 150.0f, (float)kalman.getState()[1, 0] * 10.0f);
                     break;
                 case Rule.MotionNode:
                     //SensorNode.SetRotation(0.0f, axisY.mAngle, axisZ.angle);
-                    SensorNode.SetRotation(axisX.angle, axisY.mAngle, axisZ.angle);
+                    //SensorNode.SetRotation(axisX.angle, axisY.mAngle, axisZ.angle);
+                    SensorNode.SetPosition((float)kalman.getState()[2, 0] * 1000.0f, 150.0f, (float)kalman.getState()[0, 0] * 1000.0f);
                     break;
                 case Rule.Wiimote:
                     break;
@@ -2094,6 +2294,8 @@ namespace SensorNode
         public short index;
         public short state;
         public int avgSum;
+        public int accAvg;
+        public float accAvgf;
         public int devSum;
         public int gyroAvgSum;
         public int gyroDevSum;
@@ -2161,7 +2363,10 @@ namespace SensorNode
             if (stdev > 1024.0f)
                 state |= 1;
             else
+            {
+                accAvg = avgSum / size;
                 state &= 0;
+            }
         }
         public void updateGyroRaw(int input)
         {
@@ -2201,10 +2406,10 @@ namespace SensorNode
             int beforeIndex = accIndex;
 
             accIndex++;
-            if (accVal > 1.0)
-                accVal = 1.0f;
-            else if (accVal < -1.0)
-                accVal = -1.0f;
+            //if (accVal > 1.0)
+            //    accVal = 1.0f;
+            //else if (accVal < -1.0)
+            //    accVal = -1.0f;
 
             if (accIndex >= 4)
                 accIndex = 0;
@@ -2250,6 +2455,20 @@ namespace SensorNode
             else
             {
                 weightAccel = stdev / (s1.gyroStdev + s2.gyroStdev + stdev);
+
+                if (weightAccel < 0)
+                    weightAccel = 0.0f;
+                else if (weightAccel > 1)
+                    weightAccel = 1.0f;
+            }
+        }
+        public void updateAccelWeight(ref Axis s1)
+        {
+            if (stdev + s1.stdev == 0)
+                weightAccel = 0.0f;
+            else
+            {
+                weightAccel = stdev / (stdev + s1.stdev);
 
                 if (weightAccel < 0)
                     weightAccel = 0.0f;
