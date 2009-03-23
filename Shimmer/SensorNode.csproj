@@ -122,6 +122,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Wiimote\DataTypes.cs" />
+    <Compile Include="Wiimote\Events.cs" />
+    <Compile Include="Wiimote\HIDImports.cs" />
+    <Compile Include="Wiimote\Wiimote.cs" />
+    <Compile Include="Wiimote\WiimoteCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="TV3D65">

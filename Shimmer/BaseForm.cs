@@ -16,6 +16,7 @@ using Microsoft.DirectX.Direct3D;
 using D3D = Microsoft.DirectX.Direct3D;
 using MTV3D65;
 using MotionNode.SDK;
+using WiimoteLib;
 
 namespace SensorNode
 {
@@ -179,6 +180,8 @@ namespace SensorNode
         private int FloorTex;
         private int WallTex;
 
+        Wiimote wm = new Wiimote();
+        
         public BaseForm()
         {
             InitializeComponent();
@@ -238,6 +241,22 @@ namespace SensorNode
             PortScan();
         }
 
+        private void wm_onWiimoteChanged(object sender, WiimoteChangedEventArgs args)
+        {
+            if (wm.WiimoteState == null)
+                return;
+
+            this.Invoke(new MethodInvoker(delegate()
+            {
+                this.AccelXData.Text = wm.WiimoteState.AccelState.RawValues.X.ToString();
+                this.AccelYData.Text = wm.WiimoteState.AccelState.RawValues.Y.ToString();
+                this.AccelZData.Text = wm.WiimoteState.AccelState.RawValues.Z.ToString();
+
+                this.VelocityXData.Text = wm.WiimoteState.AccelState.Values.X.ToString();
+                this.VelocityYData.Text = wm.WiimoteState.AccelState.Values.Y.ToString();
+                this.VelocityZData.Text = wm.WiimoteState.AccelState.Values.Z.ToString();
+            }));
+        }
         private void ConButton_Click(object sender, EventArgs e)
         {
             //Thread.Sleep(10000);
@@ -261,6 +280,13 @@ namespace SensorNode
                     motionRaw = new Client("", 32077);
                     motionLog = new StreamWriter("motionLog.dat");
                     break;
+                case Rule.Wiimote:
+                    wm.WiimoteChanged += wm_onWiimoteChanged;
+                    wm.Connect();
+                    wm.SetReportType(InputReport.ButtonsAccel, true);
+                    wm.GetStatus();
+                    wm.SetLEDs(0x0001);
+                    break;
             }
             Thread.Sleep(1000);
 
@@ -280,13 +306,18 @@ namespace SensorNode
         {
             kalmanLog.Close();
 
+            switch(DeviceRule)
+            {
+                case Rule.Wiimote:
+                    wm.Disconnect();
+                    break;
+            }
             dataFlag = false;
             posLog.Flush();
             posLog.WriteLine("End");
             posLog.Close();
 
             readThread.Join();
-
 
             this.ScanButton.Enabled = true;
             this.DisconButton.Enabled = false;
@@ -2113,7 +2144,7 @@ namespace SensorNode
                             SensorNode.Render();
                             break;
                         case Rule.Wiimote:
-                            WiimoteMesh.Render();
+                            SensorNode.Render();
                             break;
                         default:
                             break;
