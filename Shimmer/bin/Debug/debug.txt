@@ -1,26 +1,24 @@
-03-23-2009 16:31:01 | --------------------------------------------
-03-23-2009 16:31:01 | Truevision3D Debug/Log File
-03-23-2009 16:31:01 | --------------------------------------------
-03-23-2009 16:31:01 | Engine Version : 6.5
-03-23-2009 16:31:01 | ENGINE INFO : DLL Compilation time Nov 18 2008 18:58:52
-03-23-2009 16:31:01 | DEVICE INIT : Initialize Depth
-03-23-2009 16:31:01 | DEVICE INIT : Initializing the device in windowed mode, with a render surface size of 426x259, format 22, depthbuffer 75
-03-23-2009 16:31:01 | VIEWPORT MANAGER : Main viewport initialization
-03-23-2009 16:31:01 | VIEWPORT MANAGER : Main viewport initialized (426x259)
-03-23-2009 16:31:01 | DEVICE INIT : Initialization successful !
-03-23-2009 16:31:01 | DEVICE INFO :  3D Card : NVIDIA GeForce 9600 GT  | Card ID : 1570 | Driver ID : 729018
-03-23-2009 16:31:01 | DEVICE INFO : Available texture memory : 726 MB
-03-23-2009 16:31:01 | DEVICE INFO : Vertex Shaders 3.0 supported in hardware.
-03-23-2009 16:31:01 | Debug info : vs fffe0300  ps ffff0300 
-03-23-2009 16:31:01 | DEVICE INFO : Pixel Shaders 3.0 supported in hardware.
-03-23-2009 16:31:01 | DEVICE INFO : Driver used is a DirectX9-level driver 'nv4_disp.dll'. Excellent
-03-23-2009 16:31:01 | DEVICE INFO : Card Type Geforce6xxx/7xxx/8xxx/ATIRadeonX1xxx  Level card, third generation of programmable card
-03-23-2009 16:31:01 | TEXTURE MANAGER : Loading of 'smallGrid.bmp' successful 'Grid' on index 2 
-03-23-2009 16:31:01 | TEXTURE MANAGER : Loading of 'smallGridWall.bmp' successful 'Wall' on index 3 
-03-23-2009 16:31:03 | TEXTURE MANAGER : Loading of 'cinza.bmp' successful 'cinza.bmp' on index 4 
-03-23-2009 16:31:03 | TEXTURE MANAGER : Loading of 'nokia.bmp' successful 'nokia.bmp' on index 5 
-03-23-2009 16:31:03 | TEXTURE MANAGER : Loading of 'teclas.bmp' successful 'teclas.bmp' on index 6 
-03-23-2009 16:31:03 | TEXTURE MANAGER : Loading of 'cam_pekena.bmp' successful 'cam_pekena.bmp' on index 7 
-03-23-2009 16:31:03 | MESH MANAGER : Loading of mesh file 'N70.X' succeeded in 1406 ms ( 87750 faces, 61942 vertices ) ID 1
-03-23-2009 16:31:04 | START UNLOAD
-03-23-2009 16:31:04 | RESOURCE MANAGER : Engine successfully unloaded
+03-26-2009 18:07:48 | --------------------------------------------
+03-26-2009 18:07:48 | Truevision3D Debug/Log File
+03-26-2009 18:07:48 | --------------------------------------------
+03-26-2009 18:07:48 | Engine Version : 6.5
+03-26-2009 18:07:48 | ENGINE INFO : DLL Compilation time Nov 18 2008 18:58:52
+03-26-2009 18:07:48 | DEVICE INIT : Initialize Depth
+03-26-2009 18:07:48 | DEVICE INIT : Initializing the device in windowed mode, with a render surface size of 426x259, format 22, depthbuffer 75
+03-26-2009 18:07:49 | VIEWPORT MANAGER : Main viewport initialization
+03-26-2009 18:07:49 | VIEWPORT MANAGER : Main viewport initialized (426x259)
+03-26-2009 18:07:49 | DEVICE INIT : Initialization successful !
+03-26-2009 18:07:49 | DEVICE INFO :  3D Card : NVIDIA GeForce 9600 GT  | Card ID : 1570 | Driver ID : 729018
+03-26-2009 18:07:49 | DEVICE INFO : Available texture memory : 725 MB
+03-26-2009 18:07:49 | DEVICE INFO : Vertex Shaders 3.0 supported in hardware.
+03-26-2009 18:07:49 | Debug info : vs fffe0300  ps ffff0300 
+03-26-2009 18:07:49 | DEVICE INFO : Pixel Shaders 3.0 supported in hardware.
+03-26-2009 18:07:49 | DEVICE INFO : Driver used is a DirectX9-level driver 'nv4_disp.dll'. Excellent
+03-26-2009 18:07:49 | DEVICE INFO : Card Type Geforce6xxx/7xxx/8xxx/ATIRadeonX1xxx  Level card, third generation of programmable card
+03-26-2009 18:07:49 | TEXTURE MANAGER : Loading of 'smallGrid.bmp' successful 'Grid' on index 2 
+03-26-2009 18:07:49 | TEXTURE MANAGER : Loading of 'smallGridWall.bmp' successful 'Wall' on index 3 
+03-26-2009 18:07:50 | TEXTURE MANAGER : Loading of 'cinza.bmp' successful 'cinza.bmp' on index 4 
+03-26-2009 18:07:50 | TEXTURE MANAGER : Loading of 'nokia.bmp' successful 'nokia.bmp' on index 5 
+03-26-2009 18:07:50 | TEXTURE MANAGER : Loading of 'teclas.bmp' successful 'teclas.bmp' on index 6 
+03-26-2009 18:07:50 | TEXTURE MANAGER : Loading of 'cam_pekena.bmp' successful 'cam_pekena.bmp' on index 7 
+03-26-2009 18:07:50 | MESH MANAGER : Loading of mesh file 'N70.X' succeeded in 1266 ms ( 87750 faces, 61942 vertices ) ID 1
