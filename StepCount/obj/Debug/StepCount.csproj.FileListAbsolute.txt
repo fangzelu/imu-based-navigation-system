@@ -14,3 +14,11 @@ F:\Documents and Settings\John\바탕 화면\두루미\StepCount\obj\Debug\Resol
 F:\Documents and Settings\John\바탕 화면\두루미\StepCount\obj\Debug\StepCount.ControlPanel.resources
 F:\Documents and Settings\John\바탕 화면\두루미\StepCount\obj\Debug\StepCount.Properties.Resources.resources
 F:\Documents and Settings\John\바탕 화면\두루미\StepCount\obj\Debug\StepCount.csproj.GenerateResource.Cache
+C:\Documents and Settings\John\바탕 화면\IMU Navigation System\branches\StepCount\StepCount\obj\Debug\StepCount.exe
+C:\Documents and Settings\John\바탕 화면\IMU Navigation System\branches\StepCount\StepCount\obj\Debug\StepCount.pdb
+C:\Documents and Settings\John\바탕 화면\IMU Navigation System\branches\StepCount\StepCount\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\John\바탕 화면\IMU Navigation System\branches\StepCount\StepCount\obj\Debug\StepCount.ControlPanel.resources
+C:\Documents and Settings\John\바탕 화면\IMU Navigation System\branches\StepCount\StepCount\obj\Debug\StepCount.Properties.Resources.resources
+C:\Documents and Settings\John\바탕 화면\IMU Navigation System\branches\StepCount\StepCount\obj\Debug\StepCount.csproj.GenerateResource.Cache
+C:\Documents and Settings\John\바탕 화면\IMU Navigation System\branches\StepCount\StepCount\bin\Debug\StepCount.exe
+C:\Documents and Settings\John\바탕 화면\IMU Navigation System\branches\StepCount\StepCount\bin\Debug\StepCount.pdb
