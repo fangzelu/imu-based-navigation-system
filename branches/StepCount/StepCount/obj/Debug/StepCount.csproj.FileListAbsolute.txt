@@ -6,3 +6,11 @@ C:\Documents and Settings\John\My Documents\Visual Studio 2008\Projects\StepCoun
 C:\Documents and Settings\John\My Documents\Visual Studio 2008\Projects\StepCount\StepCount\bin\Debug\StepCount.pdb
 C:\Documents and Settings\John\My Documents\Visual Studio 2008\Projects\StepCount\StepCount\obj\Debug\StepCount.exe
 C:\Documents and Settings\John\My Documents\Visual Studio 2008\Projects\StepCount\StepCount\obj\Debug\StepCount.pdb
+F:\Documents and Settings\John\바탕 화면\두루미\StepCount\obj\Debug\StepCount.exe
+F:\Documents and Settings\John\바탕 화면\두루미\StepCount\obj\Debug\StepCount.pdb
+F:\Documents and Settings\John\바탕 화면\두루미\StepCount\bin\Debug\StepCount.exe
+F:\Documents and Settings\John\바탕 화면\두루미\StepCount\bin\Debug\StepCount.pdb
+F:\Documents and Settings\John\바탕 화면\두루미\StepCount\obj\Debug\ResolveAssemblyReference.cache
+F:\Documents and Settings\John\바탕 화면\두루미\StepCount\obj\Debug\StepCount.ControlPanel.resources
+F:\Documents and Settings\John\바탕 화면\두루미\StepCount\obj\Debug\StepCount.Properties.Resources.resources
+F:\Documents and Settings\John\바탕 화면\두루미\StepCount\obj\Debug\StepCount.csproj.GenerateResource.Cache
