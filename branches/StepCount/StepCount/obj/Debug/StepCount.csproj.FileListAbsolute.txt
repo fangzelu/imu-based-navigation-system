@@ -1,0 +1,8 @@
+C:\Documents and Settings\John\My Documents\Visual Studio 2008\Projects\StepCount\StepCount\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\John\My Documents\Visual Studio 2008\Projects\StepCount\StepCount\obj\Debug\StepCount.ControlPanel.resources
+C:\Documents and Settings\John\My Documents\Visual Studio 2008\Projects\StepCount\StepCount\obj\Debug\StepCount.Properties.Resources.resources
+C:\Documents and Settings\John\My Documents\Visual Studio 2008\Projects\StepCount\StepCount\obj\Debug\StepCount.csproj.GenerateResource.Cache
+C:\Documents and Settings\John\My Documents\Visual Studio 2008\Projects\StepCount\StepCount\bin\Debug\StepCount.exe
+C:\Documents and Settings\John\My Documents\Visual Studio 2008\Projects\StepCount\StepCount\bin\Debug\StepCount.pdb
+C:\Documents and Settings\John\My Documents\Visual Studio 2008\Projects\StepCount\StepCount\obj\Debug\StepCount.exe
+C:\Documents and Settings\John\My Documents\Visual Studio 2008\Projects\StepCount\StepCount\obj\Debug\StepCount.pdb

@@ -180,7 +180,8 @@ namespace SensorNode
         private int FloorTex;
         private int WallTex;
 
-        Wiimote wm = new Wiimote();
+        WiimoteCollection wc = new WiimoteCollection();
+        int wmIndex = 0;
         
         public BaseForm()
         {
@@ -243,18 +244,18 @@ namespace SensorNode
 
         private void wm_onWiimoteChanged(object sender, WiimoteChangedEventArgs args)
         {
-            if (wm.WiimoteState == null)
+            if (wc[wmIndex].WiimoteState == null)
                 return;
 
             this.Invoke(new MethodInvoker(delegate()
             {
-                this.AccelXData.Text = wm.WiimoteState.AccelState.RawValues.X.ToString();
-                this.AccelYData.Text = wm.WiimoteState.AccelState.RawValues.Y.ToString();
-                this.AccelZData.Text = wm.WiimoteState.AccelState.RawValues.Z.ToString();
+                this.AccelXData.Text = wc[wmIndex].WiimoteState.AccelState.RawValues.X.ToString();
+                this.AccelYData.Text = wc[wmIndex].WiimoteState.AccelState.RawValues.Y.ToString();
+                this.AccelZData.Text = wc[wmIndex].WiimoteState.AccelState.RawValues.Z.ToString();
 
-                this.VelocityXData.Text = wm.WiimoteState.AccelState.Values.X.ToString();
-                this.VelocityYData.Text = wm.WiimoteState.AccelState.Values.Y.ToString();
-                this.VelocityZData.Text = wm.WiimoteState.AccelState.Values.Z.ToString();
+                this.VelocityXData.Text = wc[wmIndex].WiimoteState.AccelState.Values.X.ToString();
+                this.VelocityYData.Text = wc[wmIndex].WiimoteState.AccelState.Values.Y.ToString();
+                this.VelocityZData.Text = wc[wmIndex].WiimoteState.AccelState.Values.Z.ToString();
             }));
         }
         private void ConButton_Click(object sender, EventArgs e)
@@ -281,11 +282,17 @@ namespace SensorNode
                     motionLog = new StreamWriter("motionLog.dat");
                     break;
                 case Rule.Wiimote:
-                    wm.WiimoteChanged += wm_onWiimoteChanged;
-                    wm.Connect();
-                    wm.SetReportType(InputReport.ButtonsAccel, true);
-                    wm.GetStatus();
-                    wm.SetLEDs(0x0001);
+                    wc.FindAllWiimotes();
+                    foreach(Wiimote wm in wc)
+                    {
+                        wmIndex = wc.IndexOf(wm);
+                        wm.WiimoteChanged += wm_onWiimoteChanged;
+                        wm.Connect();
+                        wm.SetReportType(InputReport.ButtonsAccel, true);
+                        wm.GetStatus();
+                        wm.SetLEDs(8);
+                        break;
+                    }
                     break;
             }
             Thread.Sleep(1000);
@@ -309,7 +316,7 @@ namespace SensorNode
             switch(DeviceRule)
             {
                 case Rule.Wiimote:
-                    wm.Disconnect();
+                    wc[wmIndex].Disconnect();
                     break;
             }
             dataFlag = false;
@@ -1667,33 +1674,36 @@ namespace SensorNode
                                         if (senseT.Count > DATA_BUFFER_MAX)
                                             senseT.RemoveAt(0);
 
+                                        _accelX = 0; _accelY = 0; _accelZ = 0; _gyroX = 0; _gyroY = 0; _gyroZ = 0;
+
                                         for (int i = 0; i < PACKAGE_COUNT; i++)
                                         {
-                                            _accelX = BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 0);
-                                            _accelY = BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 1);
-                                            _accelZ = BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 2);
-                                            _gyroX = BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 3);
-                                            _gyroY = BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 4);
-                                            _gyroZ = BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 5);
+                                            _accelX += BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 0);
+                                            _accelY += BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 1);
+                                            _accelZ += BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 2);
+                                            _gyroX += BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 3);
+                                            _gyroY += BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 4);
+                                            _gyroZ += BitConverter.ToInt16(buffer, i * DATA_LENGTH * sizeof(Int16) + sizeof(Int16) * 5);
 
-                                            _accelX = (short)(_accelX * RETOS_REF_VOLTAGE / RETOS_ADC_RANGE);
-                                            _accelY = (short)(_accelY * RETOS_REF_VOLTAGE / RETOS_ADC_RANGE);
-                                            _accelZ = (short)(_accelZ * RETOS_REF_VOLTAGE / RETOS_ADC_RANGE);
+                                            //_accelX = (short)(_accelX * RETOS_REF_VOLTAGE / RETOS_ADC_RANGE);
+                                            //_accelY = (short)(_accelY * RETOS_REF_VOLTAGE / RETOS_ADC_RANGE);
+                                            //_accelZ = (short)(_accelZ * RETOS_REF_VOLTAGE / RETOS_ADC_RANGE);
 
-                                            axisX.updateAccelRaw(_accelX);
-                                            axisY.updateAccelRaw(_accelY);
-                                            axisZ.updateAccelRaw(_accelZ);
+                                            //axisX.updateAccelRaw(_accelX);
+                                            //axisY.updateAccelRaw(_accelY);
+                                            //axisZ.updateAccelRaw(_accelZ);
 
-                                            axisX.updateGyroRaw(_gyroX);
-                                            axisY.updateGyroRaw(_gyroY);
-                                            axisZ.updateGyroRaw(_gyroZ);
+                                            //axisX.updateGyroRaw(_gyroX);
+                                            //axisY.updateGyroRaw(_gyroY);
+                                            //axisZ.updateGyroRaw(_gyroZ);
 
                                             //axisX.updateWeight(ref axisY, ref axisZ);
                                             //axisY.updateWeight(ref axisX, ref axisZ);
                                             //axisZ.updateWeight(ref axisX, ref axisY);
-                                            axisX.updateAccelWeight(ref axisY);
-                                            axisY.updateAccelWeight(ref axisX);
+                                            //axisX.updateAccelWeight(ref axisY);
+                                            //axisY.updateAccelWeight(ref axisX);
 
+                                            /*
                                             float accelX, accelY, accelZ;
                                             if((axisX.state & 1) == 0 && (axisY.state & 1)==0 && (axisZ.state & 1)==0)
                                             {
@@ -1730,11 +1740,12 @@ namespace SensorNode
                                                 kalman.u.writeLog(kalmanLog, "u");
                                                 kalman.next(kalmanLog);
                                             }
-
+                                            */
                                             //axisX.updateSensor(accelX, 0.0f, 0.0f);
                                             //axisY.updateSensor(accelY, 0.0f, 0.0f);
                                             //axisZ.updateSensor(accelZ, 0.0f, 0.0f);
 
+                                            /*
                                             this.Invoke(new MethodInvoker(delegate()
                                             {
                                                 this.AccelXData.Text = axisX.raw[axisX.sumIndex].ToString();
@@ -1761,9 +1772,9 @@ namespace SensorNode
                                                 this.MagnetoYData.Text = kalman.getMeasurement()[1, 0].ToString();
                                                 this.MagnetoZData.Text = kalman.getMeasurement()[2, 0].ToString();
                                             }));
+                                            */
                                         }
-
-                                        /*
+                                        
                                         //Average package data
                                         _gyroX = (Int16)(_gyroX / PACKAGE_COUNT);
                                         _gyroY = (Int16)(_gyroY / PACKAGE_COUNT);
@@ -1776,10 +1787,10 @@ namespace SensorNode
 
                                         ManipulateAccelerometer(_accelX, _accelY, _accelZ);
 
-                                        if(posLogFlag)
-                                        {
-                                            posLog.WriteLine(DateTime.Now.ToString() + "," + senseT.Last().ToString() + "," + accelXQ.Last().ToString() + "," + accelYQ.Last().ToString() + "," + accelZQ.Last().ToString() + ","+_gyroX.ToString() + ","+_gyroY.ToString()+","+_gyroZ.ToString());
-                                        }
+                                        //if(posLogFlag)
+                                        //{
+                                        //    posLog.WriteLine(DateTime.Now.ToString() + "," + senseT.Last().ToString() + "," + accelXQ.Last().ToString() + "," + accelYQ.Last().ToString() + "," + accelZQ.Last().ToString() + ","+_gyroX.ToString() + ","+_gyroY.ToString()+","+_gyroZ.ToString());
+                                        //}
                                         
 
                                         //Display data on the form
@@ -1790,7 +1801,7 @@ namespace SensorNode
                                             ChartA.DataSourceSettings.ReloadData();
 
                                         }));
-                                        */
+                                        
                                     }
                                     else
                                     {
@@ -2099,7 +2110,7 @@ namespace SensorNode
             SensorNode.SetParent(CONST_TV_NODETYPE.TV_NODETYPE_MESH, Room.GetIndex(), 1);
             SensorNode.SetPosition(0.0f, 150.0f, 0.0f);
             TV_3DVECTOR oriScale = SensorNode.GetScale();
-            SensorNode.SetScale(oriScale.x, oriScale.y * 0.4f, oriScale.z * 3.0f);
+            SensorNode.SetScale(oriScale.x, oriScale.y, oriScale.z * 1.5f);
             SensorNode.SetLightingMode(CONST_TV_LIGHTINGMODE.TV_LIGHTING_NORMAL, 0, 1);
             SensorNode.SetRotation(90.0f, 0.0f, 0.0f);
             //SensorNode.GetBoundingBox(ref Min, ref Max, true);
@@ -2171,8 +2182,8 @@ namespace SensorNode
             switch (DeviceRule)
             {
                 case Rule.SensorNode:
-                    //SensorNode.SetRotation((float)angleXQ.Last(), (float)angleYQ.Last(), (float)angleZQ.Last());
-                    SensorNode.SetPosition((float)kalman.getState()[0, 0] * 10.0f, 150.0f, (float)kalman.getState()[1, 0] * 10.0f);
+                    SensorNode.SetRotation((float)angleXQ.Last(), (float)angleYQ.Last(), (float)angleZQ.Last());
+                    //SensorNode.SetPosition((float)kalman.getState()[0, 0] * 10.0f, 150.0f, (float)kalman.getState()[1, 0] * 10.0f);
                     break;
                 case Rule.MotionNode:
                     //SensorNode.SetRotation(0.0f, axisY.mAngle, axisZ.angle);
