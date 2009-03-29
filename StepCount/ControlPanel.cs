@@ -238,12 +238,6 @@ namespace StepCount
                                     }
                                 }
 
-                                string sendMsg = "";
-                                int bbb = stageIndex - 1;
-                                if(bbb < 0)
-                                    bbb = stageSize - 1;
-                                sendMsg = DateTime.Now.ToString() + "," + xc[bbb].ToString() + "," + yc[bbb].ToString();
-                                SendMessage("WifiLoc", sendMsg);
 
                                 this.Invoke(new MethodInvoker(delegate()
                                 {
@@ -339,6 +333,17 @@ namespace StepCount
             {
                 MessageBox.Show(except.Message);
             }
+        }
+
+        private void Send_Bt_Click(object sender, EventArgs e)
+        {
+            string sendMsg = "";
+            int bbb = stageIndex - 1;
+            if (bbb < 0)
+                bbb = stageSize - 1;
+            sendMsg = DateTime.Now.ToString() + "," + xc[bbb].ToString() + "," + yc[bbb].ToString();
+            SendMessage("WifiLoc", sendMsg);
+
         }
 
     }
