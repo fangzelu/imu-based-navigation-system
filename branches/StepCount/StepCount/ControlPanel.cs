@@ -11,6 +11,7 @@ using MotionNode.SDK;
 using WiimoteLib;
 using System.IO;
 using System.IO.Ports;
+using System.Runtime.InteropServices;
 
 namespace StepCount
 {
@@ -45,6 +46,7 @@ namespace StepCount
 
         //*** Y-Mote
         SerialPort serialPort = new SerialPort();
+
 
         public ControlPanel()
         {
@@ -236,6 +238,13 @@ namespace StepCount
                                     }
                                 }
 
+                                string sendMsg = "";
+                                int bbb = stageIndex - 1;
+                                if(bbb < 0)
+                                    bbb = stageSize - 1;
+                                sendMsg = DateTime.Now.ToString() + "," + xc[bbb].ToString() + "," + yc[bbb].ToString();
+                                SendMessage("WifiLoc", sendMsg);
+
                                 this.Invoke(new MethodInvoker(delegate()
                                 {
                                     this.mAccPosX.Text = x.GetMotionPosition().ToString();
@@ -308,6 +317,30 @@ namespace StepCount
         {
             logFlag = false;
         }
+
+        void SendMessage(string strProgramName, string strMessage)
+        {
+            try
+            {
+                Win32API.COPYDATASTRUCT copyDataStruct = new Win32API.COPYDATASTRUCT();
+                copyDataStruct.dwData = (IntPtr)0; // 임시값
+                copyDataStruct.cbData = strMessage.Length * 2 + 1; // 한글 코드 지원
+                copyDataStruct.lpData = strMessage; // 보낼 메시지
+
+                IntPtr wndPtr = Win32API.FindWindow(null, strProgramName); // 
+
+                if (wndPtr == IntPtr.Zero) return;
+
+                IntPtr tempPtr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(Win32API.COPYDATASTRUCT)));
+                Marshal.StructureToPtr(copyDataStruct, tempPtr, true);
+                Win32API.SendMessage(wndPtr, Win32API.WM_COPYDATA, IntPtr.Zero, tempPtr);
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show(except.Message);
+            }
+        }
+
     }
 
     public class Axis
@@ -505,5 +538,25 @@ namespace StepCount
             else
                 log.WriteLine("");
         }
+
+    }
+
+    class Win32API
+    {
+        public const int WM_COPYDATA = 0x004A;
+
+        public struct COPYDATASTRUCT
+        {
+            public IntPtr dwData;
+            public int cbData;
+            [MarshalAs(UnmanagedType.LPStr)]
+            public string lpData;
+        }
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        [DllImport("User32.dll")]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
     }
 }
