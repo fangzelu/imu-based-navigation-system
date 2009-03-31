@@ -18,12 +18,24 @@ namespace StepCount
     public partial class ControlPanel : Form
     {
         //*** Coordinates
+        const int GRID = 2;
         int stageSize = 256;
         int stageIndex = 0;
         int x_init = 0, y_init = 0;
         float[] xc;
         float[] yc;
-        float x_diff, x_prime, y_prime;
+        float x_diff, xR_diff;
+
+        int stageIndex_tilt = 0;
+        float[] xc_tilt;
+        float[] yc_tilt;
+
+        int stageIndexR = 0;
+        int stageIndexR_tilt = 0;
+        float[] xcR;
+        float[] ycR;
+        float[] xcR_tilt;
+        float[] ycR_tilt;
 
         //*** to Control
         bool motionUse = true, wiiUse = false, ymoteUse = false;
@@ -34,19 +46,26 @@ namespace StepCount
         Axis x = new Axis(0);
         Axis y = new Axis(1);
         Axis z = new Axis(2);
-        int movingCount = 0;
+        int movingCount = 0;    // Moving Sample Count
+        int movingMin = 4096;   // Moving Min
+        int movingMax = 0;      // Moving Max
+        int movingDirection = -1;    // Moving Direction
+        int movingVibe = 0;     // Moving Vibration
+        float movingDistance = 0;   // Moving Distance
+        float movingDistanceR = 0;  // Moving Distance Runge-Kutta
+        float movingDev = 0.0f; // Moving Standard Deviation
 
         //*** MotionNode SDK
         Client motionSensor, motionRaw;
-        static int DATA_LENGTH = 6;
-        static int PACKAGE_COUNT = 3;
-        static int DATA_BUFFER_SIZE = DATA_LENGTH * PACKAGE_COUNT * sizeof(Int16) + sizeof(Int32);
         float mHeading = 0.0f;
+        float mTiltHeading = 0.0f;
         bool mMoving = false;
 
         //*** Y-Mote
         SerialPort serialPort = new SerialPort();
-
+        static int DATA_LENGTH = 6;
+        static int PACKAGE_COUNT = 3;
+        static int DATA_BUFFER_SIZE = DATA_LENGTH * PACKAGE_COUNT * sizeof(Int16) + sizeof(Int32);
 
         public ControlPanel()
         {
@@ -54,11 +73,23 @@ namespace StepCount
 
             xc = new float[stageSize];
             yc = new float[stageSize];
+            xc_tilt = new float[stageSize];
+            yc_tilt = new float[stageSize];
+            xcR = new float[stageSize];
+            ycR = new float[stageSize];
+            xcR_tilt = new float[stageSize];
+            ycR_tilt = new float[stageSize];
 
             for (int i = 0; i < stageSize; i++)
             {
                 xc[i] = 0.0f;
                 yc[i] = 0.0f;
+                xc_tilt[i] = 0.0f;
+                yc_tilt[i] = 0.0f;
+                xcR[i] = 0.0f;
+                ycR[i] = 0.0f;
+                xcR_tilt[i] = 0.0f;
+                ycR_tilt[i] = 0.0f;
             }
         }
 
@@ -97,14 +128,40 @@ namespace StepCount
             {
                 motionSensor.close();
                 motionRaw.close();
+
+                log.WriteLine("End");
+                posLog.WriteLine("End");
+                log.Close();
+                posLog.Close();
             }
 
             readThread.Abort();
         }
 
+        private void UpdateWorldPosition(float diff, float heading, ref float[] x, ref float[] y, ref int index)
+        {
+            float x_prime = (float)(diff * Math.Cos(heading));
+            float y_prime = (float)(diff * Math.Sin(heading));
+            int b = index - 1;
+            if (b < 0)
+                b = stageSize - 1;
+            x[index] = x[b] + x_prime;
+            y[index] = y[b] + y_prime;
+
+            index++;
+            if (index >= stageSize)
+                index = 0;
+        }
         private void mUpdateHeading(ref Axis x, ref Axis y)
         {
-            mHeading = (float)Math.Atan2(x.mGetMag(), y.mGetMag());
+            mHeading = (float)Math.Atan2(y.mGetMag(), x.mGetMag());
+        }
+        private void mUpdateTiltHeading(ref Axis x, ref Axis y, ref Axis z)
+        {
+            double x_prime = x.mGetMag() * Math.Cos(x.mGetAngle()) + y.mGetMag() * Math.Sin(y.mGetAngle()) * Math.Sin(x.mGetAngle()) + z.mGetMag() * Math.Cos(y.mGetAngle()) * Math.Sin(x.mGetAngle());
+            double y_prime = y.mGetMag() * Math.Cos(y.mGetAngle()) - z.mGetMag() * Math.Sin(x.mGetAngle());
+
+            mTiltHeading = (float)(Math.Atan2(y_prime, x_prime));
         }
         private void ReadSensorData()
         {
@@ -169,72 +226,110 @@ namespace StepCount
                                     x.UpdateMotionMag(itr.Value.getMagnetometer()[0]);
                                     y.UpdateMotionMag(itr.Value.getMagnetometer()[1]);
                                     z.UpdateMotionMag(itr.Value.getMagnetometer()[2]);
+
+                                    z.mUpdateAngle(ref y, ref x);
+                                    y.mUpdateAngle(ref z, ref x);
                                 }
 
                                 if (x.mAccStop && y.mAccStop && z.mAccStop)
                                 {
                                     if(mMoving)
                                     {
-                                        x.mBacktrackPosition(movingCount);
-                                        y.mBacktrackPosition(movingCount);
-                                        z.mBacktrackPosition(movingCount);
+                                        //x.mBacktrackPosition(movingCount);
+                                        //y.mBacktrackPosition(movingCount);
+                                        //z.mBacktrackPosition(movingCount);
 
-                                        if(movingCount >= 30)
-                                        {
-                                            stageIndex -= 30;
-                                            if (stageIndex < 0)
-                                                stageIndex = stageSize + stageIndex;
-                                        }
-                                        else
-                                        {
-                                            stageIndex -= movingCount + 1;
-                                            if (stageIndex < 0)
-                                                stageIndex = stageSize + stageIndex;
-                                        }
+                                        //if(movingCount >= 30)
+                                        //{
+                                        //    stageIndex -= 30;
+                                        //    if (stageIndex < 0)
+                                        //        stageIndex = stageSize + stageIndex;
+                                        //}
+                                        //else
+                                        //{
+                                        //    stageIndex -= movingCount + 1;
+                                        //    if (stageIndex < 0)
+                                        //        stageIndex = stageSize + stageIndex;
+                                        //}
 
                                         int bb = stageIndex - 1;
                                         if (bb < 0)
                                             bb = stageSize - 1;
-                                        posLog.WriteLine(DateTime.Now.ToString() + "," + xc[bb].ToString() + "," + yc[bb].ToString()+ ","+movingCount.ToString());
+                                        posLog.WriteLine("Stop Position");
                                     }
+
+                                    //x.SetMotionVelocityZero();
+                                    //y.SetMotionVelocityZero();
+                                    z.SetMotionVelocityZero();
+
                                     mUpdateHeading(ref z, ref y);
+                                    mUpdateTiltHeading(ref z, ref y, ref x);
+
                                     mMoving = false;
                                     movingCount = 0;
+                                    movingMin = 4096;
+                                    movingMax = 0;
+                                    movingDirection = -1;
+                                    movingDistance = 0.0f;
+                                    movingDistanceR = 0.0f;
+                                    movingVibe = 0;
+                                    movingDev = 0.0f;
                                 }
 
                                 if (!x.mAccStop || !y.mAccStop || !z.mAccStop)
                                 {
-                                    movingCount++;
-
-                                    x.UpdateMotionPosition();
-                                    y.UpdateMotionPosition();
+                                    //x.UpdateMotionPosition();
+                                    //y.UpdateMotionPosition();
                                     z.UpdateMotionPosition();
 
-                                    x_diff = z.mGetPositionDiff();
-                                    x_prime = (float)(x_diff * Math.Cos(mHeading));
-                                    y_prime = (float)(x_diff * Math.Sin(mHeading));
-                                    int b = stageIndex - 1;
-                                    if (b < 0)
-                                        b = stageSize - 1;
-                                    xc[stageIndex] = xc[b] + x_prime;
-                                    yc[stageIndex] = yc[b] + y_prime;
+                                    z.UpdateMotionPositionR();
 
-                                    stageIndex++;
-                                    if (stageIndex >= stageSize)
-                                        stageIndex = 0;
+                                    x_diff = z.mGetPositionDiff();
+                                    xR_diff = z.mGetPositionRDiff();
+
+                                    UpdateWorldPosition(x_diff, mHeading, ref xc, ref yc, ref stageIndex);
+                                    UpdateWorldPosition(x_diff, mTiltHeading, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
+                                    UpdateWorldPosition(xR_diff, mHeading, ref xcR, ref ycR, ref stageIndexR);
+                                    UpdateWorldPosition(xR_diff, mTiltHeading, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
 
                                     mMoving = true;
+                                    movingCount++;
+                                    movingMin = Math.Min(movingMin, z.GetMotionAccelRaw());
+                                    movingMax = Math.Min(movingMax, z.GetMotionAccelRaw());
+                                    movingDev = z.GetMotionAccelDev();
+                                    movingDistance += x_diff;
+                                    movingDistanceR += xR_diff;
+                                    int curD;
+                                    if (z.GetMotionAccel() > z.mAccAvg)
+                                        curD = 1;
+                                    else
+                                        curD = 0;
+                                    if (curD != movingDirection)
+                                        movingVibe++;
+                                    movingDirection = curD;
 
                                     if (logFlag)
                                     {
-                                        x.WriteMotionLog(log, "MotionX", mHeading);
-                                        y.WriteMotionLog(log, "MotionY", mHeading);
-                                        z.WriteMotionLog(log, "MotionZ", mHeading);
+                                        //x.WriteMotionLog(log, "MotionX", mHeading);
+                                        //y.WriteMotionLog(log, "MotionY", mHeading);
+                                        //z.WriteMotionLog(log, "MotionZ", mHeading);
 
                                         int bb = stageIndex - 1;
                                         if(bb < 0)
                                             bb = stageSize - 1;
-                                        posLog.WriteLine(DateTime.Now.ToString() + "," + xc[bb].ToString() + "," + yc[bb].ToString());
+                                        int bb_tilt = stageIndex_tilt - 1;
+                                        if (bb_tilt < 0)
+                                            bb_tilt = stageSize - 1;
+                                        int bbR = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
+                                        int bbR_tilt = (stageIndexR_tilt - 1 < 0) ? (stageSize + (stageIndexR_tilt - 1)) : (stageIndexR_tilt - 1);
+                                        posLog.WriteLine(DateTime.Now.ToString() + "," +
+                                            xc[bb].ToString() + "," + yc[bb].ToString() + "," +
+                                            xc_tilt[bb_tilt].ToString() + "," + yc_tilt[bb_tilt].ToString() + "," + 
+                                            xcR[bbR].ToString() + "," + ycR[bbR].ToString() + "," +
+                                            xcR_tilt[bbR_tilt].ToString() + "," + ycR_tilt[bbR_tilt].ToString() + "," +
+                                            movingCount.ToString() + "," + movingVibe.ToString() + "," +
+                                            movingMin.ToString() + "," + movingMax.ToString() + "," +
+                                            movingDev.ToString() + "," + movingDistance.ToString() + "," + movingDistanceR.ToString());
                                     }
                                 }
 
@@ -250,17 +345,32 @@ namespace StepCount
                                     this.mMagZ.Text = z.mGetMag().ToString();
 
                                     this.mHeadZY.Text = (mHeading * 180.0f / Math.PI).ToString();
+                                    this.mHeadTilt.Text = (mTiltHeading * 180.0f / Math.PI).ToString();
 
                                     this.mLocalX.Text = x_diff.ToString();
-
-                                    this.mWorldX.Text = x_prime.ToString();
-                                    this.mWorldY.Text = y_prime.ToString();
 
                                     int b = stageIndex - 1;
                                     if(b < 0)
                                         b = stageSize - 1;
                                     this.mStageX.Text = (xc[b]).ToString();
                                     this.mStageY.Text = (yc[b]).ToString();
+
+                                    b = stageIndex_tilt - 1;
+                                    if (b < 0)
+                                        b = stageSize - 1;
+                                    this.mStageTiltX.Text = (xc_tilt[b]).ToString();
+                                    this.mStageTiltY.Text = (yc_tilt[b]).ToString();
+
+                                    b = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
+                                    this.mStageRX.Text = (xcR[b]).ToString();
+                                    this.mStageRY.Text = (ycR[b]).ToString();
+
+                                    b = (stageIndexR_tilt - 1 < 0) ? (stageSize + (stageIndexR_tilt - 1)) : (stageIndexR_tilt - 1);
+                                    this.mStageRTX.Text = (xcR_tilt[b]).ToString();
+                                    this.mStageRTY.Text = (ycR_tilt[b]).ToString();
+
+                                    this.mRoll.Text = (y.mGetAngle() * 180.0f / Math.PI).ToString();
+                                    this.mPitch.Text = (z.mGetAngle() * 180.0f / Math.PI).ToString();
                                 }));
                             }
                         }
@@ -303,6 +413,12 @@ namespace StepCount
             {
                 xc[i] = 0.0f;
                 yc[i] = 0.0f;
+                xc_tilt[i] = 0.0f;
+                yc_tilt[i] = 0.0f;
+                xcR[i] = 0.0f;
+                ycR[i] = 0.0f;
+                xcR_tilt[i] = 0.0f;
+                ycR_tilt[i] = 0.0f;
             }
             logFlag = true;
         }
@@ -376,9 +492,16 @@ namespace StepCount
         public bool mAccStop = true;
         public float mAccAvg;
         public float mHeading;
+        public float mAngle;
 
         public float mT = 1.0f / 30.0f;
         public float[] mPos;
+
+        public float mTR = 1.0f / 60.0f;
+        public int mVeloIndex = 0;
+        public int mPosRIndex = 0;
+        public float[] mPosR;
+        public float[] mVelo;
 
         // WiiMote Data use 'w'
         int[] wAccRaw;
@@ -398,17 +521,25 @@ namespace StepCount
             mGyro = new float[mSize];
             mMag = new float[mSize];
             mPos = new float[mSize];
+            mVelo = new float[mSize];
+            mPosR = new float[mSize];
             for(int i=0 ; i < mSize ; i++)
             {
                 mAccRaw[i] = 0;
                 mAcc[i] = 0.0f;
                 mPos[i] = 0.0f;
+                mVelo[i] = 0.0f;
+                mPosR[i] = 0.0f;
             }
 
             yAccRaw = new int[yRawSize];
             yGyroRaw = new int[yRawSize];
         }
 
+        public float GetMotionAccelDev()
+        {
+            return (float)Math.Sqrt(mAccRawDev);
+        }
         public int GetMotionAccelRaw()
         {
             int bIndex = mAccRawIndex - 1;
@@ -441,12 +572,23 @@ namespace StepCount
 
             return mPos[b] - mPos[bb];
         }
+        public float mGetPositionRDiff()
+        {
+            int b = (mPosRIndex - 1 < 0) ? (mSize + (mPosRIndex - 1)) : (mPosRIndex - 1);
+            int bb = (mPosRIndex - 2 < 0) ? (mSize + (mPosRIndex - 2)) : (mPosRIndex - 2);
+
+            return mPosR[b] - mPosR[bb];
+        }
         public float mGetMag()
         {
             int b = mMagIndex - 1;
             if (b < 0)
                 b = mSize - 1;
             return mMag[b];
+        }
+        public float mGetAngle()
+        {
+            return mAngle;
         }
         public void UpdateMotionAccelRaw(int val)
         {
@@ -517,11 +659,49 @@ namespace StepCount
             if (mPosIndex >= mSize)
                 mPosIndex = 0;
         }
+        public void SetMotionVelocityZero()
+        {
+            mVelo[mVeloIndex] = 0.0f;
+            mVeloIndex++;
+            if (mVeloIndex >= mSize)
+                mVeloIndex = 0;
+        }
+        public void UpdateMotionPositionR()
+        {
+            int b = (mAccIndex - 1 < 0) ? (mSize + (mAccIndex - 1)) : (mAccIndex - 1);
+            int bb = (mAccIndex - 2 < 0) ? (mSize + (mAccIndex - 2)) : (mAccIndex - 2);
+            int bbb = (mAccIndex - 3 < 0) ? (mSize + (mAccIndex - 3)) : (mAccIndex - 3);
+            int bbbb = (mAccIndex - 4 < 0) ? (mSize + (mAccIndex - 4)) : (mAccIndex - 4);
+
+            int bv = (mVeloIndex - 1 < 0) ? (mSize - 1) : (mVeloIndex - 1);
+
+            mVelo[mVeloIndex] = mVelo[bv] + ((mAcc[bbbb] - mAccAvg) + 2 * (mAcc[bbb] - mAccAvg) + 2 * (mAcc[bb] - mAccAvg) + (mAcc[b] - mAccAvg)) / 6.0f * mTR;
+
+            mVeloIndex++;
+            if (mVeloIndex >= mSize)
+                mVeloIndex = 0;
+
+            int bp = (mPosRIndex - 1 < 0) ? (mSize - 1) : (mPosRIndex - 1);
+
+            b = (mVeloIndex - 1 < 0) ? (mSize + (mVeloIndex - 1)) : (mVeloIndex - 1);
+            bb = (mVeloIndex - 2 < 0) ? (mSize + (mVeloIndex - 2)) : (mVeloIndex - 2);
+            bbb = (mVeloIndex - 3 < 0) ? (mSize + (mVeloIndex - 3)) : (mVeloIndex - 3);
+            bbbb = (mVeloIndex - 4 < 0) ? (mSize + (mVeloIndex - 4)) : (mVeloIndex - 4);
+
+            mPosR[mPosRIndex] = mPosR[bp] + (mVelo[bbbb] + 2 * mVelo[bbb] + 2 * mVelo[bb] + mVelo[b]) / 6.0f * mTR;
+
+            mPosRIndex++;
+            if (mPosRIndex >= mSize)
+                mPosRIndex = 0;
+        }
 
         public void SetMotionPositionZero()
         {
             for (int i = 0; i < mSize; i++)
+            {
                 mPos[i] = 0.0f;
+                mPosR[i] = 0.0f;
+            }
         }
 
         public void WriteMotionLog(TextWriter log, string title, float h)
@@ -544,6 +724,19 @@ namespace StepCount
                 log.WriteLine("");
         }
 
+        public void mUpdateAngle(ref Axis hor, ref Axis ver)
+        {
+            int b = mAccIndex - 1;
+            if(b < 0)
+                b = mSize - 1;
+            int b_ver = ver.mAccIndex - 1;
+            if(b_ver < 0)
+                b_ver = ver.mSize - 1;
+            int b_hor = hor.mAccIndex - 1;
+            if(b_hor < 0)
+                b_hor = hor.mSize - 1;
+            mAngle = (float)(Math.Atan2(mAcc[b],Math.Sqrt(ver.mAcc[b_ver]*ver.mAcc[b_ver]+hor.mAcc[b_hor]*hor.mAcc[b_hor])));
+        }
     }
 
     class Win32API
