@@ -171,7 +171,18 @@ namespace StepCount
         }
         private void mUpdateHeading(ref Axis x, ref Axis y)
         {
-            float cur = (float)Math.Atan2(y.mGetMag(), x.mGetMag());
+            float yval = y.mGetMag();
+            if (yval < -25.0f)
+                yval = -25.0f;
+            else if (yval > 25.0f)
+                yval = 25.0f;
+            float xval = x.mGetMag();
+            if (xval < -25.0f)
+                xval = -25.0f;
+            else if (xval > 25.0f)
+                xval = 25.0f;
+
+            float cur = (float)Math.Atan2(yval, xval);
 
             mHeadingSum += cur;
             mHeadingSum -= mHeading[mHeadingIndex];
@@ -184,8 +195,27 @@ namespace StepCount
         }
         private void mUpdateTiltHeading(ref Axis x, ref Axis y, ref Axis z)
         {
-            double x_prime = x.mGetMag() * Math.Cos(x.mGetAngle()) + y.mGetMag() * Math.Sin(y.mGetAngle()) * Math.Sin(x.mGetAngle()) + z.mGetMag() * Math.Cos(y.mGetAngle()) * Math.Sin(x.mGetAngle());
-            double y_prime = y.mGetMag() * Math.Cos(y.mGetAngle()) - z.mGetMag() * Math.Sin(x.mGetAngle());
+            float yval = y.mGetMag();
+            if (yval < -25.0f)
+                yval = -25.0f;
+            else if (yval > 25.0f)
+                yval = 25.0f;
+            float xval = x.mGetMag();
+            if (xval < -25.0f)
+                xval = -25.0f;
+            else if (xval > 25.0f)
+                xval = 25.0f;
+            float zval = x.mGetMag();
+            if (zval < -25.0f)
+                zval = -25.0f;
+            else if (zval > 25.0f)
+                zval = 25.0f;
+
+            //double x_prime = x.mGetMag() * Math.Cos(x.mGetAngle()) + y.mGetMag() * Math.Sin(y.mGetAngle()) * Math.Sin(x.mGetAngle()) + z.mGetMag() * Math.Cos(y.mGetAngle()) * Math.Sin(x.mGetAngle());
+            //double y_prime = y.mGetMag() * Math.Cos(y.mGetAngle()) - z.mGetMag() * Math.Sin(x.mGetAngle());
+
+            double x_prime = xval * Math.Cos(x.mGetAngle()) + yval * Math.Sin(y.mGetAngle()) * Math.Sin(x.mGetAngle()) + zval * Math.Cos(y.mGetAngle()) * Math.Sin(x.mGetAngle());
+            double y_prime = yval * Math.Cos(y.mGetAngle()) - zval * Math.Sin(x.mGetAngle());
 
             float cur = (float)(Math.Atan2(y_prime, x_prime));
 
@@ -364,7 +394,9 @@ namespace StepCount
                                             xcR_tilt[bbR_tilt].ToString() + "," + ycR_tilt[bbR_tilt].ToString() + "," +
                                             movingCount.ToString() + "," + movingVibe.ToString() + "," +
                                             movingMin.ToString() + "," + movingMax.ToString() + "," +
-                                            movingDev.ToString() + "," + movingDistance.ToString() + "," + movingDistanceR.ToString());
+                                            movingDev.ToString() + "," + movingDistance.ToString() + "," + movingDistanceR.ToString() + "," +
+                                            x.mGetMag().ToString() + "," + y.mGetMag().ToString() + "," + z.mGetMag() + "," +
+                                            mHeadingAvg.ToString() + "," + mTiltHeadingAvg.ToString());
                                     }
                                 }
 
