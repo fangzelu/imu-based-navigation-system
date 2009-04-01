@@ -57,8 +57,16 @@ namespace StepCount
 
         //*** MotionNode SDK
         Client motionSensor, motionRaw;
-        float mHeading = 0.0f;
-        float mTiltHeading = 0.0f;
+
+        int mHeadingIndex = 0;
+        int mTiltHeadingIndex = 0;
+        int mHeadSize = 32;
+        float mHeadingSum = 0.0f;
+        float mTiltHeadingSum = 0.0f;
+        float mHeadingAvg = 0.0f;
+        float mTiltHeadingAvg = 0.0f;
+        float[] mHeading;
+        float[] mTiltHeading;
         bool mMoving = false;
 
         //*** Y-Mote
@@ -90,6 +98,15 @@ namespace StepCount
                 ycR[i] = 0.0f;
                 xcR_tilt[i] = 0.0f;
                 ycR_tilt[i] = 0.0f;
+            }
+
+            mHeading = new float[mHeadSize];
+            mTiltHeading = new float[mHeadSize];
+
+            for(int i = 0 ; i < mHeadSize ; i++)
+            {
+                mHeading[i] = 0.0f;
+                mTiltHeading[i] = 0.0f;
             }
         }
 
@@ -154,14 +171,32 @@ namespace StepCount
         }
         private void mUpdateHeading(ref Axis x, ref Axis y)
         {
-            mHeading = (float)Math.Atan2(y.mGetMag(), x.mGetMag());
+            float cur = (float)Math.Atan2(y.mGetMag(), x.mGetMag());
+
+            mHeadingSum += cur;
+            mHeadingSum -= mHeading[mHeadingIndex];
+
+            mHeading[mHeadingIndex] = cur;
+            mHeadingIndex++;
+            mHeadingIndex = (mHeadingIndex >= mHeadSize) ? 0 : mHeadingIndex;
+
+            mHeadingAvg = mHeadingSum / mHeadSize;
         }
         private void mUpdateTiltHeading(ref Axis x, ref Axis y, ref Axis z)
         {
             double x_prime = x.mGetMag() * Math.Cos(x.mGetAngle()) + y.mGetMag() * Math.Sin(y.mGetAngle()) * Math.Sin(x.mGetAngle()) + z.mGetMag() * Math.Cos(y.mGetAngle()) * Math.Sin(x.mGetAngle());
             double y_prime = y.mGetMag() * Math.Cos(y.mGetAngle()) - z.mGetMag() * Math.Sin(x.mGetAngle());
 
-            mTiltHeading = (float)(Math.Atan2(y_prime, x_prime));
+            float cur = (float)(Math.Atan2(y_prime, x_prime));
+
+            mTiltHeadingSum += cur;
+            mTiltHeadingSum -= mTiltHeading[mTiltHeadingIndex];
+
+            mTiltHeading[mTiltHeadingIndex] = cur;
+            mTiltHeadingIndex++;
+            mTiltHeadingIndex = (mTiltHeadingIndex >= mHeadSize) ? 0 : mTiltHeadingIndex;
+
+            mTiltHeadingAvg = mTiltHeadingSum / mHeadSize;
         }
         private void ReadSensorData()
         {
@@ -287,10 +322,10 @@ namespace StepCount
                                     x_diff = z.mGetPositionDiff();
                                     xR_diff = z.mGetPositionRDiff();
 
-                                    UpdateWorldPosition(x_diff, mHeading, ref xc, ref yc, ref stageIndex);
-                                    UpdateWorldPosition(x_diff, mTiltHeading, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
-                                    UpdateWorldPosition(xR_diff, mHeading, ref xcR, ref ycR, ref stageIndexR);
-                                    UpdateWorldPosition(xR_diff, mTiltHeading, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
+                                    UpdateWorldPosition(x_diff, mHeadingAvg, ref xc, ref yc, ref stageIndex);
+                                    UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
+                                    UpdateWorldPosition(xR_diff, mHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
+                                    UpdateWorldPosition(xR_diff, mTiltHeadingAvg, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
 
                                     mMoving = true;
                                     movingCount++;
@@ -344,8 +379,8 @@ namespace StepCount
                                     this.mMagY.Text = y.mGetMag().ToString();
                                     this.mMagZ.Text = z.mGetMag().ToString();
 
-                                    this.mHeadZY.Text = (mHeading * 180.0f / Math.PI).ToString();
-                                    this.mHeadTilt.Text = (mTiltHeading * 180.0f / Math.PI).ToString();
+                                    this.mHeadZY.Text = (mHeadingAvg * 180.0f / Math.PI).ToString();
+                                    this.mHeadTilt.Text = (mTiltHeadingAvg * 180.0f / Math.PI).ToString();
 
                                     this.mLocalX.Text = x_diff.ToString();
 
@@ -497,7 +532,7 @@ namespace StepCount
         public float mT = 1.0f / 30.0f;
         public float[] mPos;
 
-        public float mTR = 1.0f / 60.0f;
+        public float mTR = 1.0f / 30.0f;
         public int mVeloIndex = 0;
         public int mPosRIndex = 0;
         public float[] mPosR;
