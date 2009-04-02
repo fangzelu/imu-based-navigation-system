@@ -116,6 +116,8 @@ namespace StepCount
                 "RawX" + "," + "RawY" + "," +
                 //xcR[bbR].ToString() + "," + ycR[bbR].ToString() + "," +
                 "린지X" + "," + "린지Y" + "," +
+                "AccelRaw" + "," + "RawAvg" + "," + "VeloRaw" + "," + "PosRaw" + "," +
+                "Accel" + "," + "Avg" + "," + "Velo" + "," + "Pos" + "," +
                 "샘플수" + "," + "진동수" + "," + "유효수" + "," +
                 "최소" + "," + "최대" + "," + "범위" + "," +
                 "분산" + "," + "최대분산" + "," + "Raw이동거리" + "," + "린지이동거리" + "," +
@@ -334,9 +336,6 @@ namespace StepCount
                                         //        stageIndex = stageSize + stageIndex;
                                         //}
 
-                                        int bb = stageIndex - 1;
-                                        if (bb < 0)
-                                            bb = stageSize - 1;
                                         posLog.WriteLine("Stop Position");
                                     }
 
@@ -421,6 +420,8 @@ namespace StepCount
                                             xc_tilt[bb_tilt].ToString() + "," + yc_tilt[bb_tilt].ToString() + "," + 
                                             //xcR[bbR].ToString() + "," + ycR[bbR].ToString() + "," +
                                             xcR_tilt[bbR_tilt].ToString() + "," + ycR_tilt[bbR_tilt].ToString() + "," +
+                                            z.GetMotionAccelRaw().ToString() + "," + z.mAccRawAvg.ToString() + "," + z.GetMotionVeloRaw().ToString() + "," + z.GetMotionPositionRRaw().ToString() + "," +
+                                            z.GetMotionAccel().ToString() + "," + z.mAccAvg.ToString() + "," + z.GetMotionVelo().ToString() + "," + z.GetMotionPositionR().ToString() + "," +
                                             movingCount.ToString() + "," + movingVibe.ToString() + "," + movingValid.ToString() + "," +
                                             movingMin.ToString() + "," + movingMax.ToString() + "," + ((movingMax - movingMin)/800.0f).ToString() + "," +
                                             movingDev.ToString() + "," + movingDevMax.ToString() + "," + movingDistance.ToString() + "," + movingDistanceR.ToString() + "," +
@@ -669,6 +670,20 @@ namespace StepCount
             if (b < 0)
                 b = mSize - 1;
             return mPos[b];
+        }
+        public float GetMotionVelo()
+        {
+            int b = mVeloIndex - 1;
+            if (b < 0)
+                b = mSize - 1;
+            return mVelo[b];
+        }
+        public float GetMotionVeloRaw()
+        {
+            int b = mVeloRawIndex - 1;
+            if (b < 0)
+                b = mSize - 1;
+            return mVeloRaw[b];
         }
         public float GetMotionPositionR()
         {
