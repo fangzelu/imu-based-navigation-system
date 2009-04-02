@@ -51,6 +51,7 @@ namespace StepCount
         int movingMax = 0;      // Moving Max
         int movingDirection = -1;    // Moving Direction
         int movingValid = 0;    // Moving Valid Direction
+        int movingValidRaw = 0;
         int movingVibe = 0;     // Moving Vibration
         float movingDistance = 0;   // Moving Distance
         float movingDistanceR = 0;  // Moving Distance Runge-Kutta
@@ -118,7 +119,7 @@ namespace StepCount
                 "린지X" + "," + "린지Y" + "," +
                 "AccelRaw" + "," + "RawAvg" + "," + "VeloRaw" + "," + "PosRaw" + "," +
                 "Accel" + "," + "Avg" + "," + "Velo" + "," + "Pos" + "," +
-                "샘플수" + "," + "진동수" + "," + "유효수" + "," +
+                "샘플수" + "," + "진동수" + "," + "유효수" + "," + "ValidRaw" + "," +
                 "최소" + "," + "최대" + "," + "범위" + "," +
                 "분산" + "," + "최대분산" + "," + "Raw이동거리" + "," + "린지이동거리" + "," +
                 //movingDev.ToString() + "," + movingDistanceR.ToString() + "," +
@@ -356,6 +357,7 @@ namespace StepCount
                                     movingVibe = 0;
                                     movingDev = 0.0f;
                                     movingValid = 0;
+                                    movingValidRaw = 0;
                                     movingDevMax = 0.0f;
                                 }
 
@@ -378,17 +380,22 @@ namespace StepCount
                                     {
                                         //UpdateWorldPosition(xR_diff, mHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
                                         UpdateWorldPosition(xR_diff, mTiltHeadingAvg, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
-                                        UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
 
-                                        movingMin = Math.Min(movingMin, z.GetMotionAccelRaw());
-                                        movingMax = Math.Max(movingMax, z.GetMotionAccelRaw());
-                                        movingDev = z.GetMotionAccelDev();
-                                        movingDevMax = Math.Max(movingDevMax, movingDev);
                                         movingDistanceR += xR_diff;
-                                        movingDistance += x_diff;
                                         movingValid++;
                                     }
 
+                                    if(x_diff >= 0)
+                                    {
+                                        UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
+                                        movingDistance += x_diff;
+                                        movingValidRaw++;
+                                    }
+
+                                    movingMin = Math.Min(movingMin, z.GetMotionAccelRaw());
+                                    movingMax = Math.Max(movingMax, z.GetMotionAccelRaw());
+                                    movingDev = z.GetMotionAccelDev();
+                                    movingDevMax = Math.Max(movingDevMax, movingDev);
                                     mMoving = true;
                                     movingCount++;
                                     int curD;
@@ -422,7 +429,7 @@ namespace StepCount
                                             xcR_tilt[bbR_tilt].ToString() + "," + ycR_tilt[bbR_tilt].ToString() + "," +
                                             z.GetMotionAccelRaw().ToString() + "," + z.mAccRawAvg.ToString() + "," + z.GetMotionVeloRaw().ToString() + "," + z.GetMotionPositionRRaw().ToString() + "," +
                                             z.GetMotionAccel().ToString() + "," + z.mAccAvg.ToString() + "," + z.GetMotionVelo().ToString() + "," + z.GetMotionPositionR().ToString() + "," +
-                                            movingCount.ToString() + "," + movingVibe.ToString() + "," + movingValid.ToString() + "," +
+                                            movingCount.ToString() + "," + movingVibe.ToString() + "," + movingValid.ToString() + "," + movingValidRaw.ToString() + "," +
                                             movingMin.ToString() + "," + movingMax.ToString() + "," + ((movingMax - movingMin)/800.0f).ToString() + "," +
                                             movingDev.ToString() + "," + movingDevMax.ToString() + "," + movingDistance.ToString() + "," + movingDistanceR.ToString() + "," +
                                             //movingDev.ToString() + "," + movingDistanceR.ToString() + "," +
