@@ -739,7 +739,7 @@ namespace StepCount
                 mAccStop = true;
 
             if (mAccStop)
-                mAccRawAvg = mAccRawSum / mRawSize;
+                mAccRawAvg = (float)mAccRawSum / (float)mRawSize;
         }
 
         public void UpdateMotionAccel(float val)
@@ -841,7 +841,7 @@ namespace StepCount
 
             int bv = (mVeloRawIndex - 1 < 0) ? (mSize - 1) : (mVeloRawIndex - 1);
 
-            mVeloRaw[mVeloRawIndex] = mVeloRaw[bv] + ((mAccRaw[bbbb] - mAccRawAvg) + 2 * (mAccRaw[bbb] - mAccRawAvg) + 2 * (mAccRaw[bb] - mAccRawAvg) + (mAccRaw[b] - mAccRawAvg)) / 800.0f * G / 6.0f * mTR;
+            mVeloRaw[mVeloRawIndex] = mVeloRaw[bv] + (((float)mAccRaw[bbbb] - mAccRawAvg) + 2 * ((float)mAccRaw[bbb] - mAccRawAvg) + 2 * ((float)mAccRaw[bb] - mAccRawAvg) + ((float)mAccRaw[b] - mAccRawAvg)) / 800.0f * G / 6.0f * mTR;
 
             mVeloRawIndex++;
             if (mVeloRawIndex >= mSize)
