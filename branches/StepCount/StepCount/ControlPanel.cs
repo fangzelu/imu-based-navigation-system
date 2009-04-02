@@ -50,6 +50,7 @@ namespace StepCount
         int movingMin = 4096;   // Moving Min
         int movingMax = 0;      // Moving Max
         int movingDirection = -1;    // Moving Direction
+        int movingValid = 0;    // Moving Valid Direction
         int movingVibe = 0;     // Moving Vibration
         float movingDistance = 0;   // Moving Distance
         float movingDistanceR = 0;  // Moving Distance Runge-Kutta
@@ -328,7 +329,7 @@ namespace StepCount
                                     //y.SetMotionVelocityZero();
                                     z.SetMotionVelocityZero();
 
-                                    mUpdateHeading(ref z, ref y);
+                                    //mUpdateHeading(ref z, ref y);
                                     mUpdateTiltHeading(ref z, ref y, ref x);
 
                                     mMoving = false;
@@ -340,31 +341,37 @@ namespace StepCount
                                     movingDistanceR = 0.0f;
                                     movingVibe = 0;
                                     movingDev = 0.0f;
+                                    movingValid = 0;
                                 }
 
                                 if (!x.mAccStop || !y.mAccStop || !z.mAccStop)
                                 {
                                     //x.UpdateMotionPosition();
                                     //y.UpdateMotionPosition();
-                                    z.UpdateMotionPosition();
-
+                                    //z.UpdateMotionPosition();
                                     z.UpdateMotionPositionR();
 
-                                    x_diff = z.mGetPositionDiff();
+                                    //x_diff = z.mGetPositionDiff();
                                     xR_diff = z.mGetPositionRDiff();
 
-                                    UpdateWorldPosition(x_diff, mHeadingAvg, ref xc, ref yc, ref stageIndex);
-                                    UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
-                                    UpdateWorldPosition(xR_diff, mHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
-                                    UpdateWorldPosition(xR_diff, mTiltHeadingAvg, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
+                                    //UpdateWorldPosition(x_diff, mHeadingAvg, ref xc, ref yc, ref stageIndex);
+                                    //UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
+
+                                    if(xR_diff >= 0)
+                                    {
+                                        UpdateWorldPosition(xR_diff, mHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
+                                        UpdateWorldPosition(xR_diff, mTiltHeadingAvg, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
+
+                                        movingMin = Math.Min(movingMin, z.GetMotionAccelRaw());
+                                        movingMax = Math.Max(movingMax, z.GetMotionAccelRaw());
+                                        movingDev = z.GetMotionAccelDev();
+                                        movingDistanceR += xR_diff;
+                                        movingValid++;
+                                    }
 
                                     mMoving = true;
                                     movingCount++;
-                                    movingMin = Math.Min(movingMin, z.GetMotionAccelRaw());
-                                    movingMax = Math.Max(movingMax, z.GetMotionAccelRaw());
-                                    movingDev = z.GetMotionAccelDev();
-                                    movingDistance += x_diff;
-                                    movingDistanceR += xR_diff;
+                                    //movingDistance += x_diff;
                                     int curD;
                                     if (z.GetMotionAccel() > z.mAccAvg)
                                         curD = 1;
@@ -388,16 +395,20 @@ namespace StepCount
                                             bb_tilt = stageSize - 1;
                                         int bbR = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
                                         int bbR_tilt = (stageIndexR_tilt - 1 < 0) ? (stageSize + (stageIndexR_tilt - 1)) : (stageIndexR_tilt - 1);
+
                                         posLog.WriteLine(DateTime.Now.ToString() + "," +
-                                            xc[bb].ToString() + "," + yc[bb].ToString() + "," +
-                                            xc_tilt[bb_tilt].ToString() + "," + yc_tilt[bb_tilt].ToString() + "," + 
-                                            xcR[bbR].ToString() + "," + ycR[bbR].ToString() + "," +
+                                            //xc[bb].ToString() + "," + yc[bb].ToString() + "," +
+                                            //xc_tilt[bb_tilt].ToString() + "," + yc_tilt[bb_tilt].ToString() + "," + 
+                                            //xcR[bbR].ToString() + "," + ycR[bbR].ToString() + "," +
                                             xcR_tilt[bbR_tilt].ToString() + "," + ycR_tilt[bbR_tilt].ToString() + "," +
-                                            movingCount.ToString() + "," + movingVibe.ToString() + "," +
-                                            movingMin.ToString() + "," + movingMax.ToString() + "," +
-                                            movingDev.ToString() + "," + movingDistance.ToString() + "," + movingDistanceR.ToString() + "," +
+                                            movingCount.ToString() + "," + movingVibe.ToString() + "," + movingValid.ToString() + "," +
+                                            movingMin.ToString() + "," + movingMax.ToString() + "," + ((movingMax - movingMin)/800.0f).ToString() + "," +
+                                            //movingDev.ToString() + "," + movingDistance.ToString() + "," + movingDistanceR.ToString() + "," +
+                                            movingDev.ToString() + "," + movingDistanceR.ToString() + "," +
                                             x.mGetMag().ToString() + "," + y.mGetMag().ToString() + "," + z.mGetMag() + "," +
-                                            mHeadingAvg.ToString() + "," + mTiltHeadingAvg.ToString());
+                                            //mHeadingAvg.ToString() + "," + mTiltHeadingAvg.ToString() + "," +
+                                            (mTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," +
+                                            (z.mGetAngle() * 180.0f / Math.PI).ToString() + "," + (y.mGetAngle() * 180.0f / Math.PI).ToString());
                                     }
                                 }
 
@@ -412,28 +423,28 @@ namespace StepCount
                                     this.mMagY.Text = y.mGetMag().ToString();
                                     this.mMagZ.Text = z.mGetMag().ToString();
 
-                                    this.mHeadZY.Text = (mHeadingAvg * 180.0f / Math.PI).ToString();
+                                    //this.mHeadZY.Text = (mHeadingAvg * 180.0f / Math.PI).ToString();
                                     this.mHeadTilt.Text = (mTiltHeadingAvg * 180.0f / Math.PI).ToString();
 
-                                    this.mLocalX.Text = x_diff.ToString();
+                                    this.mLocalX.Text = xR_diff.ToString();
 
-                                    int b = stageIndex - 1;
-                                    if(b < 0)
-                                        b = stageSize - 1;
-                                    this.mStageX.Text = (xc[b]).ToString();
-                                    this.mStageY.Text = (yc[b]).ToString();
+                                    //int b = stageIndex - 1;
+                                    //if(b < 0)
+                                    //    b = stageSize - 1;
+                                    //this.mStageX.Text = (xc[b]).ToString();
+                                    //this.mStageY.Text = (yc[b]).ToString();
 
-                                    b = stageIndex_tilt - 1;
-                                    if (b < 0)
-                                        b = stageSize - 1;
-                                    this.mStageTiltX.Text = (xc_tilt[b]).ToString();
-                                    this.mStageTiltY.Text = (yc_tilt[b]).ToString();
+                                    //b = stageIndex_tilt - 1;
+                                    //if (b < 0)
+                                    //    b = stageSize - 1;
+                                    //this.mStageTiltX.Text = (xc_tilt[b]).ToString();
+                                    //this.mStageTiltY.Text = (yc_tilt[b]).ToString();
 
-                                    b = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
-                                    this.mStageRX.Text = (xcR[b]).ToString();
-                                    this.mStageRY.Text = (ycR[b]).ToString();
+                                    //b = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
+                                    //this.mStageRX.Text = (xcR[b]).ToString();
+                                    //this.mStageRY.Text = (ycR[b]).ToString();
 
-                                    b = (stageIndexR_tilt - 1 < 0) ? (stageSize + (stageIndexR_tilt - 1)) : (stageIndexR_tilt - 1);
+                                    int b = (stageIndexR_tilt - 1 < 0) ? (stageSize + (stageIndexR_tilt - 1)) : (stageIndexR_tilt - 1);
                                     this.mStageRTX.Text = (xcR_tilt[b]).ToString();
                                     this.mStageRTY.Text = (ycR_tilt[b]).ToString();
 
