@@ -157,8 +157,9 @@ namespace StepCount
 
         private void UpdateWorldPosition(float diff, float heading, ref float[] x, ref float[] y, ref int index)
         {
-            float x_prime = (float)(diff * Math.Cos(heading));
-            float y_prime = (float)(diff * Math.Sin(heading));
+            heading = -heading;
+            float x_prime = (float)-(diff * Math.Sin(heading));
+            float y_prime = (float)(diff * Math.Cos(heading));
             int b = index - 1;
             if (b < 0)
                 b = stageSize - 1;
@@ -360,7 +361,7 @@ namespace StepCount
                                     mMoving = true;
                                     movingCount++;
                                     movingMin = Math.Min(movingMin, z.GetMotionAccelRaw());
-                                    movingMax = Math.Min(movingMax, z.GetMotionAccelRaw());
+                                    movingMax = Math.Max(movingMax, z.GetMotionAccelRaw());
                                     movingDev = z.GetMotionAccelDev();
                                     movingDistance += x_diff;
                                     movingDistanceR += xR_diff;
