@@ -55,6 +55,7 @@ namespace StepCount
         float movingDistance = 0;   // Moving Distance
         float movingDistanceR = 0;  // Moving Distance Runge-Kutta
         float movingDev = 0.0f; // Moving Standard Deviation
+        float movingDevMax = 0.0f;  // Moving Max Deviation
 
         //*** MotionNode SDK
         Client motionSensor, motionRaw;
@@ -109,6 +110,20 @@ namespace StepCount
                 mHeading[i] = 0.0f;
                 mTiltHeading[i] = 0.0f;
             }
+
+            posLog.WriteLine("시간" + "," +
+                //xc[bb].ToString() + "," + yc[bb].ToString() + "," +
+                "RawX" + "," + "RawY" + "," +
+                //xcR[bbR].ToString() + "," + ycR[bbR].ToString() + "," +
+                "린지X" + "," + "린지Y" + "," +
+                "샘플수" + "," + "진동수" + "," + "유효수" + "," +
+                "최소" + "," + "최대" + "," + "범위" + "," +
+                "분산" + "," + "최대분산" + "," + "Raw이동거리" + "," + "린지이동거리" + "," +
+                //movingDev.ToString() + "," + movingDistanceR.ToString() + "," +
+                "자기X" + "," + "자기Y" + "," + "자기Z" + "," +
+                //mHeadingAvg.ToString() + "," + mTiltHeadingAvg.ToString() + "," +
+                "틸트헤딩" + "," +
+                "피치" + "," + "롤");
         }
 
         private void Connect_Bt_Click(object sender, EventArgs e)
@@ -342,6 +357,7 @@ namespace StepCount
                                     movingVibe = 0;
                                     movingDev = 0.0f;
                                     movingValid = 0;
+                                    movingDevMax = 0.0f;
                                 }
 
                                 if (!x.mAccStop || !y.mAccStop || !z.mAccStop)
@@ -350,28 +366,32 @@ namespace StepCount
                                     //y.UpdateMotionPosition();
                                     //z.UpdateMotionPosition();
                                     z.UpdateMotionPositionR();
+                                    z.UpdateMotionPositionRRaw();
 
                                     //x_diff = z.mGetPositionDiff();
                                     xR_diff = z.mGetPositionRDiff();
+                                    x_diff = z.mGetPositionRRawDiff();
 
                                     //UpdateWorldPosition(x_diff, mHeadingAvg, ref xc, ref yc, ref stageIndex);
                                     //UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
 
                                     if(xR_diff >= 0)
                                     {
-                                        UpdateWorldPosition(xR_diff, mHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
+                                        //UpdateWorldPosition(xR_diff, mHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
                                         UpdateWorldPosition(xR_diff, mTiltHeadingAvg, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
+                                        UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
 
                                         movingMin = Math.Min(movingMin, z.GetMotionAccelRaw());
                                         movingMax = Math.Max(movingMax, z.GetMotionAccelRaw());
                                         movingDev = z.GetMotionAccelDev();
+                                        movingDevMax = Math.Max(movingDevMax, movingDev);
                                         movingDistanceR += xR_diff;
+                                        movingDistance += x_diff;
                                         movingValid++;
                                     }
 
                                     mMoving = true;
                                     movingCount++;
-                                    //movingDistance += x_diff;
                                     int curD;
                                     if (z.GetMotionAccel() > z.mAccAvg)
                                         curD = 1;
@@ -398,13 +418,13 @@ namespace StepCount
 
                                         posLog.WriteLine(DateTime.Now.ToString() + "," +
                                             //xc[bb].ToString() + "," + yc[bb].ToString() + "," +
-                                            //xc_tilt[bb_tilt].ToString() + "," + yc_tilt[bb_tilt].ToString() + "," + 
+                                            xc_tilt[bb_tilt].ToString() + "," + yc_tilt[bb_tilt].ToString() + "," + 
                                             //xcR[bbR].ToString() + "," + ycR[bbR].ToString() + "," +
                                             xcR_tilt[bbR_tilt].ToString() + "," + ycR_tilt[bbR_tilt].ToString() + "," +
                                             movingCount.ToString() + "," + movingVibe.ToString() + "," + movingValid.ToString() + "," +
                                             movingMin.ToString() + "," + movingMax.ToString() + "," + ((movingMax - movingMin)/800.0f).ToString() + "," +
-                                            //movingDev.ToString() + "," + movingDistance.ToString() + "," + movingDistanceR.ToString() + "," +
-                                            movingDev.ToString() + "," + movingDistanceR.ToString() + "," +
+                                            movingDev.ToString() + "," + movingDevMax.ToString() + "," + movingDistance.ToString() + "," + movingDistanceR.ToString() + "," +
+                                            //movingDev.ToString() + "," + movingDistanceR.ToString() + "," +
                                             x.mGetMag().ToString() + "," + y.mGetMag().ToString() + "," + z.mGetMag() + "," +
                                             //mHeadingAvg.ToString() + "," + mTiltHeadingAvg.ToString() + "," +
                                             (mTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," +
@@ -566,6 +586,7 @@ namespace StepCount
         public float[] mMag;
         public int mAccRawSum = 0;
         public int mAccRawSumSqr = 0;
+        public float mAccRawAvg;
         public float mAccRawDev;
         public float mAccSum = 0;
         public bool mAccStop = true;
@@ -576,11 +597,15 @@ namespace StepCount
         public float mT = 1.0f / 30.0f;
         public float[] mPos;
 
-        public float mTR = 1.0f / 30.0f;
+        public float mTR = 1.0f / 60.0f;
         public int mVeloIndex = 0;
         public int mPosRIndex = 0;
+        public int mVeloRawIndex = 0;
+        public int mPosRRawIndex = 0;
         public float[] mPosR;
         public float[] mVelo;
+        public float[] mVeloRaw;
+        public float[] mPosRRaw;
 
         // WiiMote Data use 'w'
         int[] wAccRaw;
@@ -602,6 +627,8 @@ namespace StepCount
             mPos = new float[mSize];
             mVelo = new float[mSize];
             mPosR = new float[mSize];
+            mVeloRaw = new float[mSize];
+            mPosRRaw = new float[mSize];
             for(int i=0 ; i < mSize ; i++)
             {
                 mAccRaw[i] = 0;
@@ -609,6 +636,8 @@ namespace StepCount
                 mPos[i] = 0.0f;
                 mVelo[i] = 0.0f;
                 mPosR[i] = 0.0f;
+                mVeloRaw[i] = 0.0f;
+                mPosRRaw[i] = 0.0f;
             }
 
             yAccRaw = new int[yRawSize];
@@ -658,6 +687,13 @@ namespace StepCount
 
             return mPosR[b] - mPosR[bb];
         }
+        public float mGetPositionRRawDiff()
+        {
+            int b = (mPosRRawIndex - 1 < 0) ? (mSize + (mPosRRawIndex - 1)) : (mPosRRawIndex - 1);
+            int bb = (mPosRRawIndex - 2 < 0) ? (mSize + (mPosRRawIndex - 2)) : (mPosRRawIndex - 2);
+
+            return mPosRRaw[b] - mPosRRaw[bb];
+        }
         public float mGetMag()
         {
             int b = mMagIndex - 1;
@@ -686,6 +722,9 @@ namespace StepCount
                 mAccStop = false;
             else
                 mAccStop = true;
+
+            if (mAccStop)
+                mAccRawAvg = mAccRawSum / mRawSize;
         }
 
         public void UpdateMotionAccel(float val)
@@ -744,6 +783,11 @@ namespace StepCount
             mVeloIndex++;
             if (mVeloIndex >= mSize)
                 mVeloIndex = 0;
+
+            mVeloRaw[mVeloRawIndex] = 0.0f;
+            mVeloRawIndex++;
+            if (mVeloRawIndex >= mSize)
+                mVeloRawIndex = 0;
         }
         public void UpdateMotionPositionR()
         {
@@ -754,7 +798,7 @@ namespace StepCount
 
             int bv = (mVeloIndex - 1 < 0) ? (mSize - 1) : (mVeloIndex - 1);
 
-            mVelo[mVeloIndex] = mVelo[bv] + ((mAcc[bbbb] - mAccAvg) + 2 * (mAcc[bbb] - mAccAvg) + 2 * (mAcc[bb] - mAccAvg) + (mAcc[b] - mAccAvg)) / 6.0f * mTR;
+            mVelo[mVeloIndex] = mVelo[bv] + ((mAcc[bbbb] - mAccAvg) + 2 * (mAcc[bbb] - mAccAvg) + 2 * (mAcc[bb] - mAccAvg) + (mAcc[b] - mAccAvg)) * G / 6.0f * mTR;
 
             mVeloIndex++;
             if (mVeloIndex >= mSize)
@@ -773,6 +817,34 @@ namespace StepCount
             if (mPosRIndex >= mSize)
                 mPosRIndex = 0;
         }
+        public void UpdateMotionPositionRRaw()
+        {
+            int b = (mAccRawIndex - 1 < 0) ? (mRawSize + (mAccRawIndex - 1)) : (mAccRawIndex - 1);
+            int bb = (mAccRawIndex - 2 < 0) ? (mRawSize + (mAccRawIndex - 2)) : (mAccRawIndex - 2);
+            int bbb = (mAccRawIndex - 3 < 0) ? (mRawSize + (mAccRawIndex - 3)) : (mAccRawIndex - 3);
+            int bbbb = (mAccRawIndex - 4 < 0) ? (mRawSize + (mAccRawIndex - 4)) : (mAccRawIndex - 4);
+
+            int bv = (mVeloRawIndex - 1 < 0) ? (mSize - 1) : (mVeloRawIndex - 1);
+
+            mVeloRaw[mVeloRawIndex] = mVeloRaw[bv] + ((mAccRaw[bbbb] - mAccRawAvg) + 2 * (mAccRaw[bbb] - mAccRawAvg) + 2 * (mAccRaw[bb] - mAccRawAvg) + (mAccRaw[b] - mAccRawAvg)) / 800.0f * G / 6.0f * mTR;
+
+            mVeloRawIndex++;
+            if (mVeloRawIndex >= mSize)
+                mVeloRawIndex = 0;
+
+            int bp = (mPosRRawIndex - 1 < 0) ? (mSize - 1) : (mPosRRawIndex - 1);
+
+            b = (mVeloRawIndex - 1 < 0) ? (mSize + (mVeloRawIndex - 1)) : (mVeloRawIndex - 1);
+            bb = (mVeloRawIndex - 2 < 0) ? (mSize + (mVeloRawIndex - 2)) : (mVeloRawIndex - 2);
+            bbb = (mVeloRawIndex - 3 < 0) ? (mSize + (mVeloRawIndex - 3)) : (mVeloRawIndex - 3);
+            bbbb = (mVeloRawIndex - 4 < 0) ? (mSize + (mVeloRawIndex - 4)) : (mVeloRawIndex - 4);
+
+            mPosRRaw[mPosRIndex] = mPosRRaw[bp] + (mVeloRaw[bbbb] + 2 * mVeloRaw[bbb] + 2 * mVeloRaw[bb] + mVeloRaw[b]) / 6.0f * mTR;
+
+            mPosRRawIndex++;
+            if (mPosRRawIndex >= mSize)
+                mPosRRawIndex = 0;
+        }
 
         public void SetMotionPositionZero()
         {
@@ -780,6 +852,7 @@ namespace StepCount
             {
                 mPos[i] = 0.0f;
                 mPosR[i] = 0.0f;
+                mPosRRaw[i] = 0.0f;
             }
         }
 
