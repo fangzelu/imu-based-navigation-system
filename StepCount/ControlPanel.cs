@@ -373,24 +373,21 @@ namespace StepCount
                                     xR_diff = z.mGetPositionRDiff();
                                     x_diff = z.mGetPositionRRawDiff();
 
+                                    x_diff = Math.Abs(x_diff);
+                                    xR_diff = Math.Abs(xR_diff);
+
                                     //UpdateWorldPosition(x_diff, mHeadingAvg, ref xc, ref yc, ref stageIndex);
                                     //UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
 
-                                    if(xR_diff >= 0)
-                                    {
-                                        //UpdateWorldPosition(xR_diff, mHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
-                                        UpdateWorldPosition(xR_diff, mTiltHeadingAvg, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
+                                    //UpdateWorldPosition(xR_diff, mHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
+                                    UpdateWorldPosition(xR_diff, mTiltHeadingAvg, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
 
-                                        movingDistanceR += xR_diff;
-                                        movingValid++;
-                                    }
+                                    movingDistanceR += xR_diff;
+                                    movingValid++;
 
-                                    if(x_diff >= 0)
-                                    {
-                                        UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
-                                        movingDistance += x_diff;
-                                        movingValidRaw++;
-                                    }
+                                    UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
+                                    movingDistance += x_diff;
+                                    movingValidRaw++;
 
                                     movingMin = Math.Min(movingMin, z.GetMotionAccelRaw());
                                     movingMax = Math.Max(movingMax, z.GetMotionAccelRaw());
