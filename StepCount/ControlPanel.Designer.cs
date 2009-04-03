@@ -38,6 +38,10 @@
             this.Start_Bt = new System.Windows.Forms.Button();
             this.Pause_Bt = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.mStageRYZ = new System.Windows.Forms.Label();
+            this.mStageRTY = new System.Windows.Forms.Label();
+            this.mStageRTX = new System.Windows.Forms.Label();
             this.groupBox16 = new System.Windows.Forms.GroupBox();
             this.mStageTiltZ = new System.Windows.Forms.Label();
             this.mStageTiltY = new System.Windows.Forms.Label();
@@ -84,14 +88,11 @@
             this.mAccRawZ = new System.Windows.Forms.Label();
             this.mAccRawY = new System.Windows.Forms.Label();
             this.mAccRawX = new System.Windows.Forms.Label();
-            this.groupBox17 = new System.Windows.Forms.GroupBox();
-            this.mStageRYZ = new System.Windows.Forms.Label();
-            this.mStageRTY = new System.Windows.Forms.Label();
-            this.mStageRTX = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox17.SuspendLayout();
             this.groupBox16.SuspendLayout();
             this.groupBox15.SuspendLayout();
             this.groupBox14.SuspendLayout();
@@ -104,7 +105,6 @@
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            this.groupBox17.SuspendLayout();
             this.SuspendLayout();
             // 
             // Connect_Bt
@@ -220,6 +220,45 @@
             this.groupBox4.TabIndex = 9;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "MotionNode";
+            // 
+            // groupBox17
+            // 
+            this.groupBox17.Controls.Add(this.mStageRYZ);
+            this.groupBox17.Controls.Add(this.mStageRTY);
+            this.groupBox17.Controls.Add(this.mStageRTX);
+            this.groupBox17.Location = new System.Drawing.Point(343, 215);
+            this.groupBox17.Name = "groupBox17";
+            this.groupBox17.Size = new System.Drawing.Size(78, 91);
+            this.groupBox17.TabIndex = 7;
+            this.groupBox17.TabStop = false;
+            this.groupBox17.Text = "StageRT";
+            // 
+            // mStageRYZ
+            // 
+            this.mStageRYZ.Location = new System.Drawing.Point(14, 65);
+            this.mStageRYZ.Name = "mStageRYZ";
+            this.mStageRYZ.Size = new System.Drawing.Size(50, 13);
+            this.mStageRYZ.TabIndex = 2;
+            this.mStageRYZ.Text = "-";
+            this.mStageRYZ.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // mStageRTY
+            // 
+            this.mStageRTY.Location = new System.Drawing.Point(14, 44);
+            this.mStageRTY.Name = "mStageRTY";
+            this.mStageRTY.Size = new System.Drawing.Size(50, 13);
+            this.mStageRTY.TabIndex = 1;
+            this.mStageRTY.Text = "-";
+            this.mStageRTY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // mStageRTX
+            // 
+            this.mStageRTX.Location = new System.Drawing.Point(14, 22);
+            this.mStageRTX.Name = "mStageRTX";
+            this.mStageRTX.Size = new System.Drawing.Size(50, 13);
+            this.mStageRTX.TabIndex = 0;
+            this.mStageRTX.Text = "-";
+            this.mStageRTX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox16
             // 
@@ -669,45 +708,6 @@
             this.mAccRawX.Text = "-";
             this.mAccRawX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // groupBox17
-            // 
-            this.groupBox17.Controls.Add(this.mStageRYZ);
-            this.groupBox17.Controls.Add(this.mStageRTY);
-            this.groupBox17.Controls.Add(this.mStageRTX);
-            this.groupBox17.Location = new System.Drawing.Point(343, 215);
-            this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Size = new System.Drawing.Size(78, 91);
-            this.groupBox17.TabIndex = 7;
-            this.groupBox17.TabStop = false;
-            this.groupBox17.Text = "StageRT";
-            // 
-            // mStageRYZ
-            // 
-            this.mStageRYZ.Location = new System.Drawing.Point(14, 65);
-            this.mStageRYZ.Name = "mStageRYZ";
-            this.mStageRYZ.Size = new System.Drawing.Size(50, 13);
-            this.mStageRYZ.TabIndex = 2;
-            this.mStageRYZ.Text = "-";
-            this.mStageRYZ.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // mStageRTY
-            // 
-            this.mStageRTY.Location = new System.Drawing.Point(14, 44);
-            this.mStageRTY.Name = "mStageRTY";
-            this.mStageRTY.Size = new System.Drawing.Size(50, 13);
-            this.mStageRTY.TabIndex = 1;
-            this.mStageRTY.Text = "-";
-            this.mStageRTY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // mStageRTX
-            // 
-            this.mStageRTX.Location = new System.Drawing.Point(14, 22);
-            this.mStageRTX.Name = "mStageRTX";
-            this.mStageRTX.Size = new System.Drawing.Size(50, 13);
-            this.mStageRTX.TabIndex = 0;
-            this.mStageRTX.Text = "-";
-            this.mStageRTX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -719,10 +719,12 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "ControlPanel";
             this.Text = "Pedestrian Navigation System";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDownEvent);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox17.ResumeLayout(false);
             this.groupBox16.ResumeLayout(false);
             this.groupBox15.ResumeLayout(false);
             this.groupBox14.ResumeLayout(false);
@@ -735,7 +737,6 @@
             this.groupBox7.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
-            this.groupBox17.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
