@@ -69,6 +69,7 @@ namespace StepCount
         float mHeadingSum = 0.0f;
         float mTiltHeadingSum = 0.0f;
         float mHeadingAvg = 0.0f;
+        float mTiltHeadingAvgTest = 0.0f;
         float mTiltHeadingAvg = 0.0f;
         float[] mHeading;
         float[] mTiltHeading;
@@ -129,7 +130,7 @@ namespace StepCount
                 //movingDev.ToString() + "," + movingDistanceR.ToString() + "," +
                 "자기X" + "," + "자기Y" + "," + "자기Z" + "," +
                 //mHeadingAvg.ToString() + "," + mTiltHeadingAvg.ToString() + "," +
-                "틸트헤딩" + "," + "실시간헤딩," +
+                "틸트헤딩" + "," + "실시간헤딩," + "TestHeading," +
                 "피치" + "," + "롤");
         }
 
@@ -254,6 +255,7 @@ namespace StepCount
             {
                 mTiltHeadingAvg = mTiltHeadingSum / mHeadSize;
             }
+            mTiltHeadingAvgTest = mTiltHeadingAvgTest / mHeadSize;
         }
         private void ReadSensorData()
         {
@@ -450,7 +452,7 @@ namespace StepCount
                                             //movingDev.ToString() + "," + movingDistanceR.ToString() + "," +
                                             x.mGetMag().ToString() + "," + y.mGetMag().ToString() + "," + z.mGetMag() + "," +
                                             //mHeadingAvg.ToString() + "," + mTiltHeadingAvg.ToString() + "," +
-                                            (mTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + (mTiltHeading[b_heading] * 180.0f / Math.PI).ToString() + "," + 
+                                            (mTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + (mTiltHeading[b_heading] * 180.0f / Math.PI).ToString() + "," + (mTiltHeadingAvgTest * 180.0f / Math.PI).ToString() + "," +
                                             (z.mGetAngle() * 180.0f / Math.PI).ToString() + "," + (y.mGetAngle() * 180.0f / Math.PI).ToString());
                                     }
                                 }
