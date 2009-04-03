@@ -52,13 +52,12 @@ namespace StepCount
         int movingDirection = -1;    // Moving Direction
         int movingChange = 0;   // Moving Change
         int movingChangeD = 0;  // Moving Change Direction
-        int movingValid = 0;    // Moving Valid Direction
-        int movingValidRaw = 0;
         int movingVibe = 0;     // Moving Vibration
         float movingDistance = 0;   // Moving Distance
         float movingDistanceR = 0;  // Moving Distance Runge-Kutta
         float movingDev = 0.0f; // Moving Standard Deviation
         float movingDevMax = 0.0f;  // Moving Max Deviation
+        int movingStep = 0;
 
         //*** MotionNode SDK
         Client motionSensor, motionRaw;
@@ -255,7 +254,7 @@ namespace StepCount
             {
                 mTiltHeadingAvg = mTiltHeadingSum / mHeadSize;
             }
-            mTiltHeadingAvgTest = mTiltHeadingAvgTest / mHeadSize;
+            mTiltHeadingAvgTest = mTiltHeadingSum / mHeadSize;
         }
         private void ReadSensorData()
         {
@@ -326,6 +325,12 @@ namespace StepCount
                                 }
 
                                 mUpdateTiltHeading(ref z, ref y, ref x);
+                                mTiltHeadingAvg = mTiltHeadingAvg - 20.0f;
+                                if(mTiltHeadingAvg < -180.0f)
+                                    mTiltHeadingAvg += 360.0f;
+                                mTiltHeadingAvgTest = mTiltHeadingAvgTest - 20.0f;
+                                if (mTiltHeadingAvgTest < -180.0f)
+                                    mTiltHeadingAvgTest += 360.0f;
 
                                 if (x.mAccStop && y.mAccStop && z.mAccStop)
                                 {
@@ -366,11 +371,10 @@ namespace StepCount
                                     movingDistanceR = 0.0f;
                                     movingVibe = 0;
                                     movingDev = 0.0f;
-                                    movingValid = 0;
-                                    movingValidRaw = 0;
                                     movingDevMax = 0.0f;
                                     movingChangeD = 0;
                                     movingChange = 0;
+                                    movingStep++;
                                 }
 
                                 if (!x.mAccStop || !y.mAccStop || !z.mAccStop)
@@ -395,11 +399,9 @@ namespace StepCount
                                     UpdateWorldPosition(xR_diff, mTiltHeadingAvg, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
 
                                     movingDistanceR += xR_diff;
-                                    //movingValid++;
 
                                     UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
                                     movingDistance += x_diff;
-                                    //movingValidRaw++;
 
                                     int temp = z.GetMotionAccelDirection();
                                     if (movingChangeD != temp)
@@ -585,6 +587,19 @@ namespace StepCount
             sendMsg = DateTime.Now.ToString() + "," + xc[bbb].ToString() + "," + yc[bbb].ToString();
             SendMessage("WifiLoc", sendMsg);
 
+        }
+
+        private void KeyDownEvent(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.B:
+                    posLog.WriteLine("Break The Corner," + movingStep.ToString());
+                    movingStep = 0;
+                    break;
+                default:
+                    break;
+            }
         }
 
     }
