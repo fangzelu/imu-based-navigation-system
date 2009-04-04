@@ -275,8 +275,15 @@ namespace StepCount
             if(x.mAccStop && y.mAccStop && z.mAccStop)
             {
                 mTiltHeadingAvg = mTiltHeadingSum / mHeadSize;
+                mTiltHeadingAvg = mTiltHeadingAvg - (float)(20.0f * Math.PI / 180.0f);
+                if (mTiltHeadingAvg < -Math.PI)
+                    mTiltHeadingAvg += (float)(2 * Math.PI);
             }
             mTiltHeadingAvgTest = mTiltHeadingSum / mHeadSize;
+            mTiltHeadingAvgTest = mTiltHeadingAvgTest - (float)(20.0f * Math.PI / 180.0f);
+            if (mTiltHeadingAvgTest < -Math.PI)
+                mTiltHeadingAvgTest += (float)(2 * Math.PI);
+
         }
         private void ReadSensorData()
         {
@@ -347,12 +354,6 @@ namespace StepCount
                                 }
 
                                 mUpdateTiltHeading(ref z, ref y, ref x);
-                                mTiltHeadingAvg = mTiltHeadingAvg - (float)(20.0f * Math.PI / 180.0f);
-                                if(mTiltHeadingAvg < -Math.PI)
-                                    mTiltHeadingAvg += (float)(2 * Math.PI);
-                                mTiltHeadingAvgTest = mTiltHeadingAvgTest - (float)(20.0f * Math.PI / 180.0f);
-                                if (mTiltHeadingAvgTest < -Math.PI)
-                                    mTiltHeadingAvgTest += (float)(2 * Math.PI);
 
                                 if (x.mAccStop && y.mAccStop && z.mAccStop)
                                 {
