@@ -50,8 +50,6 @@ namespace StepCount
         int movingMin = 4096;   // Moving Min
         int movingMax = 0;      // Moving Max
         int movingDirection = -1;    // Moving Direction
-        int movingChange = 0;   // Moving Change
-        int movingChangeD = 0;  // Moving Change Direction
         int movingVibe = 0;     // Moving Vibration
         float movingDistance = 0;   // Moving Distance
         float movingDistanceR = 0;  // Moving Distance Runge-Kutta
@@ -59,6 +57,27 @@ namespace StepCount
         float movingDevMax = 0.0f;  // Moving Max Deviation
         int movingStep = 0;
 
+        int movingChange = 0;   // Moving Change
+        int movingChangeD = 0;  // Moving Change Direction
+
+        int peakDirectionX = 0;
+        int peakDirectionY = 0;
+        int peakDirectionZ = 0;
+        int peakChangeX = 0;
+        int peakChangeY = 0;
+        int peakChangeZ = 0;
+
+        int peakAccelRawX = 0;
+        int peakAccelRawY = 0;
+        int peakAccelRawZ = 0;
+        int peakFlagX = 0;
+        int peakFlagY = 0;
+        int peakFlagZ = 0;
+
+        float peakAccelX = 0;
+        float peakAccelY = 0;
+        float peakAccelZ = 0;
+        
         //*** MotionNode SDK
         Client motionSensor, motionRaw;
 
@@ -123,7 +142,10 @@ namespace StepCount
                 "AccelRaw" + "," + "RawAvg" + "," + "VeloRaw" + "," + "PosRaw" + "," +
                 "AccelX," + "AccelY," +
                 "Accel" + "," + "Avg" + "," + "Velo" + "," + "Pos" + "," +
-                "샘플수" + "," + "진동수" + "," + "변화수" + "," +
+                "샘플수" + "," + "진동수" + "," +
+                "변화X,상태X,피크RawX,피크X," +
+                "변화Y,상태Y,피크RawY,피크Y," +
+                "변화Z,상태Z,피크RawZ,피크Z," +
                 "최소" + "," + "최대" + "," + "범위" + "," +
                 "분산" + "," + "최대분산" + "," + "Raw이동거리" + "," + "린지이동거리" + "," +
                 //movingDev.ToString() + "," + movingDistanceR.ToString() + "," +
@@ -404,9 +426,40 @@ namespace StepCount
                                     movingDistance += x_diff;
 
                                     int temp = z.GetMotionAccelDirection();
-                                    if (movingChangeD != temp)
-                                        movingChange++;
-                                    movingChangeD = temp;
+                                    if (peakDirectionZ != temp)
+                                    {
+                                        peakAccelRawZ = z.GetMotionAccelPeakRaw();
+                                        peakAccelZ = z.GetMotionAccelPeak();
+                                        peakFlagZ = 1;
+                                        peakChangeZ++;
+                                    }
+                                    else
+                                        peakFlagZ = 0;
+                                    peakDirectionZ = temp;
+
+                                    temp = x.GetMotionAccelDirection();
+                                    if (peakDirectionX != temp)
+                                    {
+                                        peakAccelRawX = x.GetMotionAccelPeakRaw();
+                                        peakAccelX = x.GetMotionAccelPeak();
+                                        peakFlagX = 1;
+                                        peakChangeX++;
+                                    }
+                                    else
+                                        peakFlagX = 0;
+                                    peakDirectionX = temp;
+
+                                    temp = y.GetMotionAccelDirection();
+                                    if (peakDirectionY != temp)
+                                    {
+                                        peakAccelRawY = y.GetMotionAccelPeakRaw();
+                                        peakAccelY = y.GetMotionAccelPeak();
+                                        peakFlagY = 1;
+                                        peakChangeY++;
+                                    }
+                                    else
+                                        peakFlagY = 0;
+                                    peakDirectionY = temp;
 
                                     movingMin = Math.Min(movingMin, z.GetMotionAccelRaw());
                                     movingMax = Math.Max(movingMax, z.GetMotionAccelRaw());
@@ -448,7 +501,10 @@ namespace StepCount
                                             z.GetMotionAccelRaw().ToString() + "," + z.mAccRawAvg.ToString() + "," + z.GetMotionVeloRaw().ToString() + "," + z.GetMotionPositionRRaw().ToString() + "," +
                                             x.GetMotionAccel().ToString() + "," + y.GetMotionAccel().ToString() + "," +
                                             z.GetMotionAccel().ToString() + "," + z.mAccAvg.ToString() + "," + z.GetMotionVelo().ToString() + "," + z.GetMotionPositionR().ToString() + "," +
-                                            movingCount.ToString() + "," + movingVibe.ToString() + "," + movingChange.ToString() + "," +
+                                            movingCount.ToString() + "," + movingVibe.ToString() + "," +
+                                            peakChangeX.ToString() + "," + peakFlagX.ToString() + "," + peakAccelRawX.ToString() + "," + peakAccelX.ToString() + "," +
+                                            peakChangeY.ToString() + "," + peakFlagY.ToString() + "," + peakAccelRawY.ToString() + "," + peakAccelY.ToString() + "," +
+                                            peakChangeZ.ToString() + "," + peakFlagZ.ToString() + "," + peakAccelRawZ.ToString() + "," + peakAccelZ.ToString() + "," +
                                             movingMin.ToString() + "," + movingMax.ToString() + "," + ((movingMax - movingMin)/800.0f).ToString() + "," +
                                             movingDev.ToString() + "," + movingDevMax.ToString() + "," + movingDistance.ToString() + "," + movingDistanceR.ToString() + "," +
                                             //movingDev.ToString() + "," + movingDistanceR.ToString() + "," +
@@ -707,6 +763,18 @@ namespace StepCount
                 return 2;
             else
                 return 0;
+        }
+        public int GetMotionAccelPeakRaw()
+        {
+            int bb = (mAccRawIndex - 2 < 0) ? (mSize + (mAccRawIndex - 2)) : (mAccRawIndex - 2);
+
+            return mAccRaw[bb];
+        }
+        public float GetMotionAccelPeak()
+        {
+            int bb = (mAccIndex - 2 < 0) ? (mSize + (mAccIndex - 2)) : (mAccIndex - 2);
+
+            return mAcc[bb];
         }
         public float GetMotionAccel()
         {
