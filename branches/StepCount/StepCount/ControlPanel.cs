@@ -347,12 +347,12 @@ namespace StepCount
                                 }
 
                                 mUpdateTiltHeading(ref z, ref y, ref x);
-                                mTiltHeadingAvg = mTiltHeadingAvg - 20.0f;
-                                if(mTiltHeadingAvg < -180.0f)
-                                    mTiltHeadingAvg += 360.0f;
-                                mTiltHeadingAvgTest = mTiltHeadingAvgTest - 20.0f;
-                                if (mTiltHeadingAvgTest < -180.0f)
-                                    mTiltHeadingAvgTest += 360.0f;
+                                mTiltHeadingAvg = mTiltHeadingAvg - (float)(20.0f * Math.PI / 180.0f);
+                                if(mTiltHeadingAvg < -Math.PI)
+                                    mTiltHeadingAvg += (float)(2 * Math.PI);
+                                mTiltHeadingAvgTest = mTiltHeadingAvgTest - (float)(20.0f * Math.PI / 180.0f);
+                                if (mTiltHeadingAvgTest < -Math.PI)
+                                    mTiltHeadingAvgTest += (float)(2 * Math.PI);
 
                                 if (x.mAccStop && y.mAccStop && z.mAccStop)
                                 {
