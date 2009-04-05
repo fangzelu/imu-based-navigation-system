@@ -38,6 +38,9 @@
             this.Start_Bt = new System.Windows.Forms.Button();
             this.Pause_Bt = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox21 = new System.Windows.Forms.GroupBox();
+            this.mHeadStepTilt = new System.Windows.Forms.Label();
+            this.mHeadStep = new System.Windows.Forms.Label();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
             this.StepIntervalLabel = new System.Windows.Forms.Label();
             this.StepCountLabel = new System.Windows.Forms.Label();
@@ -101,13 +104,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TrainingDone = new System.Windows.Forms.Button();
             this.TraningStart = new System.Windows.Forms.Button();
-            this.groupBox21 = new System.Windows.Forms.GroupBox();
-            this.mHeadStepTilt = new System.Windows.Forms.Label();
-            this.mHeadStep = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox21.SuspendLayout();
             this.groupBox20.SuspendLayout();
             this.groupBox17.SuspendLayout();
             this.groupBox16.SuspendLayout();
@@ -126,7 +127,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.StartY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StartX)).BeginInit();
             this.groupBox19.SuspendLayout();
-            this.groupBox21.SuspendLayout();
             this.SuspendLayout();
             // 
             // Connect_Bt
@@ -244,6 +244,35 @@
             this.groupBox4.TabIndex = 9;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "MotionNode";
+            // 
+            // groupBox21
+            // 
+            this.groupBox21.Controls.Add(this.mHeadStepTilt);
+            this.groupBox21.Controls.Add(this.mHeadStep);
+            this.groupBox21.Location = new System.Drawing.Point(91, 215);
+            this.groupBox21.Name = "groupBox21";
+            this.groupBox21.Size = new System.Drawing.Size(78, 91);
+            this.groupBox21.TabIndex = 6;
+            this.groupBox21.TabStop = false;
+            this.groupBox21.Text = "Heading";
+            // 
+            // mHeadStepTilt
+            // 
+            this.mHeadStepTilt.Location = new System.Drawing.Point(14, 55);
+            this.mHeadStepTilt.Name = "mHeadStepTilt";
+            this.mHeadStepTilt.Size = new System.Drawing.Size(50, 13);
+            this.mHeadStepTilt.TabIndex = 2;
+            this.mHeadStepTilt.Text = "-";
+            this.mHeadStepTilt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // mHeadStep
+            // 
+            this.mHeadStep.Location = new System.Drawing.Point(14, 30);
+            this.mHeadStep.Name = "mHeadStep";
+            this.mHeadStep.Size = new System.Drawing.Size(50, 13);
+            this.mHeadStep.TabIndex = 1;
+            this.mHeadStep.Text = "-";
+            this.mHeadStep.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox20
             // 
@@ -780,6 +809,11 @@
             0,
             65536});
             this.StartY.Location = new System.Drawing.Point(7, 57);
+            this.StartY.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.StartY.Name = "StartY";
             this.StartY.Size = new System.Drawing.Size(63, 21);
             this.StartY.TabIndex = 1;
@@ -792,6 +826,11 @@
             0,
             65536});
             this.StartX.Location = new System.Drawing.Point(7, 23);
+            this.StartX.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.StartX.Name = "StartX";
             this.StartX.Size = new System.Drawing.Size(63, 21);
             this.StartX.TabIndex = 0;
@@ -867,35 +906,6 @@
             this.TraningStart.UseVisualStyleBackColor = true;
             this.TraningStart.Click += new System.EventHandler(this.TraningStart_Click);
             // 
-            // groupBox21
-            // 
-            this.groupBox21.Controls.Add(this.mHeadStepTilt);
-            this.groupBox21.Controls.Add(this.mHeadStep);
-            this.groupBox21.Location = new System.Drawing.Point(91, 215);
-            this.groupBox21.Name = "groupBox21";
-            this.groupBox21.Size = new System.Drawing.Size(78, 91);
-            this.groupBox21.TabIndex = 6;
-            this.groupBox21.TabStop = false;
-            this.groupBox21.Text = "Heading";
-            // 
-            // mHeadStepTilt
-            // 
-            this.mHeadStepTilt.Location = new System.Drawing.Point(14, 55);
-            this.mHeadStepTilt.Name = "mHeadStepTilt";
-            this.mHeadStepTilt.Size = new System.Drawing.Size(50, 13);
-            this.mHeadStepTilt.TabIndex = 2;
-            this.mHeadStepTilt.Text = "-";
-            this.mHeadStepTilt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // mHeadStep
-            // 
-            this.mHeadStep.Location = new System.Drawing.Point(14, 30);
-            this.mHeadStep.Name = "mHeadStep";
-            this.mHeadStep.Size = new System.Drawing.Size(50, 13);
-            this.mHeadStep.TabIndex = 1;
-            this.mHeadStep.Text = "-";
-            this.mHeadStep.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -915,6 +925,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox21.ResumeLayout(false);
             this.groupBox20.ResumeLayout(false);
             this.groupBox17.ResumeLayout(false);
             this.groupBox16.ResumeLayout(false);
@@ -933,7 +944,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.StartY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.StartX)).EndInit();
             this.groupBox19.ResumeLayout(false);
-            this.groupBox21.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
