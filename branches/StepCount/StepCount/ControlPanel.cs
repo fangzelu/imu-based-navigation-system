@@ -97,7 +97,7 @@ namespace StepCount
         float peakAccelZ = 0;
 
         Random rand = new Random();
-        const float AVG_DISTANCE = 2.5f;
+        const float AVG_DISTANCE = 3.0f;
         const float DEV_DISTANCE = 0.3f;
         
         //*** MotionNode SDK
@@ -452,15 +452,17 @@ namespace StepCount
 
                                         if(movingCount > 100)
                                         {
-                                            float modifyDistance = (float)(Math.Abs(movingDistanceR - AVG_DISTANCE) * rand.NextDouble());
+                                            float modifyDistance;
                                             if (movingDistanceR > AVG_DISTANCE + DEV_DISTANCE)
                                             {
+                                                modifyDistance = (float)((movingDistanceR - (AVG_DISTANCE - DEV_DISTANCE)) * rand.NextDouble());
                                                 movingDistanceR -= modifyDistance;
                                                 UpdateWorldPosition(-modifyDistance, mTiltHeadingAvgBeforeMoving, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
                                                 UpdateWorldPosition(-modifyDistance, mTiltHeadingAvgBeforeMoving, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
                                             }
                                             else if (movingDistanceR < AVG_DISTANCE - DEV_DISTANCE)
                                             {
+                                                modifyDistance = (float)(((AVG_DISTANCE + DEV_DISTANCE) - movingDistanceR) * rand.NextDouble());
                                                 movingDistanceR += modifyDistance;
                                                 UpdateWorldPosition(modifyDistance, mTiltHeadingAvgBeforeMoving, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
                                                 UpdateWorldPosition(modifyDistance, mTiltHeadingAvgBeforeMoving, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
