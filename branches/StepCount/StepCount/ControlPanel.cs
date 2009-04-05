@@ -21,7 +21,7 @@ namespace StepCount
         const int GRID = 2;
         int stageSize = 256;
         int stageIndex = 0;
-        int x_init = 0, y_init = 0;
+        float x_init = 0, y_init = 0;
         float[] xc;
         float[] yc;
         float x_diff, xR_diff;
@@ -36,6 +36,21 @@ namespace StepCount
         float[] ycR;
         float[] xcR_tilt;
         float[] ycR_tilt;
+
+        //*** Step Count
+        List<int> mAccelRawY = new List<int>();
+        float upperBound, lowerBound;
+        bool trainingFlag = false;
+        const int T_SIZE = 10;
+
+        const float AVG_STEP = 0.7f;
+        const float DEV_STEP = 0.1f;
+        const int STEP_TIME = 30;
+
+        int stepState = 0;
+        int stepCount = 0;
+        int stepInterval = 0;
+        bool stepSampleFlag = false;
 
         //*** to Control
         bool motionUse = true, wiiUse = false, ymoteUse = false;
@@ -77,6 +92,10 @@ namespace StepCount
         float peakAccelX = 0;
         float peakAccelY = 0;
         float peakAccelZ = 0;
+
+        Random rand = new Random();
+        const float AVG_DISTANCE = 2.5f;
+        const float DEV_DISTANCE = 0.3f;
         
         //*** MotionNode SDK
         Client motionSensor, motionRaw;
@@ -92,6 +111,10 @@ namespace StepCount
         float[] mHeading;
         float[] mTiltHeading;
         bool mMoving = false;
+
+        float mMovingTiltHeadingSum = 0.0f;
+        float mMovingTiltHeadingAvg = 0.0f;
+        const float MOVING_HEAD_WEIGHT = 0.1f;
 
         //*** Y-Mote
         SerialPort serialPort = new SerialPort();
@@ -134,24 +157,26 @@ namespace StepCount
             }
 
             posLog.WriteLine("시간" + "," +
-                //xc[bb].ToString() + "," + yc[bb].ToString() + "," +
-                "RawX" + "," + "RawY" + "," +
-                //xcR[bbR].ToString() + "," + ycR[bbR].ToString() + "," +
+                "실시간X" + "," + "실시간Y" + "," +
                 "린지X" + "," + "린지Y" + "," +
+                "실시간SCX,실시간SCY," +
+                "SCX,SCY," +
+                "SC상태,SC수,SC시간," +
                 "AccelRawX" + "," + "AccleRawY," +
                 "AccelRaw" + "," + "RawAvg" + "," + "VeloRaw" + "," + "PosRaw" + "," +
                 "AccelX," + "AccelY," +
                 "Accel" + "," + "Avg" + "," + "Velo" + "," + "Pos" + "," +
                 "샘플수" + "," + "진동수" + "," +
-                "변화X,상태X,피크RawX,피크X," +
-                "변화Y,상태Y,피크RawY,피크Y," +
-                "변화Z,상태Z,피크RawZ,피크Z," +
                 "최소" + "," + "최대" + "," + "범위" + "," +
-                "분산" + "," + "최대분산" + "," + "Raw이동거리" + "," + "린지이동거리" + "," +
+                "분산" + "," + "최대분산" + "," + "린지이동거리" + "," +
+                "변화Z,상태Z,방향Z,피크RawZ,피크Z," +
+                "변화X,상태X,방향X,피크RawX,피크X," +
+                "변화Y,상태Y,방향Y,피크RawY,피크Y," +
                 //movingDev.ToString() + "," + movingDistanceR.ToString() + "," +
                 "자기X" + "," + "자기Y" + "," + "자기Z" + "," +
                 //mHeadingAvg.ToString() + "," + mTiltHeadingAvg.ToString() + "," +
-                "틸트헤딩" + "," + "실시간헤딩," + "TestHeading," +
+                "틸트헤딩" + "," + "실시간헤딩," +
+                "Moving헤딩,Weight헤딩," +
                 "피치" + "," + "롤");
         }
 
@@ -279,11 +304,41 @@ namespace StepCount
                 if (mTiltHeadingAvg < -Math.PI)
                     mTiltHeadingAvg += (float)(2 * Math.PI);
             }
-            mTiltHeadingAvgTest = mTiltHeadingSum / mHeadSize;
-            mTiltHeadingAvgTest = mTiltHeadingAvgTest - (float)(20.0f * Math.PI / 180.0f);
-            if (mTiltHeadingAvgTest < -Math.PI)
-                mTiltHeadingAvgTest += (float)(2 * Math.PI);
 
+            //mTiltHeadingAvgTest = mTiltHeadingSum / mHeadSize;
+            //mTiltHeadingAvgTest = mTiltHeadingAvgTest - (float)(20.0f * Math.PI / 180.0f);
+            //if (mTiltHeadingAvgTest < -Math.PI)
+            //    mTiltHeadingAvgTest += (float)(2 * Math.PI);
+        }
+        private void mUpdateMovingTiltHeading(ref Axis x, ref Axis y, ref Axis z)
+        {
+            float yval = y.mGetMag();
+            if (yval < -25.0f)
+                yval = -25.0f;
+            else if (yval > 25.0f)
+                yval = 25.0f;
+            float xval = x.mGetMag();
+            if (xval < -25.0f)
+                xval = -25.0f;
+            else if (xval > 25.0f)
+                xval = 25.0f;
+            float zval = x.mGetMag();
+            if (zval < -25.0f)
+                zval = -25.0f;
+            else if (zval > 25.0f)
+                zval = 25.0f;
+
+            double x_prime = xval * Math.Cos(x.mGetAngle()) + yval * Math.Sin(y.mGetAngle()) * Math.Sin(x.mGetAngle()) + zval * Math.Cos(y.mGetAngle()) * Math.Sin(x.mGetAngle());
+            double y_prime = yval * Math.Cos(y.mGetAngle()) - zval * Math.Sin(x.mGetAngle());
+
+            float cur = (float)(Math.Atan2(y_prime, x_prime));
+
+            mMovingTiltHeadingSum += cur;
+
+            mMovingTiltHeadingAvg = mMovingTiltHeadingSum / movingCount;
+            mMovingTiltHeadingAvg = mMovingTiltHeadingAvg - (float)(20.0f * Math.PI / 180.0f);
+            if (mMovingTiltHeadingAvg < -Math.PI)
+                mMovingTiltHeadingAvg += (float)(2 * Math.PI);
         }
         private void ReadSensorData()
         {
@@ -307,6 +362,9 @@ namespace StepCount
                                     x.UpdateMotionAccelRaw(itr.Value.getAccelerometer()[0]);
                                     y.UpdateMotionAccelRaw(itr.Value.getAccelerometer()[1]);
                                     z.UpdateMotionAccelRaw(itr.Value.getAccelerometer()[2]);
+
+                                    if (trainingFlag)
+                                        mAccelRawY.Add(itr.Value.getAccelerometer()[1]);
 
                                     rawGet = true;
 
@@ -376,6 +434,18 @@ namespace StepCount
                                         //        stageIndex = stageSize + stageIndex;
                                         //}
 
+                                        float modifyDistance = (float)(Math.Abs(movingDistanceR - AVG_DISTANCE) * rand.NextDouble());
+                                        if (movingDistanceR > AVG_DISTANCE + DEV_DISTANCE)
+                                        {
+                                            UpdateWorldPosition(-modifyDistance, mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT), ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
+                                            UpdateWorldPosition(-modifyDistance, mTiltHeadingAvg, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
+                                        }
+                                        else if (movingDistanceR < AVG_DISTANCE - DEV_DISTANCE)
+                                        {
+                                            UpdateWorldPosition(modifyDistance, mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT), ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
+                                            UpdateWorldPosition(modifyDistance, mTiltHeadingAvg, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
+                                        }
+
                                         posLog.WriteLine("Stop Position");
                                     }
 
@@ -395,36 +465,48 @@ namespace StepCount
                                     movingVibe = 0;
                                     movingDev = 0.0f;
                                     movingDevMax = 0.0f;
-                                    movingChangeD = 0;
-                                    movingChange = 0;
                                     movingStep++;
+                                    peakChangeX = 0;
+                                    peakChangeY = 0;
+                                    peakChangeZ = 0;
+                                    mMovingTiltHeadingSum = 0.0f;
+
+                                    stepState = 0;
+                                    stepInterval = 0;
+                                    stepCount = 0;
                                 }
 
                                 if (!x.mAccStop || !y.mAccStop || !z.mAccStop)
                                 {
+                                    if(stepSampleFlag)
+                                        stepInterval++;
+                                    movingCount++;
+
+                                    mUpdateMovingTiltHeading(ref z, ref y, ref x);
+
                                     //x.UpdateMotionPosition();
                                     //y.UpdateMotionPosition();
                                     //z.UpdateMotionPosition();
                                     z.UpdateMotionPositionR();
-                                    z.UpdateMotionPositionRRaw();
+                                    //z.UpdateMotionPositionRRaw();
 
                                     //x_diff = z.mGetPositionDiff();
                                     xR_diff = z.mGetPositionRDiff();
-                                    x_diff = z.mGetPositionRRawDiff();
+                                    //x_diff = z.mGetPositionRRawDiff();
 
-                                    x_diff = Math.Abs(x_diff);
+                                    //x_diff = Math.Abs(x_diff);
                                     xR_diff = Math.Abs(xR_diff);
 
                                     //UpdateWorldPosition(x_diff, mHeadingAvg, ref xc, ref yc, ref stageIndex);
-                                    //UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
+                                    UpdateWorldPosition(xR_diff, mTiltHeadingAvg * (1-MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT), ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
 
                                     //UpdateWorldPosition(xR_diff, mHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
                                     UpdateWorldPosition(xR_diff, mTiltHeadingAvg, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
 
                                     movingDistanceR += xR_diff;
 
-                                    UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
-                                    movingDistance += x_diff;
+                                    //UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
+                                    //movingDistance += x_diff;
 
                                     int temp = z.GetMotionAccelDirection();
                                     if (peakDirectionZ != temp)
@@ -450,6 +532,13 @@ namespace StepCount
                                         peakFlagX = 0;
                                     peakDirectionX = temp;
 
+                                    if(stepState == 1 && stepInterval > STEP_TIME)
+                                    {
+                                        stepState = 0;
+                                        stepSampleFlag = false;
+                                        stepInterval = 0;
+                                    }
+
                                     temp = y.GetMotionAccelDirection();
                                     if (peakDirectionY != temp)
                                     {
@@ -457,6 +546,45 @@ namespace StepCount
                                         peakAccelY = y.GetMotionAccelPeak();
                                         peakFlagY = 1;
                                         peakChangeY++;
+
+                                        if(stepState == 0 && temp == 1)
+                                        {
+                                            if(peakAccelRawY < lowerBound)
+                                            {
+                                                stepState = 1;
+                                                stepSampleFlag = true;
+                                                stepInterval = 0;
+                                            }
+                                        }
+                                        else if(stepState == 1 && temp == 1)
+                                        {
+                                            if (peakAccelRawY <= lowerBound)
+                                            {
+                                                stepState = 1;
+                                                stepSampleFlag = true;
+                                                stepInterval = 0;
+                                            }
+                                        }
+                                        else if(stepState == 1 && temp == 2)
+                                        {
+                                            if (peakAccelRawY >= upperBound)
+                                            {
+                                                stepCount++;
+
+                                                if(rand.NextDouble() >= 0.5)
+                                                    x_diff = (float)(AVG_STEP + DEV_STEP * rand.NextDouble());
+                                                else
+                                                    x_diff = (float)(AVG_STEP - DEV_STEP * rand.NextDouble());
+
+                                                UpdateWorldPosition(x_diff, mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT), ref xc, ref yc, ref stageIndex);
+
+                                                UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
+
+                                                stepState = 0;
+                                                stepSampleFlag = false;
+                                                stepInterval = 0;
+                                            }
+                                        }
                                     }
                                     else
                                         peakFlagY = 0;
@@ -467,7 +595,6 @@ namespace StepCount
                                     movingDev = z.GetMotionAccelDev();
                                     movingDevMax = Math.Max(movingDevMax, movingDev);
                                     mMoving = true;
-                                    movingCount++;
                                     int curD;
                                     if (z.GetMotionAccel() > z.mAccAvg)
                                         curD = 1;
@@ -494,24 +621,26 @@ namespace StepCount
                                         int b_heading = (mTiltHeadingIndex - 1 < 0) ? (mHeadSize - 1) : (mTiltHeadingIndex - 1);
 
                                         posLog.WriteLine(DateTime.Now.ToString() + "," +
-                                            //xc[bb].ToString() + "," + yc[bb].ToString() + "," +
                                             xc_tilt[bb_tilt].ToString() + "," + yc_tilt[bb_tilt].ToString() + "," + 
-                                            //xcR[bbR].ToString() + "," + ycR[bbR].ToString() + "," +
                                             xcR_tilt[bbR_tilt].ToString() + "," + ycR_tilt[bbR_tilt].ToString() + "," +
+                                            xc[bb].ToString() + "," + yc[bb].ToString() + "," +
+                                            xcR[bbR].ToString() + "," + ycR[bbR].ToString() + "," +
+                                            stepState.ToString() + "," + stepCount.ToString() + "," + stepInterval.ToString() + "," +
                                             x.GetMotionAccelRaw().ToString() + "," + y.GetMotionAccelRaw().ToString() + "," +
                                             z.GetMotionAccelRaw().ToString() + "," + z.mAccRawAvg.ToString() + "," + z.GetMotionVeloRaw().ToString() + "," + z.GetMotionPositionRRaw().ToString() + "," +
                                             x.GetMotionAccel().ToString() + "," + y.GetMotionAccel().ToString() + "," +
                                             z.GetMotionAccel().ToString() + "," + z.mAccAvg.ToString() + "," + z.GetMotionVelo().ToString() + "," + z.GetMotionPositionR().ToString() + "," +
                                             movingCount.ToString() + "," + movingVibe.ToString() + "," +
-                                            peakChangeX.ToString() + "," + peakFlagX.ToString() + "," + peakAccelRawX.ToString() + "," + peakAccelX.ToString() + "," +
-                                            peakChangeY.ToString() + "," + peakFlagY.ToString() + "," + peakAccelRawY.ToString() + "," + peakAccelY.ToString() + "," +
-                                            peakChangeZ.ToString() + "," + peakFlagZ.ToString() + "," + peakAccelRawZ.ToString() + "," + peakAccelZ.ToString() + "," +
                                             movingMin.ToString() + "," + movingMax.ToString() + "," + ((movingMax - movingMin)/800.0f).ToString() + "," +
-                                            movingDev.ToString() + "," + movingDevMax.ToString() + "," + movingDistance.ToString() + "," + movingDistanceR.ToString() + "," +
+                                            movingDev.ToString() + "," + movingDevMax.ToString() + "," + movingDistanceR.ToString() + "," +
+                                            peakChangeZ.ToString() + "," + peakFlagZ.ToString() + "," + peakDirectionZ.ToString() + "," + peakAccelRawZ.ToString() + "," + peakAccelZ.ToString() + "," +
+                                            peakChangeX.ToString() + "," + peakFlagX.ToString() + "," + peakDirectionX.ToString() + "," + peakAccelRawX.ToString() + "," + peakAccelX.ToString() + "," +
+                                            peakChangeY.ToString() + "," + peakFlagY.ToString() + "," + peakDirectionY.ToString() + "," + peakAccelRawY.ToString() + "," + peakAccelY.ToString() + "," +
                                             //movingDev.ToString() + "," + movingDistanceR.ToString() + "," +
                                             x.mGetMag().ToString() + "," + y.mGetMag().ToString() + "," + z.mGetMag() + "," +
                                             //mHeadingAvg.ToString() + "," + mTiltHeadingAvg.ToString() + "," +
-                                            (mTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + (mTiltHeading[b_heading] * 180.0f / Math.PI).ToString() + "," + (mTiltHeadingAvgTest * 180.0f / Math.PI).ToString() + "," +
+                                            (mTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + (mTiltHeading[b_heading] * 180.0f / Math.PI).ToString() + "," +
+                                            (mMovingTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + ((mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString() + "," +
                                             (z.mGetAngle() * 180.0f / Math.PI).ToString() + "," + (y.mGetAngle() * 180.0f / Math.PI).ToString());
                                     }
                                 }
@@ -533,21 +662,21 @@ namespace StepCount
 
                                     this.mLocalX.Text = xR_diff.ToString();
 
-                                    //int b = stageIndex - 1;
-                                    //if(b < 0)
-                                    //    b = stageSize - 1;
-                                    //this.mStageX.Text = (xc[b]).ToString();
-                                    //this.mStageY.Text = (yc[b]).ToString();
+                                    int b = stageIndex - 1;
+                                    if(b < 0)
+                                        b = stageSize - 1;
+                                    this.mStageX.Text = (xc[b]).ToString();
+                                    this.mStageY.Text = (yc[b]).ToString();
 
-                                    int b = stageIndex_tilt - 1;
+                                    b = stageIndex_tilt - 1;
                                     if (b < 0)
                                         b = stageSize - 1;
                                     this.mStageTiltX.Text = (xc_tilt[b]).ToString();
                                     this.mStageTiltY.Text = (yc_tilt[b]).ToString();
 
-                                    //b = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
-                                    //this.mStageRX.Text = (xcR[b]).ToString();
-                                    //this.mStageRY.Text = (ycR[b]).ToString();
+                                    b = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
+                                    this.mStageRX.Text = (xcR[b]).ToString();
+                                    this.mStageRY.Text = (ycR[b]).ToString();
 
                                     b = (stageIndexR_tilt - 1 < 0) ? (stageSize + (stageIndexR_tilt - 1)) : (stageIndexR_tilt - 1);
                                     this.mStageRTX.Text = (xcR_tilt[b]).ToString();
@@ -555,6 +684,9 @@ namespace StepCount
 
                                     this.mRoll.Text = (y.mGetAngle() * 180.0f / Math.PI).ToString();
                                     this.mPitch.Text = (z.mGetAngle() * 180.0f / Math.PI).ToString();
+
+                                    this.StepCountLabel.Text = stepCount.ToString();
+                                    this.StepIntervalLabel.Text = stepInterval.ToString();
                                 }));
                             }
                         }
@@ -593,16 +725,19 @@ namespace StepCount
             y.SetMotionPositionZero();
             z.SetMotionPositionZero();
 
+            x_init = (float)StartX.Value;
+            y_init = (float)StartY.Value;
+
             for (int i = 0; i < stageSize; i++)
             {
-                xc[i] = 0.0f;
-                yc[i] = 0.0f;
-                xc_tilt[i] = 0.0f;
-                yc_tilt[i] = 0.0f;
-                xcR[i] = 0.0f;
-                ycR[i] = 0.0f;
-                xcR_tilt[i] = 0.0f;
-                ycR_tilt[i] = 0.0f;
+                xc[i] = x_init;
+                yc[i] = y_init;
+                xc_tilt[i] = x_init;
+                yc_tilt[i] = y_init;
+                xcR[i] = x_init;
+                ycR[i] = y_init;
+                xcR_tilt[i] = x_init;
+                ycR_tilt[i] = y_init;
             }
             logFlag = true;
         }
@@ -654,10 +789,56 @@ namespace StepCount
                     posLog.WriteLine("Break The Corner," + movingStep.ToString());
                     movingStep = 0;
                     break;
+                case Keys.T:
+                    MessageBox.Show("Test");
+                    break;
                 default:
                     break;
             }
         }
+
+        private void TraningStart_Click(object sender, EventArgs e)
+        {
+            mAccelRawY.Clear();
+            trainingFlag = true;
+        }
+
+        private void TrainingDone_Click(object sender, EventArgs e)
+        {
+            mAccelRawY.Sort();
+
+            int sum = 0, sumSquare = 0;
+            float avg, stdev;
+            for(int i=0 ; i < T_SIZE ; i++)
+            {
+                sum += mAccelRawY[i];
+                sumSquare += mAccelRawY[i] * mAccelRawY[i];
+            }
+            avg = (float)sum / T_SIZE;
+            stdev = (float)Math.Sqrt((float)sumSquare / T_SIZE - avg * avg);
+            lowerBound = avg + stdev;
+
+            sum = 0;
+            sumSquare = 0;
+            for (int i = mAccelRawY.Count - 1; i > mAccelRawY.Count - (T_SIZE+1); i--)
+            {
+                sum += mAccelRawY[i];
+                sumSquare += mAccelRawY[i] * mAccelRawY[i];
+            }
+            avg = (float)sum / T_SIZE;
+            stdev = (float)Math.Sqrt((float)sumSquare / T_SIZE - avg * avg);
+            upperBound = avg + stdev;
+
+            this.Invoke(new MethodInvoker(delegate()
+            {
+                Lower.Text = lowerBound.ToString();
+                Upper.Text = upperBound.ToString();
+            }));
+
+            trainingFlag = false;
+        }
+
+
 
     }
 

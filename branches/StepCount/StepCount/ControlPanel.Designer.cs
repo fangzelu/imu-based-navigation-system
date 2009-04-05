@@ -88,6 +88,19 @@
             this.mAccRawZ = new System.Windows.Forms.Label();
             this.mAccRawY = new System.Windows.Forms.Label();
             this.mAccRawX = new System.Windows.Forms.Label();
+            this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.StartY = new System.Windows.Forms.NumericUpDown();
+            this.StartX = new System.Windows.Forms.NumericUpDown();
+            this.groupBox19 = new System.Windows.Forms.GroupBox();
+            this.Lower = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.Upper = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TrainingDone = new System.Windows.Forms.Button();
+            this.TraningStart = new System.Windows.Forms.Button();
+            this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.StepIntervalLabel = new System.Windows.Forms.Label();
+            this.StepCountLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -105,6 +118,11 @@
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox18.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.StartY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StartX)).BeginInit();
+            this.groupBox19.SuspendLayout();
+            this.groupBox20.SuspendLayout();
             this.SuspendLayout();
             // 
             // Connect_Bt
@@ -129,7 +147,7 @@
             // 
             // Send_Bt
             // 
-            this.Send_Bt.Location = new System.Drawing.Point(18, 23);
+            this.Send_Bt.Location = new System.Drawing.Point(12, 23);
             this.Send_Bt.Name = "Send_Bt";
             this.Send_Bt.Size = new System.Drawing.Size(75, 23);
             this.Send_Bt.TabIndex = 2;
@@ -139,7 +157,7 @@
             // 
             // Stop_Bt
             // 
-            this.Stop_Bt.Location = new System.Drawing.Point(18, 57);
+            this.Stop_Bt.Location = new System.Drawing.Point(12, 57);
             this.Stop_Bt.Name = "Stop_Bt";
             this.Stop_Bt.Size = new System.Drawing.Size(75, 23);
             this.Stop_Bt.TabIndex = 3;
@@ -163,7 +181,7 @@
             this.groupBox2.Controls.Add(this.Stop_Bt);
             this.groupBox2.Location = new System.Drawing.Point(146, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(111, 95);
+            this.groupBox2.Size = new System.Drawing.Size(101, 95);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Socket";
@@ -172,16 +190,16 @@
             // 
             this.groupBox3.Controls.Add(this.Start_Bt);
             this.groupBox3.Controls.Add(this.Pause_Bt);
-            this.groupBox3.Location = new System.Drawing.Point(263, 12);
+            this.groupBox3.Location = new System.Drawing.Point(253, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(111, 95);
+            this.groupBox3.Size = new System.Drawing.Size(104, 95);
             this.groupBox3.TabIndex = 8;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Log";
             // 
             // Start_Bt
             // 
-            this.Start_Bt.Location = new System.Drawing.Point(18, 23);
+            this.Start_Bt.Location = new System.Drawing.Point(15, 23);
             this.Start_Bt.Name = "Start_Bt";
             this.Start_Bt.Size = new System.Drawing.Size(75, 23);
             this.Start_Bt.TabIndex = 2;
@@ -191,7 +209,7 @@
             // 
             // Pause_Bt
             // 
-            this.Pause_Bt.Location = new System.Drawing.Point(18, 57);
+            this.Pause_Bt.Location = new System.Drawing.Point(15, 57);
             this.Pause_Bt.Name = "Pause_Bt";
             this.Pause_Bt.Size = new System.Drawing.Size(75, 23);
             this.Pause_Bt.TabIndex = 3;
@@ -201,6 +219,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.groupBox20);
             this.groupBox4.Controls.Add(this.groupBox17);
             this.groupBox4.Controls.Add(this.groupBox16);
             this.groupBox4.Controls.Add(this.groupBox15);
@@ -708,15 +727,153 @@
             this.mAccRawX.Text = "-";
             this.mAccRawX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // groupBox18
+            // 
+            this.groupBox18.Controls.Add(this.StartY);
+            this.groupBox18.Controls.Add(this.StartX);
+            this.groupBox18.Location = new System.Drawing.Point(363, 12);
+            this.groupBox18.Name = "groupBox18";
+            this.groupBox18.Size = new System.Drawing.Size(79, 95);
+            this.groupBox18.TabIndex = 10;
+            this.groupBox18.TabStop = false;
+            this.groupBox18.Text = "Start";
+            // 
+            // StartY
+            // 
+            this.StartY.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.StartY.Location = new System.Drawing.Point(7, 57);
+            this.StartY.Name = "StartY";
+            this.StartY.Size = new System.Drawing.Size(63, 21);
+            this.StartY.TabIndex = 1;
+            // 
+            // StartX
+            // 
+            this.StartX.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.StartX.Location = new System.Drawing.Point(7, 23);
+            this.StartX.Name = "StartX";
+            this.StartX.Size = new System.Drawing.Size(63, 21);
+            this.StartX.TabIndex = 0;
+            // 
+            // groupBox19
+            // 
+            this.groupBox19.Controls.Add(this.Lower);
+            this.groupBox19.Controls.Add(this.label3);
+            this.groupBox19.Controls.Add(this.Upper);
+            this.groupBox19.Controls.Add(this.label1);
+            this.groupBox19.Controls.Add(this.TrainingDone);
+            this.groupBox19.Controls.Add(this.TraningStart);
+            this.groupBox19.Location = new System.Drawing.Point(12, 435);
+            this.groupBox19.Name = "groupBox19";
+            this.groupBox19.Size = new System.Drawing.Size(430, 64);
+            this.groupBox19.TabIndex = 11;
+            this.groupBox19.TabStop = false;
+            this.groupBox19.Text = "Traning";
+            // 
+            // Lower
+            // 
+            this.Lower.Location = new System.Drawing.Point(377, 25);
+            this.Lower.Name = "Lower";
+            this.Lower.Size = new System.Drawing.Size(44, 23);
+            this.Lower.TabIndex = 5;
+            this.Lower.Text = "-";
+            this.Lower.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(327, 25);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 23);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Lower";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Upper
+            // 
+            this.Upper.Location = new System.Drawing.Point(277, 25);
+            this.Upper.Name = "Upper";
+            this.Upper.Size = new System.Drawing.Size(44, 23);
+            this.Upper.TabIndex = 3;
+            this.Upper.Text = "-";
+            this.Upper.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(227, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 23);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Upper";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // TrainingDone
+            // 
+            this.TrainingDone.Location = new System.Drawing.Point(145, 25);
+            this.TrainingDone.Name = "TrainingDone";
+            this.TrainingDone.Size = new System.Drawing.Size(75, 23);
+            this.TrainingDone.TabIndex = 1;
+            this.TrainingDone.Text = "Done";
+            this.TrainingDone.UseVisualStyleBackColor = true;
+            this.TrainingDone.Click += new System.EventHandler(this.TrainingDone_Click);
+            // 
+            // TraningStart
+            // 
+            this.TraningStart.Location = new System.Drawing.Point(18, 25);
+            this.TraningStart.Name = "TraningStart";
+            this.TraningStart.Size = new System.Drawing.Size(121, 23);
+            this.TraningStart.TabIndex = 0;
+            this.TraningStart.Text = "Take 20 Step";
+            this.TraningStart.UseVisualStyleBackColor = true;
+            this.TraningStart.Click += new System.EventHandler(this.TraningStart_Click);
+            // 
+            // groupBox20
+            // 
+            this.groupBox20.Controls.Add(this.StepIntervalLabel);
+            this.groupBox20.Controls.Add(this.StepCountLabel);
+            this.groupBox20.Location = new System.Drawing.Point(91, 215);
+            this.groupBox20.Name = "groupBox20";
+            this.groupBox20.Size = new System.Drawing.Size(78, 91);
+            this.groupBox20.TabIndex = 6;
+            this.groupBox20.TabStop = false;
+            this.groupBox20.Text = "Step";
+            // 
+            // StepIntervalLabel
+            // 
+            this.StepIntervalLabel.Location = new System.Drawing.Point(14, 54);
+            this.StepIntervalLabel.Name = "StepIntervalLabel";
+            this.StepIntervalLabel.Size = new System.Drawing.Size(50, 13);
+            this.StepIntervalLabel.TabIndex = 1;
+            this.StepIntervalLabel.Text = "-";
+            this.StepIntervalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // StepCountLabel
+            // 
+            this.StepCountLabel.Location = new System.Drawing.Point(14, 32);
+            this.StepCountLabel.Name = "StepCountLabel";
+            this.StepCountLabel.Size = new System.Drawing.Size(50, 13);
+            this.StepCountLabel.TabIndex = 0;
+            this.StepCountLabel.Text = "-";
+            this.StepCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(457, 492);
+            this.ClientSize = new System.Drawing.Size(457, 511);
+            this.Controls.Add(this.groupBox19);
+            this.Controls.Add(this.groupBox18);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.KeyPreview = true;
             this.Name = "ControlPanel";
             this.Text = "Pedestrian Navigation System";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDownEvent);
@@ -737,6 +894,11 @@
             this.groupBox7.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
+            this.groupBox18.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.StartY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StartX)).EndInit();
+            this.groupBox19.ResumeLayout(false);
+            this.groupBox20.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -803,6 +965,19 @@
         private System.Windows.Forms.Label mStageRYZ;
         private System.Windows.Forms.Label mStageRTY;
         private System.Windows.Forms.Label mStageRTX;
+        private System.Windows.Forms.GroupBox groupBox18;
+        private System.Windows.Forms.NumericUpDown StartY;
+        private System.Windows.Forms.NumericUpDown StartX;
+        private System.Windows.Forms.GroupBox groupBox19;
+        private System.Windows.Forms.Label Lower;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label Upper;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button TrainingDone;
+        private System.Windows.Forms.Button TraningStart;
+        private System.Windows.Forms.GroupBox groupBox20;
+        private System.Windows.Forms.Label StepIntervalLabel;
+        private System.Windows.Forms.Label StepCountLabel;
     }
 }
 
