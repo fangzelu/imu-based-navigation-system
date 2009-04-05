@@ -888,7 +888,7 @@ namespace StepCount
             }
             avg = (float)sum / T_SIZE;
             stdev = (float)Math.Sqrt((float)sumSquare / T_SIZE - avg * avg);
-            lowerBound = avg + stdev;
+            lowerBound = avg + 2 * stdev;
 
             sum = 0;
             sumSquare = 0;
@@ -899,7 +899,7 @@ namespace StepCount
             }
             avg = (float)sum / T_SIZE;
             stdev = (float)Math.Sqrt((float)sumSquare / T_SIZE - avg * avg);
-            upperBound = avg + stdev;
+            upperBound = avg - 2 * stdev;
 
             this.Invoke(new MethodInvoker(delegate()
             {
