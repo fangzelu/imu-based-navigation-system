@@ -633,9 +633,9 @@ namespace StepCount
                                                 stepCount++;
 
                                                 if(rand.NextDouble() >= 0.5)
-                                                    x_diff = (float)(AVG_STEP + DEV_STEP * rand.NextDouble());
+                                                    x_diff = 2.0f * (float)(AVG_STEP + DEV_STEP * rand.NextDouble());
                                                 else
-                                                    x_diff = (float)(AVG_STEP - DEV_STEP * rand.NextDouble());
+                                                    x_diff = 2.0f * (float)(AVG_STEP - DEV_STEP * rand.NextDouble());
 
                                                 UpdateWorldPosition(x_diff, mStepCountTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mStepCountMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT), ref xc, ref yc, ref stageIndex);
 
