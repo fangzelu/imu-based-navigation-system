@@ -803,6 +803,7 @@
             // 
             // StartY
             // 
+            this.StartY.DecimalPlaces = 1;
             this.StartY.Increment = new decimal(new int[] {
             5,
             0,
@@ -820,6 +821,7 @@
             // 
             // StartX
             // 
+            this.StartX.DecimalPlaces = 1;
             this.StartX.Increment = new decimal(new int[] {
             5,
             0,
