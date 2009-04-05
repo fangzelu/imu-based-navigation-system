@@ -437,11 +437,13 @@ namespace StepCount
                                         float modifyDistance = (float)(Math.Abs(movingDistanceR - AVG_DISTANCE) * rand.NextDouble());
                                         if (movingDistanceR > AVG_DISTANCE + DEV_DISTANCE)
                                         {
+                                            movingDistanceR -= modifyDistance;
                                             UpdateWorldPosition(-modifyDistance, mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT), ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
                                             UpdateWorldPosition(-modifyDistance, mTiltHeadingAvg, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
                                         }
                                         else if (movingDistanceR < AVG_DISTANCE - DEV_DISTANCE)
                                         {
+                                            movingDistanceR += modifyDistance;
                                             UpdateWorldPosition(modifyDistance, mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT), ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
                                             UpdateWorldPosition(modifyDistance, mTiltHeadingAvg, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
                                         }
