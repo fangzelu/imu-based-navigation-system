@@ -45,7 +45,7 @@ namespace StepCount
 
         const float AVG_STEP = 0.7f;
         const float DEV_STEP = 0.1f;
-        const int STEP_TIME = 30;
+        const int STEP_TIME = 32;
 
         int stepState = 0;
         int stepCount = 0;
@@ -881,13 +881,13 @@ namespace StepCount
 
             int sum = 0, sumSquare = 0;
             float avg, stdev;
-            for(int i=0 ; i < T_SIZE ; i++)
+            for(int i=0 ; i < T_SIZE * 2 ; i++)
             {
                 sum += mAccelRawY[i];
                 sumSquare += mAccelRawY[i] * mAccelRawY[i];
             }
-            avg = (float)sum / T_SIZE;
-            stdev = (float)Math.Sqrt((float)sumSquare / T_SIZE - avg * avg);
+            avg = (float)sum / (T_SIZE * 2);
+            stdev = (float)Math.Sqrt((float)sumSquare / (T_SIZE * 2) - avg * avg);
             lowerBound = avg + 2 * stdev;
 
             sum = 0;
