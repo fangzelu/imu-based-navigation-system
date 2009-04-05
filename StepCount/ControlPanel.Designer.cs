@@ -38,6 +38,9 @@
             this.Start_Bt = new System.Windows.Forms.Button();
             this.Pause_Bt = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.StepIntervalLabel = new System.Windows.Forms.Label();
+            this.StepCountLabel = new System.Windows.Forms.Label();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
             this.mStageRYZ = new System.Windows.Forms.Label();
             this.mStageRTY = new System.Windows.Forms.Label();
@@ -63,7 +66,7 @@
             this.mLocalX = new System.Windows.Forms.Label();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.mHeadTilt = new System.Windows.Forms.Label();
-            this.mHeadZY = new System.Windows.Forms.Label();
+            this.mHead = new System.Windows.Forms.Label();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.mMagZ = new System.Windows.Forms.Label();
             this.mMagY = new System.Windows.Forms.Label();
@@ -98,13 +101,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TrainingDone = new System.Windows.Forms.Button();
             this.TraningStart = new System.Windows.Forms.Button();
-            this.groupBox20 = new System.Windows.Forms.GroupBox();
-            this.StepIntervalLabel = new System.Windows.Forms.Label();
-            this.StepCountLabel = new System.Windows.Forms.Label();
+            this.groupBox21 = new System.Windows.Forms.GroupBox();
+            this.mHeadStepTilt = new System.Windows.Forms.Label();
+            this.mHeadStep = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox20.SuspendLayout();
             this.groupBox17.SuspendLayout();
             this.groupBox16.SuspendLayout();
             this.groupBox15.SuspendLayout();
@@ -122,7 +126,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.StartY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StartX)).BeginInit();
             this.groupBox19.SuspendLayout();
-            this.groupBox20.SuspendLayout();
+            this.groupBox21.SuspendLayout();
             this.SuspendLayout();
             // 
             // Connect_Bt
@@ -219,6 +223,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.groupBox21);
             this.groupBox4.Controls.Add(this.groupBox20);
             this.groupBox4.Controls.Add(this.groupBox17);
             this.groupBox4.Controls.Add(this.groupBox16);
@@ -239,6 +244,35 @@
             this.groupBox4.TabIndex = 9;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "MotionNode";
+            // 
+            // groupBox20
+            // 
+            this.groupBox20.Controls.Add(this.StepIntervalLabel);
+            this.groupBox20.Controls.Add(this.StepCountLabel);
+            this.groupBox20.Location = new System.Drawing.Point(175, 215);
+            this.groupBox20.Name = "groupBox20";
+            this.groupBox20.Size = new System.Drawing.Size(78, 91);
+            this.groupBox20.TabIndex = 6;
+            this.groupBox20.TabStop = false;
+            this.groupBox20.Text = "Step";
+            // 
+            // StepIntervalLabel
+            // 
+            this.StepIntervalLabel.Location = new System.Drawing.Point(14, 54);
+            this.StepIntervalLabel.Name = "StepIntervalLabel";
+            this.StepIntervalLabel.Size = new System.Drawing.Size(50, 13);
+            this.StepIntervalLabel.TabIndex = 1;
+            this.StepIntervalLabel.Text = "-";
+            this.StepIntervalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // StepCountLabel
+            // 
+            this.StepCountLabel.Location = new System.Drawing.Point(14, 32);
+            this.StepCountLabel.Name = "StepCountLabel";
+            this.StepCountLabel.Size = new System.Drawing.Size(50, 13);
+            this.StepCountLabel.TabIndex = 0;
+            this.StepCountLabel.Text = "-";
+            this.StepCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox17
             // 
@@ -467,7 +501,7 @@
             // groupBox11
             // 
             this.groupBox11.Controls.Add(this.mHeadTilt);
-            this.groupBox11.Controls.Add(this.mHeadZY);
+            this.groupBox11.Controls.Add(this.mHead);
             this.groupBox11.Location = new System.Drawing.Point(91, 118);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(78, 91);
@@ -484,14 +518,14 @@
             this.mHeadTilt.Text = "-";
             this.mHeadTilt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // mHeadZY
+            // mHead
             // 
-            this.mHeadZY.Location = new System.Drawing.Point(14, 30);
-            this.mHeadZY.Name = "mHeadZY";
-            this.mHeadZY.Size = new System.Drawing.Size(50, 13);
-            this.mHeadZY.TabIndex = 1;
-            this.mHeadZY.Text = "-";
-            this.mHeadZY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mHead.Location = new System.Drawing.Point(14, 30);
+            this.mHead.Name = "mHead";
+            this.mHead.Size = new System.Drawing.Size(50, 13);
+            this.mHead.TabIndex = 1;
+            this.mHead.Text = "-";
+            this.mHead.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox10
             // 
@@ -833,34 +867,34 @@
             this.TraningStart.UseVisualStyleBackColor = true;
             this.TraningStart.Click += new System.EventHandler(this.TraningStart_Click);
             // 
-            // groupBox20
+            // groupBox21
             // 
-            this.groupBox20.Controls.Add(this.StepIntervalLabel);
-            this.groupBox20.Controls.Add(this.StepCountLabel);
-            this.groupBox20.Location = new System.Drawing.Point(91, 215);
-            this.groupBox20.Name = "groupBox20";
-            this.groupBox20.Size = new System.Drawing.Size(78, 91);
-            this.groupBox20.TabIndex = 6;
-            this.groupBox20.TabStop = false;
-            this.groupBox20.Text = "Step";
+            this.groupBox21.Controls.Add(this.mHeadStepTilt);
+            this.groupBox21.Controls.Add(this.mHeadStep);
+            this.groupBox21.Location = new System.Drawing.Point(91, 215);
+            this.groupBox21.Name = "groupBox21";
+            this.groupBox21.Size = new System.Drawing.Size(78, 91);
+            this.groupBox21.TabIndex = 6;
+            this.groupBox21.TabStop = false;
+            this.groupBox21.Text = "Heading";
             // 
-            // StepIntervalLabel
+            // mHeadStepTilt
             // 
-            this.StepIntervalLabel.Location = new System.Drawing.Point(14, 54);
-            this.StepIntervalLabel.Name = "StepIntervalLabel";
-            this.StepIntervalLabel.Size = new System.Drawing.Size(50, 13);
-            this.StepIntervalLabel.TabIndex = 1;
-            this.StepIntervalLabel.Text = "-";
-            this.StepIntervalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mHeadStepTilt.Location = new System.Drawing.Point(14, 55);
+            this.mHeadStepTilt.Name = "mHeadStepTilt";
+            this.mHeadStepTilt.Size = new System.Drawing.Size(50, 13);
+            this.mHeadStepTilt.TabIndex = 2;
+            this.mHeadStepTilt.Text = "-";
+            this.mHeadStepTilt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // StepCountLabel
+            // mHeadStep
             // 
-            this.StepCountLabel.Location = new System.Drawing.Point(14, 32);
-            this.StepCountLabel.Name = "StepCountLabel";
-            this.StepCountLabel.Size = new System.Drawing.Size(50, 13);
-            this.StepCountLabel.TabIndex = 0;
-            this.StepCountLabel.Text = "-";
-            this.StepCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mHeadStep.Location = new System.Drawing.Point(14, 30);
+            this.mHeadStep.Name = "mHeadStep";
+            this.mHeadStep.Size = new System.Drawing.Size(50, 13);
+            this.mHeadStep.TabIndex = 1;
+            this.mHeadStep.Text = "-";
+            this.mHeadStep.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ControlPanel
             // 
@@ -881,6 +915,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox20.ResumeLayout(false);
             this.groupBox17.ResumeLayout(false);
             this.groupBox16.ResumeLayout(false);
             this.groupBox15.ResumeLayout(false);
@@ -898,7 +933,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.StartY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.StartX)).EndInit();
             this.groupBox19.ResumeLayout(false);
-            this.groupBox20.ResumeLayout(false);
+            this.groupBox21.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -936,7 +971,7 @@
         private System.Windows.Forms.Label mAccPosY;
         private System.Windows.Forms.Label mAccPosX;
         private System.Windows.Forms.GroupBox groupBox11;
-        private System.Windows.Forms.Label mHeadZY;
+        private System.Windows.Forms.Label mHead;
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.Label mMagZ;
         private System.Windows.Forms.Label mMagY;
@@ -978,6 +1013,9 @@
         private System.Windows.Forms.GroupBox groupBox20;
         private System.Windows.Forms.Label StepIntervalLabel;
         private System.Windows.Forms.Label StepCountLabel;
+        private System.Windows.Forms.GroupBox groupBox21;
+        private System.Windows.Forms.Label mHeadStepTilt;
+        private System.Windows.Forms.Label mHeadStep;
     }
 }
 

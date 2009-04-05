@@ -52,6 +52,9 @@ namespace StepCount
         int stepInterval = 0;
         bool stepSampleFlag = false;
 
+        float mStepCountTiltHeadingAvg = 0.0f;
+        float mStepCountMovingTiltHeadingAvg = 0.0f;
+
         //*** to Control
         bool motionUse = true, wiiUse = false, ymoteUse = false;
         bool readFlag = false, logFlag = false;
@@ -177,6 +180,8 @@ namespace StepCount
                 //mHeadingAvg.ToString() + "," + mTiltHeadingAvg.ToString() + "," +
                 "틸트헤딩" + "," + "실시간헤딩," +
                 "Moving헤딩,Weight헤딩," +
+                "SC헤딩,"+
+                "SCMoving헤딩,SCWeight헤딩," +
                 "피치" + "," + "롤");
         }
 
@@ -303,6 +308,11 @@ namespace StepCount
                 mTiltHeadingAvg = mTiltHeadingAvg - (float)(20.0f * Math.PI / 180.0f);
                 if (mTiltHeadingAvg < -Math.PI)
                     mTiltHeadingAvg += (float)(2 * Math.PI);
+
+                mStepCountTiltHeadingAvg = mTiltHeadingAvg;
+                mStepCountTiltHeadingAvg = mStepCountTiltHeadingAvg + (float)(90.0f * Math.PI / 180.0f);
+                if (mStepCountTiltHeadingAvg > Math.PI)
+                    mStepCountTiltHeadingAvg -= (float)(2 * Math.PI);
             }
 
             //mTiltHeadingAvgTest = mTiltHeadingSum / mHeadSize;
@@ -339,6 +349,11 @@ namespace StepCount
             mMovingTiltHeadingAvg = mMovingTiltHeadingAvg - (float)(20.0f * Math.PI / 180.0f);
             if (mMovingTiltHeadingAvg < -Math.PI)
                 mMovingTiltHeadingAvg += (float)(2 * Math.PI);
+
+            mStepCountMovingTiltHeadingAvg = mMovingTiltHeadingAvg;
+            mStepCountMovingTiltHeadingAvg = mStepCountMovingTiltHeadingAvg + (float)(90.0f * Math.PI / 180.0f);
+            if (mStepCountMovingTiltHeadingAvg > Math.PI)
+                mStepCountMovingTiltHeadingAvg -= (float)(2 * Math.PI);
         }
         private void ReadSensorData()
         {
@@ -485,6 +500,8 @@ namespace StepCount
                                                 //mHeadingAvg.ToString() + "," + mTiltHeadingAvg.ToString() + "," +
                                                 (mTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + (mTiltHeading[b_heading] * 180.0f / Math.PI).ToString() + "," +
                                                 (mMovingTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + ((mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString() + "," +
+                                                (mStepCountTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," +
+                                                (mStepCountMovingTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + ((mStepCountTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mStepCountMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString() + "," +
                                                 (z.mGetAngle() * 180.0f / Math.PI).ToString() + "," + (y.mGetAngle() * 180.0f / Math.PI).ToString());
                                         }
 
@@ -618,9 +635,9 @@ namespace StepCount
                                                 else
                                                     x_diff = (float)(AVG_STEP - DEV_STEP * rand.NextDouble());
 
-                                                UpdateWorldPosition(x_diff, mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT), ref xc, ref yc, ref stageIndex);
+                                                UpdateWorldPosition(x_diff, mStepCountTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mStepCountMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT), ref xc, ref yc, ref stageIndex);
 
-                                                UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
+                                                UpdateWorldPosition(x_diff, mStepCountTiltHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
 
                                                 stepState = 0;
                                                 stepSampleFlag = false;
@@ -683,6 +700,8 @@ namespace StepCount
                                             //mHeadingAvg.ToString() + "," + mTiltHeadingAvg.ToString() + "," +
                                             (mTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + (mTiltHeading[b_heading] * 180.0f / Math.PI).ToString() + "," +
                                             (mMovingTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + ((mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString() + "," +
+                                            (mStepCountTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," +
+                                            (mStepCountMovingTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + ((mStepCountTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mStepCountMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString() + "," +
                                             (z.mGetAngle() * 180.0f / Math.PI).ToString() + "," + (y.mGetAngle() * 180.0f / Math.PI).ToString());
                                     }
                                 }
@@ -699,8 +718,11 @@ namespace StepCount
                                     this.mMagY.Text = y.mGetMag().ToString();
                                     this.mMagZ.Text = z.mGetMag().ToString();
 
-                                    //this.mHeadZY.Text = (mHeadingAvg * 180.0f / Math.PI).ToString();
+                                    this.mHead.Text = ((mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString();
                                     this.mHeadTilt.Text = (mTiltHeadingAvg * 180.0f / Math.PI).ToString();
+
+                                    this.mHeadStep.Text = ((mStepCountTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mStepCountMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString();
+                                    this.mHeadStepTilt.Text = (mStepCountTiltHeadingAvg * 180.0f / Math.PI).ToString();
 
                                     this.mLocalX.Text = xR_diff.ToString();
 
