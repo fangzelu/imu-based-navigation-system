@@ -544,8 +544,7 @@ namespace StepCount
 
                                 if (!x.mAccStop || !y.mAccStop || !z.mAccStop)
                                 {
-                                    if(stepSampleFlag)
-                                        stepInterval++;
+                                    stepInterval++;
                                     movingCount++;
 
                                     mTiltHeadingAvgBeforeMoving = mTiltHeadingAvg;
@@ -602,7 +601,6 @@ namespace StepCount
                                     if(stepState == 1 && stepInterval > STEP_TIME)
                                     {
                                         stepState = 0;
-                                        stepSampleFlag = false;
                                         stepInterval = 0;
                                     }
 
@@ -614,12 +612,11 @@ namespace StepCount
                                         peakFlagY = 1;
                                         peakChangeY++;
 
-                                        if(stepState == 0 && temp == 1)
+                                        if(stepState == 0 && temp == 1 && stepInterval >= 0)
                                         {
                                             if(peakAccelRawY < lowerBound)
                                             {
                                                 stepState = 1;
-                                                stepSampleFlag = true;
                                                 stepInterval = 0;
                                             }
                                         }
@@ -628,7 +625,6 @@ namespace StepCount
                                             if (peakAccelRawY <= lowerBound)
                                             {
                                                 stepState = 1;
-                                                stepSampleFlag = true;
                                                 stepInterval = 0;
                                             }
                                         }
@@ -648,8 +644,7 @@ namespace StepCount
                                                 UpdateWorldPosition(x_diff, mStepCountTiltHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
 
                                                 stepState = 0;
-                                                stepSampleFlag = false;
-                                                stepInterval = 0;
+                                                stepInterval = -8;
                                             }
                                         }
                                     }
