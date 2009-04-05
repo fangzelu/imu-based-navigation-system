@@ -1116,7 +1116,7 @@ namespace StepCount
                 mAccRawIndex = 0;
 
             mAccRawDev = (float)mAccRawSumSqr / mSize - (float)mAccRawSum / mSize * (float)mAccRawSum / mSize;
-            if (mAccRawDev > 1024.0f)
+            if (mAccRawDev > 2048.0f)
                 mAccStop = false;
             else
                 mAccStop = true;
