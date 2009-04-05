@@ -111,6 +111,7 @@ namespace StepCount
         float mHeadingAvg = 0.0f;
         float mTiltHeadingAvgTest = 0.0f;
         float mTiltHeadingAvg = 0.0f;
+        float mTiltHeadingAvgBeforeMoving = 0.0f;
         float[] mHeading;
         float[] mTiltHeading;
         bool mMoving = false;
@@ -453,14 +454,14 @@ namespace StepCount
                                         if (movingDistanceR > AVG_DISTANCE + DEV_DISTANCE)
                                         {
                                             movingDistanceR -= modifyDistance;
-                                            UpdateWorldPosition(-modifyDistance, mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT), ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
-                                            UpdateWorldPosition(-modifyDistance, mTiltHeadingAvg, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
+                                            UpdateWorldPosition(-modifyDistance, mTiltHeadingAvgBeforeMoving, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
+                                            UpdateWorldPosition(-modifyDistance, mTiltHeadingAvgBeforeMoving, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
                                         }
                                         else if (movingDistanceR < AVG_DISTANCE - DEV_DISTANCE)
                                         {
                                             movingDistanceR += modifyDistance;
-                                            UpdateWorldPosition(modifyDistance, mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT), ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
-                                            UpdateWorldPosition(modifyDistance, mTiltHeadingAvg, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
+                                            UpdateWorldPosition(modifyDistance, mTiltHeadingAvgBeforeMoving, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
+                                            UpdateWorldPosition(modifyDistance, mTiltHeadingAvgBeforeMoving, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
                                         }
 
                                         if (logFlag)
@@ -541,6 +542,7 @@ namespace StepCount
                                         stepInterval++;
                                     movingCount++;
 
+                                    mTiltHeadingAvgBeforeMoving = mTiltHeadingAvg;
                                     mUpdateMovingTiltHeading(ref z, ref y, ref x);
 
                                     //x.UpdateMotionPosition();
