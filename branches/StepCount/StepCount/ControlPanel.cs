@@ -867,7 +867,11 @@ namespace StepCount
                 copyDataStruct.cbData = sizeof(int) * 2 + sizeof(double);
                 copyDataStruct.msgData = message; // 보낼 메시지
 
-                if (wndPtr == IntPtr.Zero) return;
+                if (wndPtr == IntPtr.Zero)
+                {
+                    MessageBox.Show("No Window");
+                    return;
+                }
 
                 IntPtr tempPtr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(Win32API.COPYDATASTRUCT)));
                 Marshal.StructureToPtr(copyDataStruct, tempPtr, true);
@@ -895,17 +899,13 @@ namespace StepCount
             int beforeX = (int)(xcR[bbR] / 2.0f);
             int beforeY = (int)(ycR[bbR] / 2.0f);
 
-            if (curX != beforeX || curY != beforeY)
-            {
-                msg sendMsg = new msg();
-                sendMsg.x = curX;
-                sendMsg.y = curY;
-                sendMsg.p = p;
-                //sendMsg = command.ToString() + "," + curX.ToString() + "," + curY.ToString() + "," + p.ToString();
+            msg sendMsg = new msg();
+            sendMsg.x = curX;
+            sendMsg.y = curY;
+            sendMsg.p = p;
+            //sendMsg = command.ToString() + "," + curX.ToString() + "," + curY.ToString() + "," + p.ToString();
 
-                SendMessage("WifiLoc", sendMsg);
-            }
-
+            SendMessage("WifiLoc", sendMsg);
         }
 
         private void KeyDownEvent(object sender, KeyEventArgs e)
