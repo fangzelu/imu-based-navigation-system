@@ -674,7 +674,7 @@ namespace StepCount
 
                                                     if (curX != beforeX || curY != beforeY)
                                                     {
-                                                        Win32API.msg sendMsg = new Win32API.msg();
+                                                        msg sendMsg = new msg();
                                                         sendMsg.x = curX;
                                                         sendMsg.y = curY;
                                                         sendMsg.p = p;
@@ -856,14 +856,15 @@ namespace StepCount
             logFlag = false;
         }
 
-        void SendMessage(string strProgramName, Win32API.msg message)
+        void SendMessage(string strProgramName, msg message)
         {
             try
             {
                 Win32API.COPYDATASTRUCT copyDataStruct = new Win32API.COPYDATASTRUCT();
-                copyDataStruct.dwData = 1; // 임시값
+                copyDataStruct.dwData = (IntPtr)1; // 임시값
                 
                 //copyDataStruct.cbData = strMessage.Length * 2 + 1; // 한글 코드 지원
+                copyDataStruct.cbData = sizeof(int) * 2 + sizeof(double);
                 copyDataStruct.msgData = message; // 보낼 메시지
 
                 if (wndPtr == IntPtr.Zero) return;
@@ -896,7 +897,7 @@ namespace StepCount
 
             if (curX != beforeX || curY != beforeY)
             {
-                Win32API.msg sendMsg = new Win32API.msg();
+                msg sendMsg = new msg();
                 sendMsg.x = curX;
                 sendMsg.y = curY;
                 sendMsg.p = p;
@@ -1350,19 +1351,20 @@ namespace StepCount
         }
     }
 
+    public struct msg
+    {
+        public int x;
+        public int y;
+        public double p;
+    }
+
     class Win32API
     {
         public const int WM_COPYDATA = 0x004A;
 
-        public struct msg
-        {
-            public int x;
-            public int y;
-            public double p;
-        }
         public struct COPYDATASTRUCT
         {
-            public int dwData;
+            public IntPtr dwData;
             public int cbData;
             [MarshalAs(UnmanagedType.LPStr)]
             public msg msgData;
