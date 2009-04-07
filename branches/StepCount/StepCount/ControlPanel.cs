@@ -861,7 +861,7 @@ namespace StepCount
             try
             {
                 Win32API.COPYDATASTRUCT copyDataStruct = new Win32API.COPYDATASTRUCT();
-                copyDataStruct.dwData = (IntPtr)0; // 임시값
+                copyDataStruct.dwData = 1; // 임시값
                 
                 //copyDataStruct.cbData = strMessage.Length * 2 + 1; // 한글 코드 지원
                 copyDataStruct.msgData = message; // 보낼 메시지
@@ -870,7 +870,7 @@ namespace StepCount
 
                 IntPtr tempPtr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(Win32API.COPYDATASTRUCT)));
                 Marshal.StructureToPtr(copyDataStruct, tempPtr, true);
-                Win32API.SendMessage(wndPtr, 1, IntPtr.Zero, tempPtr);
+                Win32API.SendMessage(wndPtr, Win32API.WM_COPYDATA, IntPtr.Zero, tempPtr);
             }
             catch (Exception except)
             {
@@ -880,11 +880,31 @@ namespace StepCount
 
         private void Send_Bt_Click(object sender, EventArgs e)
         {
-            IntPtr wndPtr = Win32API.FindWindow(wndName, null);
+            wndPtr = Win32API.FindWindow(wndName, null);
             sendFlag = true;
 
             if (wndPtr == null)
                 MessageBox.Show("Fail to Find Window");
+
+            int bR = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
+            int bbR = (stageIndexR - 2 < 0) ? (stageSize + (stageIndexR - 2)) : (stageIndexR - 2);
+
+            int curX = (int)(xcR[bR] / 2.0f);
+            int curY = (int)(ycR[bR] / 2.0f);
+            int beforeX = (int)(xcR[bbR] / 2.0f);
+            int beforeY = (int)(ycR[bbR] / 2.0f);
+
+            if (curX != beforeX || curY != beforeY)
+            {
+                Win32API.msg sendMsg = new Win32API.msg();
+                sendMsg.x = curX;
+                sendMsg.y = curY;
+                sendMsg.p = p;
+                //sendMsg = command.ToString() + "," + curX.ToString() + "," + curY.ToString() + "," + p.ToString();
+
+                SendMessage("WifiLoc", sendMsg);
+            }
+
         }
 
         private void KeyDownEvent(object sender, KeyEventArgs e)
@@ -1342,7 +1362,7 @@ namespace StepCount
         }
         public struct COPYDATASTRUCT
         {
-            public IntPtr dwData;
+            public int dwData;
             public int cbData;
             [MarshalAs(UnmanagedType.LPStr)]
             public msg msgData;
