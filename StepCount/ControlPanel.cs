@@ -656,7 +656,7 @@ namespace StepCount
 
                                                 UpdateWorldPosition(x_diff, mStepCountTiltHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
 
-                                                p *= (pc - movingStep * pc_gap);
+                                                p *= (pc - (float)movingStep * pc_gap);
 
                                                 stepState = 0;
                                                 stepInterval = -8;
@@ -670,15 +670,10 @@ namespace StepCount
                                                     int curY = (int)(ycR[bR] / 2.0f);
                                                     int beforeX = (int)(xcR[bbR] / 2.0f);
                                                     int beforeY = (int)(ycR[bbR] / 2.0f);
-                                                    int command = 1;
 
                                                     if (curX != beforeX || curY != beforeY)
                                                     {
-                                                        msg sendMsg = new msg();
-                                                        sendMsg.x = curX;
-                                                        sendMsg.y = curY;
-                                                        sendMsg.p = p;
-                                                        //sendMsg = command.ToString() + "," + curX.ToString() + "," + curY.ToString() + "," + p.ToString();
+                                                        string sendMsg = curX.ToString() + "," + curY.ToString() + "," + p.ToString();
 
                                                         SendMessage("WifiLoc", sendMsg);
                                                     }
@@ -856,16 +851,16 @@ namespace StepCount
             logFlag = false;
         }
 
-        void SendMessage(string strProgramName, msg message)
+        void SendMessage(string strProgramName, string message)
         {
             try
             {
                 Win32API.COPYDATASTRUCT copyDataStruct = new Win32API.COPYDATASTRUCT();
                 copyDataStruct.dwData = (IntPtr)1; // 임시값
-                
-                //copyDataStruct.cbData = strMessage.Length * 2 + 1; // 한글 코드 지원
-                copyDataStruct.cbData = sizeof(int) * 2 + sizeof(double);
-                copyDataStruct.msgData = message; // 보낼 메시지
+
+                copyDataStruct.cbData = message.Length * 2 + 1; // 한글 코드 지원
+                //copyDataStruct.cbData = sizeof(int) * 2 + sizeof(double);
+                copyDataStruct.lpData = message; // 보낼 메시지
 
                 if (wndPtr == IntPtr.Zero)
                 {
@@ -896,14 +891,8 @@ namespace StepCount
 
             int curX = (int)(xcR[bR] / 2.0f);
             int curY = (int)(ycR[bR] / 2.0f);
-            int beforeX = (int)(xcR[bbR] / 2.0f);
-            int beforeY = (int)(ycR[bbR] / 2.0f);
 
-            msg sendMsg = new msg();
-            sendMsg.x = curX;
-            sendMsg.y = curY;
-            sendMsg.p = p;
-            //sendMsg = command.ToString() + "," + curX.ToString() + "," + curY.ToString() + "," + p.ToString();
+            string sendMsg = curX.ToString() + "," + curY.ToString() + "," + p.ToString();
 
             SendMessage("WifiLoc", sendMsg);
         }
@@ -1367,7 +1356,7 @@ namespace StepCount
             public IntPtr dwData;
             public int cbData;
             [MarshalAs(UnmanagedType.LPStr)]
-            public msg msgData;
+            public string lpData;
         }
 
         [DllImport("user32.dll")]
