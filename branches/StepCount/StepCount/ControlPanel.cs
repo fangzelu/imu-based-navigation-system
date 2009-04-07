@@ -674,7 +674,6 @@ namespace StepCount
                                                     if (curX != beforeX || curY != beforeY)
                                                     {
                                                         Win32API.msg sendMsg = new Win32API.msg();
-                                                        sendMsg.command = command;
                                                         sendMsg.x = curX;
                                                         sendMsg.y = curY;
                                                         sendMsg.p = p;
@@ -870,7 +869,7 @@ namespace StepCount
 
                 IntPtr tempPtr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(Win32API.COPYDATASTRUCT)));
                 Marshal.StructureToPtr(copyDataStruct, tempPtr, true);
-                Win32API.SendMessage(wndPtr, Win32API.WM_COPYDATA, IntPtr.Zero, tempPtr);
+                Win32API.SendMessage(wndPtr, 1, IntPtr.Zero, tempPtr);
             }
             catch (Exception except)
             {
@@ -1337,7 +1336,6 @@ namespace StepCount
 
         public struct msg
         {
-            public int command;
             public int x;
             public int y;
             public double p;
