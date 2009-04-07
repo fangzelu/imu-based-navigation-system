@@ -656,7 +656,7 @@ namespace StepCount
 
                                                 UpdateWorldPosition(x_diff, mStepCountTiltHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
 
-                                                p *= (pc - (float)movingStep * pc_gap);
+                                                p *= (pc - (float)stepCount * pc_gap);
 
                                                 stepState = 0;
                                                 stepInterval = -8;
@@ -772,15 +772,15 @@ namespace StepCount
                                     this.mStageX.Text = (xc[b]).ToString();
                                     this.mStageY.Text = (yc[b]).ToString();
 
-                                    b = stageIndex_tilt - 1;
-                                    if (b < 0)
-                                        b = stageSize - 1;
-                                    this.mStageTiltX.Text = (xc_tilt[b]).ToString();
-                                    this.mStageTiltY.Text = (yc_tilt[b]).ToString();
+                                    //b = stageIndex_tilt - 1;
+                                    //if (b < 0)
+                                    //    b = stageSize - 1;
+                                    //this.mStageTiltX.Text = (xc_tilt[b]).ToString();
+                                    //this.mStageTiltY.Text = (yc_tilt[b]).ToString();
 
-                                    //b = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
-                                    //this.mStageRX.Text = (xcR[b]).ToString();
-                                    //this.mStageRY.Text = (ycR[b]).ToString();
+                                    b = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
+                                    this.mStageRX.Text = (xcR[b]).ToString();
+                                    this.mStageRY.Text = (ycR[b]).ToString();
 
                                     //b = (stageIndexR_tilt - 1 < 0) ? (stageSize + (stageIndexR_tilt - 1)) : (stageIndexR_tilt - 1);
                                     //this.mStageRTX.Text = (xcR_tilt[b]).ToString();
