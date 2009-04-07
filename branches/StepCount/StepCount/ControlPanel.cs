@@ -879,9 +879,11 @@ namespace StepCount
 
         private void Send_Bt_Click(object sender, EventArgs e)
         {
-            IntPtr wndPtr = Win32API.FindWindow(null, wndName);
+            IntPtr wndPtr = Win32API.FindWindow(wndName, null);
             sendFlag = true;
 
+            if (wndPtr == null)
+                MessageBox.Show("Fail to Find Window");
         }
 
         private void KeyDownEvent(object sender, KeyEventArgs e)
