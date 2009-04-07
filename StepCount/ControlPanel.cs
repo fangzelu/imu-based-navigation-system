@@ -662,7 +662,6 @@ namespace StepCount
 
                                                 if(sendFlag)
                                                 {
-                                                    string sendMsg = "";
                                                     int bR = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
                                                     int bbR = (stageIndexR - 2 < 0) ? (stageSize + (stageIndexR - 2)) : (stageIndexR - 2);
 
@@ -674,7 +673,12 @@ namespace StepCount
 
                                                     if (curX != beforeX || curY != beforeY)
                                                     {
-                                                        sendMsg = command.ToString() + "," + curX.ToString() + "," + curY.ToString() + "," + p.ToString();
+                                                        Win32API.msg sendMsg = new Win32API.msg();
+                                                        sendMsg.command = command;
+                                                        sendMsg.x = curX;
+                                                        sendMsg.y = curY;
+                                                        sendMsg.p = p;
+                                                        //sendMsg = command.ToString() + "," + curX.ToString() + "," + curY.ToString() + "," + p.ToString();
 
                                                         SendMessage("WifiLoc", sendMsg);
                                                     }
@@ -852,14 +856,15 @@ namespace StepCount
             logFlag = false;
         }
 
-        void SendMessage(string strProgramName, string strMessage)
+        void SendMessage(string strProgramName, Win32API.msg message)
         {
             try
             {
                 Win32API.COPYDATASTRUCT copyDataStruct = new Win32API.COPYDATASTRUCT();
                 copyDataStruct.dwData = (IntPtr)0; // 임시값
-                copyDataStruct.cbData = strMessage.Length * 2 + 1; // 한글 코드 지원
-                copyDataStruct.lpData = strMessage; // 보낼 메시지
+                
+                //copyDataStruct.cbData = strMessage.Length * 2 + 1; // 한글 코드 지원
+                copyDataStruct.msgData = message; // 보낼 메시지
 
                 if (wndPtr == IntPtr.Zero) return;
 
@@ -1330,12 +1335,19 @@ namespace StepCount
     {
         public const int WM_COPYDATA = 0x004A;
 
+        public struct msg
+        {
+            public int command;
+            public int x;
+            public int y;
+            public double p;
+        }
         public struct COPYDATASTRUCT
         {
             public IntPtr dwData;
             public int cbData;
             [MarshalAs(UnmanagedType.LPStr)]
-            public string lpData;
+            public msg msgData;
         }
 
         [DllImport("user32.dll")]
