@@ -53,7 +53,7 @@ namespace StepCount
         const int STEP_TIME = 32;
         float p = 1.0f;
         float pc = 1.0f;
-        float pc_gap = 0.005f;
+        float pc_gap = 0.001f;
 
         int stepState = 0;
         int stepCount = 0;
