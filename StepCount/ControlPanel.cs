@@ -52,7 +52,8 @@ namespace StepCount
         const float DEV_STEP = 0.1f;
         const int STEP_TIME = 32;
         float p = 1.0f;
-        float pc = 0.99f;
+        float pc = 1.0f;
+        float pc_gap = 0.005f;
 
         int stepState = 0;
         int stepCount = 0;
@@ -655,7 +656,7 @@ namespace StepCount
 
                                                 UpdateWorldPosition(x_diff, mStepCountTiltHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
 
-                                                p *= pc;
+                                                p *= (pc - movingStep * pc_gap);
 
                                                 stepState = 0;
                                                 stepInterval = -8;
@@ -947,9 +948,6 @@ namespace StepCount
         {
             sendFlag = false;
         }
-
-
-
     }
 
     public class Axis
