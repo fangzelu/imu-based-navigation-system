@@ -42,6 +42,7 @@
             this.mHeadStepTilt = new System.Windows.Forms.Label();
             this.mHeadStep = new System.Windows.Forms.Label();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.StepP = new System.Windows.Forms.Label();
             this.StepIntervalLabel = new System.Windows.Forms.Label();
             this.StepCountLabel = new System.Windows.Forms.Label();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
@@ -167,6 +168,7 @@
             this.Stop_Bt.TabIndex = 3;
             this.Stop_Bt.Text = "Stop";
             this.Stop_Bt.UseVisualStyleBackColor = true;
+            this.Stop_Bt.Click += new System.EventHandler(this.Stop_Bt_Click);
             // 
             // groupBox1
             // 
@@ -276,6 +278,7 @@
             // 
             // groupBox20
             // 
+            this.groupBox20.Controls.Add(this.StepP);
             this.groupBox20.Controls.Add(this.StepIntervalLabel);
             this.groupBox20.Controls.Add(this.StepCountLabel);
             this.groupBox20.Location = new System.Drawing.Point(175, 215);
@@ -285,9 +288,18 @@
             this.groupBox20.TabStop = false;
             this.groupBox20.Text = "Step";
             // 
+            // StepP
+            // 
+            this.StepP.Location = new System.Drawing.Point(14, 66);
+            this.StepP.Name = "StepP";
+            this.StepP.Size = new System.Drawing.Size(50, 13);
+            this.StepP.TabIndex = 2;
+            this.StepP.Text = "-";
+            this.StepP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // StepIntervalLabel
             // 
-            this.StepIntervalLabel.Location = new System.Drawing.Point(14, 54);
+            this.StepIntervalLabel.Location = new System.Drawing.Point(14, 44);
             this.StepIntervalLabel.Name = "StepIntervalLabel";
             this.StepIntervalLabel.Size = new System.Drawing.Size(50, 13);
             this.StepIntervalLabel.TabIndex = 1;
@@ -296,7 +308,7 @@
             // 
             // StepCountLabel
             // 
-            this.StepCountLabel.Location = new System.Drawing.Point(14, 32);
+            this.StepCountLabel.Location = new System.Drawing.Point(14, 22);
             this.StepCountLabel.Name = "StepCountLabel";
             this.StepCountLabel.Size = new System.Drawing.Size(50, 13);
             this.StepCountLabel.TabIndex = 0;
@@ -1028,6 +1040,7 @@
         private System.Windows.Forms.GroupBox groupBox21;
         private System.Windows.Forms.Label mHeadStepTilt;
         private System.Windows.Forms.Label mHeadStep;
+        private System.Windows.Forms.Label StepP;
     }
 }
 
