@@ -1059,7 +1059,7 @@ namespace StepCount
             }
             avg = (float)sum / (T_SIZE * 2);
             stdev = (float)Math.Sqrt((float)sumSquare / (T_SIZE * 2) - avg * avg);
-            lowerBound = avg + stdev;
+            lowerBound = avg + 2 * stdev;
 
             sum = 0;
             sumSquare = 0;
