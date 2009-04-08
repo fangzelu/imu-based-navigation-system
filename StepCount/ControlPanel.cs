@@ -771,7 +771,7 @@ namespace StepCount
                                                         temp_sum += oneStepRaw[i];
                                                         temp_square_sum += oneStepRaw[i] * oneStepRaw[i];
                                                     }
-                                                    oneStepVariance = temp_square_sum / temp_count - (temp_sum / temp_count) * (temp_sum / temp_count);
+                                                    oneStepVariance = (float)Math.Sqrt(temp_square_sum / temp_count - (temp_sum / temp_count) * (temp_sum / temp_count));
 
                                                     // 스텝 카운트
                                                     stepCount++;
