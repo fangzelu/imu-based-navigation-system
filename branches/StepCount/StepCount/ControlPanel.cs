@@ -691,7 +691,7 @@ namespace StepCount
                                                 }
                                             }
 
-                                            if (temp == 1 && stepInterval >= 0)
+                                            if (peakFlagY == 1 && temp == 1 && stepInterval >= 0)
                                             {
                                                 if(peakAccelRawY <= lowerBound)
                                                 {
@@ -709,11 +709,11 @@ namespace StepCount
                                             oneStepSampleCount++;
                                             oneStepRaw.Add(val_accel);
 
-                                            if(temp == 1 && peakAccelRawY <= lowerBound)
+                                            if (peakFlagY == 1 && temp == 1 && peakAccelRawY <= lowerBound)
                                             {
                                                 stepInterval = 0;
                                             }
-                                            else if(temp == 2 && peakAccelRawY >= upperBound)
+                                            else if (peakFlagY == 1 && temp == 2 && peakAccelRawY >= upperBound)
                                             {
                                                 stepState = 2;
                                                 stepInterval = 0;
