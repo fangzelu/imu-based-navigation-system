@@ -199,7 +199,7 @@ namespace StepCount
                 "실시간SCX,실시간SCY," +
                 "SCX,SCY," +
                 "SC상태,SC수,SC시간," +
-                "OneStep수,OneStep분산,Stance헤딩,Stance상태," +
+                "OneStep수,OneStep분산,Stance헤딩,Stance상태,Stance분산," +
                 "AccleRawY," +
                 "변화Y,상태Y,방향Y,피크RawY,피크Y," +
                 "AccelRawX" + "," + "AccelRawZ" + "," +
@@ -688,7 +688,7 @@ namespace StepCount
 
                                                 mStanceRaw.RemoveAt(0);
 
-                                                mStanceStdev = (float)mStanceRawSquareSum / STANCE_WINDOW - ((float)mStanceRawSum / STANCE_WINDOW) * ((float)mStanceRawSum / STANCE_WINDOW);
+                                                mStanceStdev = (float)Math.Sqrt((float)mStanceRawSquareSum / STANCE_WINDOW - ((float)mStanceRawSum / STANCE_WINDOW) * ((float)mStanceRawSum / STANCE_WINDOW));
 
                                                 if(mStanceStdev < 100.0f)
                                                 {
@@ -754,7 +754,7 @@ namespace StepCount
 
                                                 mStanceRaw.RemoveAt(0);
 
-                                                mStanceStdev = (float)mStanceRawSquareSum / STANCE_WINDOW - ((float)mStanceRawSum / STANCE_WINDOW) * ((float)mStanceRawSum / STANCE_WINDOW);
+                                                mStanceStdev = (float)Math.Sqrt((float)mStanceRawSquareSum / STANCE_WINDOW - ((float)mStanceRawSum / STANCE_WINDOW) * ((float)mStanceRawSum / STANCE_WINDOW));
 
                                                 if (mStanceStdev < 100.0f)
                                                 {
@@ -848,7 +848,7 @@ namespace StepCount
                                             xc[bb].ToString() + "," + yc[bb].ToString() + "," +
                                             xcR[bbR].ToString() + "," + ycR[bbR].ToString() + "," +
                                             stepState.ToString() + "," + stepCount.ToString() + "," + stepInterval.ToString() + "," +
-                                            oneStepSampleCount.ToString() + "," + oneStepVariance.ToString() + "," + mStanceHeadAvg.ToString() + "," + mStanceState.ToString() + "," + 
+                                            oneStepSampleCount.ToString() + "," + oneStepVariance.ToString() + "," + mStanceHeadAvg.ToString() + "," + mStanceState.ToString() + "," + mStanceStdev.ToString() + "," +
                                             y.GetMotionAccelRaw().ToString() + "," +
                                             peakChangeY.ToString() + "," + peakFlagY.ToString() + "," + peakDirectionY.ToString() + "," + peakAccelRawY.ToString() + "," + peakAccelY.ToString() + "," +
                                             x.GetMotionAccelRaw().ToString() + "," + z.GetMotionAccelRaw().ToString() + "," +
@@ -958,6 +958,7 @@ namespace StepCount
 
             x_init = (float)StartX.Value;
             y_init = (float)StartY.Value;
+            p = 1.0f;
 
             for (int i = 0; i < stageSize; i++)
             {
