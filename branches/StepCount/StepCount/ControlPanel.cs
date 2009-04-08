@@ -187,6 +187,12 @@ namespace StepCount
                 mTiltHeading[i] = 0.0f;
             }
 
+            mAccelRawY.Clear();
+            mStanceRaw.Clear();
+            mStanceHead.Clear();
+            mStanceHeadAvgList.Clear();
+            oneStepRaw.Clear();
+
             posLog.WriteLine("시간" + "," +
                 //"실시간X" + "," + "실시간Y" + "," +
                 //"린지X" + "," + "린지Y" + "," +
@@ -698,7 +704,16 @@ namespace StepCount
                                                     stepState = 1;
                                                     stepInterval = 0;
                                                     oneStepSampleCount++;
-                                                    mStanceHeadAvg = mStanceHeadAvgList.Sum() / mStanceHeadAvgList.Count;
+                                                    if (mStanceHeadAvgList.Count > 0)
+                                                    {
+                                                        mStanceHeadAvg = mStanceHeadAvgList.Sum() / mStanceHeadAvgList.Count;
+                                                        mStanceHeadAvg = mStanceHeadAvg - (float)(90.0f * Math.PI / 180.0f);
+                                                        if (mStanceHeadAvg < -Math.PI)
+                                                            mStanceHeadAvg += (float)(2 * Math.PI);
+                                                    }
+                                                    else
+                                                        mStanceHeadAvg = -(float)(90.0f * Math.PI / 180.0f);
+
                                                     mStanceHeadAvgList.Clear();
                                                     oneStepRaw.Add(val_accel);
                                                 }
@@ -872,7 +887,7 @@ namespace StepCount
                                     //this.mHead.Text = ((mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString();
                                     //this.mHeadTilt.Text = (mTiltHeadingAvg * 180.0f / Math.PI).ToString();
 
-                                    this.mHeadStep.Text = ((mStepCountTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mStepCountMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString();
+                                    this.mHeadStep.Text = (mStanceHeadAvg * 180.0f / Math.PI).ToString();
                                     this.mHeadStepTilt.Text = (mStepCountTiltHeadingAvg * 180.0f / Math.PI).ToString();
                                     this.StepP.Text = p.ToString();
 
