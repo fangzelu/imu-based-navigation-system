@@ -215,10 +215,10 @@ namespace StepCount
             oneStepRaw.Clear();
 
             posLog.WriteLine("시간" + "," +
-                //"실시간X" + "," + "실시간Y" + "," +
-                //"린지X" + "," + "린지Y" + "," +
-                "실시간SCX,실시간SCY," +
-                "SCX,SCY," +
+                "실시간Raw_SCX" + "," + "실시간Raw_SCY" + "," +
+                "실시간S_SCX" + "," + "실시간S_SCY" + "," +
+                "실시간_SCX,실시간_SCY," +
+                "ZUPT_SCX,ZUPT_SCY," +
                 "SC상태,SC수,SC시간," +
                 "OneStep수,OneStep분산Raw,OneStep분산,Stance상태,Stance분산," +
                 "Stance헤딩,Stance헤딩S,Stance헤딩Raw,"+
@@ -897,6 +897,10 @@ namespace StepCount
 
                                                     UpdateWorldPosition(x_diff, mStepCountTiltHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
 
+                                                    UpdateWorldPosition(x_diff, mStanceHeadAvgTest, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
+
+                                                    UpdateWorldPosition(x_diff, mStanceHeadAvgSecond, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
+
                                                     p *= (pc - (float)stepCount * pc_gap);
 
                                                     posLog.WriteLine("One Step");
@@ -957,14 +961,14 @@ namespace StepCount
                                         int b_heading = (mTiltHeadingIndex - 1 < 0) ? (mHeadSize - 1) : (mTiltHeadingIndex - 1);
 
                                         posLog.WriteLine(DateTime.Now.ToString() + "," +
-                                            //xc_tilt[bb_tilt].ToString() + "," + yc_tilt[bb_tilt].ToString() + "," +
-                                            //xcR_tilt[bbR_tilt].ToString() + "," + ycR_tilt[bbR_tilt].ToString() + "," +
+                                            xc_tilt[bb_tilt].ToString() + "," + yc_tilt[bb_tilt].ToString() + "," +
+                                            xcR_tilt[bbR_tilt].ToString() + "," + ycR_tilt[bbR_tilt].ToString() + "," +
                                             xc[bb].ToString() + "," + yc[bb].ToString() + "," +
                                             xcR[bbR].ToString() + "," + ycR[bbR].ToString() + "," +
                                             stepState.ToString() + "," + stepCount.ToString() + "," + stepInterval.ToString() + "," +
                                             oneStepSampleCount.ToString() + "," + oneStepVariance.ToString() + "," + oneStepAccVariance.ToString() + "," +
                                             mStanceState.ToString() + "," + mStanceStdev.ToString() + "," +
-                                            mStanceHeadAvg.ToString() + "," + mStanceHeadAvgSecond.ToString() + "," + mStanceHeadAvgTest.ToString() + "," + 
+                                            (mStanceHeadAvg * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgSecond * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgTest * 180.0f / Math.PI).ToString() + "," + 
                                             y.GetMotionAccelRaw().ToString() + "," +
                                             peakChangeY.ToString() + "," + peakFlagY.ToString() + "," + peakDirectionY.ToString() + "," + peakAccelRawY.ToString() + "," + peakAccelY.ToString() + "," +
                                             x.GetMotionAccelRaw().ToString() + "," + z.GetMotionAccelRaw().ToString() + "," +
