@@ -311,20 +311,22 @@ namespace StepCount
         private void mUpdateTiltHeading(ref Axis x, ref Axis y, ref Axis z)
         {
             float yval = y.mGetMag();
-            if (yval < -25.0f)
-                yval = -25.0f;
-            else if (yval > 25.0f)
-                yval = 25.0f;
+            
+            //if (yval < -25.0f)
+            //    yval = -25.0f;
+            //else if (yval > 25.0f)
+            //    yval = 25.0f;
             float xval = x.mGetMag();
-            if (xval < -25.0f)
-                xval = -25.0f;
-            else if (xval > 25.0f)
-                xval = 25.0f;
+            //if (xval < -25.0f)
+            //    xval = -25.0f;
+            //else if (xval > 25.0f)
+            //    xval = 25.0f;
             float zval = x.mGetMag();
-            if (zval < -25.0f)
-                zval = -25.0f;
-            else if (zval > 25.0f)
-                zval = 25.0f;
+            //if (zval < -25.0f)
+            //    zval = -25.0f;
+            //else if (zval > 25.0f)
+            //    zval = 25.0f;
+            
 
             //double x_prime = x.mGetMag() * Math.Cos(x.mGetAngle()) + y.mGetMag() * Math.Sin(y.mGetAngle()) * Math.Sin(x.mGetAngle()) + z.mGetMag() * Math.Cos(y.mGetAngle()) * Math.Sin(x.mGetAngle());
             //double y_prime = y.mGetMag() * Math.Cos(y.mGetAngle()) - z.mGetMag() * Math.Sin(x.mGetAngle());
