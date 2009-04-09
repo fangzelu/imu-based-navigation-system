@@ -745,7 +745,7 @@ namespace StepCount
                                             mStanceState = 0;
                                             oneStepSampleCount++;
                                             oneStepRaw.Add(val_accel);
-                                            oneStepAcc.Add(val_accel);
+                                            oneStepAcc.Add(val_accel_g);
 
                                             mStanceRaw.Add(val_accel);
                                             mStanceRawSum += val_accel;
