@@ -226,7 +226,7 @@ namespace StepCount
                 "실시간Raw_SCX" + "," + "실시간Raw_SCY" + "," +
                 "실시간S_SCX" + "," + "실시간S_SCY" + "," +
                 "실시간_SCX,실시간_SCY," +
-                "ZUPT_SCX,ZUPT_SCY," +
+                "실시간E_SCX,실시간E_SCY," +
                 "SC상태,SC수,SC시간," +
                 "OneStep수,OneStep분산Raw,OneStep분산,Stance상태,Stance분산," +
                 "Stance헤딩,Stance헤딩S,Stance헤딩Raw,Stance헤딩Euler,"+
@@ -240,8 +240,8 @@ namespace StepCount
                 "최소" + "," + "최대" + "," + "범위" + "," +
                 "분산" + "," + "최대분산" + "," + "SC이동거리," +
                 //"린지이동거리" + "," +
-                "변화Z,상태Z,방향Z,피크RawZ,피크Z," +
-                "변화X,상태X,방향X,피크RawX,피크X," +
+                //"변화Z,상태Z,방향Z,피크RawZ,피크Z," +
+                //"변화X,상태X,방향X,피크RawX,피크X," +
                 //movingDev.ToString() + "," + movingDistanceR.ToString() + "," +
                 "자기X" + "," + "자기Y" + "," + "자기Z" + "," +
                 //mHeadingAvg.ToString() + "," + mTiltHeadingAvg.ToString() + "," +
@@ -301,6 +301,29 @@ namespace StepCount
             readThread.Abort();
         }
 
+        private float GetHeadingAverage(ref List<float> list)
+        {
+            if(list.Count == 0)
+                return 0.0f;
+
+            float init = list[0];
+            bool isPositive = true;
+            if (init < 0)
+                isPositive = false;
+
+            for(int i=1 ; i < list.Count ; i++)
+            {
+                if(Math.Abs(init - list[i]) > Math.PI)
+                {
+                    if (isPositive)
+                        list[i] += (float)(2 * Math.PI);
+                    else
+                        list[i] -= (float)(2 * Math.PI);
+                }
+            }
+
+            return list.Sum() / list.Count;
+        }
         private void UpdateWorldPosition(float diff, float heading, ref float[] x, ref float[] y, ref int index)
         {
             heading = -heading;
@@ -679,8 +702,8 @@ namespace StepCount
                                     stepInterval++;
                                     movingCount++;
 
-                                    mTiltHeadingAvgBeforeMoving = mTiltHeadingAvg;
-                                    mUpdateMovingTiltHeading(ref z, ref y, ref x);
+                                    //mTiltHeadingAvgBeforeMoving = mTiltHeadingAvg;
+                                    //mUpdateMovingTiltHeading(ref z, ref y, ref x);
 
                                     //x.UpdateMotionPosition();
                                     //y.UpdateMotionPosition();
@@ -706,29 +729,29 @@ namespace StepCount
                                     //UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
                                     //movingDistance += x_diff;
 
-                                    int temp = z.GetMotionAccelDirection();
-                                    if (peakDirectionZ != temp)
-                                    {
-                                        peakAccelRawZ = z.GetMotionAccelPeakRaw();
-                                        peakAccelZ = z.GetMotionAccelPeak();
-                                        peakFlagZ = 1;
-                                        peakChangeZ++;
-                                    }
-                                    else
-                                        peakFlagZ = 0;
-                                    peakDirectionZ = temp;
+                                    //int temp = z.GetMotionAccelDirection();
+                                    //if (peakDirectionZ != temp)
+                                    //{
+                                    //    peakAccelRawZ = z.GetMotionAccelPeakRaw();
+                                    //    peakAccelZ = z.GetMotionAccelPeak();
+                                    //    peakFlagZ = 1;
+                                    //    peakChangeZ++;
+                                    //}
+                                    //else
+                                    //    peakFlagZ = 0;
+                                    //peakDirectionZ = temp;
 
-                                    temp = x.GetMotionAccelDirection();
-                                    if (peakDirectionX != temp)
-                                    {
-                                        peakAccelRawX = x.GetMotionAccelPeakRaw();
-                                        peakAccelX = x.GetMotionAccelPeak();
-                                        peakFlagX = 1;
-                                        peakChangeX++;
-                                    }
-                                    else
-                                        peakFlagX = 0;
-                                    peakDirectionX = temp;
+                                    //temp = x.GetMotionAccelDirection();
+                                    //if (peakDirectionX != temp)
+                                    //{
+                                    //    peakAccelRawX = x.GetMotionAccelPeakRaw();
+                                    //    peakAccelX = x.GetMotionAccelPeak();
+                                    //    peakFlagX = 1;
+                                    //    peakChangeX++;
+                                    //}
+                                    //else
+                                    //    peakFlagX = 0;
+                                    //peakDirectionX = temp;
 
                                     if(stepState == 1 && stepInterval > STEP_TIME)
                                     {
@@ -736,7 +759,7 @@ namespace StepCount
                                         stepInterval = 0;
                                     }
 
-                                    temp = y.GetMotionAccelDirection();
+                                    int temp = y.GetMotionAccelDirection();
                                     if (peakDirectionY != temp)
                                     {
                                         peakAccelRawY = y.GetMotionAccelPeakRaw();
@@ -792,13 +815,17 @@ namespace StepCount
                                                 if(mStanceStdev < 100.0f)
                                                 {
                                                     mStanceState = 1;
-                                                    mStanceHeadAvgList.Add(mStanceHead.Sum() / STANCE_WINDOW);
+                                                    //mStanceHeadAvgList.Add(mStanceHead.Sum() / STANCE_WINDOW);
+                                                    mStanceHeadAvgList.Add(GetHeadingAverage(ref mStanceHead));
 
-                                                    mStanceHeadAvgListTest.Add(mStanceHeadTest.Sum() / STANCE_WINDOW);
+                                                    //mStanceHeadAvgListTest.Add(mStanceHeadTest.Sum() / STANCE_WINDOW);
+                                                    mStanceHeadAvgListTest.Add(GetHeadingAverage(ref mStanceHeadTest));
 
-                                                    mStanceHeadAvgListSecond.Add(mStanceHeadSecond.Sum() / STANCE_WINDOW);
+                                                    //mStanceHeadAvgListSecond.Add(mStanceHeadSecond.Sum() / STANCE_WINDOW);
+                                                    mStanceHeadAvgListSecond.Add(GetHeadingAverage(ref mStanceHeadSecond));
 
-                                                    mStanceHeadAvgListEuler.Add(mStanceHeadEuler.Sum() / STANCE_WINDOW);
+                                                    //mStanceHeadAvgListEuler.Add(mStanceHeadEuler.Sum() / STANCE_WINDOW);
+                                                    mStanceHeadAvgListEuler.Add(GetHeadingAverage(ref mStanceHeadEuler));
                                                 }
                                             }
 
@@ -811,22 +838,22 @@ namespace StepCount
                                                     oneStepSampleCount++;
                                                     if (mStanceHeadAvgList.Count > 0)
                                                     {
-                                                        mStanceHeadAvg = mStanceHeadAvgList.Sum() / mStanceHeadAvgList.Count;
+                                                        mStanceHeadAvg = GetHeadingAverage(ref mStanceHeadAvgList);
                                                         //mStanceHeadAvg = mStanceHeadAvg - (float)(90.0f * Math.PI / 180.0f);
                                                         //if (mStanceHeadAvg < -Math.PI)
                                                         //    mStanceHeadAvg += (float)(2 * Math.PI);
 
-                                                        mStanceHeadAvgTest = mStanceHeadAvgListTest.Sum() / mStanceHeadAvgListTest.Count;
+                                                        mStanceHeadAvgTest = GetHeadingAverage(ref mStanceHeadAvgListTest);
                                                         //mStanceHeadAvgTest = mStanceHeadAvgTest - (float)(90.0f * Math.PI / 180.0f);
                                                         //if(mStanceHeadAvgTest < -Math.PI)
                                                         //    mStanceHeadAvgTest += (float)(2 * Math.PI);
 
-                                                        mStanceHeadAvgSecond = mStanceHeadAvgListSecond.Sum() / mStanceHeadAvgListSecond.Count;
+                                                        mStanceHeadAvgSecond = GetHeadingAverage(ref mStanceHeadAvgListSecond);
                                                         //mStanceHeadAvgSecond = mStanceHeadAvgSecond - (float)(90.0f * Math.PI / 180.0f);
                                                         //if (mStanceHeadAvgSecond < -Math.PI)
                                                         //    mStanceHeadAvgSecond += (float)(2 * Math.PI);
 
-                                                        mStanceHeadAvgEuler = mStanceHeadAvgListEuler.Sum() / mStanceHeadAvgListEuler.Count;
+                                                        mStanceHeadAvgEuler = GetHeadingAverage(ref mStanceHeadAvgListEuler);
                                                     }
                                                     else
                                                     {
@@ -895,10 +922,10 @@ namespace StepCount
 
                                                 if (mStanceStdev < 100.0f)
                                                 {
-                                                    mStanceHeadAvgList.Add(mStanceHead.Sum() / STANCE_WINDOW);
-                                                    mStanceHeadAvgListTest.Add(mStanceHeadTest.Sum() / STANCE_WINDOW);
-                                                    mStanceHeadAvgListSecond.Add(mStanceHeadSecond.Sum() / STANCE_WINDOW);
-                                                    mStanceHeadAvgListEuler.Add(mStanceHeadEuler.Sum() / STANCE_WINDOW);
+                                                    mStanceHeadAvgList.Add(GetHeadingAverage(ref mStanceHead));
+                                                    mStanceHeadAvgListTest.Add(GetHeadingAverage(ref mStanceHeadTest));
+                                                    mStanceHeadAvgListSecond.Add(GetHeadingAverage(ref mStanceHeadSecond));
+                                                    mStanceHeadAvgListEuler.Add(GetHeadingAverage(ref mStanceHeadEuler));
 
                                                     stepState = 0;
                                                     mStanceState = 1;
@@ -1021,8 +1048,8 @@ namespace StepCount
                                             movingMin.ToString() + "," + movingMax.ToString() + "," + ((movingMax - movingMin) / 800.0f).ToString() + "," +
                                             movingDev.ToString() + "," + movingDevMax.ToString() + "," + movingDistance.ToString() + "," +
                                             //movingDistanceR.ToString() + "," +
-                                            peakChangeZ.ToString() + "," + peakFlagZ.ToString() + "," + peakDirectionZ.ToString() + "," + peakAccelRawZ.ToString() + "," + peakAccelZ.ToString() + "," +
-                                            peakChangeX.ToString() + "," + peakFlagX.ToString() + "," + peakDirectionX.ToString() + "," + peakAccelRawX.ToString() + "," + peakAccelX.ToString() + "," +
+                                            //peakChangeZ.ToString() + "," + peakFlagZ.ToString() + "," + peakDirectionZ.ToString() + "," + peakAccelRawZ.ToString() + "," + peakAccelZ.ToString() + "," +
+                                            //peakChangeX.ToString() + "," + peakFlagX.ToString() + "," + peakDirectionX.ToString() + "," + peakAccelRawX.ToString() + "," + peakAccelX.ToString() + "," +
                                             //movingDev.ToString() + "," + movingDistanceR.ToString() + "," +
                                             x.mGetMag().ToString() + "," + y.mGetMag().ToString() + "," + z.mGetMag() + "," +
                                             //mHeadingAvg.ToString() + "," + mTiltHeadingAvg.ToString() + "," +
