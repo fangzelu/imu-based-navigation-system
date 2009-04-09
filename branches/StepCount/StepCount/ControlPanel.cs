@@ -60,6 +60,10 @@ namespace StepCount
         List<float> mStanceHeadSecond = new List<float>();
         List<float> mStanceHeadAvgListSecond = new List<float>();
 
+        float mStanceHeadAvgEuler = 0.0f;
+        List<float> mStanceHeadEuler = new List<float>();
+        List<float> mStanceHeadAvgListEuler = new List<float>();
+
         List<int> oneStepRaw = new List<int>();
         List<float> oneStepAcc = new List<float>();
         int oneStepSampleCount = 0;
@@ -138,7 +142,7 @@ namespace StepCount
         const float DEV_DISTANCE = 0.3f;
         
         //*** MotionNode SDK
-        Client motionSensor, motionRaw;
+        Client motionSensor, motionRaw, motionPreview;
 
         int mHeadingIndex = 0;
         int mTiltHeadingIndex = 0;
@@ -212,6 +216,10 @@ namespace StepCount
             mStanceHeadAvgList.Clear();
             mStanceHeadTest.Clear();
             mStanceHeadAvgListTest.Clear();
+            mStanceHeadSecond.Clear();
+            mStanceHeadAvgListSecond.Clear();
+            mStanceHeadEuler.Clear();
+            mStanceHeadAvgListEuler.Clear();
             oneStepRaw.Clear();
 
             posLog.WriteLine("시간" + "," +
@@ -221,7 +229,7 @@ namespace StepCount
                 "ZUPT_SCX,ZUPT_SCY," +
                 "SC상태,SC수,SC시간," +
                 "OneStep수,OneStep분산Raw,OneStep분산,Stance상태,Stance분산," +
-                "Stance헤딩,Stance헤딩S,Stance헤딩Raw,"+
+                "Stance헤딩,Stance헤딩S,Stance헤딩Raw,Stance헤딩Euler,"+
                 "AccleRawY," +
                 "변화Y,상태Y,방향Y,피크RawY,피크Y," +
                 "AccelRawX" + "," + "AccelRawZ" + "," +
@@ -240,9 +248,9 @@ namespace StepCount
                 "일반헤딩" + "," + "실시간일반헤딩," +
                 "틸트헤딩S,실시간틸트헤딩S," +
                 "틸트헤딩" + "," + "실시간헤딩," +
-                "Moving헤딩,Weight헤딩," +
-                "SC헤딩,"+
-                "SCMoving헤딩,SCWeight헤딩," +
+                //"Moving헤딩,Weight헤딩," +
+                //"SC헤딩,"+
+                //"SCMoving헤딩,SCWeight헤딩," +
                 "피치" + "," + "롤");
         }
 
@@ -252,6 +260,7 @@ namespace StepCount
             {
                 motionSensor = new Client("",32078);
                 motionRaw = new Client("",32077);
+                motionPreview = new Client("", 32079);
             }
 
             if(ymoteUse)
@@ -279,6 +288,7 @@ namespace StepCount
 
             if (motionUse)
             {
+                motionPreview.close();
                 motionSensor.close();
                 motionRaw.close();
 
@@ -380,19 +390,19 @@ namespace StepCount
             if(x.mAccStop && y.mAccStop && z.mAccStop)
             {
                 mTiltHeadingAvg = mTiltHeadingSum / mHeadSize;
-                mTiltHeadingAvg = mTiltHeadingAvg - (float)(20.0f * Math.PI / 180.0f);
-                if (mTiltHeadingAvg < -Math.PI)
-                    mTiltHeadingAvg += (float)(2 * Math.PI);
+                //mTiltHeadingAvg = mTiltHeadingAvg - (float)(20.0f * Math.PI / 180.0f);
+                //if (mTiltHeadingAvg < -Math.PI)
+                //    mTiltHeadingAvg += (float)(2 * Math.PI);
 
                 mTiltHeadingAvgSecond = mTiltHeadingSumSecond / mHeadSize;
-                mTiltHeadingAvgSecond = mTiltHeadingAvgSecond - (float)(20.0f * Math.PI / 180.0f);
-                if (mTiltHeadingAvgSecond < -Math.PI)
-                    mTiltHeadingAvgSecond += (float)(2 * Math.PI);
+                //mTiltHeadingAvgSecond = mTiltHeadingAvgSecond - (float)(20.0f * Math.PI / 180.0f);
+                //if (mTiltHeadingAvgSecond < -Math.PI)
+                //    mTiltHeadingAvgSecond += (float)(2 * Math.PI);
 
                 mStepCountTiltHeadingAvg = mTiltHeadingAvg;
-                mStepCountTiltHeadingAvg = mStepCountTiltHeadingAvg - (float)(90.0f * Math.PI / 180.0f);
-                if (mStepCountTiltHeadingAvg < -Math.PI)
-                    mStepCountTiltHeadingAvg += (float)(2 * Math.PI);
+                //mStepCountTiltHeadingAvg = mStepCountTiltHeadingAvg - (float)(90.0f * Math.PI / 180.0f);
+                //if (mStepCountTiltHeadingAvg < -Math.PI)
+                //    mStepCountTiltHeadingAvg += (float)(2 * Math.PI);
             }
 
             //mTiltHeadingAvgTest = mTiltHeadingSum / mHeadSize;
@@ -503,6 +513,21 @@ namespace StepCount
                                         this.mAccAvgZ.Text = z.mAccAvg.ToString();
                                     }));
                                 }
+                            }
+                        }
+
+                        if(rawGet && motionPreview.waitForData())
+                        {
+                            byte[] previewBuffer = motionPreview.readData();
+                            if(previewBuffer != null)
+                            {
+                                IDictionary<int, MotionNode.SDK.Format.PreviewElement> previewMotion = MotionNode.SDK.Format.Preview(previewBuffer);
+                                        
+                                foreach (KeyValuePair<int, MotionNode.SDK.Format.PreviewElement> itr in previewMotion)
+                                {
+                                    x.UpdateMotionEuler(itr.Value.getEuler()[0]);
+                                }
+
                             }
                         }
 
@@ -728,6 +753,8 @@ namespace StepCount
                                     float val_head = GetTiltHeading();
                                     float val_head_raw = GetHeading();
                                     float val_head_s = GetTiltHeadingSecond();
+                                    float val_head_e = x.GetMotionEuler();
+
                                     switch (stepState)
                                     {
                                         case 0:
@@ -749,6 +776,9 @@ namespace StepCount
                                             mStanceHeadSecond.Add(val_head_s);
                                             if (mStanceHeadSecond.Count > STANCE_WINDOW)
                                                 mStanceHeadSecond.RemoveAt(0);
+                                            mStanceHeadEuler.Add(val_head_e);
+                                            if (mStanceHeadEuler.Count > STANCE_WINDOW)
+                                                mStanceHeadEuler.RemoveAt(0);
                                             
                                             if(mStanceRaw.Count > STANCE_WINDOW)
                                             {
@@ -767,6 +797,8 @@ namespace StepCount
                                                     mStanceHeadAvgListTest.Add(mStanceHeadTest.Sum() / STANCE_WINDOW);
 
                                                     mStanceHeadAvgListSecond.Add(mStanceHeadSecond.Sum() / STANCE_WINDOW);
+
+                                                    mStanceHeadAvgListEuler.Add(mStanceHeadEuler.Sum() / STANCE_WINDOW);
                                                 }
                                             }
 
@@ -780,30 +812,33 @@ namespace StepCount
                                                     if (mStanceHeadAvgList.Count > 0)
                                                     {
                                                         mStanceHeadAvg = mStanceHeadAvgList.Sum() / mStanceHeadAvgList.Count;
-                                                        mStanceHeadAvg = mStanceHeadAvg - (float)(90.0f * Math.PI / 180.0f);
-                                                        if (mStanceHeadAvg < -Math.PI)
-                                                            mStanceHeadAvg += (float)(2 * Math.PI);
+                                                        //mStanceHeadAvg = mStanceHeadAvg - (float)(90.0f * Math.PI / 180.0f);
+                                                        //if (mStanceHeadAvg < -Math.PI)
+                                                        //    mStanceHeadAvg += (float)(2 * Math.PI);
 
                                                         mStanceHeadAvgTest = mStanceHeadAvgListTest.Sum() / mStanceHeadAvgListTest.Count;
-                                                        mStanceHeadAvgTest = mStanceHeadAvgTest - (float)(90.0f * Math.PI / 180.0f);
-                                                        if(mStanceHeadAvgTest < -Math.PI)
-                                                            mStanceHeadAvgTest += (float)(2 * Math.PI);
+                                                        //mStanceHeadAvgTest = mStanceHeadAvgTest - (float)(90.0f * Math.PI / 180.0f);
+                                                        //if(mStanceHeadAvgTest < -Math.PI)
+                                                        //    mStanceHeadAvgTest += (float)(2 * Math.PI);
 
                                                         mStanceHeadAvgSecond = mStanceHeadAvgListSecond.Sum() / mStanceHeadAvgListSecond.Count;
-                                                        mStanceHeadAvgSecond = mStanceHeadAvgSecond - (float)(90.0f * Math.PI / 180.0f);
-                                                        if (mStanceHeadAvgSecond < -Math.PI)
-                                                            mStanceHeadAvgSecond += (float)(2 * Math.PI);
+                                                        //mStanceHeadAvgSecond = mStanceHeadAvgSecond - (float)(90.0f * Math.PI / 180.0f);
+                                                        //if (mStanceHeadAvgSecond < -Math.PI)
+                                                        //    mStanceHeadAvgSecond += (float)(2 * Math.PI);
+
+                                                        mStanceHeadAvgEuler = mStanceHeadAvgListEuler.Sum() / mStanceHeadAvgListEuler.Count;
                                                     }
                                                     else
                                                     {
-                                                        mStanceHeadAvg = -(float)(90.0f * Math.PI / 180.0f);
-                                                        mStanceHeadAvgTest = -(float)(90.0f * Math.PI / 180.0f);
-                                                        mStanceHeadAvgSecond = -(float)(90.0f * Math.PI / 180.0f);
+                                                        //mStanceHeadAvg = -(float)(90.0f * Math.PI / 180.0f);
+                                                        //mStanceHeadAvgTest = -(float)(90.0f * Math.PI / 180.0f);
+                                                        //mStanceHeadAvgSecond = -(float)(90.0f * Math.PI / 180.0f);
                                                     }
 
                                                     mStanceHeadAvgList.Clear();
                                                     mStanceHeadAvgListTest.Clear();
                                                     mStanceHeadAvgListSecond.Clear();
+                                                    mStanceHeadAvgListEuler.Clear();
                                                     oneStepRaw.Add(val_accel);
                                                     oneStepAcc.Add(val_accel_g);
                                                 }
@@ -844,6 +879,10 @@ namespace StepCount
                                             mStanceHeadSecond.Add(val_head_s);
                                             if (mStanceHeadSecond.Count > STANCE_WINDOW)
                                                 mStanceHeadSecond.RemoveAt(0);
+                                            mStanceHeadEuler.Add(val_head_e);
+                                            if (mStanceHeadEuler.Count > STANCE_WINDOW)
+                                                mStanceHeadEuler.RemoveAt(0);
+
 
                                             if (mStanceRaw.Count > STANCE_WINDOW)
                                             {
@@ -859,6 +898,8 @@ namespace StepCount
                                                     mStanceHeadAvgList.Add(mStanceHead.Sum() / STANCE_WINDOW);
                                                     mStanceHeadAvgListTest.Add(mStanceHeadTest.Sum() / STANCE_WINDOW);
                                                     mStanceHeadAvgListSecond.Add(mStanceHeadSecond.Sum() / STANCE_WINDOW);
+                                                    mStanceHeadAvgListEuler.Add(mStanceHeadEuler.Sum() / STANCE_WINDOW);
+
                                                     stepState = 0;
                                                     mStanceState = 1;
 
@@ -895,7 +936,8 @@ namespace StepCount
 
                                                     UpdateWorldPosition(x_diff, mStanceHeadAvg, ref xc, ref yc, ref stageIndex);
 
-                                                    UpdateWorldPosition(x_diff, mStepCountTiltHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
+                                                    //UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
+                                                    UpdateWorldPosition(x_diff, mStanceHeadAvgEuler, ref xcR, ref ycR, ref stageIndexR);
 
                                                     UpdateWorldPosition(x_diff, mStanceHeadAvgTest, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
 
@@ -968,7 +1010,7 @@ namespace StepCount
                                             stepState.ToString() + "," + stepCount.ToString() + "," + stepInterval.ToString() + "," +
                                             oneStepSampleCount.ToString() + "," + oneStepVariance.ToString() + "," + oneStepAccVariance.ToString() + "," +
                                             mStanceState.ToString() + "," + mStanceStdev.ToString() + "," +
-                                            (mStanceHeadAvg * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgSecond * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgTest * 180.0f / Math.PI).ToString() + "," + 
+                                            (mStanceHeadAvg * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgSecond * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgTest * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgEuler * 180.0f / Math.PI).ToString() + "," +
                                             y.GetMotionAccelRaw().ToString() + "," +
                                             peakChangeY.ToString() + "," + peakFlagY.ToString() + "," + peakDirectionY.ToString() + "," + peakAccelRawY.ToString() + "," + peakAccelY.ToString() + "," +
                                             x.GetMotionAccelRaw().ToString() + "," + z.GetMotionAccelRaw().ToString() + "," +
@@ -987,9 +1029,9 @@ namespace StepCount
                                             (mHeadingAvg * 180.0f / Math.PI).ToString() + "," + (mHeading[bb_heading] * 180.0f / Math.PI).ToString() + "," +
                                             (mTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + (mTiltHeading[b_heading] * 180.0f / Math.PI).ToString() + "," +
                                             (mTiltHeadingAvgSecond * 180.0f / Math.PI).ToString() + "," + (mTiltHeadingSecond[bbb_heading] * 180.0f / Math.PI).ToString() + "," +
-                                            (mMovingTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + ((mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString() + "," +
-                                            (mStepCountTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," +
-                                            (mStepCountMovingTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + ((mStepCountTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mStepCountMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString() + "," +
+                                            //(mMovingTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + ((mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString() + "," +
+                                            //(mStepCountTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," +
+                                            //(mStepCountMovingTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + ((mStepCountTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mStepCountMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString() + "," +
                                             (z.mGetAngle() * 180.0f / Math.PI).ToString() + "," + (y.mGetAngle() * 180.0f / Math.PI).ToString());
                                     }
                                 }
@@ -1006,10 +1048,10 @@ namespace StepCount
                                     this.mMagY.Text = y.mGetMag().ToString();
                                     this.mMagZ.Text = z.mGetMag().ToString();
 
-                                    //this.mHead.Text = ((mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString();
-                                    //this.mHeadTilt.Text = (mTiltHeadingAvg * 180.0f / Math.PI).ToString();
+                                    this.mHead.Text = (mStanceHeadAvgTest * 180.0f / Math.PI).ToString();
+                                    this.mHeadTilt.Text = (mStanceHeadAvgEuler * 180.0f / Math.PI).ToString();
 
-                                    this.mHeadStep.Text = (mStanceHeadAvg * 180.0f / Math.PI).ToString();
+                                    this.mHeadStep.Text = (mStanceHeadAvgSecond * 180.0f / Math.PI).ToString();
                                     this.mHeadStepTilt.Text = (mStepCountTiltHeadingAvg * 180.0f / Math.PI).ToString();
                                     this.StepP.Text = p.ToString();
 
@@ -1240,6 +1282,7 @@ namespace StepCount
         public float mAccAvg;
         public float mHeading;
         public float mAngle;
+        public float mEuler;
 
         public float mT = 1.0f / 30.0f;
         public float[] mPos;
@@ -1332,6 +1375,10 @@ namespace StepCount
             if (b < 0)
                 b = mSize - 1;
             return mAcc[b];
+        }
+        public float GetMotionEuler()
+        {
+            return mEuler;
         }
         public float GetMotionPosition()
         {
@@ -1438,6 +1485,10 @@ namespace StepCount
 
             if (mAccStop)
                 mAccAvg = mAccSum / mSize;
+        }
+        public void UpdateMotionEuler(float val)
+        {
+            mEuler = val;
         }
 
         public void UpdateMotionMag(float val)
