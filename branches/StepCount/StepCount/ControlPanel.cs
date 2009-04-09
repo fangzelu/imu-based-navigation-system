@@ -53,8 +53,10 @@ namespace StepCount
         List<float> mStanceHeadAvgList = new List<float>();
 
         List<int> oneStepRaw = new List<int>();
+        List<float> oneStepAcc = new List<float>();
         int oneStepSampleCount = 0;
         float oneStepVariance = 0.0f;
+        float oneStepAccVariance = 0.0f;
 
         int mStanceRawSum = 0;
         int mStanceRawSquareSum = 0;
@@ -199,7 +201,7 @@ namespace StepCount
                 "실시간SCX,실시간SCY," +
                 "SCX,SCY," +
                 "SC상태,SC수,SC시간," +
-                "OneStep수,OneStep분산,Stance헤딩,Stance상태,Stance분산," +
+                "OneStep수,OneStep분산Raw,OneStep분산,Stance헤딩,Stance상태,Stance분산," +
                 "AccleRawY," +
                 "변화Y,상태Y,방향Y,피크RawY,피크Y," +
                 "AccelRawX" + "," + "AccelRawZ" + "," +
@@ -665,12 +667,15 @@ namespace StepCount
                                     peakDirectionY = temp;
 
                                     int val_accel = y.GetMotionAccelRaw();
+                                    float val_accel_g = y.GetMotionAccel();
                                     float val_head = GetTiltHeading();
 
                                     switch (stepState)
                                     {
                                         case 0:
                                             oneStepSampleCount = 0;
+                                            oneStepRaw.Clear();
+                                            oneStepAcc.Clear();
                                             mStanceState = 0;
 
                                             mStanceRaw.Add(val_accel);
@@ -716,6 +721,7 @@ namespace StepCount
 
                                                     mStanceHeadAvgList.Clear();
                                                     oneStepRaw.Add(val_accel);
+                                                    oneStepAcc.Add(val_accel_g);
                                                 }
                                             }
                                             break;
@@ -723,6 +729,7 @@ namespace StepCount
                                             mStanceState = 0;
                                             oneStepSampleCount++;
                                             oneStepRaw.Add(val_accel);
+                                            oneStepAcc.Add(val_accel_g);
 
                                             if (peakFlagY == 1 && temp == 1 && peakAccelRawY <= lowerBound)
                                             {
@@ -738,6 +745,7 @@ namespace StepCount
                                             mStanceState = 0;
                                             oneStepSampleCount++;
                                             oneStepRaw.Add(val_accel);
+                                            oneStepAcc.Add(val_accel);
 
                                             mStanceRaw.Add(val_accel);
                                             mStanceRawSum += val_accel;
@@ -772,6 +780,17 @@ namespace StepCount
                                                         temp_square_sum += oneStepRaw[i] * oneStepRaw[i];
                                                     }
                                                     oneStepVariance = (float)Math.Sqrt(temp_square_sum / temp_count - (temp_sum / temp_count) * (temp_sum / temp_count));
+                                                    oneStepRaw.Clear();
+
+                                                    temp_count = 0; temp_sum = 0.0f; temp_square_sum = 0.0f;
+                                                    for (int i = 0; i < oneStepAcc.Count - STANCE_WINDOW; i++)
+                                                    {
+                                                        temp_count++;
+                                                        temp_sum += oneStepAcc[i];
+                                                        temp_square_sum += oneStepAcc[i] * oneStepAcc[i];
+                                                    }
+                                                    oneStepAccVariance = (float)Math.Sqrt(temp_square_sum / temp_count - (temp_sum / temp_count) * (temp_sum / temp_count));
+                                                    oneStepAcc.Clear();
 
                                                     // 스텝 카운트
                                                     stepCount++;
@@ -788,6 +807,7 @@ namespace StepCount
 
                                                     p *= (pc - (float)stepCount * pc_gap);
 
+                                                    posLog.WriteLine("One Step");
                                                     if (sendFlag)
                                                     {
                                                         int bR = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
@@ -848,7 +868,7 @@ namespace StepCount
                                             xc[bb].ToString() + "," + yc[bb].ToString() + "," +
                                             xcR[bbR].ToString() + "," + ycR[bbR].ToString() + "," +
                                             stepState.ToString() + "," + stepCount.ToString() + "," + stepInterval.ToString() + "," +
-                                            oneStepSampleCount.ToString() + "," + oneStepVariance.ToString() + "," + mStanceHeadAvg.ToString() + "," + mStanceState.ToString() + "," + mStanceStdev.ToString() + "," +
+                                            oneStepSampleCount.ToString() + "," + oneStepVariance.ToString() + "," + oneStepAccVariance.ToString() + "," + mStanceHeadAvg.ToString() + "," + mStanceState.ToString() + "," + mStanceStdev.ToString() + "," +
                                             y.GetMotionAccelRaw().ToString() + "," +
                                             peakChangeY.ToString() + "," + peakFlagY.ToString() + "," + peakDirectionY.ToString() + "," + peakAccelRawY.ToString() + "," + peakAccelY.ToString() + "," +
                                             x.GetMotionAccelRaw().ToString() + "," + z.GetMotionAccelRaw().ToString() + "," +
