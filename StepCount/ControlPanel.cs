@@ -52,6 +52,14 @@ namespace StepCount
 
         List<float> mStanceHeadAvgList = new List<float>();
 
+        float mStanceHeadAvgTest = 0.0f;
+        List<float> mStanceHeadTest = new List<float>();
+        List<float> mStanceHeadAvgListTest = new List<float>();
+
+        float mStanceHeadAvgSecond = 0.0f;
+        List<float> mStanceHeadSecond = new List<float>();
+        List<float> mStanceHeadAvgListSecond = new List<float>();
+
         List<int> oneStepRaw = new List<int>();
         List<float> oneStepAcc = new List<float>();
         int oneStepSampleCount = 0;
@@ -136,6 +144,13 @@ namespace StepCount
         int mTiltHeadingIndex = 0;
         int mHeadSize = 32;
         float mHeadingSum = 0.0f;
+
+        int mTiltHeadingIndexSecond = 0;
+        float mTiltHeadingSumSecond = 0.0f;
+        float mTiltHeadingSecondAvg = 0.0f;
+        float[] mTiltHeadingSecond;
+        float mTiltHeadingAvgSecond;
+
         float mTiltHeadingSum = 0.0f;
         float mHeadingAvg = 0.0f;
         float mTiltHeadingAvgTest = 0.0f;
@@ -182,17 +197,21 @@ namespace StepCount
 
             mHeading = new float[mHeadSize];
             mTiltHeading = new float[mHeadSize];
+            mTiltHeadingSecond = new float[mHeadSize];
 
             for(int i = 0 ; i < mHeadSize ; i++)
             {
                 mHeading[i] = 0.0f;
                 mTiltHeading[i] = 0.0f;
+                mTiltHeadingSecond[i] = 0.0f;
             }
 
             mAccelRawY.Clear();
             mStanceRaw.Clear();
             mStanceHead.Clear();
             mStanceHeadAvgList.Clear();
+            mStanceHeadTest.Clear();
+            mStanceHeadAvgListTest.Clear();
             oneStepRaw.Clear();
 
             posLog.WriteLine("시간" + "," +
@@ -201,7 +220,8 @@ namespace StepCount
                 "실시간SCX,실시간SCY," +
                 "SCX,SCY," +
                 "SC상태,SC수,SC시간," +
-                "OneStep수,OneStep분산Raw,OneStep분산,Stance헤딩,Stance상태,Stance분산," +
+                "OneStep수,OneStep분산Raw,OneStep분산,Stance상태,Stance분산," +
+                "Stance헤딩,Stance헤딩S,Stance헤딩Raw,"+
                 "AccleRawY," +
                 "변화Y,상태Y,방향Y,피크RawY,피크Y," +
                 "AccelRawX" + "," + "AccelRawZ" + "," +
@@ -217,6 +237,8 @@ namespace StepCount
                 //movingDev.ToString() + "," + movingDistanceR.ToString() + "," +
                 "자기X" + "," + "자기Y" + "," + "자기Z" + "," +
                 //mHeadingAvg.ToString() + "," + mTiltHeadingAvg.ToString() + "," +
+                "일반헤딩" + "," + "실시간일반헤딩," +
+                "틸트헤딩S,실시간틸트헤딩S," +
                 "틸트헤딩" + "," + "실시간헤딩," +
                 "Moving헤딩,Weight헤딩," +
                 "SC헤딩,"+
@@ -287,15 +309,15 @@ namespace StepCount
         private void mUpdateHeading(ref Axis x, ref Axis y)
         {
             float yval = y.mGetMag();
-            if (yval < -25.0f)
-                yval = -25.0f;
-            else if (yval > 25.0f)
-                yval = 25.0f;
+            //if (yval < -25.0f)
+               //yval = -25.0f;
+            //else if (yval > 25.0f)
+              //  yval = 25.0f;
             float xval = x.mGetMag();
-            if (xval < -25.0f)
-                xval = -25.0f;
-            else if (xval > 25.0f)
-                xval = 25.0f;
+            //if (xval < -25.0f)
+              //  xval = -25.0f;
+            //else if (xval > 25.0f)
+              //  xval = 25.0f;
 
             float cur = (float)Math.Atan2(yval, xval);
 
@@ -336,6 +358,11 @@ namespace StepCount
 
             float cur = (float)(Math.Atan2(y_prime, x_prime));
 
+            double x_prime_s = xval * Math.Cos(x.mGetAngle()) + yval * Math.Sin(y.mGetAngle()) * Math.Sin(x.mGetAngle()) - zval * Math.Cos(y.mGetAngle()) * Math.Sin(x.mGetAngle());
+            double y_prime_s = yval * Math.Cos(y.mGetAngle()) + zval * Math.Sin(x.mGetAngle());
+
+            float cur_s = (float)(Math.Atan2(y_prime_s, x_prime_s));
+
             mTiltHeadingSum += cur;
             mTiltHeadingSum -= mTiltHeading[mTiltHeadingIndex];
 
@@ -343,12 +370,24 @@ namespace StepCount
             mTiltHeadingIndex++;
             mTiltHeadingIndex = (mTiltHeadingIndex >= mHeadSize) ? 0 : mTiltHeadingIndex;
 
+            mTiltHeadingSumSecond += cur_s;
+            mTiltHeadingSumSecond -= mTiltHeadingSecond[mTiltHeadingIndexSecond];
+
+            mTiltHeadingSecond[mTiltHeadingIndexSecond] = cur_s;
+            mTiltHeadingIndexSecond++;
+            mTiltHeadingIndexSecond = (mTiltHeadingIndexSecond >= mHeadSize) ? 0 : mTiltHeadingIndexSecond;
+
             if(x.mAccStop && y.mAccStop && z.mAccStop)
             {
                 mTiltHeadingAvg = mTiltHeadingSum / mHeadSize;
                 mTiltHeadingAvg = mTiltHeadingAvg - (float)(20.0f * Math.PI / 180.0f);
                 if (mTiltHeadingAvg < -Math.PI)
                     mTiltHeadingAvg += (float)(2 * Math.PI);
+
+                mTiltHeadingAvgSecond = mTiltHeadingSumSecond / mHeadSize;
+                mTiltHeadingAvgSecond = mTiltHeadingAvgSecond - (float)(20.0f * Math.PI / 180.0f);
+                if (mTiltHeadingAvgSecond < -Math.PI)
+                    mTiltHeadingAvgSecond += (float)(2 * Math.PI);
 
                 mStepCountTiltHeadingAvg = mTiltHeadingAvg;
                 mStepCountTiltHeadingAvg = mStepCountTiltHeadingAvg - (float)(90.0f * Math.PI / 180.0f);
@@ -367,6 +406,20 @@ namespace StepCount
             if (b < 0)
                 b = mHeadSize - 1;
             return mTiltHeading[b];
+        }
+        private float GetTiltHeadingSecond()
+        {
+            int b = mTiltHeadingIndexSecond - 1;
+            if (b < 0)
+                b = mHeadSize - 1;
+            return mTiltHeadingSecond[b];
+        }
+        private float GetHeading()
+        {
+            int b = mHeadingIndex - 1;
+            if (b < 0)
+                b = mHeadSize - 1;
+            return mHeading[b];
         }
         private void mUpdateMovingTiltHeading(ref Axis x, ref Axis y, ref Axis z)
         {
@@ -473,6 +526,8 @@ namespace StepCount
                                     z.mUpdateAngle(ref y, ref x);
                                     y.mUpdateAngle(ref z, ref x);
                                 }
+
+                                mUpdateHeading(ref z, ref y);
 
                                 mUpdateTiltHeading(ref z, ref y, ref x);
 
@@ -671,7 +726,8 @@ namespace StepCount
                                     int val_accel = y.GetMotionAccelRaw();
                                     float val_accel_g = y.GetMotionAccel();
                                     float val_head = GetTiltHeading();
-
+                                    float val_head_raw = GetHeading();
+                                    float val_head_s = GetTiltHeadingSecond();
                                     switch (stepState)
                                     {
                                         case 0:
@@ -687,6 +743,12 @@ namespace StepCount
                                             mStanceHead.Add(val_head);
                                             if (mStanceHead.Count > STANCE_WINDOW)
                                                 mStanceHead.RemoveAt(0);
+                                            mStanceHeadTest.Add(val_head_raw);
+                                            if (mStanceHeadTest.Count > STANCE_WINDOW)
+                                                mStanceHeadTest.RemoveAt(0);
+                                            mStanceHeadSecond.Add(val_head_s);
+                                            if (mStanceHeadSecond.Count > STANCE_WINDOW)
+                                                mStanceHeadSecond.RemoveAt(0);
                                             
                                             if(mStanceRaw.Count > STANCE_WINDOW)
                                             {
@@ -701,6 +763,10 @@ namespace StepCount
                                                 {
                                                     mStanceState = 1;
                                                     mStanceHeadAvgList.Add(mStanceHead.Sum() / STANCE_WINDOW);
+
+                                                    mStanceHeadAvgListTest.Add(mStanceHeadTest.Sum() / STANCE_WINDOW);
+
+                                                    mStanceHeadAvgListSecond.Add(mStanceHeadSecond.Sum() / STANCE_WINDOW);
                                                 }
                                             }
 
@@ -717,11 +783,27 @@ namespace StepCount
                                                         mStanceHeadAvg = mStanceHeadAvg - (float)(90.0f * Math.PI / 180.0f);
                                                         if (mStanceHeadAvg < -Math.PI)
                                                             mStanceHeadAvg += (float)(2 * Math.PI);
+
+                                                        mStanceHeadAvgTest = mStanceHeadAvgListTest.Sum() / mStanceHeadAvgListTest.Count;
+                                                        mStanceHeadAvgTest = mStanceHeadAvgTest - (float)(90.0f * Math.PI / 180.0f);
+                                                        if(mStanceHeadAvgTest < -Math.PI)
+                                                            mStanceHeadAvgTest += (float)(2 * Math.PI);
+
+                                                        mStanceHeadAvgSecond = mStanceHeadAvgListSecond.Sum() / mStanceHeadAvgListSecond.Count;
+                                                        mStanceHeadAvgSecond = mStanceHeadAvgSecond - (float)(90.0f * Math.PI / 180.0f);
+                                                        if (mStanceHeadAvgSecond < -Math.PI)
+                                                            mStanceHeadAvgSecond += (float)(2 * Math.PI);
                                                     }
                                                     else
+                                                    {
                                                         mStanceHeadAvg = -(float)(90.0f * Math.PI / 180.0f);
+                                                        mStanceHeadAvgTest = -(float)(90.0f * Math.PI / 180.0f);
+                                                        mStanceHeadAvgSecond = -(float)(90.0f * Math.PI / 180.0f);
+                                                    }
 
                                                     mStanceHeadAvgList.Clear();
+                                                    mStanceHeadAvgListTest.Clear();
+                                                    mStanceHeadAvgListSecond.Clear();
                                                     oneStepRaw.Add(val_accel);
                                                     oneStepAcc.Add(val_accel_g);
                                                 }
@@ -756,6 +838,12 @@ namespace StepCount
                                             mStanceHead.Add(val_head);
                                             if (mStanceHead.Count > STANCE_WINDOW)
                                                 mStanceHead.RemoveAt(0);
+                                            mStanceHeadTest.Add(val_head_raw);
+                                            if(mStanceHeadTest.Count > STANCE_WINDOW)
+                                                mStanceHeadTest.RemoveAt(0);
+                                            mStanceHeadSecond.Add(val_head_s);
+                                            if (mStanceHeadSecond.Count > STANCE_WINDOW)
+                                                mStanceHeadSecond.RemoveAt(0);
 
                                             if (mStanceRaw.Count > STANCE_WINDOW)
                                             {
@@ -769,6 +857,8 @@ namespace StepCount
                                                 if (mStanceStdev < 100.0f)
                                                 {
                                                     mStanceHeadAvgList.Add(mStanceHead.Sum() / STANCE_WINDOW);
+                                                    mStanceHeadAvgListTest.Add(mStanceHeadTest.Sum() / STANCE_WINDOW);
+                                                    mStanceHeadAvgListSecond.Add(mStanceHeadSecond.Sum() / STANCE_WINDOW);
                                                     stepState = 0;
                                                     mStanceState = 1;
 
@@ -862,6 +952,8 @@ namespace StepCount
                                             bb_tilt = stageSize - 1;
                                         int bbR = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
                                         int bbR_tilt = (stageIndexR_tilt - 1 < 0) ? (stageSize + (stageIndexR_tilt - 1)) : (stageIndexR_tilt - 1);
+                                        int bbb_heading = (mTiltHeadingIndexSecond - 1 < 0) ? (mHeadSize - 1) : (mTiltHeadingIndexSecond - 1);
+                                        int bb_heading = (mHeadingIndex - 1 < 0) ? (mHeadSize - 1) : (mHeadingIndex - 1);
                                         int b_heading = (mTiltHeadingIndex - 1 < 0) ? (mHeadSize - 1) : (mTiltHeadingIndex - 1);
 
                                         posLog.WriteLine(DateTime.Now.ToString() + "," +
@@ -870,7 +962,9 @@ namespace StepCount
                                             xc[bb].ToString() + "," + yc[bb].ToString() + "," +
                                             xcR[bbR].ToString() + "," + ycR[bbR].ToString() + "," +
                                             stepState.ToString() + "," + stepCount.ToString() + "," + stepInterval.ToString() + "," +
-                                            oneStepSampleCount.ToString() + "," + oneStepVariance.ToString() + "," + oneStepAccVariance.ToString() + "," + mStanceHeadAvg.ToString() + "," + mStanceState.ToString() + "," + mStanceStdev.ToString() + "," +
+                                            oneStepSampleCount.ToString() + "," + oneStepVariance.ToString() + "," + oneStepAccVariance.ToString() + "," +
+                                            mStanceState.ToString() + "," + mStanceStdev.ToString() + "," +
+                                            mStanceHeadAvg.ToString() + "," + mStanceHeadAvgSecond.ToString() + "," + mStanceHeadAvgTest.ToString() + "," + 
                                             y.GetMotionAccelRaw().ToString() + "," +
                                             peakChangeY.ToString() + "," + peakFlagY.ToString() + "," + peakDirectionY.ToString() + "," + peakAccelRawY.ToString() + "," + peakAccelY.ToString() + "," +
                                             x.GetMotionAccelRaw().ToString() + "," + z.GetMotionAccelRaw().ToString() + "," +
@@ -886,7 +980,9 @@ namespace StepCount
                                             //movingDev.ToString() + "," + movingDistanceR.ToString() + "," +
                                             x.mGetMag().ToString() + "," + y.mGetMag().ToString() + "," + z.mGetMag() + "," +
                                             //mHeadingAvg.ToString() + "," + mTiltHeadingAvg.ToString() + "," +
+                                            (mHeadingAvg * 180.0f / Math.PI).ToString() + "," + (mHeading[bb_heading] * 180.0f / Math.PI).ToString() + "," +
                                             (mTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + (mTiltHeading[b_heading] * 180.0f / Math.PI).ToString() + "," +
+                                            (mTiltHeadingAvgSecond * 180.0f / Math.PI).ToString() + "," + (mTiltHeadingSecond[bbb_heading] * 180.0f / Math.PI).ToString() + "," +
                                             (mMovingTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + ((mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString() + "," +
                                             (mStepCountTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," +
                                             (mStepCountMovingTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + ((mStepCountTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mStepCountMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString() + "," +
