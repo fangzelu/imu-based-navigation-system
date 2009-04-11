@@ -285,6 +285,9 @@ namespace StepCount
                 "SC상태,SC수,SC시간," +
                 "OneStep수,OneStep분산Raw,OneStep분산,Stance상태,Stance분산,헤딩왜곡," +
                 "Stance헤딩,Stance헤딩S,Stance헤딩Raw,Stance헤딩Euler,"+
+                "Stance헤딩왜곡,Stance헤딩S왜곡,Stance헤딩Raw왜곡,Stance헤딩Euler왜곡," +
+                "Stance헤딩B,Stance헤딩SB,Stance헤딩RawB,Stance헤딩EulerB," +
+                "Stance헤딩Pure,Stance헤딩SPure,Stance헤딩RawPure,Stance헤딩EulerPure," +
                 "AccleRawY," +
                 "변화Y,상태Y,방향Y,피크RawY,피크Y," +
                 "AccelRawX" + "," + "AccelRawZ" + "," +
@@ -1163,6 +1166,9 @@ namespace StepCount
                                             oneStepSampleCount.ToString() + "," + oneStepVariance.ToString() + "," + oneStepAccVariance.ToString() + "," +
                                             mStanceState.ToString() + "," + mStanceStdev.ToString() + "," + GetDistortion(x.mGetMag(), y.mGetMag(), z.mGetMag()).ToString() + "," +
                                             (mStanceHeadAvg.heading * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgSecond.heading * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgTest.heading * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgEuler.heading * 180.0f / Math.PI).ToString() + "," +
+                                            (mStanceHeadAvg.isDistortion).ToString() + "," + (mStanceHeadAvgSecond.isDistortion).ToString() + "," + (mStanceHeadAvgTest.isDistortion).ToString() + "," + (mStanceHeadAvgEuler.isDistortion).ToString() + "," +
+                                            (mBeforeStanceHeadAvg.heading * 180.0f / Math.PI).ToString() + "," + (mBeforeStanceHeadAvgSecond.heading * 180.0f / Math.PI).ToString() + "," + (mBeforeStanceHeadAvgTest.heading * 180.0f / Math.PI).ToString() + "," + (mBeforeStanceHeadAvgEuler.heading * 180.0f / Math.PI).ToString() + "," +
+                                            (mLastPureStanceHeadAvg.heading * 180.0f / Math.PI).ToString() + "," + (mLastPureStanceHeadAvgSecond.heading * 180.0f / Math.PI).ToString() + "," + (mLastPureStanceHeadAvgTest.heading * 180.0f / Math.PI).ToString() + "," + (mLastPureStanceHeadAvgEuler.heading * 180.0f / Math.PI).ToString() + "," +
                                             y.GetMotionAccelRaw().ToString() + "," +
                                             peakChangeY.ToString() + "," + peakFlagY.ToString() + "," + peakDirectionY.ToString() + "," + peakAccelRawY.ToString() + "," + peakAccelY.ToString() + "," +
                                             x.GetMotionAccelRaw().ToString() + "," + z.GetMotionAccelRaw().ToString() + "," +
@@ -1209,19 +1215,15 @@ namespace StepCount
                                     this.mStageX.Text = (xc[b]).ToString();
                                     this.mStageY.Text = (yc[b]).ToString();
 
-                                    //b = stageIndex_tilt - 1;
-                                    //if (b < 0)
-                                    //    b = stageSize - 1;
-                                    //this.mStageTiltX.Text = (xc_tilt[b]).ToString();
-                                    //this.mStageTiltY.Text = (yc_tilt[b]).ToString();
 
                                     b = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
                                     this.mStageRX.Text = (xcR[b]).ToString();
                                     this.mStageRY.Text = (ycR[b]).ToString();
 
-                                    //b = (stageIndexR_tilt - 1 < 0) ? (stageSize + (stageIndexR_tilt - 1)) : (stageIndexR_tilt - 1);
-                                    //this.mStageRTX.Text = (xcR_tilt[b]).ToString();
-                                    //this.mStageRTY.Text = (ycR_tilt[b]).ToString();
+                                    this.mStageTiltX.Text = p_euler.ToString();
+                                    this.mStageTiltY.Text = pd_euler.ToString();
+                                    this.mStageRTX.Text = p.ToString();
+                                    this.mStageRTY.Text = pd.ToString();
 
                                     this.mRoll.Text = (y.mGetAngle() * 180.0f / Math.PI).ToString();
                                     this.mPitch.Text = (z.mGetAngle() * 180.0f / Math.PI).ToString();
