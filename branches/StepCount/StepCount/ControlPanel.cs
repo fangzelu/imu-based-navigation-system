@@ -103,7 +103,7 @@ namespace StepCount
         int mStanceRawSum = 0;
         int mStanceRawSquareSum = 0;
         const int STANCE_WINDOW = 8;
-        const int ZUPT_WINDOW = 256;
+        const int ZUPT_WINDOW = 128;
         float mStanceStdev = 0.0f;
         int mStanceState = 0;
         int mStanceCount = 0;
