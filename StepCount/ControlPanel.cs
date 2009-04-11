@@ -103,6 +103,7 @@ namespace StepCount
         int mStanceRawSum = 0;
         int mStanceRawSquareSum = 0;
         const int STANCE_WINDOW = 8;
+        const int ZUPT_WINDOW = 256;
         float mStanceStdev = 0.0f;
         int mStanceState = 0;
         int mStanceCount = 0;
@@ -893,12 +894,20 @@ namespace StepCount
                                             
                                                     mStanceState = 1;
                                                     mStanceHeadAvgList.Add(GetHeadingMedian(ref mStanceHead));
+                                                    if (mStanceHeadAvgList.Count > ZUPT_WINDOW)
+                                                        mStanceHeadAvgList.RemoveAt(0);
 
                                                     mStanceHeadAvgListTest.Add(GetHeadingMedian(ref mStanceHeadTest));
+                                                    if (mStanceHeadAvgListTest.Count > ZUPT_WINDOW)
+                                                        mStanceHeadAvgListTest.RemoveAt(0);
 
                                                     mStanceHeadAvgListSecond.Add(GetHeadingMedian(ref mStanceHeadSecond));
+                                                    if (mStanceHeadAvgListSecond.Count > ZUPT_WINDOW)
+                                                        mStanceHeadAvgListSecond.RemoveAt(0);
 
                                                     mStanceHeadAvgListEuler.Add(GetHeadingMedian(ref mStanceHeadEuler));
+                                                    if (mStanceHeadAvgListEuler.Count > ZUPT_WINDOW)
+                                                        mStanceHeadAvgListEuler.RemoveAt(0);
                                                 }
                                             }
 
