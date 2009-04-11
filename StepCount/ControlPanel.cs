@@ -17,6 +17,13 @@ namespace StepCount
 {
     public partial class ControlPanel : Form
     {
+        struct Head
+        {
+            public float heading;
+            public bool isDistortion;
+            public bool isOverflow;
+        };
+
         //*** IPC
         bool sendFlag;
         IntPtr wndPtr;
@@ -46,23 +53,46 @@ namespace StepCount
         List<int> mAccelRawY = new List<int>();
         
         List<int> mStanceRaw = new List<int>();
-        List<float> mStanceHead = new List<float>();
-        float mStanceHeadAvg = 0.0f;
-        float mBeforeStanceHeadAvg = 0.0f;
 
-        List<float> mStanceHeadAvgList = new List<float>();
+        // Modify Tilt Heading
+        Head mStanceHeadAvg;
+        List<Head> mStanceHead = new List<Head>();
+        List<Head> mStanceHeadAvgList = new List<Head>();
 
-        float mStanceHeadAvgTest = 0.0f;
-        List<float> mStanceHeadTest = new List<float>();
-        List<float> mStanceHeadAvgListTest = new List<float>();
+        // Raw Heading
+        Head mStanceHeadAvgTest;
+        List<Head> mStanceHeadTest = new List<Head>();
+        List<Head> mStanceHeadAvgListTest = new List<Head>();
 
-        float mStanceHeadAvgSecond = 0.0f;
-        List<float> mStanceHeadSecond = new List<float>();
-        List<float> mStanceHeadAvgListSecond = new List<float>();
+        // Original Tilt Heading
+        Head mStanceHeadAvgSecond;
+        List<Head> mStanceHeadSecond = new List<Head>();
+        List<Head> mStanceHeadAvgListSecond = new List<Head>();
 
-        float mStanceHeadAvgEuler = 0.0f;
-        List<float> mStanceHeadEuler = new List<float>();
-        List<float> mStanceHeadAvgListEuler = new List<float>();
+        // Euler Heading
+        Head mStanceHeadAvgEuler;
+        List<Head> mStanceHeadEuler = new List<Head>();
+        List<Head> mStanceHeadAvgListEuler = new List<Head>();
+
+        Head mBeforeStanceHeadAvg;
+        Head mBeforeStanceHeadAvgTest;
+        Head mBeforeStanceHeadAvgSecond;
+        Head mBeforeStanceHeadAvgEuler;
+
+        Head mLastPureStanceHeadAvg;
+        Head mLastPureStanceHeadAvgTest;
+        Head mLastPureStanceHeadAvgSecond;
+        Head mLastPureStanceHeadAvgEuler;
+
+        float movingDistanceError = 0.0f;
+        float movingDistanceErrorTest = 0.0f;
+        float movingDistanceErrorSecond = 0.0f;
+        float movingDistanceErrorEuler = 0.0f;
+
+        float movingDistanceErrorD = 0.0f;
+        float movingDistanceErrorTestD = 0.0f;
+        float movingDistanceErrorSecondD = 0.0f;
+        float movingDistanceErrorEulerD = 0.0f;
 
         List<int> oneStepRaw = new List<int>();
         List<float> oneStepAcc = new List<float>();
@@ -75,6 +105,7 @@ namespace StepCount
         const int STANCE_WINDOW = 8;
         float mStanceStdev = 0.0f;
         int mStanceState = 0;
+        int mStanceCount = 0;
 
         float upperBound = 4096.0f, lowerBound = 0.0f;
         bool trainingFlag = false;
@@ -83,9 +114,26 @@ namespace StepCount
         const float AVG_STEP = 0.7f;
         const float DEV_STEP = 0.1f;
         const int STEP_TIME = 32;
+        
         float p = 1.0f;
+        float p_second = 1.0f;
+        float p_test = 1.0f;
+        float p_euler = 1.0f;
+
+        float pd = 1.0f;
+        float pd_second = 1.0f;
+        float pd_test = 1.0f;
+        float pd_euler = 1.0f;
+
         float pc = 1.0f;
         float pc_gap = 0.001f;
+
+        const float X_MAG_UPPER = (float)-30.72352427;
+        const float X_MAG_LOWER = (float)-64.82561544;
+        const float Y_MAG_UPPER = (float)54.03456928;
+        const float Y_MAG_LOWER = (float)-27.6231079;
+        const float Z_MAG_UPPER = (float)59.94706;
+        const float Z_MAG_LOWER = (float)-56.8498;
 
         int stepState = 0;
         int stepCount = 0;
@@ -227,8 +275,14 @@ namespace StepCount
                 "실시간S_SCX" + "," + "실시간S_SCY" + "," +
                 "실시간_SCX,실시간_SCY," +
                 "실시간E_SCX,실시간E_SCY," +
+                "이동거리," +
+                "오차MTilt,오차Euler,오차Tilt,오차일반,"+
+                "오차왜곡MTilt,오차왜곡Euler,오차왜곡Tilt,오차왜곡일반," +
+                "신뢰도MTilt,신뢰도Euler,신뢰도Tilt,신뢰도일반," +
+                "신뢰도왜곡MTilt,신뢰도왜곡Euler,신뢰도왜곡Tilt,신뢰도왜곡일반," +
+
                 "SC상태,SC수,SC시간," +
-                "OneStep수,OneStep분산Raw,OneStep분산,Stance상태,Stance분산," +
+                "OneStep수,OneStep분산Raw,OneStep분산,Stance상태,Stance분산,헤딩왜곡," +
                 "Stance헤딩,Stance헤딩S,Stance헤딩Raw,Stance헤딩Euler,"+
                 "AccleRawY," +
                 "변화Y,상태Y,방향Y,피크RawY,피크Y," +
@@ -236,9 +290,9 @@ namespace StepCount
                 //"RawAvg" + "," + "VeloRaw" + "," + "PosRaw" + "," +
                 "AccelX," + "AccelY," + "AccelZ" + "," +
                 //"Avg" + "," + "Velo" + "," + "Pos" + "," +
-                "샘플수" + "," + "진동수" + "," +
-                "최소" + "," + "최대" + "," + "범위" + "," +
-                "분산" + "," + "최대분산" + "," + "SC이동거리," +
+                //"샘플수" + "," + "진동수" + "," +
+                //"최소" + "," + "최대" + "," + "범위" + "," +
+                //"분산" + "," + "최대분산" + "," + "SC이동거리," +
                 //"린지이동거리" + "," +
                 //"변화Z,상태Z,방향Z,피크RawZ,피크Z," +
                 //"변화X,상태X,방향X,피크RawX,피크X," +
@@ -323,6 +377,95 @@ namespace StepCount
             }
 
             return list.Sum() / list.Count;
+        }
+       
+        private Head GetHeadingMedian(ref List<Head> list)
+        {
+            if (list.Count == 0)
+            {
+                Head temp = new Head();
+                temp.heading = 0.0f;
+                temp.isDistortion = false;
+                return temp;
+            }
+
+            float init = list[0].heading;
+            bool isPositive = true;
+            if (init < 0)
+                isPositive = false;
+            int pureCount = 0;
+
+            for (int i = 1; i < list.Count; i++)
+            {
+                if (Math.Abs(init - list[i].heading) > Math.PI)
+                {
+                    Head temp = new Head();
+                    
+                    if (isPositive)
+                        temp.heading = list[i].heading + (float)(2 * Math.PI);
+                    else
+                        temp.heading = list[i].heading - (float)(2 * Math.PI);
+                    temp.isDistortion = list[i].isDistortion;
+
+                    list.RemoveAt(i);
+                    list.Insert(i, temp);
+                }
+                if (list[i].isDistortion == false)
+                    pureCount++;
+            }
+
+            if(pureCount == 0)
+            {
+                list.Sort(delegate(Head h1, Head h2)
+                {
+                    return h1.heading.CompareTo(h2.heading);
+                });
+
+                return list[list.Count / 2];
+            }
+            else
+            {
+                for(int i=0 ; i < list.Count; i++)
+                {
+                    if (list[i].isDistortion)
+                        list.RemoveAt(i);
+                    i--;
+                }
+
+                list.Sort(delegate(Head h1, Head h2)
+                {
+                    return h1.heading.CompareTo(h2.heading);
+                });
+
+                return list[list.Count / 2];
+            }
+        }
+        private bool GetDistortion(float xMag, float yMag, float zMag)
+        {
+            if (xMag > X_MAG_UPPER || xMag < X_MAG_LOWER)
+                return true;
+
+            if (yMag > Y_MAG_UPPER || yMag < Y_MAG_LOWER)
+                return true;
+
+            if (zMag > Z_MAG_UPPER || zMag < Z_MAG_LOWER)
+                return true;
+
+            return false;
+        }
+        private float GetHeadingDifference(Head cur, Head before)
+        {
+            bool isPositive = (cur.heading < 0) ? false : true;
+
+            if(Math.Abs(cur.heading - before.heading) > Math.PI)
+            {
+                if (isPositive)
+                    before.heading += (float)(2 * Math.PI);
+                else
+                    before.heading -= (float)(2 * Math.PI);
+            }
+
+            return Math.Abs(cur.heading - before.heading);
         }
         private void UpdateWorldPosition(float diff, float heading, ref float[] x, ref float[] y, ref int index)
         {
@@ -579,92 +722,11 @@ namespace StepCount
 
                                 mUpdateTiltHeading(ref z, ref y, ref x);
 
+                                /*
                                 if (x.mAccStop && y.mAccStop && z.mAccStop)
                                 {
                                     if(mMoving)
                                     {
-                                        //x.mBacktrackPosition(movingCount);
-                                        //y.mBacktrackPosition(movingCount);
-                                        //z.mBacktrackPosition(movingCount);
-
-                                        //if(movingCount >= 30)
-                                        //{
-                                        //    stageIndex -= 30;
-                                        //    if (stageIndex < 0)
-                                        //        stageIndex = stageSize + stageIndex;
-                                        //}
-                                        //else
-                                        //{
-                                        //    stageIndex -= movingCount + 1;
-                                        //    if (stageIndex < 0)
-                                        //        stageIndex = stageSize + stageIndex;
-                                        //}
-
-                                        /*
-                                        if(movingCount > 100)
-                                        {
-                                            float modifyDistance;
-                                            if (movingDistanceR > AVG_DISTANCE + DEV_DISTANCE)
-                                            {
-                                                modifyDistance = (float)((movingDistanceR - (AVG_DISTANCE - DEV_DISTANCE)) * rand.NextDouble());
-                                                movingDistanceR -= modifyDistance;
-                                                UpdateWorldPosition(-modifyDistance, mTiltHeadingAvgBeforeMoving, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
-                                                UpdateWorldPosition(-modifyDistance, mTiltHeadingAvgBeforeMoving, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
-                                            }
-                                            else if (movingDistanceR < AVG_DISTANCE - DEV_DISTANCE)
-                                            {
-                                                modifyDistance = (float)(((AVG_DISTANCE + DEV_DISTANCE) - movingDistanceR) * rand.NextDouble());
-                                                movingDistanceR += modifyDistance;
-                                                UpdateWorldPosition(modifyDistance, mTiltHeadingAvgBeforeMoving, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
-                                                UpdateWorldPosition(modifyDistance, mTiltHeadingAvgBeforeMoving, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
-                                            }
-
-                                            if (logFlag)
-                                            {
-                                                //x.WriteMotionLog(log, "MotionX", mHeading);
-                                                //y.WriteMotionLog(log, "MotionY", mHeading);
-                                                //z.WriteMotionLog(log, "MotionZ", mHeading);
-
-                                                int bb = stageIndex - 1;
-                                                if (bb < 0)
-                                                    bb = stageSize - 1;
-                                                int bb_tilt = stageIndex_tilt - 1;
-                                                if (bb_tilt < 0)
-                                                    bb_tilt = stageSize - 1;
-                                                int bbR = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
-                                                int bbR_tilt = (stageIndexR_tilt - 1 < 0) ? (stageSize + (stageIndexR_tilt - 1)) : (stageIndexR_tilt - 1);
-                                                int b_heading = (mTiltHeadingIndex - 1 < 0) ? (mHeadSize - 1) : (mTiltHeadingIndex - 1);
-
-                                                posLog.WriteLine(DateTime.Now.ToString() + "," +
-                                                    //xc_tilt[bb_tilt].ToString() + "," + yc_tilt[bb_tilt].ToString() + "," +
-                                                    //xcR_tilt[bbR_tilt].ToString() + "," + ycR_tilt[bbR_tilt].ToString() + "," +
-                                                    xc[bb].ToString() + "," + yc[bb].ToString() + "," +
-                                                    xcR[bbR].ToString() + "," + ycR[bbR].ToString() + "," +
-                                                    stepState.ToString() + "," + stepCount.ToString() + "," + stepInterval.ToString() + "," +
-                                                    x.GetMotionAccelRaw().ToString() + "," + y.GetMotionAccelRaw().ToString() + "," + z.GetMotionAccelRaw().ToString() + "," +
-                                                    //z.mAccRawAvg.ToString() + "," + z.GetMotionVeloRaw().ToString() + "," + z.GetMotionPositionRRaw().ToString() + "," +
-                                                    x.GetMotionAccel().ToString() + "," + y.GetMotionAccel().ToString() + "," + z.GetMotionAccel().ToString() + "," +
-                                                    //z.mAccAvg.ToString() + "," + z.GetMotionVelo().ToString() + "," + z.GetMotionPositionR().ToString() + "," +
-                                                    movingCount.ToString() + "," + movingVibe.ToString() + "," +
-                                                    movingMin.ToString() + "," + movingMax.ToString() + "," + ((movingMax - movingMin) / 800.0f).ToString() + "," +
-                                                    movingDev.ToString() + "," + movingDevMax.ToString() + "," + movingDistance.ToString() + "," +
-                                                    //movingDistanceR.ToString() + "," +
-                                                    peakChangeZ.ToString() + "," + peakFlagZ.ToString() + "," + peakDirectionZ.ToString() + "," + peakAccelRawZ.ToString() + "," + peakAccelZ.ToString() + "," +
-                                                    peakChangeX.ToString() + "," + peakFlagX.ToString() + "," + peakDirectionX.ToString() + "," + peakAccelRawX.ToString() + "," + peakAccelX.ToString() + "," +
-                                                    peakChangeY.ToString() + "," + peakFlagY.ToString() + "," + peakDirectionY.ToString() + "," + peakAccelRawY.ToString() + "," + peakAccelY.ToString() + "," +
-                                                    //movingDev.ToString() + "," + movingDistanceR.ToString() + "," +
-                                                    x.mGetMag().ToString() + "," + y.mGetMag().ToString() + "," + z.mGetMag() + "," +
-                                                    //mHeadingAvg.ToString() + "," + mTiltHeadingAvg.ToString() + "," +
-                                                    (mTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + (mTiltHeading[b_heading] * 180.0f / Math.PI).ToString() + "," +
-                                                    (mMovingTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + ((mTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString() + "," +
-                                                    (mStepCountTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," +
-                                                    (mStepCountMovingTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + ((mStepCountTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mStepCountMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString() + "," +
-                                                    (z.mGetAngle() * 180.0f / Math.PI).ToString() + "," + (y.mGetAngle() * 180.0f / Math.PI).ToString());
-                                            }
-
-                                        }
-                                        */
-
                                         posLog.WriteLine("Stop Position");
                                     }
 
@@ -696,9 +758,10 @@ namespace StepCount
                                     oneStepSampleCount = 0;
                                     oneStepVariance = 0.0f;
                                 }
+                                */
 
-                                if (!x.mAccStop || !y.mAccStop || !z.mAccStop)
-                                {
+                                //if (!x.mAccStop || !y.mAccStop || !z.mAccStop)
+                                //{
                                     stepInterval++;
                                     movingCount++;
 
@@ -773,10 +836,23 @@ namespace StepCount
 
                                     int val_accel = y.GetMotionAccelRaw();
                                     float val_accel_g = y.GetMotionAccel();
-                                    float val_head = GetTiltHeading();
-                                    float val_head_raw = GetHeading();
-                                    float val_head_s = GetTiltHeadingSecond();
-                                    float val_head_e = x.GetMotionEuler();
+
+                                    Head val_head = new Head();
+                                    Head val_head_raw = new Head();
+                                    Head val_head_s = new Head();
+                                    Head val_head_e = new Head();
+                                    
+                                    val_head.heading = GetTiltHeading();
+                                    val_head.isDistortion = GetDistortion(x.mGetMag(), y.mGetMag(), z.mGetMag());
+
+                                    val_head_raw.heading = GetHeading();
+                                    val_head_raw.isDistortion = GetDistortion(x.mGetMag(), y.mGetMag(), z.mGetMag());
+
+                                    val_head_s.heading = GetTiltHeadingSecond();
+                                    val_head_s.isDistortion = GetDistortion(x.mGetMag(), y.mGetMag(), z.mGetMag());
+
+                                    val_head_e.heading = x.GetMotionEuler();
+                                    val_head_e.isDistortion = GetDistortion(x.mGetMag(), y.mGetMag(), z.mGetMag());
 
                                     switch (stepState)
                                     {
@@ -814,18 +890,15 @@ namespace StepCount
 
                                                 if(mStanceStdev < 100.0f)
                                                 {
+                                            
                                                     mStanceState = 1;
-                                                    //mStanceHeadAvgList.Add(mStanceHead.Sum() / STANCE_WINDOW);
-                                                    mStanceHeadAvgList.Add(GetHeadingAverage(ref mStanceHead));
+                                                    mStanceHeadAvgList.Add(GetHeadingMedian(ref mStanceHead));
 
-                                                    //mStanceHeadAvgListTest.Add(mStanceHeadTest.Sum() / STANCE_WINDOW);
-                                                    mStanceHeadAvgListTest.Add(GetHeadingAverage(ref mStanceHeadTest));
+                                                    mStanceHeadAvgListTest.Add(GetHeadingMedian(ref mStanceHeadTest));
 
-                                                    //mStanceHeadAvgListSecond.Add(mStanceHeadSecond.Sum() / STANCE_WINDOW);
-                                                    mStanceHeadAvgListSecond.Add(GetHeadingAverage(ref mStanceHeadSecond));
+                                                    mStanceHeadAvgListSecond.Add(GetHeadingMedian(ref mStanceHeadSecond));
 
-                                                    //mStanceHeadAvgListEuler.Add(mStanceHeadEuler.Sum() / STANCE_WINDOW);
-                                                    mStanceHeadAvgListEuler.Add(GetHeadingAverage(ref mStanceHeadEuler));
+                                                    mStanceHeadAvgListEuler.Add(GetHeadingMedian(ref mStanceHeadEuler));
                                                 }
                                             }
 
@@ -838,28 +911,57 @@ namespace StepCount
                                                     oneStepSampleCount++;
                                                     if (mStanceHeadAvgList.Count > 0)
                                                     {
-                                                        mStanceHeadAvg = GetHeadingAverage(ref mStanceHeadAvgList);
-                                                        //mStanceHeadAvg = mStanceHeadAvg - (float)(90.0f * Math.PI / 180.0f);
-                                                        //if (mStanceHeadAvg < -Math.PI)
-                                                        //    mStanceHeadAvg += (float)(2 * Math.PI);
+                                                        mBeforeStanceHeadAvg = mStanceHeadAvg;
+                                                        mBeforeStanceHeadAvgEuler = mStanceHeadAvgEuler;
+                                                        mBeforeStanceHeadAvgSecond = mStanceHeadAvgSecond;
+                                                        mBeforeStanceHeadAvgTest = mStanceHeadAvgTest;
 
-                                                        mStanceHeadAvgTest = GetHeadingAverage(ref mStanceHeadAvgListTest);
-                                                        //mStanceHeadAvgTest = mStanceHeadAvgTest - (float)(90.0f * Math.PI / 180.0f);
-                                                        //if(mStanceHeadAvgTest < -Math.PI)
-                                                        //    mStanceHeadAvgTest += (float)(2 * Math.PI);
+                                                        if (mStanceHeadAvg.isDistortion == false)
+                                                            mLastPureStanceHeadAvg = mStanceHeadAvg;
+                                                        if (mStanceHeadAvgEuler.isDistortion == false)
+                                                            mLastPureStanceHeadAvgEuler = mStanceHeadAvgEuler;
+                                                        if (mStanceHeadAvgTest.isDistortion == false)
+                                                            mLastPureStanceHeadAvgTest = mStanceHeadAvgTest;
+                                                        if (mStanceHeadAvgSecond.isDistortion == false)
+                                                            mLastPureStanceHeadAvgSecond = mStanceHeadAvgSecond;
 
-                                                        mStanceHeadAvgSecond = GetHeadingAverage(ref mStanceHeadAvgListSecond);
-                                                        //mStanceHeadAvgSecond = mStanceHeadAvgSecond - (float)(90.0f * Math.PI / 180.0f);
-                                                        //if (mStanceHeadAvgSecond < -Math.PI)
-                                                        //    mStanceHeadAvgSecond += (float)(2 * Math.PI);
+                                                        mStanceHeadAvg = GetHeadingMedian(ref mStanceHeadAvgList);
+                                                        mStanceHeadAvgTest = GetHeadingMedian(ref mStanceHeadAvgListTest);
+                                                        mStanceHeadAvgSecond = GetHeadingMedian(ref mStanceHeadAvgListSecond);
+                                                        mStanceHeadAvgEuler = GetHeadingMedian(ref mStanceHeadAvgListEuler);
 
-                                                        mStanceHeadAvgEuler = GetHeadingAverage(ref mStanceHeadAvgListEuler);
-                                                    }
-                                                    else
-                                                    {
-                                                        //mStanceHeadAvg = -(float)(90.0f * Math.PI / 180.0f);
-                                                        //mStanceHeadAvgTest = -(float)(90.0f * Math.PI / 180.0f);
-                                                        //mStanceHeadAvgSecond = -(float)(90.0f * Math.PI / 180.0f);
+                                                        float diff_head = 0.0f;
+
+                                                        diff_head = GetHeadingDifference(mStanceHeadAvg, mBeforeStanceHeadAvg);
+                                                        movingDistanceError += (float)(x_diff * Math.Tan(diff_head));
+
+                                                        diff_head = GetHeadingDifference(mStanceHeadAvgTest, mBeforeStanceHeadAvgTest);
+                                                        movingDistanceErrorTest += (float)(x_diff * Math.Tan(diff_head));
+
+                                                        diff_head = GetHeadingDifference(mStanceHeadAvgSecond, mBeforeStanceHeadAvgSecond);
+                                                        movingDistanceErrorSecond += (float)(x_diff * Math.Tan(diff_head));
+
+                                                        diff_head = GetHeadingDifference(mStanceHeadAvgEuler, mBeforeStanceHeadAvgEuler);
+                                                        movingDistanceErrorEuler += (float)(x_diff * Math.Tan(diff_head));
+
+                                                        p = (movingDistance - movingDistanceError) / movingDistance;
+                                                        p_test = (movingDistance - movingDistanceErrorTest) / movingDistance;
+                                                        p_euler = (movingDistance - movingDistanceErrorEuler) / movingDistance;
+                                                        p_second = (movingDistance - movingDistanceErrorSecond) / movingDistance;
+
+                                                        diff_head = GetHeadingDifference(mStanceHeadAvg, mLastPureStanceHeadAvg);
+                                                        movingDistanceErrorD += (float)(x_diff * Math.Tan(diff_head));
+                                                        diff_head = GetHeadingDifference(mStanceHeadAvgTest, mLastPureStanceHeadAvgTest);
+                                                        movingDistanceErrorTestD += (float)(x_diff * Math.Tan(diff_head));
+                                                        diff_head = GetHeadingDifference(mStanceHeadAvgSecond, mLastPureStanceHeadAvgSecond);
+                                                        movingDistanceErrorSecondD += (float)(x_diff * Math.Tan(diff_head));
+                                                        diff_head = GetHeadingDifference(mStanceHeadAvgEuler, mLastPureStanceHeadAvgEuler);
+                                                        movingDistanceErrorEulerD += (float)(x_diff * Math.Tan(diff_head));
+
+                                                        pd = (movingDistance - movingDistanceErrorD) / movingDistance;
+                                                        pd_test = (movingDistance - movingDistanceErrorTestD) / movingDistance;
+                                                        pd_euler = (movingDistance - movingDistanceErrorEulerD) / movingDistance;
+                                                        pd_second = (movingDistance - movingDistanceErrorSecondD) / movingDistance;
                                                     }
 
                                                     mStanceHeadAvgList.Clear();
@@ -922,10 +1024,10 @@ namespace StepCount
 
                                                 if (mStanceStdev < 100.0f)
                                                 {
-                                                    mStanceHeadAvgList.Add(GetHeadingAverage(ref mStanceHead));
-                                                    mStanceHeadAvgListTest.Add(GetHeadingAverage(ref mStanceHeadTest));
-                                                    mStanceHeadAvgListSecond.Add(GetHeadingAverage(ref mStanceHeadSecond));
-                                                    mStanceHeadAvgListEuler.Add(GetHeadingAverage(ref mStanceHeadEuler));
+                                                    mStanceHeadAvgList.Add(GetHeadingMedian(ref mStanceHead));
+                                                    mStanceHeadAvgListTest.Add(GetHeadingMedian(ref mStanceHeadTest));
+                                                    mStanceHeadAvgListSecond.Add(GetHeadingMedian(ref mStanceHeadSecond));
+                                                    mStanceHeadAvgListEuler.Add(GetHeadingMedian(ref mStanceHeadEuler));
 
                                                     stepState = 0;
                                                     mStanceState = 1;
@@ -961,16 +1063,16 @@ namespace StepCount
                                                         x_diff = 2.0f * (float)(AVG_STEP - DEV_STEP * rand.NextDouble());
                                                     movingDistance += x_diff;
 
-                                                    UpdateWorldPosition(x_diff, mStanceHeadAvg, ref xc, ref yc, ref stageIndex);
+                                                    UpdateWorldPosition(x_diff, mStanceHeadAvg.heading, ref xc, ref yc, ref stageIndex);
 
                                                     //UpdateWorldPosition(x_diff, mTiltHeadingAvg, ref xcR, ref ycR, ref stageIndexR);
-                                                    UpdateWorldPosition(x_diff, mStanceHeadAvgEuler, ref xcR, ref ycR, ref stageIndexR);
+                                                    UpdateWorldPosition(x_diff, mStanceHeadAvgEuler.heading, ref xcR, ref ycR, ref stageIndexR);
 
-                                                    UpdateWorldPosition(x_diff, mStanceHeadAvgTest, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
+                                                    UpdateWorldPosition(x_diff, mStanceHeadAvgTest.heading, ref xc_tilt, ref yc_tilt, ref stageIndex_tilt);
 
-                                                    UpdateWorldPosition(x_diff, mStanceHeadAvgSecond, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
+                                                    UpdateWorldPosition(x_diff, mStanceHeadAvgSecond.heading, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
 
-                                                    p *= (pc - (float)stepCount * pc_gap);
+                                                    //p *= (pc - (float)stepCount * pc_gap);
 
                                                     posLog.WriteLine("One Step");
                                                     if (sendFlag)
@@ -1030,23 +1132,37 @@ namespace StepCount
                                         int b_heading = (mTiltHeadingIndex - 1 < 0) ? (mHeadSize - 1) : (mTiltHeadingIndex - 1);
 
                                         posLog.WriteLine(DateTime.Now.ToString() + "," +
+                                            //Heading Raw Use
                                             xc_tilt[bb_tilt].ToString() + "," + yc_tilt[bb_tilt].ToString() + "," +
+                                            //Heading Original Tilt Use
                                             xcR_tilt[bbR_tilt].ToString() + "," + ycR_tilt[bbR_tilt].ToString() + "," +
+                                            //Heading Modify Tilt Use
                                             xc[bb].ToString() + "," + yc[bb].ToString() + "," +
+                                            //Heading Euler Use
                                             xcR[bbR].ToString() + "," + ycR[bbR].ToString() + "," +
+                                            //이동거리
+                                            movingDistance.ToString() + "," +
+                                            //오차거리 일반
+                                            movingDistanceError.ToString() + "," + movingDistanceErrorEuler.ToString() + "," + movingDistanceErrorSecond.ToString() + "," + movingDistanceErrorTest.ToString() + "," +
+                                            //오차거리 왜곡반영
+                                            movingDistanceErrorD.ToString() + "," + movingDistanceErrorEulerD.ToString() + "," + movingDistanceErrorSecondD.ToString() + "," + movingDistanceErrorTestD.ToString() + "," +
+                                            //신뢰도 일반
+                                            p.ToString() + "," + p_euler.ToString() + "," + p_second.ToString() + "," + p_test.ToString() + "," +
+                                            //신뢰도 왜곡반영
+                                            pd.ToString() + "," + pd_euler.ToString() + "," + pd_second.ToString() + "," + pd_test.ToString() + "," +
                                             stepState.ToString() + "," + stepCount.ToString() + "," + stepInterval.ToString() + "," +
                                             oneStepSampleCount.ToString() + "," + oneStepVariance.ToString() + "," + oneStepAccVariance.ToString() + "," +
-                                            mStanceState.ToString() + "," + mStanceStdev.ToString() + "," +
-                                            (mStanceHeadAvg * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgSecond * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgTest * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgEuler * 180.0f / Math.PI).ToString() + "," +
+                                            mStanceState.ToString() + "," + mStanceStdev.ToString() + "," + GetDistortion(x.mGetMag(), y.mGetMag(), z.mGetMag()).ToString() + "," +
+                                            (mStanceHeadAvg.heading * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgSecond.heading * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgTest.heading * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgEuler.heading * 180.0f / Math.PI).ToString() + "," +
                                             y.GetMotionAccelRaw().ToString() + "," +
                                             peakChangeY.ToString() + "," + peakFlagY.ToString() + "," + peakDirectionY.ToString() + "," + peakAccelRawY.ToString() + "," + peakAccelY.ToString() + "," +
                                             x.GetMotionAccelRaw().ToString() + "," + z.GetMotionAccelRaw().ToString() + "," +
                                             //z.mAccRawAvg.ToString() + "," + z.GetMotionVeloRaw().ToString() + "," + z.GetMotionPositionRRaw().ToString() + "," +
                                             x.GetMotionAccel().ToString() + "," + y.GetMotionAccel().ToString() + "," + z.GetMotionAccel().ToString() + "," +
                                             //z.mAccAvg.ToString() + "," + z.GetMotionVelo().ToString() + "," + z.GetMotionPositionR().ToString() + "," +
-                                            movingCount.ToString() + "," + movingVibe.ToString() + "," +
-                                            movingMin.ToString() + "," + movingMax.ToString() + "," + ((movingMax - movingMin) / 800.0f).ToString() + "," +
-                                            movingDev.ToString() + "," + movingDevMax.ToString() + "," + movingDistance.ToString() + "," +
+                                            //movingCount.ToString() + "," + movingVibe.ToString() + "," +
+                                            //movingMin.ToString() + "," + movingMax.ToString() + "," + ((movingMax - movingMin) / 800.0f).ToString() + "," +
+                                            //movingDev.ToString() + "," + movingDevMax.ToString() + "," + movingDistance.ToString() + "," +
                                             //movingDistanceR.ToString() + "," +
                                             //peakChangeZ.ToString() + "," + peakFlagZ.ToString() + "," + peakDirectionZ.ToString() + "," + peakAccelRawZ.ToString() + "," + peakAccelZ.ToString() + "," +
                                             //peakChangeX.ToString() + "," + peakFlagX.ToString() + "," + peakDirectionX.ToString() + "," + peakAccelRawX.ToString() + "," + peakAccelX.ToString() + "," +
@@ -1061,28 +1177,22 @@ namespace StepCount
                                             //(mStepCountMovingTiltHeadingAvg * 180.0f / Math.PI).ToString() + "," + ((mStepCountTiltHeadingAvg * (1 - MOVING_HEAD_WEIGHT) + mStepCountMovingTiltHeadingAvg * (MOVING_HEAD_WEIGHT)) * 180.0f / Math.PI).ToString() + "," +
                                             (z.mGetAngle() * 180.0f / Math.PI).ToString() + "," + (y.mGetAngle() * 180.0f / Math.PI).ToString());
                                     }
-                                }
+                                //}
 
 
                                 this.Invoke(new MethodInvoker(delegate()
                                 {
-                                    //this.mAccPosX.Text = x.GetMotionPosition().ToString();
-                                    //this.mAccPosY.Text = y.GetMotionPosition().ToString();
-                                    //this.mAccPosY.Text = z.GetMotionPositionR().ToString();
-                                    //this.mAccPosZ.Text = z.GetMotionPositionRRaw().ToString();
-
                                     this.mMagX.Text = x.mGetMag().ToString();
                                     this.mMagY.Text = y.mGetMag().ToString();
                                     this.mMagZ.Text = z.mGetMag().ToString();
 
-                                    this.mHead.Text = (mStanceHeadAvgTest * 180.0f / Math.PI).ToString();
-                                    this.mHeadTilt.Text = (mStanceHeadAvgEuler * 180.0f / Math.PI).ToString();
+                                    this.mHead.Text = (mStanceHeadAvgTest.heading * 180.0f / Math.PI).ToString();
+                                    this.mHeadTilt.Text = (mStanceHeadAvgEuler.heading * 180.0f / Math.PI).ToString();
 
-                                    this.mHeadStep.Text = (mStanceHeadAvgSecond * 180.0f / Math.PI).ToString();
+                                    this.mHeadStep.Text = (mStanceHeadAvgSecond.heading * 180.0f / Math.PI).ToString();
                                     this.mHeadStepTilt.Text = (mStepCountTiltHeadingAvg * 180.0f / Math.PI).ToString();
                                     this.StepP.Text = p.ToString();
 
-                                    //this.mLocalX.Text = xR_diff.ToString();
 
                                     int b = stageIndex - 1;
                                     if(b < 0)
