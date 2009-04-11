@@ -772,7 +772,7 @@ namespace StepCount
                                     //x.UpdateMotionPosition();
                                     //y.UpdateMotionPosition();
                                     //z.UpdateMotionPosition();
-                                    z.UpdateMotionPositionR();
+                                    //z.UpdateMotionPositionR();
                                     //z.UpdateMotionPositionRRaw();
 
                                     //x_diff = z.mGetPositionDiff();
@@ -1108,19 +1108,19 @@ namespace StepCount
                                             break;
                                     }
 
-                                    movingMin = Math.Min(movingMin, z.GetMotionAccelRaw());
-                                    movingMax = Math.Max(movingMax, z.GetMotionAccelRaw());
-                                    movingDev = z.GetMotionAccelDev();
-                                    movingDevMax = Math.Max(movingDevMax, movingDev);
-                                    mMoving = true;
-                                    int curD;
-                                    if (z.GetMotionAccel() > z.mAccAvg)
-                                        curD = 1;
-                                    else
-                                        curD = 0;
-                                    if (curD != movingDirection)
-                                        movingVibe++;
-                                    movingDirection = curD;
+                                    //movingMin = Math.Min(movingMin, z.GetMotionAccelRaw());
+                                    //movingMax = Math.Max(movingMax, z.GetMotionAccelRaw());
+                                    //movingDev = z.GetMotionAccelDev();
+                                    //movingDevMax = Math.Max(movingDevMax, movingDev);
+                                    //mMoving = true;
+                                    //int curD;
+                                    //if (z.GetMotionAccel() > z.mAccAvg)
+                                    //    curD = 1;
+                                    //else
+                                    //    curD = 0;
+                                    //if (curD != movingDirection)
+                                    //    movingVibe++;
+                                    //movingDirection = curD;
 
                                     if (logFlag)
                                     {
