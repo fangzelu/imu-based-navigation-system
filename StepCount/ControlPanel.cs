@@ -1496,10 +1496,10 @@ namespace StepCount
 
                     Win32API.COPYDATASTRUCT rcv = (Win32API.COPYDATASTRUCT)Marshal.PtrToStructure(m.LParam, typeof(Win32API.COPYDATASTRUCT));
 
-                    String input = rcv.lpData;
-                    int x_receive = Convert.ToInt32(input.Split(seps));
-                    int y_receive = Convert.ToInt32(input.Split(seps));
-                    float error_receive = (float)Convert.ToDecimal(input.Split(seps));
+                    String[] input = rcv.lpData.Split(seps);
+                    int x_receive = Convert.ToInt32(input[0]);
+                    int y_receive = Convert.ToInt32(input[1]);
+                    float error_receive = (float)Convert.ToDecimal(input[2]);
 
                     MessageBox.Show(x_receive.ToString());
                     MessageBox.Show(y_receive.ToString());
