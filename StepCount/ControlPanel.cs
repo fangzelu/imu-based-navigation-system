@@ -1495,10 +1495,11 @@ namespace StepCount
                     char[] seps = { ',' };
 
                     Win32API.COPYDATASTRUCT rcv = (Win32API.COPYDATASTRUCT)Marshal.PtrToStructure(m.LParam, typeof(Win32API.COPYDATASTRUCT));
-                    
-                    int x_receive = Convert.ToInt32(rcv.lpData.Split(seps));
-                    int y_receive = Convert.ToInt32(rcv.lpData.Split(seps));
-                    float error_receive = (float)Convert.ToDecimal(rcv.lpData.Split(seps));
+
+                    String input = rcv.lpData;
+                    int x_receive = Convert.ToInt32(input.Split(seps));
+                    int y_receive = Convert.ToInt32(input.Split(seps));
+                    float error_receive = (float)Convert.ToDecimal(input.Split(seps));
 
                     MessageBox.Show(x_receive.ToString());
                     MessageBox.Show(y_receive.ToString());
