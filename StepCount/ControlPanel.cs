@@ -1501,9 +1501,9 @@ namespace StepCount
                     int y_receive = Convert.ToInt32(input[1]);
                     float error_receive = (float)Convert.ToDecimal(input[2]);
 
-                    MessageBox.Show(x_receive.ToString());
-                    MessageBox.Show(y_receive.ToString());
-                    MessageBox.Show(error_receive.ToString());
+                    //MessageBox.Show(x_receive.ToString());
+                    //MessageBox.Show(y_receive.ToString());
+                    //MessageBox.Show(error_receive.ToString());
 
                     movingDistanceErrorMD = error_receive;
                     xcM[stageIndexM] = x_receive;
