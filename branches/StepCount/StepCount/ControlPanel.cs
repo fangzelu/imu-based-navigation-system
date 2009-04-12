@@ -30,6 +30,7 @@ namespace StepCount
         string wndName = "WifiLoc";
         const int WM_ACTIVATEAPP = 0x001C;
         const int WM_COPYDATA = 74;
+        const int WM_USER = 1024;
 
         //*** Coordinates
         const int GRID = 2;
@@ -1487,14 +1488,13 @@ namespace StepCount
         {
             switch(m.Msg)
             {
-                case WM_COPYDATA:
+                case WM_USER:
                     char[] seps = { ',' };
-                    String msg = System.Runtime.InteropServices.Marshal.PtrToStringAuto(m.LParam);
+
+                    //MessageBox.Show(((Win32API.COPYDATASTRUCT)(m.LParam)).lpData);
+                    //String msg = System.Runtime.InteropServices.Marshal.PtrToStringAuto(m.LParam);
                     MessageBox.Show(m.LParam.ToInt32().ToString());
-                    MessageBox.Show(msg);
-                    msg = System.Runtime.InteropServices.Marshal.PtrToStringAuto(m.WParam);
-                    MessageBox.Show(m.WParam.ToInt32().ToString());
-                    MessageBox.Show(msg);
+                    //MessageBox.Show(msg);
 
                     break;
                 //int x_receive = Convert.ToInt32(msg.Split(seps));
