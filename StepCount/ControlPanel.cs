@@ -1256,6 +1256,8 @@ namespace StepCount
                                     this.mMagY.Text = y.mGetMag().ToString();
                                     this.mMagZ.Text = z.mGetMag().ToString();
 
+                                    this.mAccPosX.Text = movingDistance.ToString();
+
                                     this.mHead.Text = (GetTiltHeading() * 180.0f / Math.PI).ToString();
                                     this.mHeadTilt.Text = (x.GetMotionEuler() * 180.0f / Math.PI).ToString();
 
