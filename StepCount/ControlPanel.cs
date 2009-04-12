@@ -446,8 +446,10 @@ namespace StepCount
                 for(int i=0 ; i < list.Count; i++)
                 {
                     if (list[i].isDistortion)
+                    {
                         list.RemoveAt(i);
-                    i--;
+                        i--;
+                    }
                 }
 
                 list.Sort(delegate(Head h1, Head h2)
@@ -1256,8 +1258,6 @@ namespace StepCount
 
                                     this.mHeadStep.Text = (mStanceHeadAvg.heading * 180.0f / Math.PI).ToString();
                                     this.mHeadStepTilt.Text = (mStanceHeadAvgEuler.heading * 180.0f / Math.PI).ToString();
-                                    this.StepP.Text = p.ToString();
-
 
                                     int b = stageIndex - 1;
                                     if(b < 0)
@@ -1277,7 +1277,8 @@ namespace StepCount
                                     this.mRpd.Text = pd.ToString();
                                     this.mRp_euler.Text = p_euler.ToString();
                                     this.mRpd_euler.Text = pd_euler.ToString();
-                                    this.mRp_m.Text =
+                                    this.mRp_m.Text = p_m.ToString();
+                                    this.mRpd_m.Text = pd_m.ToString();
 
                                     this.mRoll.Text = (y.mGetAngle() * 180.0f / Math.PI).ToString();
                                     this.mPitch.Text = (z.mGetAngle() * 180.0f / Math.PI).ToString();
@@ -1329,11 +1330,13 @@ namespace StepCount
             p_test = 1.0f;
             p_euler = 1.0f;
             p_second = 1.0f;
+            p_m = 1.0f;
 
             pd = 1.0f;
             pd_test = 1.0f;
             pd_euler = 1.0f;
             pd_second = 1.0f;
+            pd_m = 1.0f;
 
             movingDistance = 0.0f;
 
@@ -1341,11 +1344,18 @@ namespace StepCount
             movingDistanceErrorEuler = 0.0f;
             movingDistanceErrorSecond = 0.0f;
             movingDistanceErrorTest = 0.0f;
+            movingDistanceErrorM = 0.0f;
 
             movingDistanceErrorD = 0.0f;
             movingDistanceErrorEulerD = 0.0f;
             movingDistanceErrorSecondD = 0.0f;
             movingDistanceErrorTestD = 0.0f;
+            movingDistanceErrorMD = 0.0f;
+
+            mStanceHeadAvg.heading = GetTiltHeading();
+            mStanceHeadAvgEuler.heading = x.GetMotionEuler();
+            mStanceHeadAvgTest.heading = GetHeading();
+            mStanceHeadAvgSecond.heading = GetTiltHeadingSecond(); 
 
             for (int i = 0; i < stageSize; i++)
             {
@@ -1478,10 +1488,10 @@ namespace StepCount
 
         protected override void WndProc(ref Message m)
         {
-            MessageBox.Show(m.LParam.ToString());
-            MessageBox.Show(m.Msg.ToString());
-            MessageBox.Show(m.WParam.ToString());
-            MessageBox.Show(m.Result.ToString());
+            //MessageBox.Show(m.LParam.ToString());
+            //MessageBox.Show(m.Msg.ToString());
+            //MessageBox.Show(m.WParam.ToString());
+            //MessageBox.Show(m.Result.ToString());
 
             base.WndProc(ref m);
         }
