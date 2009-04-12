@@ -1493,7 +1493,7 @@ namespace StepCount
 
                     //MessageBox.Show(((Win32API.COPYDATASTRUCT)(m.LParam)).lpData);
                     //String msg = System.Runtime.InteropServices.Marshal.PtrToStringAuto(m.LParam);
-                    MessageBox.Show(m.LParam.ToInt32().ToString());
+                    MessageBox.Show(m.LParam.ToString());
                     //MessageBox.Show(msg);
 
                     break;
