@@ -1150,7 +1150,7 @@ namespace StepCount
                                                         {
                                                             string sendMsg = curX.ToString() + "," + curY.ToString() + "," + p.ToString();
 
-                                                            SendMessage("WifiLoc", sendMsg);
+                                                            SendMessage("WifiLoc", sendMsg, 1);
                                                         }
 
                                                         posLog.WriteLine("Send Grid," + curX.ToString() + "," + curY.ToString() + "," + p.ToString());
@@ -1371,6 +1371,7 @@ namespace StepCount
                 ycM[i] = y_init;
             }
             logFlag = true;
+
         }
 
         private void Pause_Bt_Click(object sender, EventArgs e)
@@ -1378,12 +1379,12 @@ namespace StepCount
             logFlag = false;
         }
 
-        void SendMessage(string strProgramName, string message)
+        void SendMessage(string strProgramName, string message, int cmd)
         {
             try
             {
                 Win32API.COPYDATASTRUCT copyDataStruct = new Win32API.COPYDATASTRUCT();
-                copyDataStruct.dwData = (IntPtr)1; // 임시값
+                copyDataStruct.dwData = (IntPtr)cmd; // 임시값
 
                 copyDataStruct.cbData = message.Length * 2 + 1; // 한글 코드 지원
                 //copyDataStruct.cbData = sizeof(int) * 2 + sizeof(double);
@@ -1413,15 +1414,9 @@ namespace StepCount
             if (wndPtr == null)
                 MessageBox.Show("Fail to Find Window");
 
-            int bR = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
-            int bbR = (stageIndexR - 2 < 0) ? (stageSize + (stageIndexR - 2)) : (stageIndexR - 2);
+            string sendMsg = x_init.ToString() + "," + y_init.ToString();
 
-            int curX = (int)(xcR[bR] / 2.0f);
-            int curY = (int)(ycR[bR] / 2.0f);
-
-            string sendMsg = curX.ToString() + "," + curY.ToString() + "," + p.ToString();
-
-            SendMessage("WifiLoc", sendMsg);
+            SendMessage("WifiLoc", sendMsg, 0);
         }
 
         private void KeyDownEvent(object sender, KeyEventArgs e)
@@ -1488,10 +1483,17 @@ namespace StepCount
 
         protected override void WndProc(ref Message m)
         {
-            MessageBox.Show(m.LParam.ToString());
             MessageBox.Show(m.Msg.ToString());
-            MessageBox.Show(m.WParam.ToString());
-            MessageBox.Show(m.Result.ToString());
+            
+            char[] seps = { ',' };
+            String msg = System.Runtime.InteropServices.Marshal.PtrToStringAuto(m.LParam);
+            MessageBox.Show(msg);
+            msg = System.Runtime.InteropServices.Marshal.PtrToStringAuto(m.WParam);
+            MessageBox.Show(msg);
+
+            //int x_receive = Convert.ToInt32(msg.Split(seps));
+            //int y_receive = Convert.ToInt32(msg.Split(seps));
+            //float p_receive = (float)Convert.ToDecimal(msg.Split(seps));
 
             base.WndProc(ref m);
         }
