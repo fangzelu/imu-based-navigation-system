@@ -1488,10 +1488,10 @@ namespace StepCount
 
         protected override void WndProc(ref Message m)
         {
-            //MessageBox.Show(m.LParam.ToString());
-            //MessageBox.Show(m.Msg.ToString());
-            //MessageBox.Show(m.WParam.ToString());
-            //MessageBox.Show(m.Result.ToString());
+            MessageBox.Show(m.LParam.ToString());
+            MessageBox.Show(m.Msg.ToString());
+            MessageBox.Show(m.WParam.ToString());
+            MessageBox.Show(m.Result.ToString());
 
             base.WndProc(ref m);
         }
