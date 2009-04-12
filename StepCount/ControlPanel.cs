@@ -28,6 +28,7 @@ namespace StepCount
         bool sendFlag;
         IntPtr wndPtr;
         string wndName = "WifiLoc";
+        const int WM_ACTIVATEAPP = 0x001C;
 
         //*** Coordinates
         const int GRID = 2;
@@ -1483,17 +1484,20 @@ namespace StepCount
 
         protected override void WndProc(ref Message m)
         {
-            MessageBox.Show(m.Msg.ToString());
-            
-            char[] seps = { ',' };
-            String msg = System.Runtime.InteropServices.Marshal.PtrToStringAuto(m.LParam);
-            MessageBox.Show(msg);
-            msg = System.Runtime.InteropServices.Marshal.PtrToStringAuto(m.WParam);
-            MessageBox.Show(msg);
+            switch(m.Msg)
+            {
+                case WM_ACTIVATEAPP:
+                    char[] seps = { ',' };
+                    String msg = System.Runtime.InteropServices.Marshal.PtrToStringAuto(m.LParam);
+                    MessageBox.Show(msg);
+                    msg = System.Runtime.InteropServices.Marshal.PtrToStringAuto(m.WParam);
+                    MessageBox.Show(msg);
 
-            //int x_receive = Convert.ToInt32(msg.Split(seps));
-            //int y_receive = Convert.ToInt32(msg.Split(seps));
-            //float p_receive = (float)Convert.ToDecimal(msg.Split(seps));
+                    break;
+                //int x_receive = Convert.ToInt32(msg.Split(seps));
+                //int y_receive = Convert.ToInt32(msg.Split(seps));
+                //float p_receive = (float)Convert.ToDecimal(msg.Split(seps));
+            }           
 
             base.WndProc(ref m);
         }
