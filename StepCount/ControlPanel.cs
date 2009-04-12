@@ -1156,7 +1156,7 @@ namespace StepCount
                                                             SendMessage("WifiLoc", sendMsg, 1);
                                                         }
 
-                                                        posLog.WriteLine("Send Grid," + curX.ToString() + "," + curY.ToString() + "," + movingDistanceErrorEulerD.ToString());
+                                                        //posLog.WriteLine("Send Grid," + curX.ToString() + "," + curY.ToString() + "," + movingDistanceErrorEulerD.ToString());
                                                     }
                                                 }
                                             }
