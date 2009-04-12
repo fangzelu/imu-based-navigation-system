@@ -1488,12 +1488,10 @@ namespace StepCount
         {
             switch(m.Msg)
             {
-                case WM_USER:
+                case Win32API.WM_COPYDATA:
                     char[] seps = { ',' };
 
                     Win32API.COPYDATASTRUCT rcv = (Win32API.COPYDATASTRUCT)Marshal.PtrToStructure(m.LParam, typeof(Win32API.COPYDATASTRUCT));
-                    //MessageBox.Show(((Win32API.COPYDATASTRUCT)(m.LParam)).lpData);
-                    //String msg = System.Runtime.InteropServices.Marshal.PtrToStringAuto(m.LParam);
                     MessageBox.Show(rcv.lpData);
                     //MessageBox.Show(msg);
 
