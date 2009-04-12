@@ -1420,7 +1420,7 @@ namespace StepCount
             if (wndPtr == null)
                 MessageBox.Show("Fail to Find Window");
 
-            string sendMsg = x_init.ToString() + "," + y_init.ToString();
+            string sendMsg = (x_init / 2.0f).ToString() + "," + (y_init / 2.0f).ToString();
 
             SendMessage("WifiLoc", sendMsg, 0);
         }
