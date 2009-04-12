@@ -736,7 +736,7 @@ namespace StepCount
                                         
                                 foreach (KeyValuePair<int, MotionNode.SDK.Format.PreviewElement> itr in previewMotion)
                                 {
-                                    x.UpdateMotionEuler(itr.Value.getEuler()[0]);
+                                    x.UpdateMotionEuler(itr.Value.getEuler()[0] - (float)(Math.PI / 6.0f));
                                 }
 
                             }
