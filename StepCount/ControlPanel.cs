@@ -1141,22 +1141,22 @@ namespace StepCount
                                                     posLog.WriteLine("One Step");
                                                     if (sendFlag)
                                                     {
-                                                        int bR = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
-                                                        int bbR = (stageIndexR - 2 < 0) ? (stageSize + (stageIndexR - 2)) : (stageIndexR - 2);
+                                                        int bM = (stageIndexM - 1 < 0) ? (stageSize + (stageIndexM - 1)) : (stageIndexM - 1);
+                                                        int bbM = (stageIndexM - 2 < 0) ? (stageSize + (stageIndexM - 2)) : (stageIndexM - 2);
 
-                                                        int curX = (int)(xcR[bR] / 2.0f);
-                                                        int curY = (int)(ycR[bR] / 2.0f);
-                                                        int beforeX = (int)(xcR[bbR] / 2.0f);
-                                                        int beforeY = (int)(ycR[bbR] / 2.0f);
+                                                        int curX = (int)(xcM[bM] / 2.0f);
+                                                        int curY = (int)(ycM[bM] / 2.0f);
+                                                        int beforeX = (int)(xcM[bbM] / 2.0f);
+                                                        int beforeY = (int)(ycM[bbM] / 2.0f);
 
                                                         if (curX != beforeX || curY != beforeY)
                                                         {
-                                                            string sendMsg = curX.ToString() + "," + curY.ToString() + "," + p.ToString();
+                                                            string sendMsg = curX.ToString() + "," + curY.ToString() + "," + movingDistanceErrorEulerD.ToString();
 
                                                             SendMessage("WifiLoc", sendMsg, 1);
                                                         }
 
-                                                        posLog.WriteLine("Send Grid," + curX.ToString() + "," + curY.ToString() + "," + p.ToString());
+                                                        posLog.WriteLine("Send Grid," + curX.ToString() + "," + curY.ToString() + "," + movingDistanceErrorEulerD.ToString());
                                                     }
                                                 }
                                             }
@@ -1276,12 +1276,15 @@ namespace StepCount
                                     this.mStageRX.Text = (xcR[b]).ToString();
                                     this.mStageRY.Text = (ycR[b]).ToString();
 
-                                    this.mRp.Text = p.ToString();
-                                    this.mRpd.Text = pd.ToString();
-                                    this.mRp_euler.Text = p_euler.ToString();
-                                    this.mRpd_euler.Text = pd_euler.ToString();
-                                    this.mRp_m.Text = p_m.ToString();
-                                    this.mRpd_m.Text = pd_m.ToString();
+                                    this.mError.Text = movingDistanceError.ToString();
+                                    this.mErrorTest.Text = movingDistanceErrorTest.ToString();
+                                    this.mErrorEuler.Text = movingDistanceErrorEuler.ToString();
+                                    this.mErrorM.Text = movingDistanceErrorM.ToString();
+
+                                    this.mErrorD.Text = movingDistanceErrorD.ToString();
+                                    this.mErrorTestD.Text = movingDistanceErrorTestD.ToString();
+                                    this.mErrorEulerD.Text = movingDistanceErrorEulerD.ToString();
+                                    this.mErrorMD.Text = movingDistanceErrorMD.ToString();
 
                                     this.mRoll.Text = (y.mGetAngle() * 180.0f / Math.PI).ToString();
                                     this.mPitch.Text = (z.mGetAngle() * 180.0f / Math.PI).ToString();
@@ -1492,13 +1495,23 @@ namespace StepCount
                     char[] seps = { ',' };
 
                     Win32API.COPYDATASTRUCT rcv = (Win32API.COPYDATASTRUCT)Marshal.PtrToStructure(m.LParam, typeof(Win32API.COPYDATASTRUCT));
-                    MessageBox.Show(rcv.lpData);
-                    //MessageBox.Show(msg);
+                    
+                    int x_receive = Convert.ToInt32(rcv.lpData.Split(seps));
+                    int y_receive = Convert.ToInt32(rcv.lpData.Split(seps));
+                    float error_receive = (float)Convert.ToDecimal(rcv.lpData.Split(seps));
+
+                    MessageBox.Show(x_receive.ToString());
+                    MessageBox.Show(y_receive.ToString());
+                    MessageBox.Show(error_receive.ToString());
+
+                    movingDistanceErrorMD = error_receive;
+                    xcM[stageIndexM] = x_receive;
+                    ycM[stageIndexM] = y_receive;
+                    stageIndexM++;
+                    if (stageIndexM >= stageSize)
+                        stageIndexM = 0;
 
                     break;
-                //int x_receive = Convert.ToInt32(msg.Split(seps));
-                //int y_receive = Convert.ToInt32(msg.Split(seps));
-                //float p_receive = (float)Convert.ToDecimal(msg.Split(seps));
             }           
 
             base.WndProc(ref m);

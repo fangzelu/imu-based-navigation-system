@@ -46,9 +46,12 @@
             this.StepIntervalLabel = new System.Windows.Forms.Label();
             this.StepCountLabel = new System.Windows.Forms.Label();
             this.groupBox16 = new System.Windows.Forms.GroupBox();
-            this.mRp_euler = new System.Windows.Forms.Label();
-            this.mRpd = new System.Windows.Forms.Label();
-            this.mRp = new System.Windows.Forms.Label();
+            this.mErrorMD = new System.Windows.Forms.Label();
+            this.mErrorEulerD = new System.Windows.Forms.Label();
+            this.mErrorTestD = new System.Windows.Forms.Label();
+            this.mErrorEuler = new System.Windows.Forms.Label();
+            this.mErrorTest = new System.Windows.Forms.Label();
+            this.mError = new System.Windows.Forms.Label();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.mPitch = new System.Windows.Forms.Label();
             this.mRoll = new System.Windows.Forms.Label();
@@ -101,9 +104,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TrainingDone = new System.Windows.Forms.Button();
             this.TraningStart = new System.Windows.Forms.Button();
-            this.mRpd_euler = new System.Windows.Forms.Label();
-            this.mRpd_m = new System.Windows.Forms.Label();
-            this.mRp_m = new System.Windows.Forms.Label();
+            this.mErrorM = new System.Windows.Forms.Label();
+            this.mErrorD = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -314,45 +316,74 @@
             // 
             // groupBox16
             // 
-            this.groupBox16.Controls.Add(this.mRpd_m);
-            this.groupBox16.Controls.Add(this.mRp_m);
-            this.groupBox16.Controls.Add(this.mRpd_euler);
-            this.groupBox16.Controls.Add(this.mRp_euler);
-            this.groupBox16.Controls.Add(this.mRpd);
-            this.groupBox16.Controls.Add(this.mRp);
+            this.groupBox16.Controls.Add(this.mErrorD);
+            this.groupBox16.Controls.Add(this.mErrorM);
+            this.groupBox16.Controls.Add(this.mErrorMD);
+            this.groupBox16.Controls.Add(this.mErrorEulerD);
+            this.groupBox16.Controls.Add(this.mErrorTestD);
+            this.groupBox16.Controls.Add(this.mErrorEuler);
+            this.groupBox16.Controls.Add(this.mErrorTest);
+            this.groupBox16.Controls.Add(this.mError);
             this.groupBox16.Location = new System.Drawing.Point(343, 118);
             this.groupBox16.Name = "groupBox16";
             this.groupBox16.Size = new System.Drawing.Size(78, 188);
             this.groupBox16.TabIndex = 8;
             this.groupBox16.TabStop = false;
-            this.groupBox16.Text = "Reliability";
+            this.groupBox16.Text = "Error";
             // 
-            // mRp_euler
+            // mErrorMD
             // 
-            this.mRp_euler.Location = new System.Drawing.Point(14, 62);
-            this.mRp_euler.Name = "mRp_euler";
-            this.mRp_euler.Size = new System.Drawing.Size(50, 13);
-            this.mRp_euler.TabIndex = 2;
-            this.mRp_euler.Text = "-";
-            this.mRp_euler.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mErrorMD.Location = new System.Drawing.Point(14, 163);
+            this.mErrorMD.Name = "mErrorMD";
+            this.mErrorMD.Size = new System.Drawing.Size(50, 13);
+            this.mErrorMD.TabIndex = 5;
+            this.mErrorMD.Text = "-";
+            this.mErrorMD.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // mRpd
+            // mErrorEulerD
             // 
-            this.mRpd.Location = new System.Drawing.Point(14, 41);
-            this.mRpd.Name = "mRpd";
-            this.mRpd.Size = new System.Drawing.Size(50, 13);
-            this.mRpd.TabIndex = 1;
-            this.mRpd.Text = "-";
-            this.mRpd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mErrorEulerD.Location = new System.Drawing.Point(14, 144);
+            this.mErrorEulerD.Name = "mErrorEulerD";
+            this.mErrorEulerD.Size = new System.Drawing.Size(50, 13);
+            this.mErrorEulerD.TabIndex = 4;
+            this.mErrorEulerD.Text = "-";
+            this.mErrorEulerD.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // mRp
+            // mErrorTestD
             // 
-            this.mRp.Location = new System.Drawing.Point(14, 22);
-            this.mRp.Name = "mRp";
-            this.mRp.Size = new System.Drawing.Size(50, 13);
-            this.mRp.TabIndex = 0;
-            this.mRp.Text = "-";
-            this.mRp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mErrorTestD.Location = new System.Drawing.Point(14, 125);
+            this.mErrorTestD.Name = "mErrorTestD";
+            this.mErrorTestD.Size = new System.Drawing.Size(50, 13);
+            this.mErrorTestD.TabIndex = 3;
+            this.mErrorTestD.Text = "-";
+            this.mErrorTestD.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // mErrorEuler
+            // 
+            this.mErrorEuler.Location = new System.Drawing.Point(14, 56);
+            this.mErrorEuler.Name = "mErrorEuler";
+            this.mErrorEuler.Size = new System.Drawing.Size(50, 13);
+            this.mErrorEuler.TabIndex = 2;
+            this.mErrorEuler.Text = "-";
+            this.mErrorEuler.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // mErrorTest
+            // 
+            this.mErrorTest.Location = new System.Drawing.Point(14, 38);
+            this.mErrorTest.Name = "mErrorTest";
+            this.mErrorTest.Size = new System.Drawing.Size(50, 13);
+            this.mErrorTest.TabIndex = 1;
+            this.mErrorTest.Text = "-";
+            this.mErrorTest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // mError
+            // 
+            this.mError.Location = new System.Drawing.Point(14, 20);
+            this.mError.Name = "mError";
+            this.mError.Size = new System.Drawing.Size(50, 13);
+            this.mError.TabIndex = 0;
+            this.mError.Text = "-";
+            this.mError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox15
             // 
@@ -881,32 +912,23 @@
             this.TraningStart.UseVisualStyleBackColor = true;
             this.TraningStart.Click += new System.EventHandler(this.TraningStart_Click);
             // 
-            // mRpd_euler
+            // mErrorM
             // 
-            this.mRpd_euler.Location = new System.Drawing.Point(14, 117);
-            this.mRpd_euler.Name = "mRpd_euler";
-            this.mRpd_euler.Size = new System.Drawing.Size(50, 13);
-            this.mRpd_euler.TabIndex = 3;
-            this.mRpd_euler.Text = "-";
-            this.mRpd_euler.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mErrorM.Location = new System.Drawing.Point(14, 74);
+            this.mErrorM.Name = "mErrorM";
+            this.mErrorM.Size = new System.Drawing.Size(50, 13);
+            this.mErrorM.TabIndex = 6;
+            this.mErrorM.Text = "-";
+            this.mErrorM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // mRpd_m
+            // mErrorD
             // 
-            this.mRpd_m.Location = new System.Drawing.Point(14, 162);
-            this.mRpd_m.Name = "mRpd_m";
-            this.mRpd_m.Size = new System.Drawing.Size(50, 13);
-            this.mRpd_m.TabIndex = 5;
-            this.mRpd_m.Text = "-";
-            this.mRpd_m.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // mRp_m
-            // 
-            this.mRp_m.Location = new System.Drawing.Point(14, 140);
-            this.mRp_m.Name = "mRp_m";
-            this.mRp_m.Size = new System.Drawing.Size(50, 13);
-            this.mRp_m.TabIndex = 4;
-            this.mRp_m.Text = "-";
-            this.mRp_m.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mErrorD.Location = new System.Drawing.Point(14, 105);
+            this.mErrorD.Name = "mErrorD";
+            this.mErrorD.Size = new System.Drawing.Size(50, 13);
+            this.mErrorD.TabIndex = 7;
+            this.mErrorD.Text = "-";
+            this.mErrorD.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ControlPanel
             // 
@@ -1004,9 +1026,9 @@
         private System.Windows.Forms.Label mRoll;
         private System.Windows.Forms.Label mHeadTilt;
         private System.Windows.Forms.GroupBox groupBox16;
-        private System.Windows.Forms.Label mRp_euler;
-        private System.Windows.Forms.Label mRpd;
-        private System.Windows.Forms.Label mRp;
+        private System.Windows.Forms.Label mErrorEuler;
+        private System.Windows.Forms.Label mErrorTest;
+        private System.Windows.Forms.Label mError;
         private System.Windows.Forms.GroupBox groupBox18;
         private System.Windows.Forms.NumericUpDown StartY;
         private System.Windows.Forms.NumericUpDown StartX;
@@ -1024,9 +1046,11 @@
         private System.Windows.Forms.Label mHeadStepTilt;
         private System.Windows.Forms.Label mHeadStep;
         private System.Windows.Forms.Label StepP;
-        private System.Windows.Forms.Label mRpd_euler;
-        private System.Windows.Forms.Label mRpd_m;
-        private System.Windows.Forms.Label mRp_m;
+        private System.Windows.Forms.Label mErrorTestD;
+        private System.Windows.Forms.Label mErrorMD;
+        private System.Windows.Forms.Label mErrorEulerD;
+        private System.Windows.Forms.Label mErrorD;
+        private System.Windows.Forms.Label mErrorM;
     }
 }
 
