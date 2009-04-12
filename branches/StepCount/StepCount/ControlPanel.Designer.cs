@@ -45,14 +45,10 @@
             this.StepP = new System.Windows.Forms.Label();
             this.StepIntervalLabel = new System.Windows.Forms.Label();
             this.StepCountLabel = new System.Windows.Forms.Label();
-            this.groupBox17 = new System.Windows.Forms.GroupBox();
-            this.mStageRYZ = new System.Windows.Forms.Label();
-            this.mStageRTY = new System.Windows.Forms.Label();
-            this.mStageRTX = new System.Windows.Forms.Label();
             this.groupBox16 = new System.Windows.Forms.GroupBox();
-            this.mStageTiltZ = new System.Windows.Forms.Label();
-            this.mStageTiltY = new System.Windows.Forms.Label();
-            this.mStageTiltX = new System.Windows.Forms.Label();
+            this.mRp_euler = new System.Windows.Forms.Label();
+            this.mRpd = new System.Windows.Forms.Label();
+            this.mRp = new System.Windows.Forms.Label();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.mPitch = new System.Windows.Forms.Label();
             this.mRoll = new System.Windows.Forms.Label();
@@ -65,9 +61,9 @@
             this.mStageRY = new System.Windows.Forms.Label();
             this.mStageRX = new System.Windows.Forms.Label();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.mLocalZ = new System.Windows.Forms.Label();
-            this.mLocalY = new System.Windows.Forms.Label();
-            this.mLocalX = new System.Windows.Forms.Label();
+            this.mStageMZ = new System.Windows.Forms.Label();
+            this.mStageMY = new System.Windows.Forms.Label();
+            this.mStageMX = new System.Windows.Forms.Label();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.mHeadTilt = new System.Windows.Forms.Label();
             this.mHead = new System.Windows.Forms.Label();
@@ -105,13 +101,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TrainingDone = new System.Windows.Forms.Button();
             this.TraningStart = new System.Windows.Forms.Button();
+            this.mRpd_euler = new System.Windows.Forms.Label();
+            this.mRpd_m = new System.Windows.Forms.Label();
+            this.mRp_m = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox21.SuspendLayout();
             this.groupBox20.SuspendLayout();
-            this.groupBox17.SuspendLayout();
             this.groupBox16.SuspendLayout();
             this.groupBox15.SuspendLayout();
             this.groupBox14.SuspendLayout();
@@ -227,7 +225,6 @@
             // 
             this.groupBox4.Controls.Add(this.groupBox21);
             this.groupBox4.Controls.Add(this.groupBox20);
-            this.groupBox4.Controls.Add(this.groupBox17);
             this.groupBox4.Controls.Add(this.groupBox16);
             this.groupBox4.Controls.Add(this.groupBox15);
             this.groupBox4.Controls.Add(this.groupBox14);
@@ -256,7 +253,7 @@
             this.groupBox21.Size = new System.Drawing.Size(78, 91);
             this.groupBox21.TabIndex = 6;
             this.groupBox21.TabStop = false;
-            this.groupBox21.Text = "Heading";
+            this.groupBox21.Text = "SHeading";
             // 
             // mHeadStepTilt
             // 
@@ -315,83 +312,47 @@
             this.StepCountLabel.Text = "-";
             this.StepCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // groupBox17
-            // 
-            this.groupBox17.Controls.Add(this.mStageRYZ);
-            this.groupBox17.Controls.Add(this.mStageRTY);
-            this.groupBox17.Controls.Add(this.mStageRTX);
-            this.groupBox17.Location = new System.Drawing.Point(343, 215);
-            this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Size = new System.Drawing.Size(78, 91);
-            this.groupBox17.TabIndex = 7;
-            this.groupBox17.TabStop = false;
-            this.groupBox17.Text = "StageRT";
-            // 
-            // mStageRYZ
-            // 
-            this.mStageRYZ.Location = new System.Drawing.Point(14, 65);
-            this.mStageRYZ.Name = "mStageRYZ";
-            this.mStageRYZ.Size = new System.Drawing.Size(50, 13);
-            this.mStageRYZ.TabIndex = 2;
-            this.mStageRYZ.Text = "-";
-            this.mStageRYZ.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // mStageRTY
-            // 
-            this.mStageRTY.Location = new System.Drawing.Point(14, 44);
-            this.mStageRTY.Name = "mStageRTY";
-            this.mStageRTY.Size = new System.Drawing.Size(50, 13);
-            this.mStageRTY.TabIndex = 1;
-            this.mStageRTY.Text = "-";
-            this.mStageRTY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // mStageRTX
-            // 
-            this.mStageRTX.Location = new System.Drawing.Point(14, 22);
-            this.mStageRTX.Name = "mStageRTX";
-            this.mStageRTX.Size = new System.Drawing.Size(50, 13);
-            this.mStageRTX.TabIndex = 0;
-            this.mStageRTX.Text = "-";
-            this.mStageRTX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // groupBox16
             // 
-            this.groupBox16.Controls.Add(this.mStageTiltZ);
-            this.groupBox16.Controls.Add(this.mStageTiltY);
-            this.groupBox16.Controls.Add(this.mStageTiltX);
+            this.groupBox16.Controls.Add(this.mRpd_m);
+            this.groupBox16.Controls.Add(this.mRp_m);
+            this.groupBox16.Controls.Add(this.mRpd_euler);
+            this.groupBox16.Controls.Add(this.mRp_euler);
+            this.groupBox16.Controls.Add(this.mRpd);
+            this.groupBox16.Controls.Add(this.mRp);
             this.groupBox16.Location = new System.Drawing.Point(343, 118);
             this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Size = new System.Drawing.Size(78, 91);
+            this.groupBox16.Size = new System.Drawing.Size(78, 188);
             this.groupBox16.TabIndex = 8;
             this.groupBox16.TabStop = false;
-            this.groupBox16.Text = "StageTilt";
+            this.groupBox16.Text = "Reliability";
             // 
-            // mStageTiltZ
+            // mRp_euler
             // 
-            this.mStageTiltZ.Location = new System.Drawing.Point(14, 65);
-            this.mStageTiltZ.Name = "mStageTiltZ";
-            this.mStageTiltZ.Size = new System.Drawing.Size(50, 13);
-            this.mStageTiltZ.TabIndex = 2;
-            this.mStageTiltZ.Text = "-";
-            this.mStageTiltZ.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mRp_euler.Location = new System.Drawing.Point(14, 62);
+            this.mRp_euler.Name = "mRp_euler";
+            this.mRp_euler.Size = new System.Drawing.Size(50, 13);
+            this.mRp_euler.TabIndex = 2;
+            this.mRp_euler.Text = "-";
+            this.mRp_euler.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // mStageTiltY
+            // mRpd
             // 
-            this.mStageTiltY.Location = new System.Drawing.Point(14, 44);
-            this.mStageTiltY.Name = "mStageTiltY";
-            this.mStageTiltY.Size = new System.Drawing.Size(50, 13);
-            this.mStageTiltY.TabIndex = 1;
-            this.mStageTiltY.Text = "-";
-            this.mStageTiltY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mRpd.Location = new System.Drawing.Point(14, 41);
+            this.mRpd.Name = "mRpd";
+            this.mRpd.Size = new System.Drawing.Size(50, 13);
+            this.mRpd.TabIndex = 1;
+            this.mRpd.Text = "-";
+            this.mRpd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // mStageTiltX
+            // mRp
             // 
-            this.mStageTiltX.Location = new System.Drawing.Point(14, 22);
-            this.mStageTiltX.Name = "mStageTiltX";
-            this.mStageTiltX.Size = new System.Drawing.Size(50, 13);
-            this.mStageTiltX.TabIndex = 0;
-            this.mStageTiltX.Text = "-";
-            this.mStageTiltX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mRp.Location = new System.Drawing.Point(14, 22);
+            this.mRp.Name = "mRp";
+            this.mRp.Size = new System.Drawing.Size(50, 13);
+            this.mRp.TabIndex = 0;
+            this.mRp.Text = "-";
+            this.mRp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox15
             // 
@@ -432,7 +393,7 @@
             this.groupBox14.Size = new System.Drawing.Size(78, 91);
             this.groupBox14.TabIndex = 7;
             this.groupBox14.TabStop = false;
-            this.groupBox14.Text = "Stage";
+            this.groupBox14.Text = "StageRaw";
             // 
             // mStageZ
             // 
@@ -471,7 +432,7 @@
             this.groupBox13.Size = new System.Drawing.Size(78, 91);
             this.groupBox13.TabIndex = 6;
             this.groupBox13.TabStop = false;
-            this.groupBox13.Text = "StageR";
+            this.groupBox13.Text = "Stage";
             // 
             // mStageRZ
             // 
@@ -502,42 +463,42 @@
             // 
             // groupBox12
             // 
-            this.groupBox12.Controls.Add(this.mLocalZ);
-            this.groupBox12.Controls.Add(this.mLocalY);
-            this.groupBox12.Controls.Add(this.mLocalX);
+            this.groupBox12.Controls.Add(this.mStageMZ);
+            this.groupBox12.Controls.Add(this.mStageMY);
+            this.groupBox12.Controls.Add(this.mStageMX);
             this.groupBox12.Location = new System.Drawing.Point(175, 118);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(78, 91);
             this.groupBox12.TabIndex = 5;
             this.groupBox12.TabStop = false;
-            this.groupBox12.Text = "Local";
+            this.groupBox12.Text = "StageM";
             // 
-            // mLocalZ
+            // mStageMZ
             // 
-            this.mLocalZ.Location = new System.Drawing.Point(14, 65);
-            this.mLocalZ.Name = "mLocalZ";
-            this.mLocalZ.Size = new System.Drawing.Size(50, 13);
-            this.mLocalZ.TabIndex = 2;
-            this.mLocalZ.Text = "-";
-            this.mLocalZ.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mStageMZ.Location = new System.Drawing.Point(14, 65);
+            this.mStageMZ.Name = "mStageMZ";
+            this.mStageMZ.Size = new System.Drawing.Size(50, 13);
+            this.mStageMZ.TabIndex = 2;
+            this.mStageMZ.Text = "-";
+            this.mStageMZ.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // mLocalY
+            // mStageMY
             // 
-            this.mLocalY.Location = new System.Drawing.Point(14, 44);
-            this.mLocalY.Name = "mLocalY";
-            this.mLocalY.Size = new System.Drawing.Size(50, 13);
-            this.mLocalY.TabIndex = 1;
-            this.mLocalY.Text = "-";
-            this.mLocalY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mStageMY.Location = new System.Drawing.Point(14, 44);
+            this.mStageMY.Name = "mStageMY";
+            this.mStageMY.Size = new System.Drawing.Size(50, 13);
+            this.mStageMY.TabIndex = 1;
+            this.mStageMY.Text = "-";
+            this.mStageMY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // mLocalX
+            // mStageMX
             // 
-            this.mLocalX.Location = new System.Drawing.Point(14, 22);
-            this.mLocalX.Name = "mLocalX";
-            this.mLocalX.Size = new System.Drawing.Size(50, 13);
-            this.mLocalX.TabIndex = 0;
-            this.mLocalX.Text = "-";
-            this.mLocalX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mStageMX.Location = new System.Drawing.Point(14, 22);
+            this.mStageMX.Name = "mStageMX";
+            this.mStageMX.Size = new System.Drawing.Size(50, 13);
+            this.mStageMX.TabIndex = 0;
+            this.mStageMX.Text = "-";
+            this.mStageMX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox11
             // 
@@ -920,6 +881,33 @@
             this.TraningStart.UseVisualStyleBackColor = true;
             this.TraningStart.Click += new System.EventHandler(this.TraningStart_Click);
             // 
+            // mRpd_euler
+            // 
+            this.mRpd_euler.Location = new System.Drawing.Point(14, 117);
+            this.mRpd_euler.Name = "mRpd_euler";
+            this.mRpd_euler.Size = new System.Drawing.Size(50, 13);
+            this.mRpd_euler.TabIndex = 3;
+            this.mRpd_euler.Text = "-";
+            this.mRpd_euler.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // mRpd_m
+            // 
+            this.mRpd_m.Location = new System.Drawing.Point(14, 162);
+            this.mRpd_m.Name = "mRpd_m";
+            this.mRpd_m.Size = new System.Drawing.Size(50, 13);
+            this.mRpd_m.TabIndex = 5;
+            this.mRpd_m.Text = "-";
+            this.mRpd_m.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // mRp_m
+            // 
+            this.mRp_m.Location = new System.Drawing.Point(14, 140);
+            this.mRp_m.Name = "mRp_m";
+            this.mRp_m.Size = new System.Drawing.Size(50, 13);
+            this.mRp_m.TabIndex = 4;
+            this.mRp_m.Text = "-";
+            this.mRp_m.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -941,7 +929,6 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox21.ResumeLayout(false);
             this.groupBox20.ResumeLayout(false);
-            this.groupBox17.ResumeLayout(false);
             this.groupBox16.ResumeLayout(false);
             this.groupBox15.ResumeLayout(false);
             this.groupBox14.ResumeLayout(false);
@@ -1009,21 +996,17 @@
         private System.Windows.Forms.Label mStageRY;
         private System.Windows.Forms.Label mStageRX;
         private System.Windows.Forms.GroupBox groupBox12;
-        private System.Windows.Forms.Label mLocalZ;
-        private System.Windows.Forms.Label mLocalY;
-        private System.Windows.Forms.Label mLocalX;
+        private System.Windows.Forms.Label mStageMZ;
+        private System.Windows.Forms.Label mStageMY;
+        private System.Windows.Forms.Label mStageMX;
         private System.Windows.Forms.GroupBox groupBox15;
         private System.Windows.Forms.Label mPitch;
         private System.Windows.Forms.Label mRoll;
         private System.Windows.Forms.Label mHeadTilt;
         private System.Windows.Forms.GroupBox groupBox16;
-        private System.Windows.Forms.Label mStageTiltZ;
-        private System.Windows.Forms.Label mStageTiltY;
-        private System.Windows.Forms.Label mStageTiltX;
-        private System.Windows.Forms.GroupBox groupBox17;
-        private System.Windows.Forms.Label mStageRYZ;
-        private System.Windows.Forms.Label mStageRTY;
-        private System.Windows.Forms.Label mStageRTX;
+        private System.Windows.Forms.Label mRp_euler;
+        private System.Windows.Forms.Label mRpd;
+        private System.Windows.Forms.Label mRp;
         private System.Windows.Forms.GroupBox groupBox18;
         private System.Windows.Forms.NumericUpDown StartY;
         private System.Windows.Forms.NumericUpDown StartX;
@@ -1041,6 +1024,9 @@
         private System.Windows.Forms.Label mHeadStepTilt;
         private System.Windows.Forms.Label mHeadStep;
         private System.Windows.Forms.Label StepP;
+        private System.Windows.Forms.Label mRpd_euler;
+        private System.Windows.Forms.Label mRpd_m;
+        private System.Windows.Forms.Label mRp_m;
     }
 }
 

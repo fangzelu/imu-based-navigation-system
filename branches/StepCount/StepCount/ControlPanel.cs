@@ -49,6 +49,10 @@ namespace StepCount
         float[] xcR_tilt;
         float[] ycR_tilt;
 
+        int stageIndexM = 0;
+        float[] xcM;
+        float[] ycM;
+
         //*** Step Count
         List<int> mAccelRawY = new List<int>();
         
@@ -88,11 +92,13 @@ namespace StepCount
         float movingDistanceErrorTest = 0.0f;
         float movingDistanceErrorSecond = 0.0f;
         float movingDistanceErrorEuler = 0.0f;
+        float movingDistanceErrorM = 0.0f;
 
         float movingDistanceErrorD = 0.0f;
         float movingDistanceErrorTestD = 0.0f;
         float movingDistanceErrorSecondD = 0.0f;
         float movingDistanceErrorEulerD = 0.0f;
+        float movingDistanceErrorMD = 0.0f;
 
         List<int> oneStepRaw = new List<int>();
         List<float> oneStepAcc = new List<float>();
@@ -120,11 +126,13 @@ namespace StepCount
         float p_second = 1.0f;
         float p_test = 1.0f;
         float p_euler = 1.0f;
+        float p_m = 1.0f;
 
         float pd = 1.0f;
         float pd_second = 1.0f;
         float pd_test = 1.0f;
         float pd_euler = 1.0f;
+        float pd_m = 1.0f;
 
         float pc = 1.0f;
         float pc_gap = 0.001f;
@@ -235,6 +243,8 @@ namespace StepCount
             ycR = new float[stageSize];
             xcR_tilt = new float[stageSize];
             ycR_tilt = new float[stageSize];
+            xcM = new float[stageSize];
+            ycM = new float[stageSize];
 
             for (int i = 0; i < stageSize; i++)
             {
@@ -246,6 +256,8 @@ namespace StepCount
                 ycR[i] = 0.0f;
                 xcR_tilt[i] = 0.0f;
                 ycR_tilt[i] = 0.0f;
+                xcM[i] = 0.0f;
+                ycM[i] = 0.0f;
             }
 
             mHeading = new float[mHeadSize];
@@ -276,11 +288,13 @@ namespace StepCount
                 "실시간S_SCX" + "," + "실시간S_SCY" + "," +
                 "실시간_SCX,실시간_SCY," +
                 "실시간E_SCX,실시간E_SCY," +
+                "보정_SCX,보정_SCY," +
+
                 "이동거리," +
                 "오차MTilt,오차Euler,오차Tilt,오차일반,"+
                 "오차왜곡MTilt,오차왜곡Euler,오차왜곡Tilt,오차왜곡일반," +
-                "신뢰도MTilt,신뢰도Euler,신뢰도Tilt,신뢰도일반," +
-                "신뢰도왜곡MTilt,신뢰도왜곡Euler,신뢰도왜곡Tilt,신뢰도왜곡일반," +
+                "신뢰도MTilt,신뢰도Euler,신뢰도Tilt,신뢰도일반,신뢰도보정," +
+                "신뢰도왜곡MTilt,신뢰도왜곡Euler,신뢰도왜곡Tilt,신뢰도왜곡일반,신뢰도왜곡보정," +
 
                 "SC상태,SC수,SC시간," +
                 "OneStep수,OneStep분산Raw,OneStep분산,Stance상태,Stance분산,헤딩왜곡," +
@@ -470,6 +484,28 @@ namespace StepCount
             }
 
             return Math.Abs(cur.heading - before.heading);
+        }
+        private Head CheckOverflow(Head cur, Head before)
+        {
+            bool isPositive = (cur.heading < 0) ? false : true;
+
+            if(Math.Abs(cur.heading - before.heading) > Math.PI)
+            {
+                if (isPositive)
+                    before.heading += (float)(2 * Math.PI);
+                else
+                    before.heading -= (float)(2 * Math.PI);
+            }
+
+            if(Math.Abs(cur.heading - before.heading) > Math.PI / 6.0f)
+            {
+                if (cur.heading < before.heading)
+                    cur.heading = before.heading - (float)Math.PI / 6.0f;
+                else if (cur.heading > before.heading)
+                    cur.heading = before.heading + (float)Math.PI / 6.0f;
+            }
+
+            return cur;
         }
         private void UpdateWorldPosition(float diff, float heading, ref float[] x, ref float[] y, ref int index)
         {
@@ -942,38 +978,47 @@ namespace StepCount
                                                         mStanceHeadAvgSecond = GetHeadingMedian(ref mStanceHeadAvgListSecond);
                                                         mStanceHeadAvgEuler = GetHeadingMedian(ref mStanceHeadAvgListEuler);
 
-                                                        float diff_head = 0.0f;
+                                                        mStanceHeadAvg = CheckOverflow(mStanceHeadAvg, mBeforeStanceHeadAvg);
+                                                        mStanceHeadAvgTest = CheckOverflow(mStanceHeadAvgTest, mBeforeStanceHeadAvgTest);
+                                                        mStanceHeadAvgSecond = CheckOverflow(mStanceHeadAvgSecond, mBeforeStanceHeadAvgSecond);
+                                                        mStanceHeadAvgEuler = CheckOverflow(mStanceHeadAvgEuler, mBeforeStanceHeadAvgEuler);
 
+                                                        float diff_head = 0.0f;
+                                                        
                                                         diff_head = GetHeadingDifference(mStanceHeadAvg, mBeforeStanceHeadAvg);
-                                                        movingDistanceError += (float)(x_diff * Math.Tan(diff_head));
+                                                        movingDistanceError += (float)(2 * x_diff * Math.Cos((Math.PI - diff_head)/2.0f));
 
                                                         diff_head = GetHeadingDifference(mStanceHeadAvgTest, mBeforeStanceHeadAvgTest);
-                                                        movingDistanceErrorTest += (float)(x_diff * Math.Tan(diff_head));
+                                                        movingDistanceErrorTest += (float)(2 * x_diff * Math.Cos((Math.PI - diff_head) / 2.0f));
 
                                                         diff_head = GetHeadingDifference(mStanceHeadAvgSecond, mBeforeStanceHeadAvgSecond);
-                                                        movingDistanceErrorSecond += (float)(x_diff * Math.Tan(diff_head));
+                                                        movingDistanceErrorSecond += (float)(2 * x_diff * Math.Cos((Math.PI - diff_head) / 2.0f));
 
                                                         diff_head = GetHeadingDifference(mStanceHeadAvgEuler, mBeforeStanceHeadAvgEuler);
-                                                        movingDistanceErrorEuler += (float)(x_diff * Math.Tan(diff_head));
+                                                        movingDistanceErrorEuler += (float)(2 * x_diff * Math.Cos((Math.PI - diff_head) / 2.0f));
+                                                        movingDistanceErrorM += (float)(2 * x_diff * Math.Cos((Math.PI - diff_head) / 2.0f));
 
                                                         p = (movingDistance - movingDistanceError) / movingDistance;
                                                         p_test = (movingDistance - movingDistanceErrorTest) / movingDistance;
                                                         p_euler = (movingDistance - movingDistanceErrorEuler) / movingDistance;
                                                         p_second = (movingDistance - movingDistanceErrorSecond) / movingDistance;
+                                                        p_m = (movingDistance - movingDistanceErrorM) / movingDistance;
 
                                                         diff_head = GetHeadingDifference(mStanceHeadAvg, mLastPureStanceHeadAvg);
-                                                        movingDistanceErrorD += (float)(x_diff * Math.Tan(diff_head));
+                                                        movingDistanceErrorD += (float)(2 * x_diff * Math.Cos((Math.PI - diff_head) / 2.0f));
                                                         diff_head = GetHeadingDifference(mStanceHeadAvgTest, mLastPureStanceHeadAvgTest);
-                                                        movingDistanceErrorTestD += (float)(x_diff * Math.Tan(diff_head));
+                                                        movingDistanceErrorTestD += (float)(2 * x_diff * Math.Cos((Math.PI - diff_head) / 2.0f));
                                                         diff_head = GetHeadingDifference(mStanceHeadAvgSecond, mLastPureStanceHeadAvgSecond);
-                                                        movingDistanceErrorSecondD += (float)(x_diff * Math.Tan(diff_head));
+                                                        movingDistanceErrorSecondD += (float)(2 * x_diff * Math.Cos((Math.PI - diff_head) / 2.0f));
                                                         diff_head = GetHeadingDifference(mStanceHeadAvgEuler, mLastPureStanceHeadAvgEuler);
-                                                        movingDistanceErrorEulerD += (float)(x_diff * Math.Tan(diff_head));
+                                                        movingDistanceErrorEulerD += (float)(2 * x_diff * Math.Cos((Math.PI - diff_head) / 2.0f));
+                                                        movingDistanceErrorMD += (float)(2 * x_diff * Math.Cos((Math.PI - diff_head) / 2.0f));
 
                                                         pd = (movingDistance - movingDistanceErrorD) / movingDistance;
                                                         pd_test = (movingDistance - movingDistanceErrorTestD) / movingDistance;
                                                         pd_euler = (movingDistance - movingDistanceErrorEulerD) / movingDistance;
                                                         pd_second = (movingDistance - movingDistanceErrorSecondD) / movingDistance;
+                                                        pd_m = (movingDistance - movingDistanceErrorMD) / movingDistance;
                                                     }
 
                                                     mStanceHeadAvgList.Clear();
@@ -1084,6 +1129,8 @@ namespace StepCount
 
                                                     UpdateWorldPosition(x_diff, mStanceHeadAvgSecond.heading, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
 
+                                                    UpdateWorldPosition(x_diff, mStanceHeadAvgEuler.heading, ref xcM, ref ycM, ref stageIndexM);
+
                                                     //p *= (pc - (float)stepCount * pc_gap);
 
                                                     posLog.WriteLine("One Step");
@@ -1137,6 +1184,7 @@ namespace StepCount
                                         int bb_tilt = stageIndex_tilt - 1;
                                         if (bb_tilt < 0)
                                             bb_tilt = stageSize - 1;
+                                        int bbM = (stageIndexM - 1 < 0) ? (stageSize + (stageIndexM - 1)) : (stageIndexM - 1);
                                         int bbR = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
                                         int bbR_tilt = (stageIndexR_tilt - 1 < 0) ? (stageSize + (stageIndexR_tilt - 1)) : (stageIndexR_tilt - 1);
                                         int bbb_heading = (mTiltHeadingIndexSecond - 1 < 0) ? (mHeadSize - 1) : (mTiltHeadingIndexSecond - 1);
@@ -1152,6 +1200,8 @@ namespace StepCount
                                             xc[bb].ToString() + "," + yc[bb].ToString() + "," +
                                             //Heading Euler Use
                                             xcR[bbR].ToString() + "," + ycR[bbR].ToString() + "," +
+                                            //Modified by Fingerprint
+                                            xcM[bbM].ToString() + "," + ycM[bbM].ToString() + "," +
                                             //이동거리
                                             movingDistance.ToString() + "," +
                                             //오차거리 일반
@@ -1159,9 +1209,9 @@ namespace StepCount
                                             //오차거리 왜곡반영
                                             movingDistanceErrorD.ToString() + "," + movingDistanceErrorEulerD.ToString() + "," + movingDistanceErrorSecondD.ToString() + "," + movingDistanceErrorTestD.ToString() + "," +
                                             //신뢰도 일반
-                                            p.ToString() + "," + p_euler.ToString() + "," + p_second.ToString() + "," + p_test.ToString() + "," +
+                                            p.ToString() + "," + p_euler.ToString() + "," + p_second.ToString() + "," + p_test.ToString() + "," + p_m.ToString() + "," +
                                             //신뢰도 왜곡반영
-                                            pd.ToString() + "," + pd_euler.ToString() + "," + pd_second.ToString() + "," + pd_test.ToString() + "," +
+                                            pd.ToString() + "," + pd_euler.ToString() + "," + pd_second.ToString() + "," + pd_test.ToString() + "," + pd_m.ToString() + "," +
                                             stepState.ToString() + "," + stepCount.ToString() + "," + stepInterval.ToString() + "," +
                                             oneStepSampleCount.ToString() + "," + oneStepVariance.ToString() + "," + oneStepAccVariance.ToString() + "," +
                                             mStanceState.ToString() + "," + mStanceStdev.ToString() + "," + GetDistortion(x.mGetMag(), y.mGetMag(), z.mGetMag()).ToString() + "," +
@@ -1201,11 +1251,11 @@ namespace StepCount
                                     this.mMagY.Text = y.mGetMag().ToString();
                                     this.mMagZ.Text = z.mGetMag().ToString();
 
-                                    this.mHead.Text = (mStanceHeadAvgTest.heading * 180.0f / Math.PI).ToString();
-                                    this.mHeadTilt.Text = (mStanceHeadAvgEuler.heading * 180.0f / Math.PI).ToString();
+                                    this.mHead.Text = (GetTiltHeading() * 180.0f / Math.PI).ToString();
+                                    this.mHeadTilt.Text = (x.GetMotionEuler() * 180.0f / Math.PI).ToString();
 
-                                    this.mHeadStep.Text = (mStanceHeadAvgSecond.heading * 180.0f / Math.PI).ToString();
-                                    this.mHeadStepTilt.Text = (mStepCountTiltHeadingAvg * 180.0f / Math.PI).ToString();
+                                    this.mHeadStep.Text = (mStanceHeadAvg.heading * 180.0f / Math.PI).ToString();
+                                    this.mHeadStepTilt.Text = (mStanceHeadAvgEuler.heading * 180.0f / Math.PI).ToString();
                                     this.StepP.Text = p.ToString();
 
 
@@ -1215,15 +1265,19 @@ namespace StepCount
                                     this.mStageX.Text = (xc[b]).ToString();
                                     this.mStageY.Text = (yc[b]).ToString();
 
+                                    b = (stageIndexM - 1 < 0) ? (stageSize - 1) : (stageIndexM - 1);
+                                    this.mStageMX.Text = (xcM[b]).ToString();
+                                    this.mStageMY.Text = (ycM[b]).ToString();
 
                                     b = (stageIndexR - 1 < 0) ? (stageSize + (stageIndexR - 1)) : (stageIndexR - 1);
                                     this.mStageRX.Text = (xcR[b]).ToString();
                                     this.mStageRY.Text = (ycR[b]).ToString();
 
-                                    this.mStageTiltX.Text = p_euler.ToString();
-                                    this.mStageTiltY.Text = pd_euler.ToString();
-                                    this.mStageRTX.Text = p.ToString();
-                                    this.mStageRTY.Text = pd.ToString();
+                                    this.mRp.Text = p.ToString();
+                                    this.mRpd.Text = pd.ToString();
+                                    this.mRp_euler.Text = p_euler.ToString();
+                                    this.mRpd_euler.Text = pd_euler.ToString();
+                                    this.mRp_m.Text =
 
                                     this.mRoll.Text = (y.mGetAngle() * 180.0f / Math.PI).ToString();
                                     this.mPitch.Text = (z.mGetAngle() * 180.0f / Math.PI).ToString();
@@ -1270,7 +1324,28 @@ namespace StepCount
 
             x_init = (float)StartX.Value;
             y_init = (float)StartY.Value;
+
             p = 1.0f;
+            p_test = 1.0f;
+            p_euler = 1.0f;
+            p_second = 1.0f;
+
+            pd = 1.0f;
+            pd_test = 1.0f;
+            pd_euler = 1.0f;
+            pd_second = 1.0f;
+
+            movingDistance = 0.0f;
+
+            movingDistanceError = 0.0f;
+            movingDistanceErrorEuler = 0.0f;
+            movingDistanceErrorSecond = 0.0f;
+            movingDistanceErrorTest = 0.0f;
+
+            movingDistanceErrorD = 0.0f;
+            movingDistanceErrorEulerD = 0.0f;
+            movingDistanceErrorSecondD = 0.0f;
+            movingDistanceErrorTestD = 0.0f;
 
             for (int i = 0; i < stageSize; i++)
             {
@@ -1282,6 +1357,8 @@ namespace StepCount
                 ycR[i] = y_init;
                 xcR_tilt[i] = x_init;
                 ycR_tilt[i] = y_init;
+                xcM[i] = x_init;
+                ycM[i] = y_init;
             }
             logFlag = true;
         }
@@ -1397,6 +1474,16 @@ namespace StepCount
         private void Stop_Bt_Click(object sender, EventArgs e)
         {
             sendFlag = false;
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            MessageBox.Show(m.LParam.ToString());
+            MessageBox.Show(m.Msg.ToString());
+            MessageBox.Show(m.WParam.ToString());
+            MessageBox.Show(m.Result.ToString());
+
+            base.WndProc(ref m);
         }
     }
 
