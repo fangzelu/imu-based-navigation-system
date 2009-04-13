@@ -543,6 +543,8 @@ namespace StepCount
               //  xval = 25.0f;
 
             float cur = (float)Math.Atan2(yval, xval) - (float)(110.0f * Math.PI / 180.0f);
+            if (cur < -Math.PI)
+                cur += (float)(2 * Math.PI);
 
             //mHeadingSum += cur;
             //mHeadingSum -= mHeading[mHeadingIndex];
@@ -567,6 +569,8 @@ namespace StepCount
             double y_prime_s = yval * Math.Cos(y.mGetAngle()) + zval * Math.Sin(x.mGetAngle());
 
             float cur_s = (float)(Math.Atan2(y_prime_s, x_prime_s)) - (float)(110.0f * Math.PI / 180.0f);
+            if (cur_s < -Math.PI)
+                cur_s += (float)(2 * Math.PI);
 
             if (yval < -25.0f)
                 yval = -25.0f;
@@ -585,6 +589,8 @@ namespace StepCount
             double y_prime = yval * Math.Cos(y.mGetAngle()) - zval * Math.Sin(x.mGetAngle());
 
             float cur = (float)(Math.Atan2(y_prime, x_prime)) - (float)(110.0f * Math.PI / 180.0f);
+            if (cur < -Math.PI)
+                cur += (float)(2 * Math.PI);
 
             //mTiltHeadingSum += cur;
             //mTiltHeadingSum -= mTiltHeading[mTiltHeadingIndex];
@@ -725,7 +731,10 @@ namespace StepCount
                                         
                                 foreach (KeyValuePair<int, MotionNode.SDK.Format.PreviewElement> itr in previewMotion)
                                 {
-                                    x.UpdateMotionEuler(itr.Value.getEuler()[0] - (float)(Math.PI / 6.0f));
+                                    float temp = itr.Value.getEuler()[0] - (float)(Math.PI / 6.0f);
+                                    if (temp < -Math.PI)
+                                        temp += (float)(2 * Math.PI);
+                                    x.UpdateMotionEuler(temp);
                                     //x.UpdateMotionEuler(itr.Value.getEuler()[0]);
                                 }
 
