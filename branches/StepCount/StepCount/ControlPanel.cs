@@ -544,84 +544,71 @@ namespace StepCount
 
             float cur = (float)Math.Atan2(yval, xval) - (float)(110.0f * Math.PI / 180.0f);
 
-            mHeadingSum += cur;
-            mHeadingSum -= mHeading[mHeadingIndex];
+            //mHeadingSum += cur;
+            //mHeadingSum -= mHeading[mHeadingIndex];
 
             mHeading[mHeadingIndex] = cur;
             mHeadingIndex++;
             mHeadingIndex = (mHeadingIndex >= mHeadSize) ? 0 : mHeadingIndex;
 
-            mHeadingAvg = mHeadingSum / mHeadSize;
+            //mHeadingAvg = mHeadingSum / mHeadSize;
         }
         private void mUpdateTiltHeading(ref Axis x, ref Axis y, ref Axis z)
         {
             float yval = y.mGetMag();
             
-            //if (yval < -25.0f)
-            //    yval = -25.0f;
-            //else if (yval > 25.0f)
-            //    yval = 25.0f;
             float xval = x.mGetMag();
-            //if (xval < -25.0f)
-            //    xval = -25.0f;
-            //else if (xval > 25.0f)
-            //    xval = 25.0f;
             float zval = x.mGetMag();
-            //if (zval < -25.0f)
-            //    zval = -25.0f;
-            //else if (zval > 25.0f)
-            //    zval = 25.0f;
             
-
             //double x_prime = x.mGetMag() * Math.Cos(x.mGetAngle()) + y.mGetMag() * Math.Sin(y.mGetAngle()) * Math.Sin(x.mGetAngle()) + z.mGetMag() * Math.Cos(y.mGetAngle()) * Math.Sin(x.mGetAngle());
             //double y_prime = y.mGetMag() * Math.Cos(y.mGetAngle()) - z.mGetMag() * Math.Sin(x.mGetAngle());
-
-            double x_prime = xval * Math.Cos(x.mGetAngle()) + yval * Math.Sin(y.mGetAngle()) * Math.Sin(x.mGetAngle()) + zval * Math.Cos(y.mGetAngle()) * Math.Sin(x.mGetAngle());
-            double y_prime = yval * Math.Cos(y.mGetAngle()) - zval * Math.Sin(x.mGetAngle());
-
-            float cur = (float)(Math.Atan2(y_prime, x_prime));
 
             double x_prime_s = xval * Math.Cos(x.mGetAngle()) + yval * Math.Sin(y.mGetAngle()) * Math.Sin(x.mGetAngle()) - zval * Math.Cos(y.mGetAngle()) * Math.Sin(x.mGetAngle());
             double y_prime_s = yval * Math.Cos(y.mGetAngle()) + zval * Math.Sin(x.mGetAngle());
 
             float cur_s = (float)(Math.Atan2(y_prime_s, x_prime_s));
 
-            mTiltHeadingSum += cur;
-            mTiltHeadingSum -= mTiltHeading[mTiltHeadingIndex];
+            if (yval < -25.0f)
+                yval = -25.0f;
+            else if (yval > 25.0f)
+                yval = 25.0f;
+            if (xval < -25.0f)
+                xval = -25.0f;
+            else if (xval > 25.0f)
+                xval = 25.0f;
+            if (zval < -25.0f)
+                zval = -25.0f;
+            else if (zval > 25.0f)
+                zval = 25.0f;
+
+            double x_prime = xval * Math.Cos(x.mGetAngle()) + yval * Math.Sin(y.mGetAngle()) * Math.Sin(x.mGetAngle()) + zval * Math.Cos(y.mGetAngle()) * Math.Sin(x.mGetAngle());
+            double y_prime = yval * Math.Cos(y.mGetAngle()) - zval * Math.Sin(x.mGetAngle());
+
+            float cur = (float)(Math.Atan2(y_prime, x_prime));
+
+            //mTiltHeadingSum += cur;
+            //mTiltHeadingSum -= mTiltHeading[mTiltHeadingIndex];
 
             mTiltHeading[mTiltHeadingIndex] = cur;
             mTiltHeadingIndex++;
             mTiltHeadingIndex = (mTiltHeadingIndex >= mHeadSize) ? 0 : mTiltHeadingIndex;
 
-            mTiltHeadingSumSecond += cur_s;
-            mTiltHeadingSumSecond -= mTiltHeadingSecond[mTiltHeadingIndexSecond];
+            //mTiltHeadingSumSecond += cur_s;
+            //mTiltHeadingSumSecond -= mTiltHeadingSecond[mTiltHeadingIndexSecond];
 
             mTiltHeadingSecond[mTiltHeadingIndexSecond] = cur_s;
             mTiltHeadingIndexSecond++;
             mTiltHeadingIndexSecond = (mTiltHeadingIndexSecond >= mHeadSize) ? 0 : mTiltHeadingIndexSecond;
 
-            if(x.mAccStop && y.mAccStop && z.mAccStop)
-            {
-                mTiltHeadingAvg = mTiltHeadingSum / mHeadSize;
-                //mTiltHeadingAvg = mTiltHeadingAvg - (float)(20.0f * Math.PI / 180.0f);
-                //if (mTiltHeadingAvg < -Math.PI)
-                //    mTiltHeadingAvg += (float)(2 * Math.PI);
+            //if(x.mAccStop && y.mAccStop && z.mAccStop)
+            //{
+            //    mTiltHeadingAvg = mTiltHeadingSum / mHeadSize;
 
-                mTiltHeadingAvgSecond = mTiltHeadingSumSecond / mHeadSize;
-                //mTiltHeadingAvgSecond = mTiltHeadingAvgSecond - (float)(20.0f * Math.PI / 180.0f);
-                //if (mTiltHeadingAvgSecond < -Math.PI)
-                //    mTiltHeadingAvgSecond += (float)(2 * Math.PI);
+            //    mTiltHeadingAvgSecond = mTiltHeadingSumSecond / mHeadSize;
 
-                mStepCountTiltHeadingAvg = mTiltHeadingAvg;
-                //mStepCountTiltHeadingAvg = mStepCountTiltHeadingAvg - (float)(90.0f * Math.PI / 180.0f);
-                //if (mStepCountTiltHeadingAvg < -Math.PI)
-                //    mStepCountTiltHeadingAvg += (float)(2 * Math.PI);
-            }
+            //    mStepCountTiltHeadingAvg = mTiltHeadingAvg;
+            //}
 
-            //mTiltHeadingAvgTest = mTiltHeadingSum / mHeadSize;
-            //mTiltHeadingAvgTest = mTiltHeadingAvgTest - (float)(20.0f * Math.PI / 180.0f);
-            //if (mTiltHeadingAvgTest < -Math.PI)
-            //    mTiltHeadingAvgTest += (float)(2 * Math.PI);
         }
         private float GetTiltHeading()
         {
@@ -1272,6 +1259,8 @@ namespace StepCount
                                     this.mMagZ.Text = z.mGetMag().ToString();
 
                                     this.mAccPosX.Text = movingDistance.ToString();
+                                    this.mAccPosY.Text = (GetHeading() * 180.0f / Math.PI).ToString();
+                                    this.mAccPosZ.Text = (GetTiltHeadingSecond() * 180.0f / Math.PI).ToString();
 
                                     this.mHead.Text = (GetTiltHeading() * 180.0f / Math.PI).ToString();
                                     this.mHeadTilt.Text = (x.GetMotionEuler() * 180.0f / Math.PI).ToString();
