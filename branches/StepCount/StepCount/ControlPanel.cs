@@ -504,12 +504,12 @@ namespace StepCount
                     before.heading -= (float)(2 * Math.PI);
             }
 
-            if(Math.Abs(cur.heading - before.heading) > Math.PI / 12.0f)
+            if(Math.Abs(cur.heading - before.heading) > Math.PI / 9.0f)
             {
                 if (cur.heading < before.heading)
-                    cur.heading = before.heading - (float)Math.PI / 12.0f;
+                    cur.heading = before.heading - (float)Math.PI / 9.0f;
                 else if (cur.heading > before.heading)
-                    cur.heading = before.heading + (float)Math.PI / 12.0f;
+                    cur.heading = before.heading + (float)Math.PI / 9.0f;
             }
 
             return cur;
@@ -542,7 +542,7 @@ namespace StepCount
             //else if (xval > 25.0f)
               //  xval = 25.0f;
 
-            float cur = (float)Math.Atan2(yval, xval);
+            float cur = (float)Math.Atan2(yval, xval) - (float)(110.0f * Math.PI / 180.0f);
 
             mHeadingSum += cur;
             mHeadingSum -= mHeading[mHeadingIndex];
@@ -579,12 +579,12 @@ namespace StepCount
             double x_prime = xval * Math.Cos(x.mGetAngle()) + yval * Math.Sin(y.mGetAngle()) * Math.Sin(x.mGetAngle()) + zval * Math.Cos(y.mGetAngle()) * Math.Sin(x.mGetAngle());
             double y_prime = yval * Math.Cos(y.mGetAngle()) - zval * Math.Sin(x.mGetAngle());
 
-            float cur = (float)(Math.Atan2(y_prime, x_prime));
+            float cur = (float)(Math.Atan2(y_prime, x_prime)) - (float)(110.0f * Math.PI / 180.0f);
 
             double x_prime_s = xval * Math.Cos(x.mGetAngle()) + yval * Math.Sin(y.mGetAngle()) * Math.Sin(x.mGetAngle()) - zval * Math.Cos(y.mGetAngle()) * Math.Sin(x.mGetAngle());
             double y_prime_s = yval * Math.Cos(y.mGetAngle()) + zval * Math.Sin(x.mGetAngle());
 
-            float cur_s = (float)(Math.Atan2(y_prime_s, x_prime_s));
+            float cur_s = (float)(Math.Atan2(y_prime_s, x_prime_s)) - (float)(110.0f * Math.PI / 180.0f);
 
             mTiltHeadingSum += cur;
             mTiltHeadingSum -= mTiltHeading[mTiltHeadingIndex];
@@ -738,8 +738,8 @@ namespace StepCount
                                         
                                 foreach (KeyValuePair<int, MotionNode.SDK.Format.PreviewElement> itr in previewMotion)
                                 {
-                                    //x.UpdateMotionEuler(itr.Value.getEuler()[0] - (float)(Math.PI / 6.0f));
-                                    x.UpdateMotionEuler(itr.Value.getEuler()[0]);
+                                    x.UpdateMotionEuler(itr.Value.getEuler()[0] - (float)(Math.PI / 6.0f));
+                                    //x.UpdateMotionEuler(itr.Value.getEuler()[0]);
                                 }
 
                             }
