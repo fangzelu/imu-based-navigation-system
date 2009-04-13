@@ -117,7 +117,7 @@ namespace StepCount
         int mStanceState = 0;
         int mStanceCount = 0;
 
-        float upperBound = 4096.0f, lowerBound = 0.0f;
+        float upperBound = 4090.0f, lowerBound = 1800.0f;
         bool trainingFlag = false;
         const int T_SIZE = 10;
 
