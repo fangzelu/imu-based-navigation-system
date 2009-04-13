@@ -152,6 +152,8 @@ namespace StepCount
         int stepInterval = 0;
         bool stepSampleFlag = false;
         bool needStepCount = false;
+        bool stopFlag = false;
+        int stanceCount = 0;
 
         float mStepCountTiltHeadingAvg = 0.0f;
         float mStepCountMovingTiltHeadingAvg = 0.0f;
@@ -300,7 +302,7 @@ namespace StepCount
                 "신뢰도왜곡MTilt,신뢰도왜곡Euler,신뢰도왜곡Tilt,신뢰도왜곡일반,신뢰도왜곡보정," +
 
                 "SC상태,SC수,SC시간," +
-                "OneStep수,OneStep분산Raw,OneStep분산,Stance상태,Stance분산,헤딩왜곡," +
+                "OneStep수,OneStep분산Raw,OneStep분산,Stance상태,Stop상태,Stance분산,헤딩왜곡," +
                 "Stance헤딩,Stance헤딩S,Stance헤딩Raw,Stance헤딩Euler,"+
                 "Stance헤딩왜곡,Stance헤딩S왜곡,Stance헤딩Raw왜곡,Stance헤딩Euler왜곡," +
                 "Stance헤딩B,Stance헤딩SB,Stance헤딩RawB,Stance헤딩EulerB," +
@@ -936,7 +938,6 @@ namespace StepCount
 
                                                 if(mStanceStdev < 100.0f)
                                                 {
-                                            
                                                     mStanceState = 1;
                                                     mStanceHeadAvgList.Add(GetHeadingMedian(ref mStanceHead));
                                                     if (mStanceHeadAvgList.Count > ZUPT_WINDOW)
@@ -953,6 +954,8 @@ namespace StepCount
                                                     mStanceHeadAvgListEuler.Add(GetHeadingMedian(ref mStanceHeadEuler));
                                                     if (mStanceHeadAvgListEuler.Count > ZUPT_WINDOW)
                                                         mStanceHeadAvgListEuler.RemoveAt(0);
+
+                                                    stanceCount++;
                                                 }
                                             }
 
@@ -1164,6 +1167,17 @@ namespace StepCount
                                             break;
                                     }
 
+                                    if (mStanceState == 1)
+                                    {
+                                        stanceCount++;
+                                        if (stanceCount >= 64)
+                                            stopFlag = true;
+                                    }
+                                    else
+                                    {
+                                        stanceCount = 0;
+                                        stopFlag = false;
+                                    }
                                     //movingMin = Math.Min(movingMin, z.GetMotionAccelRaw());
                                     //movingMax = Math.Max(movingMax, z.GetMotionAccelRaw());
                                     //movingDev = z.GetMotionAccelDev();
@@ -1220,7 +1234,7 @@ namespace StepCount
                                             pd.ToString() + "," + pd_euler.ToString() + "," + pd_second.ToString() + "," + pd_test.ToString() + "," + pd_m.ToString() + "," +
                                             stepState.ToString() + "," + stepCount.ToString() + "," + stepInterval.ToString() + "," +
                                             oneStepSampleCount.ToString() + "," + oneStepVariance.ToString() + "," + oneStepAccVariance.ToString() + "," +
-                                            mStanceState.ToString() + "," + mStanceStdev.ToString() + "," + GetDistortion(x.mGetMag(), y.mGetMag(), z.mGetMag()).ToString() + "," +
+                                            mStanceState.ToString() + "," + stopFlag.ToString() + "," + mStanceStdev.ToString() + "," + GetDistortion(x.mGetMag(), y.mGetMag(), z.mGetMag()).ToString() + "," +
                                             (mStanceHeadAvg.heading * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgSecond.heading * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgTest.heading * 180.0f / Math.PI).ToString() + "," + (mStanceHeadAvgEuler.heading * 180.0f / Math.PI).ToString() + "," +
                                             (mStanceHeadAvg.isDistortion).ToString() + "," + (mStanceHeadAvgSecond.isDistortion).ToString() + "," + (mStanceHeadAvgTest.isDistortion).ToString() + "," + (mStanceHeadAvgEuler.isDistortion).ToString() + "," +
                                             (mBeforeStanceHeadAvg.heading * 180.0f / Math.PI).ToString() + "," + (mBeforeStanceHeadAvgSecond.heading * 180.0f / Math.PI).ToString() + "," + (mBeforeStanceHeadAvgTest.heading * 180.0f / Math.PI).ToString() + "," + (mBeforeStanceHeadAvgEuler.heading * 180.0f / Math.PI).ToString() + "," +
@@ -1262,10 +1276,10 @@ namespace StepCount
                                     this.mHead.Text = (GetTiltHeading() * 180.0f / Math.PI).ToString();
                                     this.mHeadTilt.Text = (x.GetMotionEuler() * 180.0f / Math.PI).ToString();
 
-                                    this.mHeadStep.Text = (GetHeading() * 180.0f / Math.PI).ToString();
-                                    this.mHeadStepTilt.Text = (GetTiltHeadingSecond() * 180.0f / Math.PI).ToString();
-                                    //this.mHeadStep.Text = (mStanceHeadAvg.heading * 180.0f / Math.PI).ToString();
-                                    //this.mHeadStepTilt.Text = (mStanceHeadAvgEuler.heading * 180.0f / Math.PI).ToString();
+                                    //this.mHeadStep.Text = (GetHeading() * 180.0f / Math.PI).ToString();
+                                    //this.mHeadStepTilt.Text = (GetTiltHeadingSecond() * 180.0f / Math.PI).ToString();
+                                    this.mHeadStep.Text = (mStanceHeadAvg.heading * 180.0f / Math.PI).ToString();
+                                    this.mHeadStepTilt.Text = (mStanceHeadAvgEuler.heading * 180.0f / Math.PI).ToString();
 
                                     int b = stageIndex - 1;
                                     if(b < 0)
