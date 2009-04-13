@@ -736,7 +736,8 @@ namespace StepCount
                                         
                                 foreach (KeyValuePair<int, MotionNode.SDK.Format.PreviewElement> itr in previewMotion)
                                 {
-                                    x.UpdateMotionEuler(itr.Value.getEuler()[0] - (float)(Math.PI / 6.0f));
+                                    //x.UpdateMotionEuler(itr.Value.getEuler()[0] - (float)(Math.PI / 6.0f));
+                                    x.UpdateMotionEuler(itr.Value.getEuler()[0]);
                                 }
 
                             }
@@ -1261,8 +1262,10 @@ namespace StepCount
                                     this.mHead.Text = (GetTiltHeading() * 180.0f / Math.PI).ToString();
                                     this.mHeadTilt.Text = (x.GetMotionEuler() * 180.0f / Math.PI).ToString();
 
-                                    this.mHeadStep.Text = (mStanceHeadAvg.heading * 180.0f / Math.PI).ToString();
-                                    this.mHeadStepTilt.Text = (mStanceHeadAvgEuler.heading * 180.0f / Math.PI).ToString();
+                                    this.mHeadStep.Text = (GetHeading() * 180.0f / Math.PI).ToString();
+                                    this.mHeadStepTilt.Text = (GetTiltHeadingSecond() * 180.0f / Math.PI).ToString();
+                                    //this.mHeadStep.Text = (mStanceHeadAvg.heading * 180.0f / Math.PI).ToString();
+                                    //this.mHeadStepTilt.Text = (mStanceHeadAvgEuler.heading * 180.0f / Math.PI).ToString();
 
                                     int b = stageIndex - 1;
                                     if(b < 0)
