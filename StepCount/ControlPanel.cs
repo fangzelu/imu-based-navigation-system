@@ -579,12 +579,12 @@ namespace StepCount
             double x_prime = xval * Math.Cos(x.mGetAngle()) + yval * Math.Sin(y.mGetAngle()) * Math.Sin(x.mGetAngle()) + zval * Math.Cos(y.mGetAngle()) * Math.Sin(x.mGetAngle());
             double y_prime = yval * Math.Cos(y.mGetAngle()) - zval * Math.Sin(x.mGetAngle());
 
-            float cur = (float)(Math.Atan2(y_prime, x_prime)) - (float)(110.0f * Math.PI / 180.0f);
+            float cur = (float)(Math.Atan2(y_prime, x_prime));
 
             double x_prime_s = xval * Math.Cos(x.mGetAngle()) + yval * Math.Sin(y.mGetAngle()) * Math.Sin(x.mGetAngle()) - zval * Math.Cos(y.mGetAngle()) * Math.Sin(x.mGetAngle());
             double y_prime_s = yval * Math.Cos(y.mGetAngle()) + zval * Math.Sin(x.mGetAngle());
 
-            float cur_s = (float)(Math.Atan2(y_prime_s, x_prime_s)) - (float)(110.0f * Math.PI / 180.0f);
+            float cur_s = (float)(Math.Atan2(y_prime_s, x_prime_s));
 
             mTiltHeadingSum += cur;
             mTiltHeadingSum -= mTiltHeading[mTiltHeadingIndex];
