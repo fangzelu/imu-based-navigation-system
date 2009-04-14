@@ -296,8 +296,8 @@ namespace StepCount
                 "보정_SCX,보정_SCY," +
 
                 "이동거리," +
-                "오차MTilt,오차Euler,오차Tilt,오차일반,"+
-                "오차왜곡MTilt,오차왜곡Euler,오차왜곡Tilt,오차왜곡일반," +
+                "오차MTilt,오차Euler,오차Tilt,오차일반,오차보정,"+
+                "오차왜곡MTilt,오차왜곡Euler,오차왜곡Tilt,오차왜곡일반,오차왜곡보정," +
                 "신뢰도MTilt,신뢰도Euler,신뢰도Tilt,신뢰도일반,신뢰도보정," +
                 "신뢰도왜곡MTilt,신뢰도왜곡Euler,신뢰도왜곡Tilt,신뢰도왜곡일반,신뢰도왜곡보정," +
 
@@ -1221,9 +1221,9 @@ namespace StepCount
                                             //이동거리
                                             movingDistance.ToString() + "," +
                                             //오차거리 일반
-                                            movingDistanceError.ToString() + "," + movingDistanceErrorEuler.ToString() + "," + movingDistanceErrorSecond.ToString() + "," + movingDistanceErrorTest.ToString() + "," +
+                                            movingDistanceError.ToString() + "," + movingDistanceErrorEuler.ToString() + "," + movingDistanceErrorSecond.ToString() + "," + movingDistanceErrorTest.ToString() + "," + movingDistanceErrorM.ToString() + "," +
                                             //오차거리 왜곡반영
-                                            movingDistanceErrorD.ToString() + "," + movingDistanceErrorEulerD.ToString() + "," + movingDistanceErrorSecondD.ToString() + "," + movingDistanceErrorTestD.ToString() + "," +
+                                            movingDistanceErrorD.ToString() + "," + movingDistanceErrorEulerD.ToString() + "," + movingDistanceErrorSecondD.ToString() + "," + movingDistanceErrorTestD.ToString() + "," + movingDistanceErrorMD.ToString() + "," +
                                             //신뢰도 일반
                                             p.ToString() + "," + p_euler.ToString() + "," + p_second.ToString() + "," + p_test.ToString() + "," + p_m.ToString() + "," +
                                             //신뢰도 왜곡반영
@@ -1523,8 +1523,8 @@ namespace StepCount
                     //MessageBox.Show(error_receive.ToString());
 
                     movingDistanceErrorMD = error_receive;
-                    xcM[stageIndexM] = x_receive;
-                    ycM[stageIndexM] = y_receive;
+                    xcM[stageIndexM] = x_receive * 2.0f;
+                    ycM[stageIndexM] = y_receive * 2.0f;
                     stageIndexM++;
                     if (stageIndexM >= stageSize)
                         stageIndexM = 0;
