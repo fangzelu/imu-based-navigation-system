@@ -531,12 +531,12 @@ namespace StepCount
                     before.heading -= (float)(2 * Math.PI);
             }
 
-            if(Math.Abs(cur.heading - before.heading) > Math.PI / 4.0f)
+            if(Math.Abs(cur.heading - before.heading) > Math.PI / 2.0f)
             {
                 if (cur.heading < before.heading)
-                    cur.heading = before.heading - (float)Math.PI / 4.0f;
+                    cur.heading = before.heading - (float)Math.PI / 2.0f;
                 else if (cur.heading > before.heading)
-                    cur.heading = before.heading + (float)Math.PI / 4.0f;
+                    cur.heading = before.heading + (float)Math.PI / 2.0f;
             }
 
             return cur;
