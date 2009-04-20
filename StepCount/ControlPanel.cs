@@ -1035,8 +1035,8 @@ namespace StepCount
                                                         UpdateWorldPosition(x_diff, mid_head, ref xcM, ref ycM, ref stageIndexM);
 
                                                         diff_head = GetHeadingDifference(mStanceHeadAvgEuler, mid_head);
-                                                        movingDistanceErrorEuler += (float)(2 * x_diff * Math.Sin(diff_head / 4.0f));
-                                                        movingDistanceErrorM += (float)(2 * x_diff * Math.Sin(diff_head / 4.0f));
+                                                        movingDistanceErrorEuler += (float)(2 * x_diff * Math.Sin(diff_head / 2.0f));
+                                                        movingDistanceErrorM += (float)(2 * x_diff * Math.Sin(diff_head / 2.0f));
 
                                                         p_euler = (float)(GRID * GRID) / (float)(movingDistanceErrorEuler * movingDistanceErrorEuler * Math.PI);
                                                         p_m = (float)(GRID * GRID) / (float)(movingDistanceErrorM * movingDistanceErrorM * Math.PI);
@@ -1050,8 +1050,8 @@ namespace StepCount
                                                         UpdateWorldPosition(x_diff, mid_head, ref xcR_tilt, ref ycR_tilt, ref stageIndexR_tilt);
 
                                                         diff_head = GetHeadingDifference(mStanceHeadAvgEuler, mid_head);
-                                                        movingDistanceErrorEulerD += (float)(2 * x_diff * Math.Sin(diff_head / 4.0f));
-                                                        movingDistanceErrorMD += (float)(2 * x_diff * Math.Sin(diff_head / 4.0f));
+                                                        movingDistanceErrorEulerD += (float)(2 * x_diff * Math.Sin(diff_head / 2.0f));
+                                                        movingDistanceErrorMD += (float)(2 * x_diff * Math.Sin(diff_head / 2.0f));
 
                                                         pd_euler = (float)(GRID * GRID) / (float)(movingDistanceErrorEulerD * movingDistanceErrorEulerD * Math.PI);
                                                         pd_m = (float)(GRID * GRID) / (float)(movingDistanceErrorMD * movingDistanceErrorMD * Math.PI);
@@ -1063,7 +1063,7 @@ namespace StepCount
                                                         UpdateWorldPosition(x_diff, mid_head, ref xc, ref yc, ref stageIndex);
 
                                                         diff_head = GetHeadingDifference(mStanceHeadAvg, mid_head);
-                                                        movingDistanceErrorD += (float)(2 * x_diff * Math.Sin(diff_head / 4.0f));
+                                                        movingDistanceErrorD += (float)(2 * x_diff * Math.Sin(diff_head / 2.0f));
 
                                                         pd = (float)(GRID * GRID) / (float)(movingDistanceErrorD * movingDistanceErrorD * Math.PI);
                                                         pd = (pd > 1.0f) ? 1.0f : pd;
