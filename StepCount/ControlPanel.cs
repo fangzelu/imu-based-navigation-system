@@ -1076,10 +1076,10 @@ namespace StepCount
                                                             int bM = (stageIndexR_tilt - 1 < 0) ? (stageSize + (stageIndexR_tilt - 1)) : (stageIndexR_tilt - 1);
                                                             int bbM = (stageIndexR_tilt - 2 < 0) ? (stageSize + (stageIndexR_tilt - 2)) : (stageIndexR_tilt - 2);
 
-                                                            int curX = (int)(xcR_tilt[bM] / 1.0f);
-                                                            int curY = (int)(ycR_tilt[bM] / 1.0f);
-                                                            int beforeX = (int)(xcR_tilt[bbM] / 1.0f);
-                                                            int beforeY = (int)(ycR_tilt[bbM] / 1.0f);
+                                                            int curX = (int)(xcR_tilt[bM] / 2.0f);
+                                                            int curY = (int)(ycR_tilt[bM] / 2.0f);
+                                                            int beforeX = (int)(xcR_tilt[bbM] / 2.0f);
+                                                            int beforeY = (int)(ycR_tilt[bbM] / 2.0f);
 
                                                             if (curX != beforeX || curY != beforeY)
                                                             {
