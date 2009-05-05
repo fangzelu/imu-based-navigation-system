@@ -233,12 +233,18 @@ int	main()
 			led3_on();
 		}
 
-		imu.sensor_val[0] = ADCResult[ACC_X_CHANNEL];
-		imu.sensor_val[1] = ADCResult[ACC_Y_CHANNEL];
-		imu.sensor_val[2] = ADCResult[ACC_Z_CHANNEL];
-		imu.sensor_val[3] = ADCResult[GYRO1_X_CHANNEL];
-		imu.sensor_val[4] = ADCResult[GYRO1_Y_CHANNEL];
-		imu.sensor_val[5] = ADCResult[GYRO2_Y_CHANNEL];
+		//imu.sensor_val[0] = ADCResult[ACC_X_CHANNEL];
+		//imu.sensor_val[1] = ADCResult[ACC_Y_CHANNEL];
+		//imu.sensor_val[2] = ADCResult[ACC_Z_CHANNEL];
+		//imu.sensor_val[3] = ADCResult[GYRO1_X_CHANNEL];
+		//imu.sensor_val[4] = ADCResult[GYRO1_Y_CHANNEL];
+		//imu.sensor_val[5] = ADCResult[GYRO2_Y_CHANNEL];
+		imu.sensor_val[0] = 0;
+		imu.sensor_val[1] = 0;
+		imu.sensor_val[2] = 0;
+		imu.sensor_val[3] = 0;
+		imu.sensor_val[4] = 0;
+		imu.sensor_val[5] = 0;
 		//TxPrintf("S,%04d,%04d,%04d,%04d,%04d,%04d,E,"
 		//		, imu.sensor_val[0], imu.sensor_val[1], imu.sensor_val[2]
 		//		, imu.sensor_val[3], imu.sensor_val[4], imu.sensor_val[5]);
