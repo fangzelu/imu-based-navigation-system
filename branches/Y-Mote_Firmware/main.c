@@ -166,22 +166,22 @@ int	main()
 
 #if ACCEL_ENABLE == ON
 		adc_get(ACC_X_CHANNEL);
-		for(i=0;i<100;i++);
+		WAIT_ADC();
 		adc_get(ACC_Y_CHANNEL);
-		for(i=0;i<100;i++);
+		WAIT_ADC();
 		adc_get(ACC_Z_CHANNEL);
-		for(i=0;i<100;i++);
+		WAIT_ADC();
 #endif
 
 #if GYRO_ENABLE == ON
 		adc_get(GYRO1_X_CHANNEL);
-		for(i=0;i<100;i++);
+		WAIT_ADC();
 		adc_get(GYRO1_Y_CHANNEL);
-		for(i=0;i<100;i++);
+		WAIT_ADC();
 		//adc_get(GYRO2_X_CHANNEL);
 		//WAIT_ADC();
 		adc_get(GYRO2_Y_CHANNEL);
-		for(i=0;i<100;i++);
+		WAIT_ADC();
 #endif
 	
 #if COMPASS_ENABLE == ON
