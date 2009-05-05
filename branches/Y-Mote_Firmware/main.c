@@ -237,7 +237,10 @@ int	main()
 		imu.sensor_val[3] = ADCResult[GYRO1_X_CHANNEL];
 		imu.sensor_val[4] = ADCResult[GYRO1_Y_CHANNEL];
 		imu.sensor_val[5] = ADCResult[GYRO2_X_CHANNEL];
-		TxBinary(&imu, (uint8_t)sizeof(imu_packet));
+		TxPrintf("ACC X : %04d, Y : %04d, Z:%04d, GYRO x1 : %04d, y1 : %04d, x2 : %04d\n"
+				, ADCResult[ACC_X_CHANNEL], ADCResult[ACC_Y_CHANNEL], ADCResult[ACC_Z_CHANNEL]
+				, ADCResult[GYRO1_X_CHANNEL], ADCResult[GYRO1_Y_CHANNEL], ADCResult[GYRO2_X_CHANNEL]);
+		//TxBinary(&imu, (uint8_t)sizeof(imu_packet));
 
 		/*
 		switch(SWCnt)
