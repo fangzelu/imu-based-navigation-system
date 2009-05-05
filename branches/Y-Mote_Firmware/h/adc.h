@@ -21,7 +21,7 @@
 #define ADC6_CH			6
 #define ADC7_CH			7
 
-#define	ADC_DELAY		10
+#define	ADC_DELAY		100
 
 #define WAIT_ADC()		usdelay(ADC_DELAY)
 
