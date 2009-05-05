@@ -164,26 +164,36 @@ int	main()
 */
 //===========================================
 
+		TxBinary(&(imu.start_char), (uint8_t)sizeof(char));
+
 #if ACCEL_ENABLE == ON
 		adc_get(ACC_X_CHANNEL);
-		WAIT_ADC();
+		TxBinary(&(ADCResult[ACC_X_CHANNEL]), (uint8_t)sizeof(uint16_t));
+		//WAIT_ADC();
 		adc_get(ACC_Y_CHANNEL);
-		WAIT_ADC();
+		TxBinary(&(ADCResult[ACC_Y_CHANNEL]), (uint8_t)sizeof(uint16_t));
+		//WAIT_ADC();
 		adc_get(ACC_Z_CHANNEL);
-		WAIT_ADC();
+		TxBinary(&(ADCResult[ACC_Z_CHANNEL]), (uint8_t)sizeof(uint16_t));
+		//WAIT_ADC();
 #endif
 
 #if GYRO_ENABLE == ON
 		adc_get(GYRO1_X_CHANNEL);
-		WAIT_ADC();
+		TxBinary(&(ADCResult[GYRO1_X_CHANNEL]), (uint8_t)sizeof(uint16_t));
+		//WAIT_ADC();
 		adc_get(GYRO1_Y_CHANNEL);
-		WAIT_ADC();
+		TxBinary(&(ADCResult[GYRO1_Y_CHANNEL]), (uint8_t)sizeof(uint16_t));
+		//WAIT_ADC();
 		//adc_get(GYRO2_X_CHANNEL);
 		//WAIT_ADC();
 		adc_get(GYRO2_Y_CHANNEL);
-		WAIT_ADC();
+		TxBinary(&(ADCResult[GYRO2_Y_CHANNEL]), (uint8_t)sizeof(uint16_t));
+		//WAIT_ADC();
 #endif
-	
+
+		TxBinary(&(imu.end_char), (uint8_t)sizeof(char));
+
 #if COMPASS_ENABLE == ON
 		CompassX = ReadCompassXAxis();
 		CompassY = ReadCompassYAxis();
@@ -233,12 +243,12 @@ int	main()
 			led3_on();
 		}
 
-		imu.sensor_val[0] = ADCResult[ACC_X_CHANNEL];
-		imu.sensor_val[1] = ADCResult[ACC_Y_CHANNEL];
-		imu.sensor_val[2] = ADCResult[ACC_Z_CHANNEL];
-		imu.sensor_val[3] = ADCResult[GYRO1_X_CHANNEL];
-		imu.sensor_val[4] = ADCResult[GYRO1_Y_CHANNEL];
-		imu.sensor_val[5] = ADCResult[GYRO2_Y_CHANNEL];
+		//imu.sensor_val[0] = ADCResult[ACC_X_CHANNEL];
+		//imu.sensor_val[1] = ADCResult[ACC_Y_CHANNEL];
+		//imu.sensor_val[2] = ADCResult[ACC_Z_CHANNEL];
+		//imu.sensor_val[3] = ADCResult[GYRO1_X_CHANNEL];
+		//imu.sensor_val[4] = ADCResult[GYRO1_Y_CHANNEL];
+		//imu.sensor_val[5] = ADCResult[GYRO2_Y_CHANNEL];
 		//imu.sensor_val[0] = 0;
 		//imu.sensor_val[1] = 0;
 		//imu.sensor_val[2] = 0;
@@ -248,7 +258,7 @@ int	main()
 		//TxPrintf("S,%04d,%04d,%04d,%04d,%04d,%04d,E,"
 		//		, imu.sensor_val[0], imu.sensor_val[1], imu.sensor_val[2]
 		//		, imu.sensor_val[3], imu.sensor_val[4], imu.sensor_val[5]);
-		TxBinary(&imu, (uint8_t)sizeof(imu_packet));
+		//TxBinary(&imu, (uint8_t)sizeof(imu_packet));
 
 		/*
 		switch(SWCnt)
