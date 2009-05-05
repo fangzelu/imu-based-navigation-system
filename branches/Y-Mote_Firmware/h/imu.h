@@ -8,3 +8,4 @@ typedef struct _imu_packet
 	char end_char;
 }imu_packet;
 
+#endif
