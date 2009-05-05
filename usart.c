@@ -111,15 +111,14 @@ void TxPrintf(char *Form, ...)
 	CRITICAL_SECTION_END();
 }
 
-void TxBinary(imu_packet *target)
+void TxBinary(void *target, uint16_t size)
 {
-	uint8_t *val;
-	uint8_t i = 0, s = sizeof(imu_packet);
-	val = &(target->start_char);
+	uint8_t i = 0;
+	uint8_t* val = (uint8_t*)target;
 
 	CRITICAL_SECTION_START();
 
-	for(;i<s;++i)
+	for(;i<size;++i)
 	{
 		TXBUF0 = *val++;
 		while (!(IFG1 & UTXIFG0));
