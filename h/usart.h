@@ -7,6 +7,7 @@
 
 void uart_init();
 extern void TxPrintf(char *Form, ...);
+extern void TxBinary(uint8_t* target, uint16_t size);
 
 #ifdef TRACE_DEBUG
 
