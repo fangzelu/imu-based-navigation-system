@@ -21,9 +21,9 @@
 #define ADC6_CH			6
 #define ADC7_CH			7
 
-#define	ADC_DELAY		1
+#define	ADC_DELAY		10
 
-#define WAIT_ADC()		msdelay(ADC_DELAY)
+#define WAIT_ADC()		usdelay(ADC_DELAY)
 
 
 MAKE_PORT_MACRO(ADC0, 6, 0);
