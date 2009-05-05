@@ -164,6 +164,23 @@ int	main()
 */
 //===========================================
 
+		if(BTConsole == OFF)
+		{
+			_DINT();
+			uart_init();
+			_EINT();
+			SCIDebugExtSelect(SCI_DEBUG);
+			led3_off();
+		}
+		else
+		{
+			_DINT();
+			InitBTUart();
+			_EINT();
+			SCIDebugExtSelect(SCI_BT);
+			led3_on();
+		}
+
 		TxBinary(&(imu.start_char), (uint8_t)sizeof(char));
 
 #if ACCEL_ENABLE == ON
@@ -226,22 +243,6 @@ int	main()
 #endif//RF_ENABLE		
 
 
-		if(BTConsole == OFF)
-		{
-			_DINT();
-			uart_init();
-			_EINT();
-			SCIDebugExtSelect(SCI_DEBUG);
-			led3_off();
-		}
-		else
-		{
-			_DINT();
-			InitBTUart();
-			_EINT();
-			SCIDebugExtSelect(SCI_BT);
-			led3_on();
-		}
 
 		//imu.sensor_val[0] = ADCResult[ACC_X_CHANNEL];
 		//imu.sensor_val[1] = ADCResult[ACC_Y_CHANNEL];
