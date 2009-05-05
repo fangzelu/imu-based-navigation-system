@@ -64,6 +64,8 @@ int	main()
 
 	uint8_t  DebugStartF = OFF;
 
+	uint8_t i;
+
 	imu_packet imu;
 	imu.start_char = '*';
 	imu.end_char = '*';
@@ -164,22 +166,22 @@ int	main()
 
 #if ACCEL_ENABLE == ON
 		adc_get(ACC_X_CHANNEL);
-		WAIT_ADC();
+		for(i=0;i<100;i++);
 		adc_get(ACC_Y_CHANNEL);
-		WAIT_ADC();
+		for(i=0;i<100;i++);
 		adc_get(ACC_Z_CHANNEL);
-		WAIT_ADC();
+		for(i=0;i<100;i++);
 #endif
 
 #if GYRO_ENABLE == ON
 		adc_get(GYRO1_X_CHANNEL);
-		WAIT_ADC();
+		for(i=0;i<100;i++);
 		adc_get(GYRO1_Y_CHANNEL);
-		WAIT_ADC();
-		adc_get(GYRO2_X_CHANNEL);
-		WAIT_ADC();
+		for(i=0;i<100;i++);
+		//adc_get(GYRO2_X_CHANNEL);
+		//WAIT_ADC();
 		adc_get(GYRO2_Y_CHANNEL);
-		WAIT_ADC();
+		for(i=0;i<100;i++);
 #endif
 	
 #if COMPASS_ENABLE == ON

@@ -113,12 +113,12 @@ void TxPrintf(char *Form, ...)
 
 void TxBinary(void *target, uint8_t size)
 {
-	uint8_t i = 0;
+	uint8_t i;
 	uint8_t* val = (uint8_t*)target;
 
 	CRITICAL_SECTION_START();
 
-	for(;i<size;++i)
+	for(i=0;i<size;++i)
 	{
 		TXBUF0 = *val++;
 		while (!(IFG1 & UTXIFG0));
