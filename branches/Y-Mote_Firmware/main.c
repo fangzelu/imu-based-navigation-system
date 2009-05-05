@@ -237,7 +237,7 @@ int	main()
 		imu.sensor_val[3] = ADCResult[GYRO1_X_CHANNEL];
 		imu.sensor_val[4] = ADCResult[GYRO1_Y_CHANNEL];
 		imu.sensor_val[5] = ADCResult[GYRO2_X_CHANNEL];
-		TxBinary(&imu, sizeof(imu_packet));
+		TxBinary(&imu, (uint8_t)sizeof(imu_packet));
 
 		/*
 		switch(SWCnt)

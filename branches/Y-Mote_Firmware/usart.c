@@ -111,7 +111,7 @@ void TxPrintf(char *Form, ...)
 	CRITICAL_SECTION_END();
 }
 
-void TxBinary(void *target, uint16_t size)
+void TxBinary(void *target, uint8_t size)
 {
 	uint8_t i = 0;
 	uint8_t* val = (uint8_t*)target;
