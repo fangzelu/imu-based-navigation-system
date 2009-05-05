@@ -68,7 +68,7 @@ int	main()
 
 	imu_packet imu;
 	imu.start_char = '*';
-	imu.end_char = '*';
+	imu.end_char = '%';
 
 	_DINT();
 	
