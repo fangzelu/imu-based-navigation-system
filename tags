@@ -1,0 +1,2240 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.7	//
+ACCEL_ACTIVE	h/common_def.h	48;"	d
+ACCEL_ENABLE	main.c	31;"	d	file:
+ACCEL_GSEL1	h/ymote2_io.h	95;"	d
+ACCEL_GSEL2	h/ymote2_io.h	96;"	d
+ACCEL_G_SEL15	h/common_def.h	50;"	d
+ACCEL_G_SEL20	h/common_def.h	51;"	d
+ACCEL_G_SEL40	h/common_def.h	52;"	d
+ACCEL_G_SEL60	h/common_def.h	53;"	d
+ACCEL_LDO_CE	h/ymote2_io.h	94;"	d
+ACCEL_POWER_OFF	h/common_def.h	27;"	d
+ACCEL_POWER_ON	h/common_def.h	38;"	d
+ACCEL_SEP	h/ymote2_io.h	97;"	d
+ACCEL_SLEEP	h/common_def.h	47;"	d
+ACC_X_CHANNEL	h/adc.h	7;"	d
+ACC_Y_CHANNEL	h/adc.h	8;"	d
+ACC_Z_CHANNEL	h/adc.h	9;"	d
+ACLK_CALIB_PERIOD	dco.c	11;"	d	file:
+ACLK_KHZ	dco.c	12;"	d	file:
+ACRL_L	h/bm.h	/^	ACRL_L,		\/\/ 13$/;"	e	enum:DS2782_REG
+ACRL_M	h/bm.h	/^	ACRL_M,$/;"	e	enum:DS2782_REG
+ACR_L	h/bm.h	/^	ACR_L,$/;"	e	enum:DS2782_REG
+ACR_M	h/bm.h	/^	ACR_M,		$/;"	e	enum:DS2782_REG
+ACTTXID	ntrxranging.c	38;"	d	file:
+ADC0_CH	h/adc.h	15;"	d
+ADC1_CH	h/adc.h	16;"	d
+ADC2_CH	h/adc.h	17;"	d
+ADC3_CH	h/adc.h	18;"	d
+ADC4_CH	h/adc.h	19;"	d
+ADC5_CH	h/adc.h	20;"	d
+ADC6_CH	h/adc.h	21;"	d
+ADC7_CH	h/adc.h	22;"	d
+ADCChannel	adc.c	/^uint8_t		ADCChannel = 0;$/;"	v
+ADCResult	adc.c	/^uint16_t	ADCResult[8] = {0,};$/;"	v
+ADC_DELAY	h/adc.h	24;"	d
+AE_L	h/bm.h	/^	AE_L,$/;"	e	enum:DS2782_REG
+AE_M	h/bm.h	/^	AE_M,		\/\/ 18$/;"	e	enum:DS2782_REG
+AR	makefile	/^AR			= $(CROSS_COMPILE)ar$/;"	m
+ARQMODE	h/ntrxutil.h	/^enum ARQMODE$/;"	g
+ARQcount	h/ntrxdil.h	/^    MyDword32T   ARQcount;$/;"	m	struct:TXstat
+ARRYLEN	ntrxranging.c	41;"	d	file:
+AS	h/bm.h	/^	AS,$/;"	e	enum:DS2782_REG
+AS	makefile	/^AS			= $(CROSS_COMPILE)as$/;"	m
+AllCAL	h/ntrxutil.h	67;"	d
+ApplCallback	app.c	/^void ApplCallback (MyAddrT source, MyByte8T *payload, MyInt16T len)$/;"	f
+BADC	h/ina219.h	/^	uint16_t	BADC:4;	\/\/ 0x00: 9bit, 0x01: 10bit, 0x02: 11bit, 0x03: 12bit ...$/;"	m	struct:INA219_CONFIGURE_BIT
+BITS2BYTES	h/ntrxtypes.h	23;"	d
+BIT_CLEAR	h/common_def.h	22;"	d
+BIT_SET	h/common_def.h	21;"	d
+BOOL_OP	ntrxutil.c	344;"	d	file:
+BRANG	h/ina219.h	/^	uint16_t	BRANG:1;	\/\/ 0: 16V FSR, 1: 32V FSR$/;"	m	struct:INA219_CONFIGURE_BIT
+BSL_RX	h/ymote2_io.h	75;"	d
+BSL_TX	h/ymote2_io.h	65;"	d
+BTCTS	h/ymote2_io.h	71;"	d
+BTConsole	timer.c	/^uint16_t BTConsole = OFF;$/;"	v
+BTRST	h/ymote2_io.h	69;"	d
+BTRTS	h/ymote2_io.h	70;"	d
+BT_CONSOLE_DELAY	timer.c	12;"	d	file:
+BT_ENABLE	main.c	28;"	d	file:
+BT_GPS_SCI_OE	h/ymote2_io.h	76;"	d
+BT_LDO_CE	h/ymote2_io.h	84;"	d
+BT_POWER_OFF	h/common_def.h	25;"	d
+BT_POWER_ON	h/common_def.h	36;"	d
+BUS_VOLT	h/ina219.h	/^	BUS_VOLT,$/;"	e	enum:INA219_REG
+BYTES2INT	h/common_def.h	17;"	d
+BYTES2UINT	h/common_def.h	18;"	d
+BufGPSLine	gps.c	/^static char				BufGPSLine[256];$/;"	v	file:
+CALIBRATION	h/ina219.h	/^	CALIBRATION$/;"	e	enum:INA219_REG
+CC	makefile	/^CC			= $(CROSS_COMPILE)gcc$/;"	m
+CCVERSION	makefile	/^CCVERSION	:= $(shell $(CC) --verbose 2>&1 | tail -1)$/;"	m
+CFLAGS	makefile	/^CFLAGS		:= $(FLAGS) $(DEBUGFLAGS) $(INC) -DTRACE_DEBUG$/;"	m
+CHIRPBYTE	h/ntrxutil.h	/^enum CHIRPBYTE$/;"	g
+CMDT	h/nnspi.h	/^} CMDT;$/;"	t	typeref:enum:__anon9
+CMD_ERROR	h/ntrxutil.h	/^    CMD_ERROR$/;"	e	enum:__anon7
+COMPASS_ENABLE	main.c	32;"	d	file:
+COMPASS_LDO_CE	h/ymote2_io.h	77;"	d
+COMPASS_POWER_OFF	h/common_def.h	29;"	d
+COMPASS_POWER_ON	h/common_def.h	40;"	d
+CONFIG_80MHz_1us_1M_S	h/config.h	90;"	d
+CONFIG_AVR_BOARD_11	h/config.h	36;"	d
+CONFIG_CLK_73_MHZ	h/config.h	39;"	d
+CONFIG_CONSOLE	h/config.h	5;"	d
+CONFIG_CONSOLE_LINE_SIZE	h/config.h	17;"	d
+CONFIG_CONSOLE_QUEUE_SIZE	h/config.h	11;"	d
+CONFIG_DEFAULT_TRX_80MHZ_1000NS	h/config.h	67;"	d
+CONFIG_DEFAULT_TRX_80MHZ_1000NS	h/config.h	83;"	d
+CONFIG_FIXmode	h/config.h	91;"	d
+CONFIG_NTRX_22MHZ_1000NS	h/config.h	50;"	d
+CONFIG_NTRX_22MHZ_16000NS	h/config.h	54;"	d
+CONFIG_NTRX_22MHZ_2000NS	h/config.h	51;"	d
+CONFIG_NTRX_22MHZ_4000NS	h/config.h	52;"	d
+CONFIG_NTRX_22MHZ_500NS	h/config.h	49;"	d
+CONFIG_NTRX_22MHZ_8000NS	h/config.h	53;"	d
+CONFIG_NTRX_22MHZ_HR_4000NS	h/config.h	59;"	d
+CONFIG_NTRX_80MHZ_1000NS	h/config.h	56;"	d
+CONFIG_NTRX_80MHZ_2000NS	h/config.h	57;"	d
+CONFIG_NTRX_80MHZ_4000NS	h/config.h	58;"	d
+CONFIG_NTRX_80MHZ_500NS	h/config.h	55;"	d
+CONFIG_NTRX_AUTO_RECALIB	h/config.h	43;"	d
+CONFIG_NTRX_RECAL_DELAY	h/config.h	20;"	d
+CONFIG_NTRX_RF_TX_EXT_PAMP_OUT	h/config.h	46;"	d
+CONFIG_PRINTF	h/config.h	8;"	d
+CONFIG_PRINTF_LINE_SIZE	h/config.h	14;"	d
+CONFIG_REG	h/ina219.h	/^	CONFIG_REG = 0,$/;"	e	enum:INA219_REG
+CONFIG_REG_MAP_NR	h/config.h	23;"	d
+COPY_B0	h/bm.h	/^	COPY_B0 = 0x42,$/;"	e	enum:DS2782_CMD
+COPY_B1	h/bm.h	/^	COPY_B1 = 0x44,$/;"	e	enum:DS2782_CMD
+CRC1failsCount	h/ntrxdil.h	/^    MyDword32T   CRC1failsCount;$/;"	m	struct:RXstat
+CRC2failsCount	h/ntrxdil.h	/^    MyDword32T   CRC2failsCount;$/;"	m	struct:RXstat
+CREGA	h/compass.h	/^	CREGA = 0,		\/\/Configuration Register A$/;"	e	enum:HMC5843
+CREGB	h/compass.h	/^	CREGB,			\/\/Configuration Register B$/;"	e	enum:HMC5843
+CRITICAL_SECTION_END	h/util.h	15;"	d
+CRITICAL_SECTION_END_NO_BRACE	h/util.h	19;"	d
+CRITICAL_SECTION_START	h/util.h	11;"	d
+CROSS_COMPILE	makefile	/^CROSS_COMPILE = msp430-$/;"	m
+CS_END	h/util.h	22;"	d
+CS_START	h/util.h	21;"	d
+CURRENT	h/ina219.h	/^	CURRENT,$/;"	e	enum:INA219_REG
+CURRENT_L	h/bm.h	/^	CURRENT_L,$/;"	e	enum:DS2782_REG
+CURRENT_M	h/bm.h	/^	CURRENT_M,	\/\/ 0E$/;"	e	enum:DS2782_REG
+CompassCRAReg	compass.c	/^union HMC5843_CREGA_REG		CompassCRAReg;$/;"	v	typeref:union:HMC5843_CREGA_REG
+CompassCRBReg	compass.c	/^union HMC5843_CREGB_REG		CompassCRBReg;$/;"	v	typeref:union:HMC5843_CREGB_REG
+CompassMRReg	compass.c	/^union HMC5843_MODEREG_REG	CompassMRReg;$/;"	v	typeref:union:HMC5843_MODEREG_REG
+DATA_RATE_T	h/ntrxdil.h	/^} DATA_RATE_T;$/;"	t	typeref:enum:__anon6
+DEBUG_EXT_SCI_OE	h/ymote2_io.h	74;"	d
+DELAY_100us	h/ntrxutil.h	52;"	d
+DELAY_20ms	h/ntrxutil.h	54;"	d
+DELAY_20us	h/ntrxutil.h	51;"	d
+DELAY_800us	h/ntrxutil.h	53;"	d
+DELIMETER	util.c	25;"	d	file:
+DILDATARATE	h/ntrxutil.h	/^enum DILDATARATE$/;"	g
+DILMODSYSTEM	h/ntrxutil.h	/^enum DILMODSYSTEM$/;"	g
+DILPRETRAILSYMBOLS	h/ntrxutil.h	/^enum DILPRETRAILSYMBOLS$/;"	g
+DILSTAADDNO	h/ntrxutil.h	/^enum DILSTAADDNO$/;"	g
+DIMADDRESS	ntrxdil.c	33;"	d	file:
+DINT	h/util.h	8;"	d
+DL	h/compass.h	/^	uint8_t DL:4;$/;"	m	struct:HMC5843_CREGB_BITS
+DO	h/compass.h	/^	uint8_t DO:3;$/;"	m	struct:HMC5843_CREGA_BITS
+DS2782_CMD	h/bm.h	/^enum DS2782_CMD$/;"	g
+DS2782_REG	h/bm.h	/^enum DS2782_REG$/;"	g
+EEPROM_CTL	h/bm.h	/^	EEPROM_CTL 	 = 0x60,$/;"	e	enum:DS2782_REG
+EEPROM_FCR	h/bm.h	/^	EEPROM_FCR 	 = 0xFE,$/;"	e	enum:DS2782_REG
+EEPROM_REG	h/bm.h	/^	EEPROM_REG 	 = 0x1F,$/;"	e	enum:DS2782_REG
+EEPROM_S_ADD	h/bm.h	/^	EEPROM_S_ADD = 0x7E,$/;"	e	enum:DS2782_REG
+EINT	h/util.h	7;"	d
+ELF	makefile	/^ELF := $(MAINEXE).elf$/;"	m
+ENTER_TASK	h/hwclock.h	41;"	d
+FALSE	h/common_def.h	8;"	d
+FALSE	h/ntrxtypes.h	/^	FALSE = 0,$/;"	e	enum:__anon8
+FALSE	h/ntrxtypes.h	91;"	d
+FALSE	h/types.h	17;"	d
+FLAGS	makefile	/^FLAGS		:= -O2 -W -Wall -Wshadow \\$/;"	m
+FORMAT	makefile	/^FORMAT = ihex$/;"	m
+FRMTYPE	h/ntrxutil.h	/^enum FRMTYPE$/;"	g
+FULL_L	h/bm.h	/^	FULL_L,$/;"	e	enum:DS2782_REG
+FULL_M	h/bm.h	/^	FULL_M,$/;"	e	enum:DS2782_REG
+FunctionCMDDS2782	bm.c	/^void FunctionCMDDS2782(enum DS2782_CMD Command)$/;"	f
+GL	h/compass.h	/^	uint8_t GL:3;$/;"	m	struct:HMC5843_CREGB_BITS
+GPSGetData	gps.c	/^int GPSGetData(void)$/;"	f
+GPSRowData	gps.c	/^char	GPSRowData[256];$/;"	v
+GPSTask	gps.c	/^void GPSTask(void)$/;"	f
+GPS_ACTIVE	h/common_def.h	43;"	d
+GPS_EN	h/ymote2_io.h	92;"	d
+GPS_ENABLE	main.c	33;"	d	file:
+GPS_LDO_CE	h/ymote2_io.h	91;"	d
+GPS_POWER_OFF	h/common_def.h	30;"	d
+GPS_POWER_ON	h/common_def.h	41;"	d
+GPS_SLEEP	h/common_def.h	44;"	d
+GPS_isVaild	gps.c	/^int GPS_isVaild(int len)$/;"	f
+GPS_parseGPGGA	gps.c	/^void GPS_parseGPGGA(int len)$/;"	f
+GPS_parseGPRMC	gps.c	/^void GPS_parseGPRMC(int len)$/;"	f
+GPS_parseGPVTG	gps.c	/^void GPS_parseGPVTG(int len)$/;"	f
+GYRO1_X_CHANNEL	h/adc.h	10;"	d
+GYRO1_Y_CHANNEL	h/adc.h	11;"	d
+GYRO2_X_CHANNEL	h/adc.h	12;"	d
+GYRO2_Y_CHANNEL	h/adc.h	13;"	d
+GYRO_AZ	h/ymote2_io.h	100;"	d
+GYRO_ENABLE	main.c	30;"	d	file:
+GYRO_LDO_CE	h/ymote2_io.h	98;"	d
+GYRO_POWER_OFF	h/common_def.h	26;"	d
+GYRO_POWER_ON	h/common_def.h	37;"	d
+GYRO_PTATS	h/adc.h	6;"	d
+HBM2X1M_init	hbm2x1m.c	/^void HBM2X1M_init()$/;"	f
+HBM2X1M_reset	hbm2x1m.c	/^void HBM2X1M_reset()$/;"	f
+HEX	makefile	/^HEX := $(MAINEXE).hex$/;"	m
+HMC5843	h/compass.h	/^enum HMC5843$/;"	g
+HMC5843_CREGA_BITS	h/compass.h	/^struct HMC5843_CREGA_BITS$/;"	s
+HMC5843_CREGA_REG	h/compass.h	/^union HMC5843_CREGA_REG$/;"	u
+HMC5843_CREGB_BITS	h/compass.h	/^struct HMC5843_CREGB_BITS$/;"	s
+HMC5843_CREGB_REG	h/compass.h	/^union HMC5843_CREGB_REG$/;"	u
+HMC5843_MODEREG_BITS	h/compass.h	/^struct HMC5843_MODEREG_BITS$/;"	s
+HMC5843_MODEREG_REG	h/compass.h	/^union HMC5843_MODEREG_REG$/;"	u
+I2CBufferPointer	i2c.c	/^static volatile int				I2CBufferPointer = 0;$/;"	v	file:
+I2CReadCount	i2c.c	/^static volatile int				I2CReadCount 	 = 0;$/;"	v	file:
+I2CSlaveRegAddress	i2c.c	/^static volatile unsigned char	I2CSlaveRegAddress = 0;$/;"	v	file:
+I2CWriteCount	i2c.c	/^static volatile int				I2CWriteCount 	 = 0;$/;"	v	file:
+I2C_COMPASS_ADD	compass.c	13;"	d	file:
+I2C_DS2782_ADD	h/bm.h	54;"	d
+I2C_INA219_MSP_ADD	h/ina219.h	7;"	d
+I2C_INA219_RADIO_ADD	h/ina219.h	8;"	d
+I2C_INA219_SENSOR_ADD	h/ina219.h	9;"	d
+I2C_OWN_ADD	h/i2c.h	6;"	d
+I2C_SCL	h/ymote2_io.h	85;"	d
+I2C_SDA	h/ymote2_io.h	83;"	d
+IAVG_L	h/bm.h	/^	IAVG_L,$/;"	e	enum:DS2782_REG
+IAVG_M	h/bm.h	/^	IAVG_M,$/;"	e	enum:DS2782_REG
+INA219ConfigreReg	ina219.c	/^union INA219_CONFigure_REG INA219ConfigreReg;$/;"	v	typeref:union:INA219_CONFigure_REG
+INA219_CAL	h/ina219.h	11;"	d
+INA219_CONFIGURE_BIT	h/ina219.h	/^struct INA219_CONFIGURE_BIT$/;"	s
+INA219_CONFigure_REG	h/ina219.h	/^union INA219_CONFigure_REG$/;"	u
+INA219_REG	h/ina219.h	/^enum INA219_REG$/;"	g
+INC	makefile	/^INC	        := -I.\/h$/;"	m
+IREGA	h/compass.h	/^	IREGA,			\/\/Identification Register$/;"	e	enum:HMC5843
+IREGB	h/compass.h	/^	IREGB,			\/\/Identification Register$/;"	e	enum:HMC5843
+IREGC	h/compass.h	/^	IREGC			\/\/Identification Register$/;"	e	enum:HMC5843
+InitApplication	app.c	/^void	InitApplication(void)$/;"	f
+InitBTUart	hbm2x1m.c	/^void InitBTUart(void)$/;"	f
+InitCompass	main.c	/^void InitCompass(void)$/;"	f
+InitComponentPower	main.c	/^void InitComponentPower(void)$/;"	f
+InitCurrentMonitor	main.c	/^void InitCurrentMonitor(void)$/;"	f
+InitGPSUart	gps.c	/^void InitGPSUart(void)$/;"	f
+InitI2CModule	i2c.c	/^void InitI2CModule(void)$/;"	f
+InitI2CRx	i2c.c	/^void InitI2CRx(void)$/;"	f
+InitI2CTx	i2c.c	/^void InitI2CTx(void)$/;"	f
+InitMSPGPIOFuction	main.c	/^void InitMSPGPIOFuction(void)$/;"	f
+InitSPI	nnspi.c	/^void InitSPI(void)$/;"	f
+InitTimer	timer.c	/^void InitTimer(void)$/;"	f
+LD	makefile	/^LD			= $(CROSS_COMPILE)ld$/;"	m
+LEAVE_TASK	h/hwclock.h	45;"	d
+LED1	h/ymote2_io.h	104;"	d
+LED2	h/ymote2_io.h	105;"	d
+LED3	h/ymote2_io.h	106;"	d
+LED4	h/ymote2_io.h	68;"	d
+LED5	h/ymote2_io.h	73;"	d
+LEDS_MASK	h/led.h	9;"	d
+LEDS_NORMAL	h/led.h	53;"	d
+LEDS_OFF	h/led.h	55;"	d
+LEDS_ON	h/led.h	54;"	d
+LEDS_TOGGLE	h/led.h	56;"	d
+LED_DELAY	ntrxdil.c	69;"	d	file:
+LOCK_B0	h/bm.h	/^	LOCK_B0 = 0x63,$/;"	e	enum:DS2782_CMD
+LOCK_B1	h/bm.h	/^	LOCK_B1 = 0x66$/;"	e	enum:DS2782_CMD
+LSS	makefile	/^LSS := $(MAINEXE).lss$/;"	m
+MAINEXE	makefile	/^MAINEXE = main$/;"	m
+MAKE_PORTINT_MACRO	h/pinmacros.h	17;"	d
+MAKE_PORT_MACRO	h/pinmacros.h	7;"	d
+MAKE_TIMERCC_MACRO	h/pinmacros.h	36;"	d
+MAP	makefile	/^MAP := $(MAINEXE).map$/;"	m
+MAX_DEVIATION	dco.c	17;"	d	file:
+MAX_DIFF_ALLOWED	ntrxranging.c	51;"	d	file:
+MAX_TIMER_TICK	hwclock.c	74;"	d	file:
+MAX_TIMER_TICK	timer.c	10;"	d	file:
+MD	h/compass.h	/^	uint8_t MD:2;$/;"	m	struct:HMC5843_MODEREG_BITS
+MILLISECONDS_PER_TICK	hwclock.c	36;"	d	file:
+MODE	h/ina219.h	/^	uint16_t	 MODE:3;	\/\/ 0x00: Power Down, 0x01: S_V_T, 0x02: B_V_T, 0x03: S_B_V_T, 0x04: ADCoff, 0x05: S_V_C, 0x06: B_V_C, 0x07: S_B_V_C$/;"	m	struct:INA219_CONFIGURE_BIT
+MODEREG	h/compass.h	/^	MODEREG,		\/\/Mode Register$/;"	e	enum:HMC5843
+MS	h/compass.h	/^	uint8_t MS:2;$/;"	m	struct:HMC5843_CREGA_BITS
+MSP_ROSC	h/ymote2_io.h	78;"	d
+MyAddrT	h/ntrxtypes.h	/^typedef	MyAddressT	MyAddrT;$/;"	t
+MyAddressT	h/ntrxtypes.h	/^typedef	MyByte8T	MyAddressT[BITS2BYTES(48)];$/;"	t
+MyBoolT	h/ntrxtypes.h	/^}	MyBoolT;$/;"	t	typeref:enum:__anon8
+MyByte24T	h/ntrxtypes.h	/^typedef	MyByte8T	MyByte24T[BITS2BYTES(24)];$/;"	t
+MyByte64T	h/ntrxtypes.h	/^typedef	MyByte8T	MyByte64T[BITS2BYTES(64)];$/;"	t
+MyByte8T	h/ntrxtypes.h	/^typedef	unsigned	char	MyByte8T;$/;"	t
+MyChar8T	h/ntrxtypes.h	/^typedef	signed	char	MyChar8T;$/;"	t
+MyDouble32T	h/ntrxtypes.h	/^typedef	double	MyDouble32T;$/;"	t
+MyDword32T	h/ntrxtypes.h	/^typedef	unsigned	long	MyDword32T;$/;"	t
+MyFnPtrT	h/ntrxtypes.h	/^typedef	void	(*MyFnPtrT)(void);$/;"	t
+MyInt16T	h/ntrxtypes.h	/^typedef	signed	short	MyInt16T;$/;"	t
+MyListT	h/ntrxtypes.h	/^}	MyListT;$/;"	t	typeref:struct:_ppslistt_
+MyLong32T	h/ntrxtypes.h	/^typedef	signed	long	MyLong32T;$/;"	t
+MyMtimeT	h/ntrxtypes.h	/^typedef	MyDword32T	MyMtimeT;$/;"	t
+MyPtrT	h/ntrxtypes.h	/^typedef	void	*MyPtrT;$/;"	t
+MyTimeT	h/ntrxtypes.h	/^typedef	MyDword32T	MyTimeT;$/;"	t
+MyTmT	h/ntrxtypes.h	/^}	MyTmT;$/;"	t	typeref:struct:_tm_
+MyWord16T	h/ntrxtypes.h	/^typedef	unsigned	short	MyWord16T;$/;"	t
+NANONETRESETDELAY	h/nnspi.h	33;"	d
+NA_125k_S	h/ntrxutil.h	542;"	d
+NA_16us	h/ntrxutil.h	553;"	d
+NA_1M_S	h/ntrxutil.h	545;"	d
+NA_1us	h/ntrxutil.h	549;"	d
+NA_22MHz	h/ntrxutil.h	537;"	d
+NA_22MHz_HR	h/ntrxutil.h	538;"	d
+NA_250k_S	h/ntrxutil.h	543;"	d
+NA_2M_S	h/ntrxutil.h	546;"	d
+NA_2us	h/ntrxutil.h	550;"	d
+NA_31k25_S	h/ntrxutil.h	540;"	d
+NA_4us	h/ntrxutil.h	551;"	d
+NA_500k_S	h/ntrxutil.h	544;"	d
+NA_500ns	h/ntrxutil.h	548;"	d
+NA_62k5_S	h/ntrxutil.h	541;"	d
+NA_80MHz	h/ntrxutil.h	536;"	d
+NA_8us	h/ntrxutil.h	552;"	d
+NA_ADC_IQ_LSB	h/OffstMapInit.h	1855;"	d
+NA_ADC_IQ_MSB	h/OffstMapInit.h	1854;"	d
+NA_AddrBits_IC_C	h/OffstMapInit.h	1890;"	d
+NA_AgcAmplitude	h/ntrxutil.h	/^    NA_AgcAmplitude,$/;"	e	enum:__anon7
+NA_AgcAmplitude_I	h/OffstMapInit.h	1651;"	d
+NA_AgcAmplitude_LSB	h/OffstMapInit.h	1650;"	d
+NA_AgcAmplitude_MSB	h/OffstMapInit.h	1649;"	d
+NA_AgcAmplitude_O	h/OffstMapInit.h	1648;"	d
+NA_AgcDeadTime	h/ntrxutil.h	/^    NA_AgcDeadTime,$/;"	e	enum:__anon7
+NA_AgcDeadTime_I	h/OffstMapInit.h	598;"	d
+NA_AgcDeadTime_LSB	h/OffstMapInit.h	597;"	d
+NA_AgcDeadTime_MSB	h/OffstMapInit.h	596;"	d
+NA_AgcDeadTime_O	h/OffstMapInit.h	595;"	d
+NA_AgcDefaultEn	h/ntrxutil.h	/^    NA_AgcDefaultEn,$/;"	e	enum:__anon7
+NA_AgcDefaultEn_B	h/OffstMapInit.h	629;"	d
+NA_AgcDefaultEn_I	h/OffstMapInit.h	630;"	d
+NA_AgcDefaultEn_O	h/OffstMapInit.h	628;"	d
+NA_AgcGain	h/ntrxutil.h	/^    NA_AgcGain, \/* 90 *\/$/;"	e	enum:__anon7
+NA_AgcGain_I	h/OffstMapInit.h	649;"	d
+NA_AgcGain_LSB	h/OffstMapInit.h	648;"	d
+NA_AgcGain_MSB	h/OffstMapInit.h	647;"	d
+NA_AgcGain_O	h/OffstMapInit.h	646;"	d
+NA_AgcHold	h/ntrxutil.h	/^    NA_AgcHold,$/;"	e	enum:__anon7
+NA_AgcHold_B	h/OffstMapInit.h	634;"	d
+NA_AgcHold_I	h/OffstMapInit.h	635;"	d
+NA_AgcHold_O	h/OffstMapInit.h	633;"	d
+NA_AgcIntTime	h/ntrxutil.h	/^    NA_AgcIntTime,$/;"	e	enum:__anon7
+NA_AgcIntTime_I	h/OffstMapInit.h	611;"	d
+NA_AgcIntTime_LSB	h/OffstMapInit.h	610;"	d
+NA_AgcIntTime_MSB	h/OffstMapInit.h	609;"	d
+NA_AgcIntTime_O	h/OffstMapInit.h	608;"	d
+NA_AgcNregLength	h/ntrxutil.h	/^    NA_AgcNregLength,$/;"	e	enum:__anon7
+NA_AgcNregLength_I	h/OffstMapInit.h	604;"	d
+NA_AgcNregLength_LSB	h/OffstMapInit.h	603;"	d
+NA_AgcNregLength_MSB	h/OffstMapInit.h	602;"	d
+NA_AgcNregLength_O	h/OffstMapInit.h	601;"	d
+NA_AgcRangeOffset	h/ntrxutil.h	/^    NA_AgcRangeOffset,$/;"	e	enum:__anon7
+NA_AgcRangeOffset_I	h/OffstMapInit.h	1658;"	d
+NA_AgcRangeOffset_LSB	h/OffstMapInit.h	1657;"	d
+NA_AgcRangeOffset_MSB	h/OffstMapInit.h	1656;"	d
+NA_AgcRangeOffset_O	h/OffstMapInit.h	1655;"	d
+NA_AgcRssiThres	h/ntrxutil.h	/^    NA_AgcRssiThres,$/;"	e	enum:__anon7
+NA_AgcRssiThres_I	h/OffstMapInit.h	643;"	d
+NA_AgcRssiThres_LSB	h/OffstMapInit.h	642;"	d
+NA_AgcRssiThres_MSB	h/OffstMapInit.h	641;"	d
+NA_AgcRssiThres_O	h/OffstMapInit.h	640;"	d
+NA_AgcThresHold1	h/ntrxutil.h	/^    NA_AgcThresHold1,$/;"	e	enum:__anon7
+NA_AgcThresHold1_I	h/OffstMapInit.h	572;"	d
+NA_AgcThresHold1_LSB	h/OffstMapInit.h	571;"	d
+NA_AgcThresHold1_MSB	h/OffstMapInit.h	570;"	d
+NA_AgcThresHold1_O	h/OffstMapInit.h	569;"	d
+NA_AgcThresHold2	h/ntrxutil.h	/^    NA_AgcThresHold2, \/* 80 *\/$/;"	e	enum:__anon7
+NA_AgcThresHold2_I	h/OffstMapInit.h	579;"	d
+NA_AgcThresHold2_LSB	h/OffstMapInit.h	578;"	d
+NA_AgcThresHold2_MSB	h/OffstMapInit.h	577;"	d
+NA_AgcThresHold2_O	h/OffstMapInit.h	576;"	d
+NA_AgcValue	h/ntrxutil.h	/^    NA_AgcValue,$/;"	e	enum:__anon7
+NA_AgcValue_I	h/OffstMapInit.h	625;"	d
+NA_AgcValue_LSB	h/OffstMapInit.h	624;"	d
+NA_AgcValue_MSB	h/OffstMapInit.h	623;"	d
+NA_AgcValue_O	h/OffstMapInit.h	622;"	d
+NA_BasebandTimerStartValue_I	h/OffstMapInit.h	694;"	d
+NA_BasebandTimerStartValue_LSB	h/OffstMapInit.h	693;"	d
+NA_BasebandTimerStartValue_MSB	h/OffstMapInit.h	692;"	d
+NA_BasebandTimerStartValue_O	h/OffstMapInit.h	691;"	d
+NA_BattMgmtCompare	h/ntrxutil.h	/^    NA_BattMgmtCompare, \/* 10 *\/$/;"	e	enum:__anon7
+NA_BattMgmtCompare_B	h/OffstMapInit.h	109;"	d
+NA_BattMgmtCompare_I	h/OffstMapInit.h	110;"	d
+NA_BattMgmtCompare_O	h/OffstMapInit.h	108;"	d
+NA_BattMgmtEnable	h/ntrxutil.h	/^    NA_BattMgmtEnable,$/;"	e	enum:__anon7
+NA_BattMgmtEnable_B	h/OffstMapInit.h	98;"	d
+NA_BattMgmtEnable_I	h/OffstMapInit.h	99;"	d
+NA_BattMgmtEnable_O	h/OffstMapInit.h	97;"	d
+NA_BattMgmtThreshold	h/ntrxutil.h	/^    NA_BattMgmtThreshold,$/;"	e	enum:__anon7
+NA_BattMgmtThreshold_I	h/OffstMapInit.h	105;"	d
+NA_BattMgmtThreshold_LSB	h/OffstMapInit.h	104;"	d
+NA_BattMgmtThreshold_MSB	h/OffstMapInit.h	103;"	d
+NA_BattMgmtThreshold_O	h/OffstMapInit.h	102;"	d
+NA_BbTimerIrqEnable	h/ntrxutil.h	/^    NA_BbTimerIrqEnable,$/;"	e	enum:__anon7
+NA_BbTimerIrqEnable_B	h/OffstMapInit.h	381;"	d
+NA_BbTimerIrqEnable_I	h/OffstMapInit.h	382;"	d
+NA_BbTimerIrqEnable_O	h/OffstMapInit.h	380;"	d
+NA_BbTimerIrqStatus	h/ntrxutil.h	/^    NA_BbTimerIrqStatus,$/;"	e	enum:__anon7
+NA_BbTimerIrqStatus_B	h/OffstMapInit.h	401;"	d
+NA_BbTimerIrqStatus_I	h/OffstMapInit.h	402;"	d
+NA_BbTimerIrqStatus_O	h/OffstMapInit.h	400;"	d
+NA_BypassBbCrystal	h/ntrxutil.h	/^    NA_BypassBbCrystal, \/* 30 *\/$/;"	e	enum:__anon7
+NA_BypassBbCrystal_B	h/OffstMapInit.h	227;"	d
+NA_BypassBbCrystal_I	h/OffstMapInit.h	228;"	d
+NA_BypassBbCrystal_O	h/OffstMapInit.h	226;"	d
+NA_ChirpDown_VC_C	h/OffstMapInit.h	1215;"	d
+NA_ChirpFilterCaps	h/ntrxutil.h	/^    NA_ChirpFilterCaps,$/;"	e	enum:__anon7
+NA_ChirpFilterCaps_I	h/OffstMapInit.h	661;"	d
+NA_ChirpFilterCaps_LSB	h/OffstMapInit.h	660;"	d
+NA_ChirpFilterCaps_MSB	h/OffstMapInit.h	659;"	d
+NA_ChirpFilterCaps_O	h/OffstMapInit.h	658;"	d
+NA_ChirpFoldMinus_VC_C	h/OffstMapInit.h	1217;"	d
+NA_ChirpFoldPlus_VC_C	h/OffstMapInit.h	1218;"	d
+NA_ChirpMatrix0	h/ntrxutil.h	/^    NA_ChirpMatrix0, \/* 160 *\/$/;"	e	enum:__anon7
+NA_ChirpMatrix0_I	h/OffstMapInit.h	1194;"	d
+NA_ChirpMatrix0_LSB	h/OffstMapInit.h	1193;"	d
+NA_ChirpMatrix0_MSB	h/OffstMapInit.h	1192;"	d
+NA_ChirpMatrix0_O	h/OffstMapInit.h	1191;"	d
+NA_ChirpMatrix1	h/ntrxutil.h	/^    NA_ChirpMatrix1,$/;"	e	enum:__anon7
+NA_ChirpMatrix1_I	h/OffstMapInit.h	1200;"	d
+NA_ChirpMatrix1_LSB	h/OffstMapInit.h	1199;"	d
+NA_ChirpMatrix1_MSB	h/OffstMapInit.h	1198;"	d
+NA_ChirpMatrix1_O	h/OffstMapInit.h	1197;"	d
+NA_ChirpMatrix2	h/ntrxutil.h	/^    NA_ChirpMatrix2,$/;"	e	enum:__anon7
+NA_ChirpMatrix2_I	h/OffstMapInit.h	1207;"	d
+NA_ChirpMatrix2_LSB	h/OffstMapInit.h	1206;"	d
+NA_ChirpMatrix2_MSB	h/OffstMapInit.h	1205;"	d
+NA_ChirpMatrix2_O	h/OffstMapInit.h	1204;"	d
+NA_ChirpMatrix3	h/ntrxutil.h	/^    NA_ChirpMatrix3,$/;"	e	enum:__anon7
+NA_ChirpMatrix3_I	h/OffstMapInit.h	1213;"	d
+NA_ChirpMatrix3_LSB	h/OffstMapInit.h	1212;"	d
+NA_ChirpMatrix3_MSB	h/OffstMapInit.h	1211;"	d
+NA_ChirpMatrix3_O	h/OffstMapInit.h	1210;"	d
+NA_ChirpOff_VC_C	h/OffstMapInit.h	1219;"	d
+NA_ChirpUp_VC_C	h/OffstMapInit.h	1216;"	d
+NA_ClearBasebandTimerInt	h/ntrxutil.h	/^    NA_ClearBasebandTimerInt,$/;"	e	enum:__anon7
+NA_ClearBasebandTimerInt_B	h/OffstMapInit.h	489;"	d
+NA_ClearBasebandTimerInt_I	h/OffstMapInit.h	490;"	d
+NA_ClearBasebandTimerInt_O	h/OffstMapInit.h	488;"	d
+NA_Crc1Bits_IC_C	h/OffstMapInit.h	1857;"	d
+NA_Crc2Type	h/ntrxutil.h	/^    NA_Crc2Type,$/;"	e	enum:__anon7
+NA_Crc2Type1Bits_IC_C	h/OffstMapInit.h	1125;"	d
+NA_Crc2Type1_VC_C	h/OffstMapInit.h	1122;"	d
+NA_Crc2Type2Bits_IC_C	h/OffstMapInit.h	1126;"	d
+NA_Crc2Type2_VC_C	h/OffstMapInit.h	1123;"	d
+NA_Crc2Type3Bits_IC_C	h/OffstMapInit.h	1127;"	d
+NA_Crc2Type3_VC_C	h/OffstMapInit.h	1124;"	d
+NA_Crc2Type_I	h/OffstMapInit.h	1120;"	d
+NA_Crc2Type_LSB	h/OffstMapInit.h	1119;"	d
+NA_Crc2Type_MSB	h/OffstMapInit.h	1118;"	d
+NA_Crc2Type_O	h/OffstMapInit.h	1117;"	d
+NA_CryptBits_IC_C	h/OffstMapInit.h	1863;"	d
+NA_CryptFieldEn_B	h/OffstMapInit.h	1865;"	d
+NA_CryptFieldId_LSB	h/OffstMapInit.h	1866;"	d
+NA_CryptFieldId_MSB	h/OffstMapInit.h	1867;"	d
+NA_CryptFieldSeqN_B	h/OffstMapInit.h	1868;"	d
+NA_CryptIdCount_IC_C	h/OffstMapInit.h	1860;"	d
+NA_CrystalFrequency_IC_C	h/OffstMapInit.h	1912;"	d
+NA_CsqAsyMode	h/ntrxutil.h	/^    NA_CsqAsyMode,$/;"	e	enum:__anon7
+NA_CsqAsyMode_B	h/OffstMapInit.h	924;"	d
+NA_CsqAsyMode_I	h/OffstMapInit.h	925;"	d
+NA_CsqAsyMode_O	h/OffstMapInit.h	923;"	d
+NA_CsqDitherValue	h/ntrxutil.h	/^    NA_CsqDitherValue,$/;"	e	enum:__anon7
+NA_CsqDitherValue_I	h/OffstMapInit.h	910;"	d
+NA_CsqDitherValue_LSB	h/OffstMapInit.h	909;"	d
+NA_CsqDitherValue_MSB	h/OffstMapInit.h	908;"	d
+NA_CsqDitherValue_O	h/OffstMapInit.h	907;"	d
+NA_CsqMemAddrInit	h/ntrxutil.h	/^    NA_CsqMemAddrInit, \/* 120 *\/$/;"	e	enum:__anon7
+NA_CsqMemAddrInit_B	h/OffstMapInit.h	929;"	d
+NA_CsqMemAddrInit_I	h/OffstMapInit.h	930;"	d
+NA_CsqMemAddrInit_O	h/OffstMapInit.h	928;"	d
+NA_CsqUse4Phases	h/ntrxutil.h	/^    NA_CsqUse4Phases,$/;"	e	enum:__anon7
+NA_CsqUse4Phases_B	h/OffstMapInit.h	919;"	d
+NA_CsqUse4Phases_I	h/OffstMapInit.h	920;"	d
+NA_CsqUse4Phases_O	h/OffstMapInit.h	918;"	d
+NA_CsqUsePhaseShift	h/ntrxutil.h	/^    NA_CsqUsePhaseShift,$/;"	e	enum:__anon7
+NA_CsqUsePhaseShift_B	h/OffstMapInit.h	914;"	d
+NA_CsqUsePhaseShift_I	h/OffstMapInit.h	915;"	d
+NA_CsqUsePhaseShift_O	h/OffstMapInit.h	913;"	d
+NA_CsqUseRam	h/ntrxutil.h	/^    NA_CsqUseRam,$/;"	e	enum:__anon7
+NA_CsqUseRam_B	h/OffstMapInit.h	934;"	d
+NA_CsqUseRam_I	h/OffstMapInit.h	935;"	d
+NA_CsqUseRam_O	h/OffstMapInit.h	933;"	d
+NA_D3lFixnMap	h/ntrxutil.h	/^    NA_D3lFixnMap,$/;"	e	enum:__anon7
+NA_D3lFixnMap_B	h/OffstMapInit.h	953;"	d
+NA_D3lFixnMap_I	h/OffstMapInit.h	954;"	d
+NA_D3lFixnMap_O	h/OffstMapInit.h	952;"	d
+NA_D3lPomEn	h/ntrxutil.h	/^    NA_D3lPomEn,$/;"	e	enum:__anon7
+NA_D3lPomEn_B	h/OffstMapInit.h	958;"	d
+NA_D3lPomEn_I	h/OffstMapInit.h	959;"	d
+NA_D3lPomEn_O	h/OffstMapInit.h	957;"	d
+NA_D3lPomLen	h/ntrxutil.h	/^    NA_D3lPomLen,$/;"	e	enum:__anon7
+NA_D3lPomLen_I	h/OffstMapInit.h	965;"	d
+NA_D3lPomLen_LSB	h/OffstMapInit.h	964;"	d
+NA_D3lPomLen_MSB	h/OffstMapInit.h	963;"	d
+NA_D3lPomLen_O	h/OffstMapInit.h	962;"	d
+NA_D3lUpDownEx	h/ntrxutil.h	/^    NA_D3lUpDownEx,$/;"	e	enum:__anon7
+NA_D3lUpDownEx_B	h/OffstMapInit.h	969;"	d
+NA_D3lUpDownEx_I	h/OffstMapInit.h	970;"	d
+NA_D3lUpDownEx_O	h/OffstMapInit.h	968;"	d
+NA_DeviceSelect	h/ntrxutil.h	/^    NA_DeviceSelect,$/;"	e	enum:__anon7
+NA_DeviceSelectBbRam0_C	h/OffstMapInit.h	363;"	d
+NA_DeviceSelectBbRam1_C	h/OffstMapInit.h	364;"	d
+NA_DeviceSelectCsq_C	h/OffstMapInit.h	365;"	d
+NA_DeviceSelectD3l_C	h/OffstMapInit.h	366;"	d
+NA_DeviceSelect_I	h/OffstMapInit.h	362;"	d
+NA_DeviceSelect_LSB	h/OffstMapInit.h	361;"	d
+NA_DeviceSelect_MSB	h/OffstMapInit.h	360;"	d
+NA_DeviceSelect_O	h/OffstMapInit.h	359;"	d
+NA_DioAlarmPolarity	h/ntrxutil.h	/^    NA_DioAlarmPolarity,$/;"	e	enum:__anon7
+NA_DioAlarmPolarity_B	h/OffstMapInit.h	130;"	d
+NA_DioAlarmPolarity_I	h/OffstMapInit.h	131;"	d
+NA_DioAlarmPolarity_O	h/OffstMapInit.h	129;"	d
+NA_DioAlarmStart	h/ntrxutil.h	/^    NA_DioAlarmStart,$/;"	e	enum:__anon7
+NA_DioAlarmStart_B	h/OffstMapInit.h	125;"	d
+NA_DioAlarmStart_I	h/OffstMapInit.h	126;"	d
+NA_DioAlarmStart_O	h/OffstMapInit.h	124;"	d
+NA_DioDirection	h/ntrxutil.h	/^    NA_DioDirection,$/;"	e	enum:__anon7
+NA_DioDirection_B	h/OffstMapInit.h	115;"	d
+NA_DioDirection_I	h/OffstMapInit.h	116;"	d
+NA_DioDirection_O	h/OffstMapInit.h	114;"	d
+NA_DioInValueAlarmStatus	h/ntrxutil.h	/^    NA_DioInValueAlarmStatus,$/;"	e	enum:__anon7
+NA_DioInValueAlarmStatus_I	h/OffstMapInit.h	147;"	d
+NA_DioInValueAlarmStatus_LSB	h/OffstMapInit.h	146;"	d
+NA_DioInValueAlarmStatus_MSB	h/OffstMapInit.h	145;"	d
+NA_DioInValueAlarmStatus_O	h/OffstMapInit.h	144;"	d
+NA_DioOutValueAlarmEnable	h/ntrxutil.h	/^    NA_DioOutValueAlarmEnable,$/;"	e	enum:__anon7
+NA_DioOutValueAlarmEnable_B	h/OffstMapInit.h	120;"	d
+NA_DioOutValueAlarmEnable_I	h/OffstMapInit.h	121;"	d
+NA_DioOutValueAlarmEnable_O	h/OffstMapInit.h	119;"	d
+NA_DioPortWe	h/ntrxutil.h	/^    NA_DioPortWe,$/;"	e	enum:__anon7
+NA_DioPortWe_I	h/OffstMapInit.h	154;"	d
+NA_DioPortWe_LSB	h/OffstMapInit.h	153;"	d
+NA_DioPortWe_MSB	h/OffstMapInit.h	152;"	d
+NA_DioPortWe_O	h/OffstMapInit.h	151;"	d
+NA_DioUsePulldown	h/ntrxutil.h	/^    NA_DioUsePulldown,$/;"	e	enum:__anon7
+NA_DioUsePulldown_B	h/OffstMapInit.h	140;"	d
+NA_DioUsePulldown_I	h/OffstMapInit.h	141;"	d
+NA_DioUsePulldown_O	h/OffstMapInit.h	139;"	d
+NA_DioUsePullup	h/ntrxutil.h	/^    NA_DioUsePullup,$/;"	e	enum:__anon7
+NA_DioUsePullup_B	h/OffstMapInit.h	135;"	d
+NA_DioUsePullup_I	h/OffstMapInit.h	136;"	d
+NA_DioUsePullup_O	h/OffstMapInit.h	134;"	d
+NA_DownPulseDetectDis	h/ntrxutil.h	/^    NA_DownPulseDetectDis,$/;"	e	enum:__anon7
+NA_DownPulseDetectDis_B	h/OffstMapInit.h	1530;"	d
+NA_DownPulseDetectDis_I	h/OffstMapInit.h	1531;"	d
+NA_DownPulseDetectDis_O	h/OffstMapInit.h	1529;"	d
+NA_EnableBbClock	h/ntrxutil.h	/^    NA_EnableBbClock,$/;"	e	enum:__anon7
+NA_EnableBbClock_B	h/OffstMapInit.h	222;"	d
+NA_EnableBbClock_I	h/OffstMapInit.h	223;"	d
+NA_EnableBbClock_O	h/OffstMapInit.h	221;"	d
+NA_EnableBbCrystal	h/ntrxutil.h	/^    NA_EnableBbCrystal,$/;"	e	enum:__anon7
+NA_EnableBbCrystal_B	h/OffstMapInit.h	217;"	d
+NA_EnableBbCrystal_I	h/OffstMapInit.h	218;"	d
+NA_EnableBbCrystal_O	h/OffstMapInit.h	216;"	d
+NA_EnableCsqClock	h/ntrxutil.h	/^    NA_EnableCsqClock,$/;"	e	enum:__anon7
+NA_EnableCsqClock_B	h/OffstMapInit.h	1009;"	d
+NA_EnableCsqClock_I	h/OffstMapInit.h	1010;"	d
+NA_EnableCsqClock_O	h/OffstMapInit.h	1008;"	d
+NA_EnableExtPA	h/ntrxutil.h	/^    NA_EnableExtPA,$/;"	e	enum:__anon7
+NA_EnableExtPA_B	h/OffstMapInit.h	1019;"	d
+NA_EnableExtPA_I	h/OffstMapInit.h	1020;"	d
+NA_EnableExtPA_O	h/OffstMapInit.h	1018;"	d
+NA_EnableFeatureClock	h/ntrxutil.h	/^    NA_EnableFeatureClock,$/;"	e	enum:__anon7
+NA_EnableFeatureClock_B	h/OffstMapInit.h	247;"	d
+NA_EnableFeatureClock_I	h/OffstMapInit.h	248;"	d
+NA_EnableFeatureClock_O	h/OffstMapInit.h	246;"	d
+NA_EnableLO	h/ntrxutil.h	/^    NA_EnableLO,$/;"	e	enum:__anon7
+NA_EnableLO_B	h/OffstMapInit.h	999;"	d
+NA_EnableLO_I	h/OffstMapInit.h	1000;"	d
+NA_EnableLO_O	h/OffstMapInit.h	998;"	d
+NA_EnableLOdiv10	h/ntrxutil.h	/^    NA_EnableLOdiv10,$/;"	e	enum:__anon7
+NA_EnableLOdiv10_B	h/OffstMapInit.h	1004;"	d
+NA_EnableLOdiv10_I	h/OffstMapInit.h	1005;"	d
+NA_EnableLOdiv10_O	h/OffstMapInit.h	1003;"	d
+NA_EnableTx	h/ntrxutil.h	/^    NA_EnableTx,$/;"	e	enum:__anon7
+NA_EnableTx_B	h/OffstMapInit.h	675;"	d
+NA_EnableTx_I	h/OffstMapInit.h	676;"	d
+NA_EnableTx_O	h/OffstMapInit.h	674;"	d
+NA_EnableWakeUpDio	h/ntrxutil.h	/^    NA_EnableWakeUpDio, \/* 20 *\/$/;"	e	enum:__anon7
+NA_EnableWakeUpDio_B	h/OffstMapInit.h	164;"	d
+NA_EnableWakeUpDio_I	h/OffstMapInit.h	165;"	d
+NA_EnableWakeUpDio_O	h/OffstMapInit.h	163;"	d
+NA_EnableWakeUpRtc	h/ntrxutil.h	/^    NA_EnableWakeUpRtc,$/;"	e	enum:__anon7
+NA_EnableWakeUpRtc_B	h/OffstMapInit.h	159;"	d
+NA_EnableWakeUpRtc_I	h/OffstMapInit.h	160;"	d
+NA_EnableWakeUpRtc_O	h/OffstMapInit.h	158;"	d
+NA_FIX_MODE	h/ntrxutil.h	556;"	d
+NA_False_BC_C	h/OffstMapInit.h	1841;"	d
+NA_FctClockEn	h/ntrxutil.h	/^    NA_FctClockEn,$/;"	e	enum:__anon7
+NA_FctClockEn_B	h/OffstMapInit.h	665;"	d
+NA_FctClockEn_I	h/OffstMapInit.h	666;"	d
+NA_FctClockEn_O	h/OffstMapInit.h	664;"	d
+NA_FctPeriod	h/ntrxutil.h	/^    NA_FctPeriod,$/;"	e	enum:__anon7
+NA_FctPeriod_I	h/OffstMapInit.h	682;"	d
+NA_FctPeriod_LSB	h/OffstMapInit.h	681;"	d
+NA_FctPeriod_MSB	h/OffstMapInit.h	680;"	d
+NA_FctPeriod_O	h/OffstMapInit.h	679;"	d
+NA_FdmaEnable	h/ntrxutil.h	/^    NA_FdmaEnable,$/;"	e	enum:__anon7
+NA_FdmaEnable_B	h/OffstMapInit.h	1178;"	d
+NA_FdmaEnable_I	h/OffstMapInit.h	1179;"	d
+NA_FdmaEnable_O	h/OffstMapInit.h	1177;"	d
+NA_FeatClockDefaultDio_IC_C	h/OffstMapInit.h	1903;"	d
+NA_FeatureClockDiv128_C	h/OffstMapInit.h	243;"	d
+NA_FeatureClockDiv16_C	h/OffstMapInit.h	240;"	d
+NA_FeatureClockDiv1_C	h/OffstMapInit.h	236;"	d
+NA_FeatureClockDiv2_C	h/OffstMapInit.h	237;"	d
+NA_FeatureClockDiv32_C	h/OffstMapInit.h	241;"	d
+NA_FeatureClockDiv4_C	h/OffstMapInit.h	238;"	d
+NA_FeatureClockDiv64_C	h/OffstMapInit.h	242;"	d
+NA_FeatureClockDiv8_C	h/OffstMapInit.h	239;"	d
+NA_FeatureClockFreq	h/ntrxutil.h	/^    NA_FeatureClockFreq,$/;"	e	enum:__anon7
+NA_FeatureClockFreq_I	h/OffstMapInit.h	234;"	d
+NA_FeatureClockFreq_LSB	h/OffstMapInit.h	233;"	d
+NA_FeatureClockFreq_MSB	h/OffstMapInit.h	232;"	d
+NA_FeatureClockFreq_O	h/OffstMapInit.h	231;"	d
+NA_GateAdjBitsyncEn	h/ntrxutil.h	/^    NA_GateAdjBitsyncEn,$/;"	e	enum:__anon7
+NA_GateAdjBitsyncEn_B	h/OffstMapInit.h	1564;"	d
+NA_GateAdjBitsyncEn_I	h/OffstMapInit.h	1565;"	d
+NA_GateAdjBitsyncEn_O	h/OffstMapInit.h	1563;"	d
+NA_GateAdjFramesyncEn	h/ntrxutil.h	/^    NA_GateAdjFramesyncEn, \/* 210 *\/$/;"	e	enum:__anon7
+NA_GateAdjFramesyncEn_B	h/OffstMapInit.h	1569;"	d
+NA_GateAdjFramesyncEn_I	h/OffstMapInit.h	1570;"	d
+NA_GateAdjFramesyncEn_O	h/OffstMapInit.h	1568;"	d
+NA_GateAdjThreshold	h/ntrxutil.h	/^    NA_GateAdjThreshold,$/;"	e	enum:__anon7
+NA_GateAdjThreshold_I	h/OffstMapInit.h	1526;"	d
+NA_GateAdjThreshold_LSB	h/OffstMapInit.h	1525;"	d
+NA_GateAdjThreshold_MSB	h/OffstMapInit.h	1524;"	d
+NA_GateAdjThreshold_O	h/OffstMapInit.h	1523;"	d
+NA_GateSize3Slots_VC_C	h/OffstMapInit.h	1557;"	d
+NA_GateSize5Slots_VC_C	h/OffstMapInit.h	1558;"	d
+NA_GateSize7Slots_VC_C	h/OffstMapInit.h	1559;"	d
+NA_GateSize9Slots_VC_C	h/OffstMapInit.h	1560;"	d
+NA_GateSizeBitsync	h/ntrxutil.h	/^    NA_GateSizeBitsync,$/;"	e	enum:__anon7
+NA_GateSizeBitsync_I	h/OffstMapInit.h	1549;"	d
+NA_GateSizeBitsync_LSB	h/OffstMapInit.h	1548;"	d
+NA_GateSizeBitsync_MSB	h/OffstMapInit.h	1547;"	d
+NA_GateSizeBitsync_O	h/OffstMapInit.h	1546;"	d
+NA_GateSizeFramesync	h/ntrxutil.h	/^    NA_GateSizeFramesync,$/;"	e	enum:__anon7
+NA_GateSizeFramesync_I	h/OffstMapInit.h	1555;"	d
+NA_GateSizeFramesync_LSB	h/OffstMapInit.h	1554;"	d
+NA_GateSizeFramesync_MSB	h/OffstMapInit.h	1553;"	d
+NA_GateSizeFramesync_O	h/OffstMapInit.h	1552;"	d
+NA_GateSizeUnsync	h/ntrxutil.h	/^    NA_GateSizeUnsync,$/;"	e	enum:__anon7
+NA_GateSizeUnsync_I	h/OffstMapInit.h	1543;"	d
+NA_GateSizeUnsync_LSB	h/OffstMapInit.h	1542;"	d
+NA_GateSizeUnsync_MSB	h/OffstMapInit.h	1541;"	d
+NA_GateSizeUnsync_O	h/OffstMapInit.h	1540;"	d
+NA_Go2BitsyncThreshold	h/ntrxutil.h	/^    NA_Go2BitsyncThreshold,$/;"	e	enum:__anon7
+NA_Go2BitsyncThreshold_I	h/OffstMapInit.h	1577;"	d
+NA_Go2BitsyncThreshold_LSB	h/OffstMapInit.h	1576;"	d
+NA_Go2BitsyncThreshold_MSB	h/OffstMapInit.h	1575;"	d
+NA_Go2BitsyncThreshold_O	h/OffstMapInit.h	1574;"	d
+NA_Go2MapThresh1InBitsync	h/ntrxutil.h	/^    NA_Go2MapThresh1InBitsync,$/;"	e	enum:__anon7
+NA_Go2MapThresh1InBitsync_I	h/OffstMapInit.h	989;"	d
+NA_Go2MapThresh1InBitsync_LSB	h/OffstMapInit.h	988;"	d
+NA_Go2MapThresh1InBitsync_MSB	h/OffstMapInit.h	987;"	d
+NA_Go2MapThresh1InBitsync_O	h/OffstMapInit.h	986;"	d
+NA_HoldAgcInBitSync	h/ntrxutil.h	/^    NA_HoldAgcInBitSync,$/;"	e	enum:__anon7
+NA_HoldAgcInBitSync_I	h/OffstMapInit.h	586;"	d
+NA_HoldAgcInBitSync_LSB	h/OffstMapInit.h	585;"	d
+NA_HoldAgcInBitSync_MSB	h/OffstMapInit.h	584;"	d
+NA_HoldAgcInBitSync_O	h/OffstMapInit.h	583;"	d
+NA_HoldAgcInFrameSync	h/ntrxutil.h	/^    NA_HoldAgcInFrameSync,$/;"	e	enum:__anon7
+NA_HoldAgcInFrameSync_B	h/OffstMapInit.h	590;"	d
+NA_HoldAgcInFrameSync_I	h/OffstMapInit.h	591;"	d
+NA_HoldAgcInFrameSync_O	h/OffstMapInit.h	589;"	d
+NA_InvertRxClock	h/ntrxutil.h	/^    NA_InvertRxClock,$/;"	e	enum:__anon7
+NA_InvertRxClock_B	h/OffstMapInit.h	1014;"	d
+NA_InvertRxClock_I	h/OffstMapInit.h	1015;"	d
+NA_InvertRxClock_O	h/OffstMapInit.h	1013;"	d
+NA_IrqDriver	h/ntrxutil.h	/^    NA_IrqDriver,$/;"	e	enum:__anon7
+NA_IrqDriverOpenDrain_C	h/OffstMapInit.h	66;"	d
+NA_IrqDriverPushPull_C	h/OffstMapInit.h	67;"	d
+NA_IrqDriver_B	h/OffstMapInit.h	64;"	d
+NA_IrqDriver_I	h/OffstMapInit.h	65;"	d
+NA_IrqDriver_O	h/OffstMapInit.h	63;"	d
+NA_IrqPolarity	h/ntrxutil.h	/^    NA_IrqPolarity,$/;"	e	enum:__anon7
+NA_IrqPolarityActiveHigh_C	h/OffstMapInit.h	60;"	d
+NA_IrqPolarityActiveLow_C	h/OffstMapInit.h	59;"	d
+NA_IrqPolarity_B	h/OffstMapInit.h	57;"	d
+NA_IrqPolarity_I	h/OffstMapInit.h	58;"	d
+NA_IrqPolarity_O	h/OffstMapInit.h	56;"	d
+NA_LeaveBitsyncThreshold	h/ntrxutil.h	/^    NA_LeaveBitsyncThreshold,$/;"	e	enum:__anon7
+NA_LeaveBitsyncThreshold_I	h/OffstMapInit.h	1583;"	d
+NA_LeaveBitsyncThreshold_LSB	h/OffstMapInit.h	1582;"	d
+NA_LeaveBitsyncThreshold_MSB	h/OffstMapInit.h	1581;"	d
+NA_LeaveBitsyncThreshold_O	h/OffstMapInit.h	1580;"	d
+NA_LeaveMapThresh1InBitsync	h/ntrxutil.h	/^    NA_LeaveMapThresh1InBitsync, \/* 130 *\/$/;"	e	enum:__anon7
+NA_LeaveMapThresh1InBitsync_I	h/OffstMapInit.h	977;"	d
+NA_LeaveMapThresh1InBitsync_LSB	h/OffstMapInit.h	976;"	d
+NA_LeaveMapThresh1InBitsync_MSB	h/OffstMapInit.h	975;"	d
+NA_LeaveMapThresh1InBitsync_O	h/OffstMapInit.h	974;"	d
+NA_LengthBits_IC_C	h/OffstMapInit.h	1891;"	d
+NA_LnaFreqAdjust	h/ntrxutil.h	/^    NA_LnaFreqAdjust,$/;"	e	enum:__anon7
+NA_LnaFreqAdjust_I	h/OffstMapInit.h	1032;"	d
+NA_LnaFreqAdjust_LSB	h/OffstMapInit.h	1031;"	d
+NA_LnaFreqAdjust_MSB	h/OffstMapInit.h	1030;"	d
+NA_LnaFreqAdjust_O	h/OffstMapInit.h	1029;"	d
+NA_LoEnableFastTuning	h/ntrxutil.h	/^    NA_LoEnableFastTuning,$/;"	e	enum:__anon7
+NA_LoEnableFastTuning_B	h/OffstMapInit.h	534;"	d
+NA_LoEnableFastTuning_I	h/OffstMapInit.h	535;"	d
+NA_LoEnableFastTuning_O	h/OffstMapInit.h	533;"	d
+NA_LoEnableLsbNeg	h/ntrxutil.h	/^    NA_LoEnableLsbNeg,$/;"	e	enum:__anon7
+NA_LoEnableLsbNeg_B	h/OffstMapInit.h	547;"	d
+NA_LoEnableLsbNeg_I	h/OffstMapInit.h	548;"	d
+NA_LoEnableLsbNeg_O	h/OffstMapInit.h	546;"	d
+NA_LoFastTuningLevel	h/ntrxutil.h	/^    NA_LoFastTuningLevel,$/;"	e	enum:__anon7
+NA_LoFastTuningLevel_I	h/OffstMapInit.h	543;"	d
+NA_LoFastTuningLevel_LSB	h/OffstMapInit.h	542;"	d
+NA_LoFastTuningLevel_MSB	h/OffstMapInit.h	541;"	d
+NA_LoFastTuningLevel_O	h/OffstMapInit.h	540;"	d
+NA_LoIntsEn	h/ntrxutil.h	/^    NA_LoIntsEn,$/;"	e	enum:__anon7
+NA_LoIntsEn_B	h/OffstMapInit.h	509;"	d
+NA_LoIntsEn_I	h/OffstMapInit.h	510;"	d
+NA_LoIntsEn_O	h/OffstMapInit.h	508;"	d
+NA_LoIntsRawStat	h/ntrxutil.h	/^    NA_LoIntsRawStat,$/;"	e	enum:__anon7
+NA_LoIntsRawStat_B	h/OffstMapInit.h	475;"	d
+NA_LoIntsRawStat_I	h/OffstMapInit.h	476;"	d
+NA_LoIntsRawStat_O	h/OffstMapInit.h	474;"	d
+NA_LoIntsReset	h/ntrxutil.h	/^    NA_LoIntsReset,$/;"	e	enum:__anon7
+NA_LoIntsReset_B	h/OffstMapInit.h	480;"	d
+NA_LoIntsReset_I	h/OffstMapInit.h	483;"	d
+NA_LoIntsReset_LSB	h/OffstMapInit.h	482;"	d
+NA_LoIntsReset_MSB	h/OffstMapInit.h	481;"	d
+NA_LoIntsReset_O	h/OffstMapInit.h	479;"	d
+NA_LoIrqEnable	h/ntrxutil.h	/^    NA_LoIrqEnable,$/;"	e	enum:__anon7
+NA_LoIrqEnable_B	h/OffstMapInit.h	386;"	d
+NA_LoIrqEnable_I	h/OffstMapInit.h	387;"	d
+NA_LoIrqEnable_O	h/OffstMapInit.h	385;"	d
+NA_LoIrqStatus	h/ntrxutil.h	/^    NA_LoIrqStatus,$/;"	e	enum:__anon7
+NA_LoIrqStatus_B	h/OffstMapInit.h	406;"	d
+NA_LoIrqStatus_I	h/OffstMapInit.h	407;"	d
+NA_LoIrqStatus_O	h/OffstMapInit.h	405;"	d
+NA_LoRxCapsValue_I	h/OffstMapInit.h	522;"	d
+NA_LoRxCapsValue_LSB	h/OffstMapInit.h	521;"	d
+NA_LoRxCapsValue_MSB	h/OffstMapInit.h	520;"	d
+NA_LoRxCapsValue_O	h/OffstMapInit.h	519;"	d
+NA_LoTargetValue	h/ntrxutil.h	/^    NA_LoTargetValue,$/;"	e	enum:__anon7
+NA_LoTargetValue_I	h/OffstMapInit.h	560;"	d
+NA_LoTargetValue_LSB	h/OffstMapInit.h	559;"	d
+NA_LoTargetValue_MSB	h/OffstMapInit.h	558;"	d
+NA_LoTargetValue_O	h/OffstMapInit.h	557;"	d
+NA_LoTuningReady_B	h/OffstMapInit.h	485;"	d
+NA_LoTxCapsValue_I	h/OffstMapInit.h	529;"	d
+NA_LoTxCapsValue_LSB	h/OffstMapInit.h	528;"	d
+NA_LoTxCapsValue_MSB	h/OffstMapInit.h	527;"	d
+NA_LoTxCapsValue_O	h/OffstMapInit.h	526;"	d
+NA_MAP_MODE	h/ntrxutil.h	555;"	d
+NA_MAX_ARQ_CNT	h/ntrxutil.h	68;"	d
+NA_MacCodeBits_IC_C	h/OffstMapInit.h	1889;"	d
+NA_MacPreambleSymbols1000ns_IC_C	h/OffstMapInit.h	1906;"	d
+NA_MacPreambleSymbols16000ns_IC_C	h/OffstMapInit.h	1910;"	d
+NA_MacPreambleSymbols2000ns_IC_C	h/OffstMapInit.h	1907;"	d
+NA_MacPreambleSymbols4000ns_IC_C	h/OffstMapInit.h	1908;"	d
+NA_MacPreambleSymbols500ns_IC_C	h/OffstMapInit.h	1905;"	d
+NA_MacPreambleSymbols8000ns_IC_C	h/OffstMapInit.h	1909;"	d
+NA_MacRtcTimeBRxAdj1M2AryFec_IC_C	h/OffstMapInit.h	1615;"	d
+NA_MacRtcTimeBRxAdj1M2Ary_IC_C	h/OffstMapInit.h	1613;"	d
+NA_MacRtcTimeBRxAdj1M4AryFec_IC_C	h/OffstMapInit.h	1616;"	d
+NA_MacRtcTimeBRxAdj1M4Ary_IC_C	h/OffstMapInit.h	1614;"	d
+NA_MacRtcTimeBRxAdj500k2AryFec_IC_C	h/OffstMapInit.h	1619;"	d
+NA_MacRtcTimeBRxAdj500k2Ary_IC_C	h/OffstMapInit.h	1617;"	d
+NA_MacRtcTimeBRxAdj500k4AryFec_IC_C	h/OffstMapInit.h	1620;"	d
+NA_MacRtcTimeBRxAdj500k4Ary_IC_C	h/OffstMapInit.h	1618;"	d
+NA_MacRtcTimeBTxAdj1M2AryFec_IC_C	h/OffstMapInit.h	1599;"	d
+NA_MacRtcTimeBTxAdj1M2Ary_IC_C	h/OffstMapInit.h	1597;"	d
+NA_MacRtcTimeBTxAdj1M4AryFec_IC_C	h/OffstMapInit.h	1600;"	d
+NA_MacRtcTimeBTxAdj1M4Ary_IC_C	h/OffstMapInit.h	1598;"	d
+NA_MacRtcTimeBTxAdj500k2AryFec_IC_C	h/OffstMapInit.h	1603;"	d
+NA_MacRtcTimeBTxAdj500k2Ary_IC_C	h/OffstMapInit.h	1601;"	d
+NA_MacRtcTimeBTxAdj500k4AryFec_IC_C	h/OffstMapInit.h	1604;"	d
+NA_MacRtcTimeBTxAdj500k4Ary_IC_C	h/OffstMapInit.h	1602;"	d
+NA_MacTypeBits_IC_C	h/OffstMapInit.h	1872;"	d
+NA_MacType_VC_C	h/OffstMapInit.h	1901;"	d
+NA_ModulationSystem	h/ntrxutil.h	/^    NA_ModulationSystem, \/* 150 *\/$/;"	e	enum:__anon7
+NA_ModulationSystem2ary_BC_C	h/OffstMapInit.h	1112;"	d
+NA_ModulationSystem4ary_BC_C	h/OffstMapInit.h	1113;"	d
+NA_ModulationSystem_B	h/OffstMapInit.h	1109;"	d
+NA_ModulationSystem_I	h/OffstMapInit.h	1110;"	d
+NA_ModulationSystem_O	h/OffstMapInit.h	1108;"	d
+NA_PhaseOffsetAck	h/ntrxutil.h	/^    NA_PhaseOffsetAck,$/;"	e	enum:__anon7
+NA_PhaseOffsetAck_I	h/OffstMapInit.h	737;"	d
+NA_PhaseOffsetAck_LSB	h/OffstMapInit.h	736;"	d
+NA_PhaseOffsetAck_MSB	h/OffstMapInit.h	735;"	d
+NA_PhaseOffsetAck_O	h/OffstMapInit.h	734;"	d
+NA_PhaseOffsetData	h/ntrxutil.h	/^    NA_PhaseOffsetData,$/;"	e	enum:__anon7
+NA_PhaseOffsetData_I	h/OffstMapInit.h	743;"	d
+NA_PhaseOffsetData_LSB	h/OffstMapInit.h	742;"	d
+NA_PhaseOffsetData_MSB	h/OffstMapInit.h	741;"	d
+NA_PhaseOffsetData_O	h/OffstMapInit.h	740;"	d
+NA_PowerDown	h/ntrxutil.h	/^    NA_PowerDown,$/;"	e	enum:__anon7
+NA_PowerDownMode	h/ntrxutil.h	/^    NA_PowerDownMode,$/;"	e	enum:__anon7
+NA_PowerDownModeFull_C	h/OffstMapInit.h	185;"	d
+NA_PowerDownModePad_C	h/OffstMapInit.h	186;"	d
+NA_PowerDownMode_B	h/OffstMapInit.h	183;"	d
+NA_PowerDownMode_I	h/OffstMapInit.h	184;"	d
+NA_PowerDownMode_O	h/OffstMapInit.h	182;"	d
+NA_PowerDown_B	h/OffstMapInit.h	191;"	d
+NA_PowerDown_I	h/OffstMapInit.h	192;"	d
+NA_PowerDown_O	h/OffstMapInit.h	190;"	d
+NA_PowerUpTime	h/ntrxutil.h	/^    NA_PowerUpTime,$/;"	e	enum:__anon7
+NA_PowerUpTime128Ticks_C	h/OffstMapInit.h	179;"	d
+NA_PowerUpTime16Ticks_C	h/OffstMapInit.h	176;"	d
+NA_PowerUpTime1Ticks_C	h/OffstMapInit.h	172;"	d
+NA_PowerUpTime2Ticks_C	h/OffstMapInit.h	173;"	d
+NA_PowerUpTime32Ticks_C	h/OffstMapInit.h	177;"	d
+NA_PowerUpTime4Ticks_C	h/OffstMapInit.h	174;"	d
+NA_PowerUpTime64Ticks_C	h/OffstMapInit.h	178;"	d
+NA_PowerUpTime8Ticks_C	h/OffstMapInit.h	175;"	d
+NA_PowerUpTime_I	h/OffstMapInit.h	171;"	d
+NA_PowerUpTime_LSB	h/OffstMapInit.h	170;"	d
+NA_PowerUpTime_MSB	h/OffstMapInit.h	169;"	d
+NA_PowerUpTime_O	h/OffstMapInit.h	168;"	d
+NA_PulseDetDelay	h/ntrxutil.h	/^    NA_PulseDetDelay,$/;"	e	enum:__anon7
+NA_PulseDetDelay_I	h/OffstMapInit.h	1519;"	d
+NA_PulseDetDelay_LSB	h/OffstMapInit.h	1518;"	d
+NA_PulseDetDelay_MSB	h/OffstMapInit.h	1517;"	d
+NA_PulseDetDelay_O	h/OffstMapInit.h	1516;"	d
+NA_PwrMngmtClockFreq_IC_C	h/OffstMapInit.h	1877;"	d
+NA_RamCsqDataByte0_LSB	h/OffstMapInit.h	1797;"	d
+NA_RamCsqDataByte0_MSB	h/OffstMapInit.h	1796;"	d
+NA_RamCsqDataByte0_O	h/OffstMapInit.h	1795;"	d
+NA_RamCsqDataByte1_LSB	h/OffstMapInit.h	1802;"	d
+NA_RamCsqDataByte1_MSB	h/OffstMapInit.h	1801;"	d
+NA_RamCsqDataByte1_O	h/OffstMapInit.h	1800;"	d
+NA_RamCsqDataByte2_LSB	h/OffstMapInit.h	1807;"	d
+NA_RamCsqDataByte2_MSB	h/OffstMapInit.h	1806;"	d
+NA_RamCsqDataByte2_O	h/OffstMapInit.h	1805;"	d
+NA_RamCsqDataPage0_O	h/OffstMapInit.h	1798;"	d
+NA_RamCsqDataPage1_O	h/OffstMapInit.h	1803;"	d
+NA_RamCsqDataPage2_O	h/OffstMapInit.h	1808;"	d
+NA_RamD3lPatIPage_O	h/OffstMapInit.h	1814;"	d
+NA_RamD3lPatI_I	h/OffstMapInit.h	1813;"	d
+NA_RamD3lPatI_LSB	h/OffstMapInit.h	1812;"	d
+NA_RamD3lPatI_MSB	h/OffstMapInit.h	1811;"	d
+NA_RamD3lPatI_O	h/OffstMapInit.h	1810;"	d
+NA_RamD3lPatQPage_O	h/OffstMapInit.h	1820;"	d
+NA_RamD3lPatQ_I	h/OffstMapInit.h	1819;"	d
+NA_RamD3lPatQ_LSB	h/OffstMapInit.h	1818;"	d
+NA_RamD3lPatQ_MSB	h/OffstMapInit.h	1817;"	d
+NA_RamD3lPatQ_O	h/OffstMapInit.h	1816;"	d
+NA_RamD3lThresDown_I	h/OffstMapInit.h	1827;"	d
+NA_RamD3lThresDown_LSB	h/OffstMapInit.h	1826;"	d
+NA_RamD3lThresDown_MSB	h/OffstMapInit.h	1825;"	d
+NA_RamD3lThresUp_I	h/OffstMapInit.h	1831;"	d
+NA_RamD3lThresUp_LSB	h/OffstMapInit.h	1830;"	d
+NA_RamD3lThresUp_MSB	h/OffstMapInit.h	1829;"	d
+NA_RamD3lThresholdPage_O	h/OffstMapInit.h	1823;"	d
+NA_RamD3lThreshold_O	h/OffstMapInit.h	1822;"	d
+NA_RamIndex	h/ntrxutil.h	/^    NA_RamIndex,$/;"	e	enum:__anon7
+NA_RamIndex_I	h/OffstMapInit.h	356;"	d
+NA_RamIndex_LSB	h/OffstMapInit.h	355;"	d
+NA_RamIndex_MSB	h/OffstMapInit.h	354;"	d
+NA_RamIndex_O	h/OffstMapInit.h	353;"	d
+NA_RamRtcReg_LSB	h/OffstMapInit.h	1757;"	d
+NA_RamRtcReg_MSB	h/OffstMapInit.h	1756;"	d
+NA_RamRtcReg_O	h/OffstMapInit.h	1755;"	d
+NA_RamRtcRx_LSB	h/OffstMapInit.h	1753;"	d
+NA_RamRtcRx_MSB	h/OffstMapInit.h	1752;"	d
+NA_RamRtcRx_O	h/OffstMapInit.h	1751;"	d
+NA_RamRtcTx_LSB	h/OffstMapInit.h	1749;"	d
+NA_RamRtcTx_MSB	h/OffstMapInit.h	1748;"	d
+NA_RamRtcTx_O	h/OffstMapInit.h	1747;"	d
+NA_RamRxBuffer_LSB	h/OffstMapInit.h	1773;"	d
+NA_RamRxBuffer_MSB	h/OffstMapInit.h	1772;"	d
+NA_RamRxBuffer_O	h/OffstMapInit.h	1771;"	d
+NA_RamRxCryptClock_LSB	h/OffstMapInit.h	1769;"	d
+NA_RamRxCryptClock_MSB	h/OffstMapInit.h	1768;"	d
+NA_RamRxCryptClock_O	h/OffstMapInit.h	1767;"	d
+NA_RamRxDstAddr_LSB	h/OffstMapInit.h	1726;"	d
+NA_RamRxDstAddr_MSB	h/OffstMapInit.h	1725;"	d
+NA_RamRxDstAddr_O	h/OffstMapInit.h	1724;"	d
+NA_RamRxFragC_B	h/OffstMapInit.h	1739;"	d
+NA_RamRxFragC_O	h/OffstMapInit.h	1738;"	d
+NA_RamRxLCh_B	h/OffstMapInit.h	1745;"	d
+NA_RamRxLCh_O	h/OffstMapInit.h	1744;"	d
+NA_RamRxLength_LSB	h/OffstMapInit.h	1736;"	d
+NA_RamRxLength_MSB	h/OffstMapInit.h	1735;"	d
+NA_RamRxLength_O	h/OffstMapInit.h	1734;"	d
+NA_RamRxSeqN_B	h/OffstMapInit.h	1742;"	d
+NA_RamRxSeqN_O	h/OffstMapInit.h	1741;"	d
+NA_RamRxSrcAddr_LSB	h/OffstMapInit.h	1730;"	d
+NA_RamRxSrcAddr_MSB	h/OffstMapInit.h	1729;"	d
+NA_RamRxSrcAddr_O	h/OffstMapInit.h	1728;"	d
+NA_RamRxTransBuffer_LSB	h/OffstMapInit.h	1785;"	d
+NA_RamRxTransBuffer_MSB	h/OffstMapInit.h	1784;"	d
+NA_RamRxTransBuffer_O	h/OffstMapInit.h	1783;"	d
+NA_RamStaAddr0	h/ntrxutil.h	/^    NA_RamStaAddr0,$/;"	e	enum:__anon7
+NA_RamStaAddr0_LSB	h/OffstMapInit.h	1699;"	d
+NA_RamStaAddr0_MSB	h/OffstMapInit.h	1698;"	d
+NA_RamStaAddr0_O	h/OffstMapInit.h	1697;"	d
+NA_RamStaAddr1_LSB	h/OffstMapInit.h	1703;"	d
+NA_RamStaAddr1_MSB	h/OffstMapInit.h	1702;"	d
+NA_RamStaAddr1_O	h/OffstMapInit.h	1701;"	d
+NA_RamTxBuffer_LSB	h/OffstMapInit.h	1777;"	d
+NA_RamTxBuffer_MSB	h/OffstMapInit.h	1776;"	d
+NA_RamTxBuffer_O	h/OffstMapInit.h	1775;"	d
+NA_RamTxCryptClock_LSB	h/OffstMapInit.h	1765;"	d
+NA_RamTxCryptClock_MSB	h/OffstMapInit.h	1764;"	d
+NA_RamTxCryptClock_O	h/OffstMapInit.h	1763;"	d
+NA_RamTxDstAddr_LSB	h/OffstMapInit.h	1707;"	d
+NA_RamTxDstAddr_MSB	h/OffstMapInit.h	1706;"	d
+NA_RamTxDstAddr_O	h/OffstMapInit.h	1705;"	d
+NA_RamTxFragC_B	h/OffstMapInit.h	1716;"	d
+NA_RamTxFragC_O	h/OffstMapInit.h	1715;"	d
+NA_RamTxLCh_B	h/OffstMapInit.h	1722;"	d
+NA_RamTxLCh_O	h/OffstMapInit.h	1721;"	d
+NA_RamTxLength	h/ntrxutil.h	/^    NA_RamTxLength,$/;"	e	enum:__anon7
+NA_RamTxLength_LSB	h/OffstMapInit.h	1713;"	d
+NA_RamTxLength_MSB	h/OffstMapInit.h	1712;"	d
+NA_RamTxLength_O	h/OffstMapInit.h	1711;"	d
+NA_RamTxRxBuffer_LSB	h/OffstMapInit.h	1781;"	d
+NA_RamTxRxBuffer_MSB	h/OffstMapInit.h	1780;"	d
+NA_RamTxRxBuffer_O	h/OffstMapInit.h	1779;"	d
+NA_RamTxRxCryptKey_LSB	h/OffstMapInit.h	1761;"	d
+NA_RamTxRxCryptKey_MSB	h/OffstMapInit.h	1760;"	d
+NA_RamTxRxCryptKey_O	h/OffstMapInit.h	1759;"	d
+NA_RamTxRxTransBuffer_LSB	h/OffstMapInit.h	1793;"	d
+NA_RamTxRxTransBuffer_MSB	h/OffstMapInit.h	1792;"	d
+NA_RamTxRxTransBuffer_O	h/OffstMapInit.h	1791;"	d
+NA_RamTxSeqN_B	h/OffstMapInit.h	1719;"	d
+NA_RamTxSeqN_O	h/OffstMapInit.h	1718;"	d
+NA_RamTxTransBuffer_LSB	h/OffstMapInit.h	1789;"	d
+NA_RamTxTransBuffer_MSB	h/OffstMapInit.h	1788;"	d
+NA_RamTxTransBuffer_O	h/OffstMapInit.h	1787;"	d
+NA_RangingPulses	h/ntrxutil.h	/^    NA_RangingPulses,$/;"	e	enum:__anon7
+NA_RangingPulses16_VC_C	h/OffstMapInit.h	1506;"	d
+NA_RangingPulses1_VC_C	h/OffstMapInit.h	1502;"	d
+NA_RangingPulses24_VC_C	h/OffstMapInit.h	1507;"	d
+NA_RangingPulses2_VC_C	h/OffstMapInit.h	1503;"	d
+NA_RangingPulses32_VC_C	h/OffstMapInit.h	1508;"	d
+NA_RangingPulses40_VC_C	h/OffstMapInit.h	1509;"	d
+NA_RangingPulses48_VC_C	h/OffstMapInit.h	1510;"	d
+NA_RangingPulses4_VC_C	h/OffstMapInit.h	1504;"	d
+NA_RangingPulses56_VC_C	h/OffstMapInit.h	1511;"	d
+NA_RangingPulses64_VC_C	h/OffstMapInit.h	1512;"	d
+NA_RangingPulses8_VC_C	h/OffstMapInit.h	1505;"	d
+NA_RangingPulses_I	h/OffstMapInit.h	1500;"	d
+NA_RangingPulses_LSB	h/OffstMapInit.h	1499;"	d
+NA_RangingPulses_MSB	h/OffstMapInit.h	1498;"	d
+NA_RangingPulses_O	h/OffstMapInit.h	1497;"	d
+NA_ResetBbClockGate	h/ntrxutil.h	/^    NA_ResetBbClockGate,$/;"	e	enum:__anon7
+NA_ResetBbClockGate_B	h/OffstMapInit.h	196;"	d
+NA_ResetBbClockGate_I	h/OffstMapInit.h	197;"	d
+NA_ResetBbClockGate_O	h/OffstMapInit.h	195;"	d
+NA_ResetBbRadioCtrl	h/ntrxutil.h	/^    NA_ResetBbRadioCtrl,$/;"	e	enum:__anon7
+NA_ResetBbRadioCtrl_B	h/OffstMapInit.h	201;"	d
+NA_ResetBbRadioCtrl_I	h/OffstMapInit.h	202;"	d
+NA_ResetBbRadioCtrl_O	h/OffstMapInit.h	200;"	d
+NA_Revision	h/ntrxutil.h	/^    NA_Revision,$/;"	e	enum:__anon7
+NA_Revision_I	h/OffstMapInit.h	87;"	d
+NA_Revision_LSB	h/OffstMapInit.h	86;"	d
+NA_Revision_MSB	h/OffstMapInit.h	85;"	d
+NA_Revision_O	h/OffstMapInit.h	84;"	d
+NA_RfRxCompValueI	h/ntrxutil.h	/^    NA_RfRxCompValueI,$/;"	e	enum:__anon7
+NA_RfRxCompValueI_I	h/OffstMapInit.h	1064;"	d
+NA_RfRxCompValueI_LSB	h/OffstMapInit.h	1063;"	d
+NA_RfRxCompValueI_MSB	h/OffstMapInit.h	1062;"	d
+NA_RfRxCompValueI_O	h/OffstMapInit.h	1061;"	d
+NA_RfRxCompValueQ	h/ntrxutil.h	/^    NA_RfRxCompValueQ,$/;"	e	enum:__anon7
+NA_RfRxCompValueQ_I	h/OffstMapInit.h	1071;"	d
+NA_RfRxCompValueQ_LSB	h/OffstMapInit.h	1070;"	d
+NA_RfRxCompValueQ_MSB	h/OffstMapInit.h	1069;"	d
+NA_RfRxCompValueQ_O	h/OffstMapInit.h	1068;"	d
+NA_RtcCmdRd	h/ntrxutil.h	/^    NA_RtcCmdRd,$/;"	e	enum:__anon7
+NA_RtcCmdRd_B	h/OffstMapInit.h	1630;"	d
+NA_RtcCmdRd_I	h/OffstMapInit.h	1631;"	d
+NA_RtcCmdRd_O	h/OffstMapInit.h	1629;"	d
+NA_RtcCmdWr	h/ntrxutil.h	/^    NA_RtcCmdWr,$/;"	e	enum:__anon7
+NA_RtcCmdWr_B	h/OffstMapInit.h	1625;"	d
+NA_RtcCmdWr_I	h/OffstMapInit.h	1626;"	d
+NA_RtcCmdWr_O	h/OffstMapInit.h	1624;"	d
+NA_RtcReg_LSB	h/OffstMapInit.h	1880;"	d
+NA_RtcReg_MSB	h/OffstMapInit.h	1879;"	d
+NA_RtcTimeBAutoMode	h/ntrxutil.h	/^    NA_RtcTimeBAutoMode,$/;"	e	enum:__anon7
+NA_RtcTimeBAutoModeOff_BC_C	h/OffstMapInit.h	1638;"	d
+NA_RtcTimeBAutoModeOn_BC_C	h/OffstMapInit.h	1639;"	d
+NA_RtcTimeBAutoMode_B	h/OffstMapInit.h	1635;"	d
+NA_RtcTimeBAutoMode_I	h/OffstMapInit.h	1636;"	d
+NA_RtcTimeBAutoMode_O	h/OffstMapInit.h	1634;"	d
+NA_RtcTimeBRxAdj	h/ntrxutil.h	/^    NA_RtcTimeBRxAdj,$/;"	e	enum:__anon7
+NA_RtcTimeBRxAdj_I	h/OffstMapInit.h	1611;"	d
+NA_RtcTimeBRxAdj_LSB	h/OffstMapInit.h	1610;"	d
+NA_RtcTimeBRxAdj_MSB	h/OffstMapInit.h	1609;"	d
+NA_RtcTimeBRxAdj_O	h/OffstMapInit.h	1608;"	d
+NA_RtcTimeBTxAdj	h/ntrxutil.h	/^    NA_RtcTimeBTxAdj,$/;"	e	enum:__anon7
+NA_RtcTimeBTxAdj_I	h/OffstMapInit.h	1595;"	d
+NA_RtcTimeBTxAdj_LSB	h/OffstMapInit.h	1594;"	d
+NA_RtcTimeBTxAdj_MSB	h/OffstMapInit.h	1593;"	d
+NA_RtcTimeBTxAdj_O	h/OffstMapInit.h	1592;"	d
+NA_RtcTimeSlotLsbs_IC_C	h/OffstMapInit.h	1870;"	d
+NA_RxAddrMatch	h/ntrxutil.h	/^    NA_RxAddrMatch,$/;"	e	enum:__anon7
+NA_RxAddrMatch_I	h/OffstMapInit.h	773;"	d
+NA_RxAddrMatch_LSB	h/OffstMapInit.h	772;"	d
+NA_RxAddrMatch_MSB	h/OffstMapInit.h	771;"	d
+NA_RxAddrMatch_O	h/OffstMapInit.h	770;"	d
+NA_RxAddrMode	h/ntrxutil.h	/^    NA_RxAddrMode, \/* 200 *\/$/;"	e	enum:__anon7
+NA_RxAddrModeOff_BC_C	h/OffstMapInit.h	1493;"	d
+NA_RxAddrModeOn_BC_C	h/OffstMapInit.h	1494;"	d
+NA_RxAddrMode_B	h/OffstMapInit.h	1490;"	d
+NA_RxAddrMode_I	h/OffstMapInit.h	1491;"	d
+NA_RxAddrMode_O	h/OffstMapInit.h	1489;"	d
+NA_RxAddrSegDevIdL	h/ntrxutil.h	/^    NA_RxAddrSegDevIdL,$/;"	e	enum:__anon7
+NA_RxAddrSegDevIdL_I	h/OffstMapInit.h	1463;"	d
+NA_RxAddrSegDevIdL_LSB	h/OffstMapInit.h	1462;"	d
+NA_RxAddrSegDevIdL_MSB	h/OffstMapInit.h	1461;"	d
+NA_RxAddrSegDevIdL_O	h/OffstMapInit.h	1460;"	d
+NA_RxAddrSegEsMatch	h/ntrxutil.h	/^    NA_RxAddrSegEsMatch,$/;"	e	enum:__anon7
+NA_RxAddrSegEsMatch_B	h/OffstMapInit.h	801;"	d
+NA_RxAddrSegEsMatch_I	h/OffstMapInit.h	802;"	d
+NA_RxAddrSegEsMatch_O	h/OffstMapInit.h	800;"	d
+NA_RxAddrSegEsMode	h/ntrxutil.h	/^    NA_RxAddrSegEsMode,$/;"	e	enum:__anon7
+NA_RxAddrSegEsMode_B	h/OffstMapInit.h	1451;"	d
+NA_RxAddrSegEsMode_I	h/OffstMapInit.h	1452;"	d
+NA_RxAddrSegEsMode_O	h/OffstMapInit.h	1450;"	d
+NA_RxAddrSegIsMatch	h/ntrxutil.h	/^    NA_RxAddrSegIsMatch,$/;"	e	enum:__anon7
+NA_RxAddrSegIsMatch_B	h/OffstMapInit.h	806;"	d
+NA_RxAddrSegIsMatch_I	h/OffstMapInit.h	807;"	d
+NA_RxAddrSegIsMatch_O	h/OffstMapInit.h	805;"	d
+NA_RxAddrSegIsMode	h/ntrxutil.h	/^    NA_RxAddrSegIsMode,$/;"	e	enum:__anon7
+NA_RxAddrSegIsMode_B	h/OffstMapInit.h	1456;"	d
+NA_RxAddrSegIsMode_I	h/OffstMapInit.h	1457;"	d
+NA_RxAddrSegIsMode_O	h/OffstMapInit.h	1455;"	d
+NA_RxArqMode	h/ntrxutil.h	/^    NA_RxArqMode,$/;"	e	enum:__anon7
+NA_RxArqModeCrc1_VC_C	h/OffstMapInit.h	1446;"	d
+NA_RxArqModeCrc2_VC_C	h/OffstMapInit.h	1447;"	d
+NA_RxArqModeNone_VC_C	h/OffstMapInit.h	1445;"	d
+NA_RxArqMode_I	h/OffstMapInit.h	1443;"	d
+NA_RxArqMode_LSB	h/OffstMapInit.h	1442;"	d
+NA_RxArqMode_MSB	h/OffstMapInit.h	1441;"	d
+NA_RxArqMode_O	h/OffstMapInit.h	1440;"	d
+NA_RxBrdcastEn	h/ntrxutil.h	/^    NA_RxBrdcastEn,$/;"	e	enum:__anon7
+NA_RxBrdcastEn_B	h/OffstMapInit.h	1475;"	d
+NA_RxBrdcastEn_I	h/OffstMapInit.h	1476;"	d
+NA_RxBrdcastEn_O	h/OffstMapInit.h	1474;"	d
+NA_RxBrdcastOff_BC_C	h/OffstMapInit.h	1478;"	d
+NA_RxBrdcastOn_BC_C	h/OffstMapInit.h	1479;"	d
+NA_RxBufferCmd	h/ntrxutil.h	/^    NA_RxBufferCmd,$/;"	e	enum:__anon7
+NA_RxBufferCmd_I	h/OffstMapInit.h	1406;"	d
+NA_RxBufferCmd_LSB	h/OffstMapInit.h	1405;"	d
+NA_RxBufferCmd_MSB	h/OffstMapInit.h	1404;"	d
+NA_RxBufferCmd_O	h/OffstMapInit.h	1403;"	d
+NA_RxBufferRdy_LSB	h/OffstMapInit.h	470;"	d
+NA_RxBufferRdy_MSB	h/OffstMapInit.h	469;"	d
+NA_RxCmdStart	h/ntrxutil.h	/^    NA_RxCmdStart,$/;"	e	enum:__anon7
+NA_RxCmdStart_B	h/OffstMapInit.h	1399;"	d
+NA_RxCmdStart_I	h/OffstMapInit.h	1400;"	d
+NA_RxCmdStart_O	h/OffstMapInit.h	1398;"	d
+NA_RxCmdStop	h/ntrxutil.h	/^    NA_RxCmdStop,$/;"	e	enum:__anon7
+NA_RxCmdStop_B	h/OffstMapInit.h	1394;"	d
+NA_RxCmdStop_I	h/OffstMapInit.h	1395;"	d
+NA_RxCmdStop_O	h/OffstMapInit.h	1393;"	d
+NA_RxCorrBitErr	h/ntrxutil.h	/^    NA_RxCorrBitErr,$/;"	e	enum:__anon7
+NA_RxCorrBitErr_I	h/OffstMapInit.h	790;"	d
+NA_RxCorrBitErr_LSB	h/OffstMapInit.h	789;"	d
+NA_RxCorrBitErr_MSB	h/OffstMapInit.h	788;"	d
+NA_RxCorrBitErr_O	h/OffstMapInit.h	787;"	d
+NA_RxCorrErrThres	h/ntrxutil.h	/^    NA_RxCorrErrThres,$/;"	e	enum:__anon7
+NA_RxCorrErrThres_I	h/OffstMapInit.h	796;"	d
+NA_RxCorrErrThres_LSB	h/OffstMapInit.h	795;"	d
+NA_RxCorrErrThres_MSB	h/OffstMapInit.h	794;"	d
+NA_RxCorrErrThres_O	h/OffstMapInit.h	793;"	d
+NA_RxCrc1Stat	h/ntrxutil.h	/^    NA_RxCrc1Stat,$/;"	e	enum:__anon7
+NA_RxCrc1Stat_B	h/OffstMapInit.h	777;"	d
+NA_RxCrc1Stat_I	h/OffstMapInit.h	778;"	d
+NA_RxCrc1Stat_O	h/OffstMapInit.h	776;"	d
+NA_RxCrc2Mode	h/ntrxutil.h	/^    NA_RxCrc2Mode,$/;"	e	enum:__anon7
+NA_RxCrc2ModeTrigOff_BC_C	h/OffstMapInit.h	1436;"	d
+NA_RxCrc2ModeTrigOn_BC_C	h/OffstMapInit.h	1437;"	d
+NA_RxCrc2Mode_B	h/OffstMapInit.h	1433;"	d
+NA_RxCrc2Mode_I	h/OffstMapInit.h	1434;"	d
+NA_RxCrc2Mode_O	h/OffstMapInit.h	1432;"	d
+NA_RxCrc2Stat	h/ntrxutil.h	/^    NA_RxCrc2Stat,$/;"	e	enum:__anon7
+NA_RxCrc2Stat_B	h/OffstMapInit.h	782;"	d
+NA_RxCrc2Stat_I	h/OffstMapInit.h	783;"	d
+NA_RxCrc2Stat_O	h/OffstMapInit.h	781;"	d
+NA_RxCryptEn	h/ntrxutil.h	/^    NA_RxCryptEn,$/;"	e	enum:__anon7
+NA_RxCryptEn_B	h/OffstMapInit.h	811;"	d
+NA_RxCryptEn_I	h/OffstMapInit.h	812;"	d
+NA_RxCryptEn_O	h/OffstMapInit.h	810;"	d
+NA_RxCryptId	h/ntrxutil.h	/^    NA_RxCryptId, \/* 110 *\/$/;"	e	enum:__anon7
+NA_RxCryptId_I	h/OffstMapInit.h	818;"	d
+NA_RxCryptId_LSB	h/OffstMapInit.h	817;"	d
+NA_RxCryptId_MSB	h/OffstMapInit.h	816;"	d
+NA_RxCryptId_O	h/OffstMapInit.h	815;"	d
+NA_RxCryptSeqN	h/ntrxutil.h	/^    NA_RxCryptSeqN,$/;"	e	enum:__anon7
+NA_RxCryptSeqN_B	h/OffstMapInit.h	822;"	d
+NA_RxCryptSeqN_I	h/OffstMapInit.h	823;"	d
+NA_RxCryptSeqN_O	h/OffstMapInit.h	821;"	d
+NA_RxCryptSeqReset	h/ntrxutil.h	/^    NA_RxCryptSeqReset, \/* 190 *\/$/;"	e	enum:__anon7
+NA_RxCryptSeqReset_I	h/OffstMapInit.h	1413;"	d
+NA_RxCryptSeqReset_LSB	h/OffstMapInit.h	1412;"	d
+NA_RxCryptSeqReset_MSB	h/OffstMapInit.h	1411;"	d
+NA_RxCryptSeqReset_O	h/OffstMapInit.h	1410;"	d
+NA_RxDataEn	h/ntrxutil.h	/^    NA_RxDataEn,$/;"	e	enum:__anon7
+NA_RxDataEn_B	h/OffstMapInit.h	1468;"	d
+NA_RxDataEn_I	h/OffstMapInit.h	1469;"	d
+NA_RxDataEn_O	h/OffstMapInit.h	1467;"	d
+NA_RxDataOff_BC_C	h/OffstMapInit.h	1470;"	d
+NA_RxDataOn_BC_C	h/OffstMapInit.h	1471;"	d
+NA_RxEnd_B	h/OffstMapInit.h	468;"	d
+NA_RxFec1BitErr_I	h/OffstMapInit.h	830;"	d
+NA_RxFec1BitErr_LSB	h/OffstMapInit.h	829;"	d
+NA_RxFec1BitErr_MSB	h/OffstMapInit.h	828;"	d
+NA_RxFec1BitErr_O	h/OffstMapInit.h	827;"	d
+NA_RxHeaderEnd_B	h/OffstMapInit.h	467;"	d
+NA_RxIntsEn	h/ntrxutil.h	/^    NA_RxIntsEn,$/;"	e	enum:__anon7
+NA_RxIntsEn_I	h/OffstMapInit.h	504;"	d
+NA_RxIntsEn_LSB	h/OffstMapInit.h	503;"	d
+NA_RxIntsEn_MSB	h/OffstMapInit.h	502;"	d
+NA_RxIntsEn_O	h/OffstMapInit.h	501;"	d
+NA_RxIntsRawStat	h/ntrxutil.h	/^    NA_RxIntsRawStat,$/;"	e	enum:__anon7
+NA_RxIntsRawStat_I	h/OffstMapInit.h	456;"	d
+NA_RxIntsRawStat_LSB	h/OffstMapInit.h	455;"	d
+NA_RxIntsRawStat_MSB	h/OffstMapInit.h	454;"	d
+NA_RxIntsRawStat_O	h/OffstMapInit.h	453;"	d
+NA_RxIntsReset	h/ntrxutil.h	/^    NA_RxIntsReset,$/;"	e	enum:__anon7
+NA_RxIntsReset_I	h/OffstMapInit.h	462;"	d
+NA_RxIntsReset_LSB	h/OffstMapInit.h	461;"	d
+NA_RxIntsReset_MSB	h/OffstMapInit.h	460;"	d
+NA_RxIntsReset_O	h/OffstMapInit.h	459;"	d
+NA_RxIrqEnable	h/ntrxutil.h	/^    NA_RxIrqEnable,$/;"	e	enum:__anon7
+NA_RxIrqEnable_B	h/OffstMapInit.h	376;"	d
+NA_RxIrqEnable_I	h/OffstMapInit.h	377;"	d
+NA_RxIrqEnable_O	h/OffstMapInit.h	375;"	d
+NA_RxIrqStatus	h/ntrxutil.h	/^    NA_RxIrqStatus, \/* 60 *\/$/;"	e	enum:__anon7
+NA_RxIrqStatus_B	h/OffstMapInit.h	396;"	d
+NA_RxIrqStatus_I	h/OffstMapInit.h	397;"	d
+NA_RxIrqStatus_O	h/OffstMapInit.h	395;"	d
+NA_RxOverflow_B	h/OffstMapInit.h	466;"	d
+NA_RxPacketSlot_I	h/OffstMapInit.h	867;"	d
+NA_RxPacketSlot_LSB	h/OffstMapInit.h	866;"	d
+NA_RxPacketSlot_MSB	h/OffstMapInit.h	865;"	d
+NA_RxPacketSlot_O	h/OffstMapInit.h	864;"	d
+NA_RxPacketType	h/ntrxutil.h	/^    NA_RxPacketType,$/;"	e	enum:__anon7
+NA_RxPacketType_I	h/OffstMapInit.h	767;"	d
+NA_RxPacketType_LSB	h/OffstMapInit.h	766;"	d
+NA_RxPacketType_MSB	h/OffstMapInit.h	765;"	d
+NA_RxPacketType_O	h/OffstMapInit.h	764;"	d
+NA_RxTimeBCrc1Mode	h/ntrxutil.h	/^    NA_RxTimeBCrc1Mode,$/;"	e	enum:__anon7
+NA_RxTimeBCrc1ModeOff_BC_C	h/OffstMapInit.h	1428;"	d
+NA_RxTimeBCrc1ModeOn_BC_C	h/OffstMapInit.h	1429;"	d
+NA_RxTimeBCrc1Mode_B	h/OffstMapInit.h	1425;"	d
+NA_RxTimeBCrc1Mode_I	h/OffstMapInit.h	1426;"	d
+NA_RxTimeBCrc1Mode_O	h/OffstMapInit.h	1424;"	d
+NA_RxTimeBEn	h/ntrxutil.h	/^    NA_RxTimeBEn,$/;"	e	enum:__anon7
+NA_RxTimeBEn_B	h/OffstMapInit.h	1483;"	d
+NA_RxTimeBEn_I	h/OffstMapInit.h	1484;"	d
+NA_RxTimeBEn_O	h/OffstMapInit.h	1482;"	d
+NA_RxTimeBOff_BC_C	h/OffstMapInit.h	1485;"	d
+NA_RxTimeBOn_BC_C	h/OffstMapInit.h	1486;"	d
+NA_RxTimeSlotControl	h/ntrxutil.h	/^    NA_RxTimeSlotControl,$/;"	e	enum:__anon7
+NA_RxTimeSlotControl_B	h/OffstMapInit.h	859;"	d
+NA_RxTimeSlotControl_I	h/OffstMapInit.h	860;"	d
+NA_RxTimeSlotControl_O	h/OffstMapInit.h	858;"	d
+NA_RxTimeSlotEnd_B	h/OffstMapInit.h	464;"	d
+NA_RxTimeSlotEnd_I	h/OffstMapInit.h	880;"	d
+NA_RxTimeSlotEnd_LSB	h/OffstMapInit.h	879;"	d
+NA_RxTimeSlotEnd_MSB	h/OffstMapInit.h	878;"	d
+NA_RxTimeSlotEnd_O	h/OffstMapInit.h	877;"	d
+NA_RxTimeSlotStart_I	h/OffstMapInit.h	873;"	d
+NA_RxTimeSlotStart_LSB	h/OffstMapInit.h	872;"	d
+NA_RxTimeSlotStart_MSB	h/OffstMapInit.h	871;"	d
+NA_RxTimeSlotStart_O	h/OffstMapInit.h	870;"	d
+NA_RxTimeSlotTOut_B	h/OffstMapInit.h	465;"	d
+NA_RxTransBytes_I	h/OffstMapInit.h	1420;"	d
+NA_RxTransBytes_LSB	h/OffstMapInit.h	1419;"	d
+NA_RxTransBytes_MSB	h/OffstMapInit.h	1418;"	d
+NA_RxTransBytes_O	h/OffstMapInit.h	1417;"	d
+NA_ScrambInitBits_IC_C	h/OffstMapInit.h	1888;"	d
+NA_SpiBitOrder	h/ntrxutil.h	/^    NA_SpiBitOrder,$/;"	e	enum:__anon7
+NA_SpiBitOrderLsbFirst_C	h/OffstMapInit.h	45;"	d
+NA_SpiBitOrderMsbFirst_C	h/OffstMapInit.h	46;"	d
+NA_SpiBitOrder_B	h/OffstMapInit.h	43;"	d
+NA_SpiBitOrder_I	h/OffstMapInit.h	44;"	d
+NA_SpiBitOrder_O	h/OffstMapInit.h	42;"	d
+NA_SpiTxDriver	h/ntrxutil.h	/^    NA_SpiTxDriver,$/;"	e	enum:__anon7
+NA_SpiTxDriverOpenDrain_C	h/OffstMapInit.h	52;"	d
+NA_SpiTxDriverPushPull_C	h/OffstMapInit.h	53;"	d
+NA_SpiTxDriver_B	h/OffstMapInit.h	50;"	d
+NA_SpiTxDriver_I	h/OffstMapInit.h	51;"	d
+NA_SpiTxDriver_O	h/OffstMapInit.h	49;"	d
+NA_StartFctMeasure	h/ntrxutil.h	/^    NA_StartFctMeasure,$/;"	e	enum:__anon7
+NA_StartFctMeasure_B	h/OffstMapInit.h	670;"	d
+NA_StartFctMeasure_I	h/OffstMapInit.h	671;"	d
+NA_StartFctMeasure_O	h/OffstMapInit.h	669;"	d
+NA_SwapBbBuffers	h/ntrxutil.h	/^    NA_SwapBbBuffers,$/;"	e	enum:__anon7
+NA_SwapBbBuffers_B	h/OffstMapInit.h	1157;"	d
+NA_SwapBbBuffers_I	h/OffstMapInit.h	1158;"	d
+NA_SwapBbBuffers_O	h/OffstMapInit.h	1156;"	d
+NA_SymbolDur	h/ntrxutil.h	/^    NA_SymbolDur,$/;"	e	enum:__anon7
+NA_SymbolDur1000ns_C	h/OffstMapInit.h	1090;"	d
+NA_SymbolDur16000ns_C	h/OffstMapInit.h	1086;"	d
+NA_SymbolDur2000ns_C	h/OffstMapInit.h	1089;"	d
+NA_SymbolDur4000ns_C	h/OffstMapInit.h	1088;"	d
+NA_SymbolDur500ns_C	h/OffstMapInit.h	1091;"	d
+NA_SymbolDur8000ns_C	h/OffstMapInit.h	1087;"	d
+NA_SymbolDur_I	h/OffstMapInit.h	1083;"	d
+NA_SymbolDur_LSB	h/OffstMapInit.h	1082;"	d
+NA_SymbolDur_MSB	h/OffstMapInit.h	1081;"	d
+NA_SymbolDur_O	h/OffstMapInit.h	1080;"	d
+NA_SymbolRate	h/ntrxutil.h	/^    NA_SymbolRate,$/;"	e	enum:__anon7
+NA_SymbolRate125kSymbols_VC_C	h/OffstMapInit.h	1101;"	d
+NA_SymbolRate1MSymbols_VC_C	h/OffstMapInit.h	1104;"	d
+NA_SymbolRate250kSymbols_VC_C	h/OffstMapInit.h	1102;"	d
+NA_SymbolRate2MSymbols_VC_C	h/OffstMapInit.h	1105;"	d
+NA_SymbolRate31k25Symbols_VC_C	h/OffstMapInit.h	1099;"	d
+NA_SymbolRate500kSymbols_VC_C	h/OffstMapInit.h	1103;"	d
+NA_SymbolRate62k5Symbols_VC_C	h/OffstMapInit.h	1100;"	d
+NA_SymbolRate_I	h/OffstMapInit.h	1097;"	d
+NA_SymbolRate_LSB	h/OffstMapInit.h	1096;"	d
+NA_SymbolRate_MSB	h/OffstMapInit.h	1095;"	d
+NA_SymbolRate_O	h/OffstMapInit.h	1094;"	d
+NA_SyncWord	h/ntrxutil.h	/^    NA_SyncWord,$/;"	e	enum:__anon7
+NA_SyncWordBits_IC_C	h/OffstMapInit.h	1887;"	d
+NA_SyncWord_I	h/OffstMapInit.h	706;"	d
+NA_SyncWord_LSB	h/OffstMapInit.h	705;"	d
+NA_SyncWord_MSB	h/OffstMapInit.h	704;"	d
+NA_SyncWord_O	h/OffstMapInit.h	703;"	d
+NA_TailSymbols_IC_C	h/OffstMapInit.h	1886;"	d
+NA_ToaOffsetMeanAck	h/ntrxutil.h	/^    NA_ToaOffsetMeanAck,$/;"	e	enum:__anon7
+NA_ToaOffsetMeanAckValid	h/ntrxutil.h	/^    NA_ToaOffsetMeanAckValid, \/* 100 *\/$/;"	e	enum:__anon7
+NA_ToaOffsetMeanAckValid_B	h/OffstMapInit.h	722;"	d
+NA_ToaOffsetMeanAckValid_I	h/OffstMapInit.h	723;"	d
+NA_ToaOffsetMeanAckValid_O	h/OffstMapInit.h	721;"	d
+NA_ToaOffsetMeanAck_I	h/OffstMapInit.h	718;"	d
+NA_ToaOffsetMeanAck_LSB	h/OffstMapInit.h	717;"	d
+NA_ToaOffsetMeanAck_MSB	h/OffstMapInit.h	716;"	d
+NA_ToaOffsetMeanAck_O	h/OffstMapInit.h	715;"	d
+NA_ToaOffsetMeanData	h/ntrxutil.h	/^    NA_ToaOffsetMeanData,$/;"	e	enum:__anon7
+NA_ToaOffsetMeanDataValid	h/ntrxutil.h	/^    NA_ToaOffsetMeanDataValid,$/;"	e	enum:__anon7
+NA_ToaOffsetMeanDataValid_B	h/OffstMapInit.h	754;"	d
+NA_ToaOffsetMeanDataValid_I	h/OffstMapInit.h	755;"	d
+NA_ToaOffsetMeanDataValid_O	h/OffstMapInit.h	753;"	d
+NA_ToaOffsetMeanData_I	h/OffstMapInit.h	750;"	d
+NA_ToaOffsetMeanData_LSB	h/OffstMapInit.h	749;"	d
+NA_ToaOffsetMeanData_MSB	h/OffstMapInit.h	748;"	d
+NA_ToaOffsetMeanData_O	h/OffstMapInit.h	747;"	d
+NA_True_BC_C	h/OffstMapInit.h	1840;"	d
+NA_Tx3Way	h/ntrxutil.h	/^    NA_Tx3Way,$/;"	e	enum:__anon7
+NA_Tx3WayOff_BC_C	h/OffstMapInit.h	1293;"	d
+NA_Tx3WayOn_BC_C	h/OffstMapInit.h	1294;"	d
+NA_Tx3Way_B	h/OffstMapInit.h	1290;"	d
+NA_Tx3Way_I	h/OffstMapInit.h	1291;"	d
+NA_Tx3Way_O	h/OffstMapInit.h	1289;"	d
+NA_TxAddrSlct	h/ntrxutil.h	/^    NA_TxAddrSlct,$/;"	e	enum:__anon7
+NA_TxAddrSlct_B	h/OffstMapInit.h	1366;"	d
+NA_TxAddrSlct_I	h/OffstMapInit.h	1367;"	d
+NA_TxAddrSlct_O	h/OffstMapInit.h	1365;"	d
+NA_TxArq	h/ntrxutil.h	/^    NA_TxArq,$/;"	e	enum:__anon7
+NA_TxArqCnt	h/ntrxutil.h	/^    NA_TxArqCnt,$/;"	e	enum:__anon7
+NA_TxArqCnt_I	h/OffstMapInit.h	892;"	d
+NA_TxArqCnt_LSB	h/OffstMapInit.h	891;"	d
+NA_TxArqCnt_MSB	h/OffstMapInit.h	890;"	d
+NA_TxArqCnt_O	h/OffstMapInit.h	889;"	d
+NA_TxArqMax	h/ntrxutil.h	/^    NA_TxArqMax,$/;"	e	enum:__anon7
+NA_TxArqMax_I	h/OffstMapInit.h	898;"	d
+NA_TxArqMax_LSB	h/OffstMapInit.h	897;"	d
+NA_TxArqMax_MSB	h/OffstMapInit.h	896;"	d
+NA_TxArqMax_O	h/OffstMapInit.h	895;"	d
+NA_TxArqOff_BC_C	h/OffstMapInit.h	1285;"	d
+NA_TxArqOn_BC_C	h/OffstMapInit.h	1286;"	d
+NA_TxArq_B	h/OffstMapInit.h	1282;"	d
+NA_TxArq_I	h/OffstMapInit.h	1283;"	d
+NA_TxArq_O	h/OffstMapInit.h	1281;"	d
+NA_TxBackOffAlg	h/ntrxutil.h	/^    NA_TxBackOffAlg,$/;"	e	enum:__anon7
+NA_TxBackOffAlgOff_BC_C	h/OffstMapInit.h	1301;"	d
+NA_TxBackOffAlgOn_BC_C	h/OffstMapInit.h	1302;"	d
+NA_TxBackOffAlg_B	h/OffstMapInit.h	1298;"	d
+NA_TxBackOffAlg_I	h/OffstMapInit.h	1299;"	d
+NA_TxBackOffAlg_O	h/OffstMapInit.h	1297;"	d
+NA_TxBackOffSeed	h/ntrxutil.h	/^    NA_TxBackOffSeed,$/;"	e	enum:__anon7
+NA_TxBackOffSeed_I	h/OffstMapInit.h	1313;"	d
+NA_TxBackOffSeed_LSB	h/OffstMapInit.h	1312;"	d
+NA_TxBackOffSeed_MSB	h/OffstMapInit.h	1311;"	d
+NA_TxBackOffSeed_O	h/OffstMapInit.h	1310;"	d
+NA_TxBufferCmd	h/ntrxutil.h	/^    NA_TxBufferCmd,$/;"	e	enum:__anon7
+NA_TxBufferCmd_I	h/OffstMapInit.h	1384;"	d
+NA_TxBufferCmd_LSB	h/OffstMapInit.h	1383;"	d
+NA_TxBufferCmd_MSB	h/OffstMapInit.h	1382;"	d
+NA_TxBufferCmd_O	h/OffstMapInit.h	1381;"	d
+NA_TxBufferRdy_LSB	h/OffstMapInit.h	449;"	d
+NA_TxBufferRdy_MSB	h/OffstMapInit.h	448;"	d
+NA_TxCmdStart	h/ntrxutil.h	/^    NA_TxCmdStart,$/;"	e	enum:__anon7
+NA_TxCmdStart_B	h/OffstMapInit.h	1377;"	d
+NA_TxCmdStart_I	h/OffstMapInit.h	1378;"	d
+NA_TxCmdStart_O	h/OffstMapInit.h	1376;"	d
+NA_TxCmdStop	h/ntrxutil.h	/^    NA_TxCmdStop,$/;"	e	enum:__anon7
+NA_TxCmdStop_B	h/OffstMapInit.h	1372;"	d
+NA_TxCmdStop_I	h/OffstMapInit.h	1373;"	d
+NA_TxCmdStop_O	h/OffstMapInit.h	1371;"	d
+NA_TxCryptEn	h/ntrxutil.h	/^    NA_TxCryptEn,$/;"	e	enum:__anon7
+NA_TxCryptEn_B	h/OffstMapInit.h	1324;"	d
+NA_TxCryptEn_I	h/OffstMapInit.h	1325;"	d
+NA_TxCryptEn_O	h/OffstMapInit.h	1323;"	d
+NA_TxCryptId	h/ntrxutil.h	/^    NA_TxCryptId,$/;"	e	enum:__anon7
+NA_TxCryptId_I	h/OffstMapInit.h	1331;"	d
+NA_TxCryptId_LSB	h/OffstMapInit.h	1330;"	d
+NA_TxCryptId_MSB	h/OffstMapInit.h	1329;"	d
+NA_TxCryptId_O	h/OffstMapInit.h	1328;"	d
+NA_TxCryptSeqN	h/ntrxutil.h	/^    NA_TxCryptSeqN,$/;"	e	enum:__anon7
+NA_TxCryptSeqN_B	h/OffstMapInit.h	1335;"	d
+NA_TxCryptSeqN_I	h/OffstMapInit.h	1336;"	d
+NA_TxCryptSeqN_O	h/OffstMapInit.h	1334;"	d
+NA_TxCryptSeqReset	h/ntrxutil.h	/^    NA_TxCryptSeqReset,$/;"	e	enum:__anon7
+NA_TxCryptSeqReset_I	h/OffstMapInit.h	1320;"	d
+NA_TxCryptSeqReset_LSB	h/OffstMapInit.h	1319;"	d
+NA_TxCryptSeqReset_MSB	h/OffstMapInit.h	1318;"	d
+NA_TxCryptSeqReset_O	h/OffstMapInit.h	1317;"	d
+NA_TxEnd_B	h/OffstMapInit.h	447;"	d
+NA_TxFragPrio	h/ntrxutil.h	/^    NA_TxFragPrio,$/;"	e	enum:__anon7
+NA_TxFragPrio_B	h/OffstMapInit.h	1306;"	d
+NA_TxFragPrio_I	h/OffstMapInit.h	1307;"	d
+NA_TxFragPrio_O	h/OffstMapInit.h	1305;"	d
+NA_TxIntsEn	h/ntrxutil.h	/^    NA_TxIntsEn, \/* 70 *\/$/;"	e	enum:__anon7
+NA_TxIntsEn_I	h/OffstMapInit.h	497;"	d
+NA_TxIntsEn_LSB	h/OffstMapInit.h	496;"	d
+NA_TxIntsEn_MSB	h/OffstMapInit.h	495;"	d
+NA_TxIntsEn_O	h/OffstMapInit.h	494;"	d
+NA_TxIntsRawStat	h/ntrxutil.h	/^    NA_TxIntsRawStat,$/;"	e	enum:__anon7
+NA_TxIntsRawStat_I	h/OffstMapInit.h	436;"	d
+NA_TxIntsRawStat_LSB	h/OffstMapInit.h	435;"	d
+NA_TxIntsRawStat_MSB	h/OffstMapInit.h	434;"	d
+NA_TxIntsRawStat_O	h/OffstMapInit.h	433;"	d
+NA_TxIntsReset	h/ntrxutil.h	/^    NA_TxIntsReset,$/;"	e	enum:__anon7
+NA_TxIntsReset_I	h/OffstMapInit.h	442;"	d
+NA_TxIntsReset_LSB	h/OffstMapInit.h	441;"	d
+NA_TxIntsReset_MSB	h/OffstMapInit.h	440;"	d
+NA_TxIntsReset_O	h/OffstMapInit.h	439;"	d
+NA_TxIrqEnable	h/ntrxutil.h	/^    NA_TxIrqEnable,$/;"	e	enum:__anon7
+NA_TxIrqEnable_B	h/OffstMapInit.h	371;"	d
+NA_TxIrqEnable_I	h/OffstMapInit.h	372;"	d
+NA_TxIrqEnable_O	h/OffstMapInit.h	370;"	d
+NA_TxIrqStatus	h/ntrxutil.h	/^    NA_TxIrqStatus,$/;"	e	enum:__anon7
+NA_TxIrqStatus_B	h/OffstMapInit.h	391;"	d
+NA_TxIrqStatus_I	h/OffstMapInit.h	392;"	d
+NA_TxIrqStatus_O	h/OffstMapInit.h	390;"	d
+NA_TxMacCifsDis	h/ntrxutil.h	/^    NA_TxMacCifsDis,$/;"	e	enum:__anon7
+NA_TxMacCifsDis_B	h/OffstMapInit.h	1249;"	d
+NA_TxMacCifsDis_I	h/OffstMapInit.h	1250;"	d
+NA_TxMacCifsDis_O	h/OffstMapInit.h	1248;"	d
+NA_TxOutputPower0	h/ntrxutil.h	/^    NA_TxOutputPower0,$/;"	e	enum:__anon7
+NA_TxOutputPower0_I	h/OffstMapInit.h	1045;"	d
+NA_TxOutputPower0_LSB	h/OffstMapInit.h	1044;"	d
+NA_TxOutputPower0_MSB	h/OffstMapInit.h	1043;"	d
+NA_TxOutputPower0_O	h/OffstMapInit.h	1042;"	d
+NA_TxOutputPower1	h/ntrxutil.h	/^    NA_TxOutputPower1,$/;"	e	enum:__anon7
+NA_TxOutputPower1_I	h/OffstMapInit.h	1052;"	d
+NA_TxOutputPower1_LSB	h/OffstMapInit.h	1051;"	d
+NA_TxOutputPower1_MSB	h/OffstMapInit.h	1050;"	d
+NA_TxOutputPower1_O	h/OffstMapInit.h	1049;"	d
+NA_TxPaBias	h/ntrxutil.h	/^    NA_TxPaBias,$/;"	e	enum:__anon7
+NA_TxPaBias_I	h/OffstMapInit.h	1038;"	d
+NA_TxPaBias_LSB	h/OffstMapInit.h	1037;"	d
+NA_TxPaBias_MSB	h/OffstMapInit.h	1036;"	d
+NA_TxPaBias_O	h/OffstMapInit.h	1035;"	d
+NA_TxPacketType	h/ntrxutil.h	/^    NA_TxPacketType,$/;"	e	enum:__anon7
+NA_TxPacketType_I	h/OffstMapInit.h	1362;"	d
+NA_TxPacketType_LSB	h/OffstMapInit.h	1361;"	d
+NA_TxPacketType_MSB	h/OffstMapInit.h	1360;"	d
+NA_TxPacketType_O	h/OffstMapInit.h	1359;"	d
+NA_TxPhCarrSensModeOff_VC_C	h/OffstMapInit.h	1267;"	d
+NA_TxPhCarrSensModeRssi_VC_C	h/OffstMapInit.h	1269;"	d
+NA_TxPhCarrSensModeSymbolsRssi_VC_C	h/OffstMapInit.h	1270;"	d
+NA_TxPhCarrSensModeSymbols_VC_C	h/OffstMapInit.h	1268;"	d
+NA_TxPhCarrSenseMode	h/ntrxutil.h	/^    NA_TxPhCarrSenseMode,$/;"	e	enum:__anon7
+NA_TxPhCarrSenseMode_I	h/OffstMapInit.h	1265;"	d
+NA_TxPhCarrSenseMode_LSB	h/OffstMapInit.h	1264;"	d
+NA_TxPhCarrSenseMode_MSB	h/OffstMapInit.h	1263;"	d
+NA_TxPhCarrSenseMode_O	h/OffstMapInit.h	1262;"	d
+NA_TxPreTrailMatrix0	h/ntrxutil.h	/^    NA_TxPreTrailMatrix0,$/;"	e	enum:__anon7
+NA_TxPreTrailMatrix0_I	h/OffstMapInit.h	1231;"	d
+NA_TxPreTrailMatrix0_LSB	h/OffstMapInit.h	1230;"	d
+NA_TxPreTrailMatrix0_MSB	h/OffstMapInit.h	1229;"	d
+NA_TxPreTrailMatrix0_O	h/OffstMapInit.h	1228;"	d
+NA_TxPreTrailMatrix1	h/ntrxutil.h	/^    NA_TxPreTrailMatrix1,$/;"	e	enum:__anon7
+NA_TxPreTrailMatrix1_I	h/OffstMapInit.h	1237;"	d
+NA_TxPreTrailMatrix1_LSB	h/OffstMapInit.h	1236;"	d
+NA_TxPreTrailMatrix1_MSB	h/OffstMapInit.h	1235;"	d
+NA_TxPreTrailMatrix1_O	h/OffstMapInit.h	1234;"	d
+NA_TxRespTime	h/ntrxutil.h	/^    NA_TxRespTime,$/;"	e	enum:__anon7
+NA_TxRespTime_I	h/OffstMapInit.h	730;"	d
+NA_TxRespTime_LSB	h/OffstMapInit.h	729;"	d
+NA_TxRespTime_MSB	h/OffstMapInit.h	728;"	d
+NA_TxRespTime_O	h/OffstMapInit.h	727;"	d
+NA_TxRxBbBufferMode0	h/ntrxutil.h	/^    NA_TxRxBbBufferMode0,$/;"	e	enum:__anon7
+NA_TxRxBbBufferMode0_B	h/OffstMapInit.h	1170;"	d
+NA_TxRxBbBufferMode0_I	h/OffstMapInit.h	1171;"	d
+NA_TxRxBbBufferMode0_O	h/OffstMapInit.h	1169;"	d
+NA_TxRxBbBufferMode1	h/ntrxutil.h	/^    NA_TxRxBbBufferMode1,$/;"	e	enum:__anon7
+NA_TxRxBbBufferMode1_B	h/OffstMapInit.h	1162;"	d
+NA_TxRxBbBufferMode1_I	h/OffstMapInit.h	1163;"	d
+NA_TxRxBbBufferMode1_O	h/OffstMapInit.h	1161;"	d
+NA_TxRxBufferMode0Auto_BC_C	h/OffstMapInit.h	1173;"	d
+NA_TxRxBufferMode0Transparent_BC_C	h/OffstMapInit.h	1174;"	d
+NA_TxRxBufferMode1Duplex_BC_C	h/OffstMapInit.h	1165;"	d
+NA_TxRxBufferMode1Simplex_BC_C	h/OffstMapInit.h	1166;"	d
+NA_TxRxCryptClkMode	h/ntrxutil.h	/^    NA_TxRxCryptClkMode,$/;"	e	enum:__anon7
+NA_TxRxCryptClkModeCryptClock_BC_C	h/OffstMapInit.h	1151;"	d
+NA_TxRxCryptClkModeScrambInit_BC_C	h/OffstMapInit.h	1152;"	d
+NA_TxRxCryptClkMode_I	h/OffstMapInit.h	1149;"	d
+NA_TxRxCryptClkMode_LSB	h/OffstMapInit.h	1148;"	d
+NA_TxRxCryptClkMode_MSB	h/OffstMapInit.h	1147;"	d
+NA_TxRxCryptClkMode_O	h/OffstMapInit.h	1146;"	d
+NA_TxRxCryptCrc2Mode	h/ntrxutil.h	/^    NA_TxRxCryptCrc2Mode,$/;"	e	enum:__anon7
+NA_TxRxCryptCrc2ModeEncrypted_BC_C	h/OffstMapInit.h	1143;"	d
+NA_TxRxCryptCrc2ModeUncrypted_BC_C	h/OffstMapInit.h	1142;"	d
+NA_TxRxCryptCrc2Mode_B	h/OffstMapInit.h	1139;"	d
+NA_TxRxCryptCrc2Mode_I	h/OffstMapInit.h	1140;"	d
+NA_TxRxCryptCrc2Mode_O	h/OffstMapInit.h	1138;"	d
+NA_TxRxCryptOff_BC_C	h/OffstMapInit.h	1850;"	d
+NA_TxRxCryptOn_BC_C	h/OffstMapInit.h	1851;"	d
+NA_TxRxMode	h/ntrxutil.h	/^    NA_TxRxMode,$/;"	e	enum:__anon7
+NA_TxRxModeAuto_BC_C	h/OffstMapInit.h	1186;"	d
+NA_TxRxModeTransparent_BC_C	h/OffstMapInit.h	1187;"	d
+NA_TxRxMode_B	h/OffstMapInit.h	1183;"	d
+NA_TxRxMode_I	h/OffstMapInit.h	1184;"	d
+NA_TxRxMode_O	h/OffstMapInit.h	1182;"	d
+NA_TxRxPacketFragC_B	h/OffstMapInit.h	1882;"	d
+NA_TxRxPacketLCh_B	h/OffstMapInit.h	1884;"	d
+NA_TxRxPacketLength_INIT_C	h/OffstMapInit.h	1847;"	d
+NA_TxRxPacketLength_LSB	h/OffstMapInit.h	1846;"	d
+NA_TxRxPacketLength_MSB	h/OffstMapInit.h	1845;"	d
+NA_TxRxPacketSeqN_B	h/OffstMapInit.h	1883;"	d
+NA_TxScrambEn	h/ntrxutil.h	/^    NA_TxScrambEn,$/;"	e	enum:__anon7
+NA_TxScrambEn_B	h/OffstMapInit.h	1347;"	d
+NA_TxScrambEn_I	h/OffstMapInit.h	1348;"	d
+NA_TxScrambEn_O	h/OffstMapInit.h	1346;"	d
+NA_TxScrambInit	h/ntrxutil.h	/^    NA_TxScrambInit, \/* 180 *\/$/;"	e	enum:__anon7
+NA_TxScrambInit_I	h/OffstMapInit.h	1343;"	d
+NA_TxScrambInit_LSB	h/OffstMapInit.h	1342;"	d
+NA_TxScrambInit_MSB	h/OffstMapInit.h	1341;"	d
+NA_TxScrambInit_O	h/OffstMapInit.h	1340;"	d
+NA_TxTimeSlotControl	h/ntrxutil.h	/^    NA_TxTimeSlotControl,$/;"	e	enum:__anon7
+NA_TxTimeSlotControl_B	h/OffstMapInit.h	854;"	d
+NA_TxTimeSlotControl_I	h/OffstMapInit.h	855;"	d
+NA_TxTimeSlotControl_O	h/OffstMapInit.h	853;"	d
+NA_TxTimeSlotEnd_B	h/OffstMapInit.h	444;"	d
+NA_TxTimeSlotEnd_I	h/OffstMapInit.h	849;"	d
+NA_TxTimeSlotEnd_LSB	h/OffstMapInit.h	848;"	d
+NA_TxTimeSlotEnd_MSB	h/OffstMapInit.h	847;"	d
+NA_TxTimeSlotEnd_O	h/OffstMapInit.h	846;"	d
+NA_TxTimeSlotStart_I	h/OffstMapInit.h	842;"	d
+NA_TxTimeSlotStart_LSB	h/OffstMapInit.h	841;"	d
+NA_TxTimeSlotStart_MSB	h/OffstMapInit.h	840;"	d
+NA_TxTimeSlotStart_O	h/OffstMapInit.h	839;"	d
+NA_TxTimeSlotTOut_B	h/OffstMapInit.h	445;"	d
+NA_TxTransBytes_I	h/OffstMapInit.h	1355;"	d
+NA_TxTransBytes_LSB	h/OffstMapInit.h	1354;"	d
+NA_TxTransBytes_MSB	h/OffstMapInit.h	1353;"	d
+NA_TxTransBytes_O	h/OffstMapInit.h	1352;"	d
+NA_TxUnderrunIgnore	h/ntrxutil.h	/^    NA_TxUnderrunIgnore,$/;"	e	enum:__anon7
+NA_TxUnderrunIgnoreOff_BC_C	h/OffstMapInit.h	1244;"	d
+NA_TxUnderrunIgnoreOn_BC_C	h/OffstMapInit.h	1245;"	d
+NA_TxUnderrunIgnore_B	h/OffstMapInit.h	1241;"	d
+NA_TxUnderrunIgnore_I	h/OffstMapInit.h	1242;"	d
+NA_TxUnderrunIgnore_O	h/OffstMapInit.h	1240;"	d
+NA_TxUnderrun_B	h/OffstMapInit.h	446;"	d
+NA_TxVCarrSens	h/ntrxutil.h	/^    NA_TxVCarrSens,$/;"	e	enum:__anon7
+NA_TxVCarrSensAck	h/ntrxutil.h	/^    NA_TxVCarrSensAck, \/* 170 *\/$/;"	e	enum:__anon7
+NA_TxVCarrSensAckOff_BC_C	h/OffstMapInit.h	1277;"	d
+NA_TxVCarrSensAckOn_BC_C	h/OffstMapInit.h	1278;"	d
+NA_TxVCarrSensAck_B	h/OffstMapInit.h	1274;"	d
+NA_TxVCarrSensAck_I	h/OffstMapInit.h	1275;"	d
+NA_TxVCarrSensAck_O	h/OffstMapInit.h	1273;"	d
+NA_TxVCarrSensOff_BC_C	h/OffstMapInit.h	1258;"	d
+NA_TxVCarrSensOn_BC_C	h/OffstMapInit.h	1259;"	d
+NA_TxVCarrSens_B	h/OffstMapInit.h	1255;"	d
+NA_TxVCarrSens_I	h/OffstMapInit.h	1256;"	d
+NA_TxVCarrSens_O	h/OffstMapInit.h	1254;"	d
+NA_TypeCodeAck_VC_C	h/OffstMapInit.h	1894;"	d
+NA_TypeCodeBitPos_IC_C	h/OffstMapInit.h	1874;"	d
+NA_TypeCodeBits_IC_C	h/OffstMapInit.h	1875;"	d
+NA_TypeCodeBrdcast_VC_C	h/OffstMapInit.h	1896;"	d
+NA_TypeCodeClr2s_VC_C	h/OffstMapInit.h	1898;"	d
+NA_TypeCodeData_VC_C	h/OffstMapInit.h	1893;"	d
+NA_TypeCodeReq2s_VC_C	h/OffstMapInit.h	1897;"	d
+NA_TypeCodeTimeB_VC_C	h/OffstMapInit.h	1895;"	d
+NA_TypeCodeUndef_VC_C	h/OffstMapInit.h	1899;"	d
+NA_UpPulseDetectDis	h/ntrxutil.h	/^    NA_UpPulseDetectDis,$/;"	e	enum:__anon7
+NA_UpPulseDetectDis_B	h/OffstMapInit.h	1535;"	d
+NA_UpPulseDetectDis_I	h/OffstMapInit.h	1536;"	d
+NA_UpPulseDetectDis_O	h/OffstMapInit.h	1534;"	d
+NA_UseAlternativeAgc	h/ntrxutil.h	/^    NA_UseAlternativeAgc,$/;"	e	enum:__anon7
+NA_UseAlternativeAgc_B	h/OffstMapInit.h	1662;"	d
+NA_UseAlternativeAgc_I	h/OffstMapInit.h	1663;"	d
+NA_UseAlternativeAgc_O	h/OffstMapInit.h	1661;"	d
+NA_UseFec	h/ntrxutil.h	/^    NA_UseFec,$/;"	e	enum:__anon7
+NA_UseFecOff_BC_C	h/OffstMapInit.h	1134;"	d
+NA_UseFecOn_BC_C	h/OffstMapInit.h	1135;"	d
+NA_UseFec_B	h/OffstMapInit.h	1131;"	d
+NA_UseFec_I	h/OffstMapInit.h	1132;"	d
+NA_UseFec_O	h/OffstMapInit.h	1130;"	d
+NA_UseLoRxCaps	h/ntrxutil.h	/^    NA_UseLoRxCaps,$/;"	e	enum:__anon7
+NA_UseLoRxCaps_B	h/OffstMapInit.h	552;"	d
+NA_UseLoRxCaps_I	h/OffstMapInit.h	553;"	d
+NA_UseLoRxCaps_O	h/OffstMapInit.h	551;"	d
+NA_UseMapThresh1InFramesync	h/ntrxutil.h	/^    NA_UseMapThresh1InFramesync,$/;"	e	enum:__anon7
+NA_UseMapThresh1InFramesync_B	h/OffstMapInit.h	981;"	d
+NA_UseMapThresh1InFramesync_I	h/OffstMapInit.h	982;"	d
+NA_UseMapThresh1InFramesync_O	h/OffstMapInit.h	980;"	d
+NA_UsePulldown4Pamp	h/ntrxutil.h	/^    NA_UsePulldown4Pamp,$/;"	e	enum:__anon7
+NA_UsePulldown4Pamp_B	h/OffstMapInit.h	309;"	d
+NA_UsePulldown4Pamp_I	h/OffstMapInit.h	310;"	d
+NA_UsePulldown4Pamp_O	h/OffstMapInit.h	308;"	d
+NA_UsePulldown4Por	h/ntrxutil.h	/^    NA_UsePulldown4Por,$/;"	e	enum:__anon7
+NA_UsePulldown4Por_B	h/OffstMapInit.h	299;"	d
+NA_UsePulldown4Por_I	h/OffstMapInit.h	300;"	d
+NA_UsePulldown4Por_O	h/OffstMapInit.h	298;"	d
+NA_UsePulldown4Spiclk	h/ntrxutil.h	/^    NA_UsePulldown4Spiclk,$/;"	e	enum:__anon7
+NA_UsePulldown4Spiclk_B	h/OffstMapInit.h	258;"	d
+NA_UsePulldown4Spiclk_I	h/OffstMapInit.h	259;"	d
+NA_UsePulldown4Spiclk_O	h/OffstMapInit.h	257;"	d
+NA_UsePulldown4Spirxd	h/ntrxutil.h	/^    NA_UsePulldown4Spirxd,$/;"	e	enum:__anon7
+NA_UsePulldown4Spirxd_B	h/OffstMapInit.h	278;"	d
+NA_UsePulldown4Spirxd_I	h/OffstMapInit.h	279;"	d
+NA_UsePulldown4Spirxd_O	h/OffstMapInit.h	277;"	d
+NA_UsePulldown4Spissn	h/ntrxutil.h	/^    NA_UsePulldown4Spissn,$/;"	e	enum:__anon7
+NA_UsePulldown4Spissn_B	h/OffstMapInit.h	268;"	d
+NA_UsePulldown4Spissn_I	h/OffstMapInit.h	269;"	d
+NA_UsePulldown4Spissn_O	h/OffstMapInit.h	267;"	d
+NA_UsePulldown4Spitxd	h/ntrxutil.h	/^    NA_UsePulldown4Spitxd, \/* 40 *\/$/;"	e	enum:__anon7
+NA_UsePulldown4Spitxd_B	h/OffstMapInit.h	288;"	d
+NA_UsePulldown4Spitxd_I	h/OffstMapInit.h	289;"	d
+NA_UsePulldown4Spitxd_O	h/OffstMapInit.h	287;"	d
+NA_UsePulldown4Test	h/ntrxutil.h	/^    NA_UsePulldown4Test,$/;"	e	enum:__anon7
+NA_UsePulldown4Test_B	h/OffstMapInit.h	211;"	d
+NA_UsePulldown4Test_I	h/OffstMapInit.h	212;"	d
+NA_UsePulldown4Test_O	h/OffstMapInit.h	210;"	d
+NA_UsePulldown4Ucirq	h/ntrxutil.h	/^    NA_UsePulldown4Ucirq,$/;"	e	enum:__anon7
+NA_UsePulldown4Ucirq_B	h/OffstMapInit.h	319;"	d
+NA_UsePulldown4Ucirq_I	h/OffstMapInit.h	320;"	d
+NA_UsePulldown4Ucirq_O	h/OffstMapInit.h	318;"	d
+NA_UsePulldown4Ucrst	h/ntrxutil.h	/^    NA_UsePulldown4Ucrst,$/;"	e	enum:__anon7
+NA_UsePulldown4Ucrst_B	h/OffstMapInit.h	329;"	d
+NA_UsePulldown4Ucrst_I	h/OffstMapInit.h	330;"	d
+NA_UsePulldown4Ucrst_O	h/OffstMapInit.h	328;"	d
+NA_UsePullup4Pamp	h/ntrxutil.h	/^    NA_UsePullup4Pamp,$/;"	e	enum:__anon7
+NA_UsePullup4Pamp_B	h/OffstMapInit.h	304;"	d
+NA_UsePullup4Pamp_I	h/OffstMapInit.h	305;"	d
+NA_UsePullup4Pamp_O	h/OffstMapInit.h	303;"	d
+NA_UsePullup4Por	h/ntrxutil.h	/^    NA_UsePullup4Por,$/;"	e	enum:__anon7
+NA_UsePullup4Por_B	h/OffstMapInit.h	294;"	d
+NA_UsePullup4Por_I	h/OffstMapInit.h	295;"	d
+NA_UsePullup4Por_O	h/OffstMapInit.h	293;"	d
+NA_UsePullup4Spiclk	h/ntrxutil.h	/^    NA_UsePullup4Spiclk,$/;"	e	enum:__anon7
+NA_UsePullup4Spiclk_B	h/OffstMapInit.h	253;"	d
+NA_UsePullup4Spiclk_I	h/OffstMapInit.h	254;"	d
+NA_UsePullup4Spiclk_O	h/OffstMapInit.h	252;"	d
+NA_UsePullup4Spirxd	h/ntrxutil.h	/^    NA_UsePullup4Spirxd,$/;"	e	enum:__anon7
+NA_UsePullup4Spirxd_B	h/OffstMapInit.h	273;"	d
+NA_UsePullup4Spirxd_I	h/OffstMapInit.h	274;"	d
+NA_UsePullup4Spirxd_O	h/OffstMapInit.h	272;"	d
+NA_UsePullup4Spissn	h/ntrxutil.h	/^    NA_UsePullup4Spissn,$/;"	e	enum:__anon7
+NA_UsePullup4Spissn_B	h/OffstMapInit.h	263;"	d
+NA_UsePullup4Spissn_I	h/OffstMapInit.h	264;"	d
+NA_UsePullup4Spissn_O	h/OffstMapInit.h	262;"	d
+NA_UsePullup4Spitxd	h/ntrxutil.h	/^    NA_UsePullup4Spitxd,$/;"	e	enum:__anon7
+NA_UsePullup4Spitxd_B	h/OffstMapInit.h	283;"	d
+NA_UsePullup4Spitxd_I	h/OffstMapInit.h	284;"	d
+NA_UsePullup4Spitxd_O	h/OffstMapInit.h	282;"	d
+NA_UsePullup4Test	h/ntrxutil.h	/^    NA_UsePullup4Test,$/;"	e	enum:__anon7
+NA_UsePullup4Test_B	h/OffstMapInit.h	206;"	d
+NA_UsePullup4Test_I	h/OffstMapInit.h	207;"	d
+NA_UsePullup4Test_O	h/OffstMapInit.h	205;"	d
+NA_UsePullup4Ucirq	h/ntrxutil.h	/^    NA_UsePullup4Ucirq,$/;"	e	enum:__anon7
+NA_UsePullup4Ucirq_B	h/OffstMapInit.h	314;"	d
+NA_UsePullup4Ucirq_I	h/OffstMapInit.h	315;"	d
+NA_UsePullup4Ucirq_O	h/OffstMapInit.h	313;"	d
+NA_UsePullup4Ucrst	h/ntrxutil.h	/^    NA_UsePullup4Ucrst,$/;"	e	enum:__anon7
+NA_UsePullup4Ucrst_B	h/OffstMapInit.h	324;"	d
+NA_UsePullup4Ucrst_I	h/OffstMapInit.h	325;"	d
+NA_UsePullup4Ucrst_O	h/OffstMapInit.h	323;"	d
+NA_Version	h/ntrxutil.h	/^    NA_Version,$/;"	e	enum:__anon7
+NA_Version_I	h/OffstMapInit.h	74;"	d
+NA_Version_LSB	h/OffstMapInit.h	73;"	d
+NA_Version_MSB	h/OffstMapInit.h	72;"	d
+NA_Version_O	h/OffstMapInit.h	71;"	d
+NA_WakeUpTimeByte	h/ntrxutil.h	/^    NA_WakeUpTimeByte,$/;"	e	enum:__anon7
+NA_WakeUpTimeByte_I	h/OffstMapInit.h	80;"	d
+NA_WakeUpTimeByte_LSB	h/OffstMapInit.h	79;"	d
+NA_WakeUpTimeByte_MSB	h/OffstMapInit.h	78;"	d
+NA_WakeUpTimeByte_O	h/OffstMapInit.h	77;"	d
+NA_WakeUpTimeWe	h/ntrxutil.h	/^    NA_WakeUpTimeWe,$/;"	e	enum:__anon7
+NA_WakeUpTimeWe_I	h/OffstMapInit.h	93;"	d
+NA_WakeUpTimeWe_LSB	h/OffstMapInit.h	92;"	d
+NA_WakeUpTimeWe_MSB	h/OffstMapInit.h	91;"	d
+NA_WakeUpTimeWe_O	h/OffstMapInit.h	90;"	d
+NA_WakeUpTime_I	h/OffstMapInit.h	414;"	d
+NA_WakeUpTime_LSB	h/OffstMapInit.h	413;"	d
+NA_WakeUpTime_MSB	h/OffstMapInit.h	412;"	d
+NA_WritePulls4Pads	h/ntrxutil.h	/^    NA_WritePulls4Pads, \/* 50 *\/$/;"	e	enum:__anon7
+NA_WritePulls4Pads_B	h/OffstMapInit.h	340;"	d
+NA_WritePulls4Pads_I	h/OffstMapInit.h	341;"	d
+NA_WritePulls4Pads_O	h/OffstMapInit.h	339;"	d
+NA_WritePulls4Spi	h/ntrxutil.h	/^    NA_WritePulls4Spi,$/;"	e	enum:__anon7
+NA_WritePulls4Spi_B	h/OffstMapInit.h	335;"	d
+NA_WritePulls4Spi_I	h/OffstMapInit.h	336;"	d
+NA_WritePulls4Spi_O	h/OffstMapInit.h	334;"	d
+NC	h/compass.h	/^	uint8_t NC:1;$/;"	m	struct:HMC5843_CREGB_BITS
+NC	h/compass.h	/^	uint8_t NC:3;$/;"	m	struct:HMC5843_CREGA_BITS
+NC	h/compass.h	/^	uint8_t NC:6;$/;"	m	struct:HMC5843_MODEREG_BITS
+NC	h/ina219.h	/^	uint16_t	NC:1;$/;"	m	struct:INA219_CONFIGURE_BIT
+NC0	h/ymote2_io.h	88;"	d
+NC1	h/ymote2_io.h	89;"	d
+NC2	h/ymote2_io.h	107;"	d
+NIL	h/ntrxtypes.h	30;"	d
+NKEYS	h/hwclock.h	28;"	d
+NM	makefile	/^NM := $(CROSS_COMPILE)nm$/;"	m
+NTRXAllCalibration	ntrxutil.c	/^void NTRXAllCalibration (void)$/;"	f
+NTRXCheckTable	ntrxutil.c	/^MyBoolT NTRXCheckTable (void)$/;"	f
+NTRXCheckVerRev	ntrxutil.c	/^MyBoolT NTRXCheckVerRev (void)$/;"	f
+NTRXCmdTE	h/ntrxutil.h	/^} NTRXCmdTE;$/;"	t	typeref:enum:__anon7
+NTRXFctCal	ntrxutil.c	/^void NTRXFctCal (void)$/;"	f
+NTRXGetChannel	ntrxutil.c	/^MyByte8T NTRXGetChannel (void)$/;"	f
+NTRXGetNRegister	ntrxutil.c	/^void NTRXGetNRegister (NTRXCmdTE cmd, MyByte8T *reg)$/;"	f
+NTRXGetPowerEntry	ntrxutil.c	/^MyByte8T NTRXGetPowerEntry (MyByte8T value)$/;"	f
+NTRXGetRTC	ntrxutil.c	/^MyDword32T NTRXGetRTC (MyBoolT force)$/;"	f
+NTRXGetRegister	ntrxutil.c	/^void NTRXGetRegister (NTRXCmdTE cmd, MyByte8T *reg)$/;"	f
+NTRXGetRfOutputPower	ntrxutil.c	/^MyByte8T NTRXGetRfOutputPower (MyByte8T type)$/;"	f
+NTRXGetRxCRC2mode	ntrxutil.c	/^MyBoolT NTRXGetRxCRC2mode (void)$/;"	f
+NTRXGetTxARQCnt	ntrxdil.c	/^MyByte8T NTRXGetTxARQCnt (void)$/;"	f
+NTRXGetTxARQmax	ntrxutil.c	/^MyByte8T NTRXGetTxARQmax (void)$/;"	f
+NTRXIQPAR_H	h/ntrxiqpar.h	20;"	d
+NTRXInitShadowRegister	ntrxutil.c	/^void NTRXInitShadowRegister (void)$/;"	f
+NTRXPowerdownMode	ntrxutil.c	/^void NTRXPowerdownMode (MyByte8T mode, MyDword32T seconds)$/;"	f
+NTRXProcessSequence	ntrxutil.c	/^void NTRXProcessSequence (const MyByte8T *table)$/;"	f
+NTRXProcessTable	ntrxutil.c	/^void NTRXProcessTable (const MyByte8T *table)$/;"	f
+NTRXPwrOutLat	ntrxutil.c	/^static const MyByte8T NTRXPwrOutLat[] =$/;"	v	file:
+NTRXRANGING_H	h/ntrxranging.h	21;"	d
+NTRXRange	ntrxdil.c	/^MyDouble32T NTRXRange(MyAddrT dest)$/;"	f
+NTRXReadSPI	nnspi.c	/^void NTRXReadSPI(MyByte8T address, MyByte8T *buffer, MyByte8T len)$/;"	f
+NTRXReadSingleSPI	nnspi.c	/^void NTRXReadSingleSPI(MyByte8T address, MyByte8T *buffer)$/;"	f
+NTRXRegCmd	h/ntrxutil.h	/^typedef struct NTRXRegCmd$/;"	s
+NTRXRegCmdT	h/ntrxutil.h	/^} NTRXRegCmdT;$/;"	t	typeref:struct:NTRXRegCmd
+NTRXRestart	ntrxdil.c	/^MyBoolT NTRXRestart (void)$/;"	f
+NTRXRxLoCalibration	ntrxutil.c	/^void NTRXRxLoCalibration (void)$/;"	f
+NTRXRxReceive	ntrxdil.c	/^void NTRXRxReceive (void)$/;"	f
+NTRXSendMessage	ntrxdil.c	/^void NTRXSendMessage (MyByte8T *addr, MyPtrT payload, MyWord16T len)$/;"	f
+NTRXSetAgcValues	ntrxiqpar.c	/^void NTRXSetAgcValues (MyByte8T bandwidth, MyByte8T symbolDur, MyByte8T symbolRate)$/;"	f
+NTRXSetCalInterval	ntrxdil.c	/^void NTRXSetCalInterval (MyDword32T ci)$/;"	f
+NTRXSetChannel	ntrxutil.c	/^void NTRXSetChannel (MyByte8T value)$/;"	f
+NTRXSetCorrThreshold	ntrxiqpar.c	/^void NTRXSetCorrThreshold (MyByte8T bandwidth, MyByte8T symbolDur)$/;"	f
+NTRXSetCorrThreshold2	ntrxiqpar.c	/^void NTRXSetCorrThreshold2 (void)$/;"	f
+NTRXSetIndexReg	ntrxutil.c	/^void NTRXSetIndexReg (MyByte8T page)$/;"	f
+NTRXSetNRegister	ntrxutil.c	/^void NTRXSetNRegister (NTRXCmdTE cmd, MyByte8T *data)$/;"	f
+NTRXSetRamIndex	ntrxutil.c	/^void NTRXSetRamIndex (MyByte8T page)$/;"	f
+NTRXSetRegister	ntrxutil.c	/^void NTRXSetRegister (NTRXCmdTE cmd, MyByte8T value)$/;"	f
+NTRXSetRxIQMatrix	ntrxiqpar.c	/^void NTRXSetRxIQMatrix (MyByte8T bandwidth, MyByte8T symbolDur)$/;"	f
+NTRXSetStaAddress	ntrxutil.c	/^void NTRXSetStaAddress (MyByte8T *address)$/;"	f
+NTRXSetSyncWord	ntrxutil.c	/^void NTRXSetSyncWord (MyByte8T *value)$/;"	f
+NTRXSetTransparentMode	ntrxutil.c	/^void NTRXSetTransparentMode( MyBoolT on )$/;"	f
+NTRXSetTxIQMatrix	ntrxiqpar.c	/^void NTRXSetTxIQMatrix (MyByte8T bandwidth, MyByte8T symbolDur)$/;"	f
+NTRXSetupTRxMode	ntrxutil.c	/^void NTRXSetupTRxMode (MyByte8T fdma, MyByte8T sd, MyByte8T sr)$/;"	f
+NTRXStart	ntrxdil.c	/^MyBoolT NTRXStart (void)$/;"	f
+NTRXStartBasebandTimer	ntrxutil.c	/^void NTRXStartBasebandTimer (MyInt16T startvalue)$/;"	f
+NTRXStopBasebandTimer	ntrxutil.c	/^void NTRXStopBasebandTimer (void)$/;"	f
+NTRXTxData	ntrxdil.c	/^void NTRXTxData (MyPtrT payload, MyWord16T len)$/;"	f
+NTRXTxEnd	ntrxdil.c	/^void NTRXTxEnd (void)$/;"	f
+NTRXTxHeader	ntrxdil.c	/^void NTRXTxHeader (MyByte8T *addr, MyWord16T len, MyByte8T rsvd, MyByte8T seq_n, MyByte8T flush)$/;"	f
+NTRXTxLoCalibration	ntrxutil.c	/^void NTRXTxLoCalibration (void)$/;"	f
+NTRXTxStart	ntrxdil.c	/^void NTRXTxStart (void)$/;"	f
+NTRXUTIL_H	h/ntrxutil.h	21;"	d
+NTRXUpdate	ntrxdil.c	/^void NTRXUpdate (void)$/;"	f
+NTRXWriteSPI	nnspi.c	/^void NTRXWriteSPI(MyByte8T address, MyByte8T *buffer, MyByte8T len)$/;"	f
+NTRXWriteSingleSPI	nnspi.c	/^void NTRXWriteSingleSPI(MyByte8T address, MyByte8T buffer)$/;"	f
+NTRX_DUMMY_REG	ntrxutil.c	38;"	d	file:
+NTRX_NC_REG	ntrxutil.c	347;"	d	file:
+NTRX_REV_INIT	h/ntrxdil.h	34;"	d
+NTRX_RO_REG	ntrxutil.c	348;"	d	file:
+NTRX_RW_REG	ntrxutil.c	346;"	d	file:
+NTRX_TC_REG	ntrxutil.c	351;"	d	file:
+NTRX_TX_ARQ	ntrxdil.c	108;"	d	file:
+NTRX_TX_BUFF0	ntrxdil.c	106;"	d	file:
+NTRX_TX_BUFF1	ntrxdil.c	107;"	d	file:
+NTRX_TX_HEADER	ntrxdil.c	115;"	d	file:
+NTRX_TX_PUSH_PULL	h/ntrxdil.h	36;"	d
+NTRX_TX_START	ntrxdil.c	105;"	d	file:
+NTRX_VERSION	h/ntrxdil.h	35;"	d
+NTRX_VER_INIT	h/ntrxdil.h	33;"	d
+NTRX_WO_REG	ntrxutil.c	349;"	d	file:
+NTRXagcValSt	ntrxiqpar.c	/^typedef struct NTRXagcValSt$/;"	s	file:
+NTRXagcValSt	ntrxiqpar.c	/^} NTRXagcValSt;$/;"	t	typeref:struct:NTRXagcValSt	file:
+NULL	h/ntrxtypes.h	26;"	d
+NanoReset	nnspi.c	/^void NanoReset(void)$/;"	f
+NoCAL	h/ntrxutil.h	64;"	d
+NtrxInit	ntrxinit.c	/^MyBoolT NtrxInit(void)$/;"	f
+OBJCOPY	makefile	/^OBJCOPY := $(CROSS_COMPILE)objcopy$/;"	m
+OBJDUMP	makefile	/^OBJDUMP := $(CROSS_COMPILE)objdump$/;"	m
+OBJS	makefile	/^OBJS =  main.o led.o dco.o delay.o util.o\\$/;"	m
+OFF	h/common_def.h	9;"	d
+OFF	h/types.h	18;"	d
+ON	h/common_def.h	6;"	d
+ON	h/types.h	15;"	d
+P1_0	h/ymote2_io.h	7;"	d
+P1_1	h/ymote2_io.h	8;"	d
+P1_2	h/ymote2_io.h	9;"	d
+P1_3	h/ymote2_io.h	10;"	d
+P1_4	h/ymote2_io.h	11;"	d
+P1_5	h/ymote2_io.h	12;"	d
+P1_6	h/ymote2_io.h	13;"	d
+P1_7	h/ymote2_io.h	14;"	d
+P2_0	h/ymote2_io.h	16;"	d
+P2_1	h/ymote2_io.h	17;"	d
+P2_2	h/ymote2_io.h	18;"	d
+P2_3	h/ymote2_io.h	19;"	d
+P2_4	h/ymote2_io.h	20;"	d
+P2_5	h/ymote2_io.h	21;"	d
+P2_6	h/ymote2_io.h	22;"	d
+P2_7	h/ymote2_io.h	23;"	d
+P3_0	h/ymote2_io.h	25;"	d
+P3_1	h/ymote2_io.h	26;"	d
+P3_2	h/ymote2_io.h	27;"	d
+P3_3	h/ymote2_io.h	28;"	d
+P3_4	h/ymote2_io.h	29;"	d
+P3_5	h/ymote2_io.h	30;"	d
+P3_6	h/ymote2_io.h	31;"	d
+P3_7	h/ymote2_io.h	32;"	d
+P4_0	h/ymote2_io.h	34;"	d
+P4_1	h/ymote2_io.h	35;"	d
+P4_2	h/ymote2_io.h	36;"	d
+P4_3	h/ymote2_io.h	37;"	d
+P4_4	h/ymote2_io.h	38;"	d
+P4_5	h/ymote2_io.h	39;"	d
+P4_6	h/ymote2_io.h	40;"	d
+P4_7	h/ymote2_io.h	41;"	d
+P5_0	h/ymote2_io.h	44;"	d
+P5_1	h/ymote2_io.h	45;"	d
+P5_2	h/ymote2_io.h	46;"	d
+P5_3	h/ymote2_io.h	47;"	d
+P5_4	h/ymote2_io.h	48;"	d
+P5_5	h/ymote2_io.h	49;"	d
+P5_6	h/ymote2_io.h	50;"	d
+P5_7	h/ymote2_io.h	51;"	d
+P6_0	h/ymote2_io.h	53;"	d
+P6_1	h/ymote2_io.h	54;"	d
+P6_2	h/ymote2_io.h	55;"	d
+P6_3	h/ymote2_io.h	56;"	d
+P6_4	h/ymote2_io.h	57;"	d
+P6_5	h/ymote2_io.h	58;"	d
+P6_6	h/ymote2_io.h	59;"	d
+P6_7	h/ymote2_io.h	60;"	d
+PER_ACR	bm.c	25;"	d	file:
+PER_ACR	bm.c	33;"	d	file:
+PER_ACRL	bm.c	24;"	d	file:
+PER_ACRL	bm.c	32;"	d	file:
+PER_CURRENT	bm.c	23;"	d	file:
+PER_CURRENT	bm.c	31;"	d	file:
+PER_IAVG	bm.c	22;"	d	file:
+PER_IAVG	bm.c	30;"	d	file:
+PER_TEMP	bm.c	14;"	d	file:
+PER_VOLT	bm.c	13;"	d	file:
+PG	h/ina219.h	/^	uint16_t	PG:2;	\/\/ 00: 40mV, 01: 80mV, 10: 160mV, 11: 320mV,$/;"	m	struct:INA219_CONFIGURE_BIT
+PHASEOFFSETACK	ntrxranging.c	28;"	d	file:
+PHASEOFFSETDATA	ntrxranging.c	33;"	d	file:
+PHCARRSENSMODE	h/ntrxutil.h	/^enum PHCARRSENSMODE$/;"	g
+POWER	h/ina219.h	/^	POWER,$/;"	e	enum:INA219_REG
+PPSRXstatT	h/ntrxdil.h	/^}PPSRXstatT;$/;"	t	typeref:struct:RXstat
+PPSTXstatT	h/ntrxdil.h	/^} PPSTXstatT;$/;"	t	typeref:struct:TXstat
+PPS_CRC2_T	h/ntrxdil.h	/^} PPS_CRC2_T;$/;"	t	typeref:enum:__anon3
+PPS_MACMETH_T	h/ntrxdil.h	/^} PPS_MACMETH_T;$/;"	t	typeref:enum:__anon4
+PREVRXID	ntrxranging.c	36;"	d	file:
+PREVTXID	ntrxranging.c	37;"	d	file:
+PROGMEM	h/ntrxutil.h	79;"	d
+PROGMEM	ntrxiqpar.c	/^const NTRXagcValSt NA5TR1_AGC_22MHz_HR_4000ns[] PROGMEM =$/;"	v
+PROGMEM	ntrxiqpar.c	/^const NTRXagcValSt NA5TR1_AGC_80MHz_1000ns[] PROGMEM =$/;"	v
+PROGMEM	ntrxiqpar.c	/^const NTRXagcValSt NA5TR1_AGC_80MHz_2000ns[] PROGMEM =$/;"	v
+PROGMEM	ntrxiqpar.c	/^const NTRXagcValSt NA5TR1_AGC_80MHz_4000ns[] PROGMEM =$/;"	v
+PROGMEM	ntrxiqpar.c	/^const NTRXagcValSt NA5TR1_AGC_80MHz_500ns[] PROGMEM =$/;"	v
+PROGMEM	ntrxiqpar.c	/^static MyByte8T NA5TR1_THRES_22MHz_1000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static MyByte8T NA5TR1_THRES_22MHz_16000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static MyByte8T NA5TR1_THRES_22MHz_2000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static MyByte8T NA5TR1_THRES_22MHz_4000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static MyByte8T NA5TR1_THRES_22MHz_500ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static MyByte8T NA5TR1_THRES_22MHz_8000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static MyByte8T NA5TR1_THRES_22MHz_HR_4000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static MyByte8T NA5TR1_THRES_80MHz_1000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static MyByte8T NA5TR1_THRES_80MHz_2000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static MyByte8T NA5TR1_THRES_80MHz_4000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static MyByte8T NA5TR1_THRES_80MHz_500ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Rx_22MHz_1000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Rx_22MHz_16000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Rx_22MHz_2000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Rx_22MHz_4000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Rx_22MHz_500ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Rx_22MHz_8000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Rx_22MHz_HR_4000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Rx_80MHz_1000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Rx_80MHz_2000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Rx_80MHz_4000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Rx_80MHz_500ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Tx_22MHz_1000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Tx_22MHz_16000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Tx_22MHz_2000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Tx_22MHz_4000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Tx_22MHz_500ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Tx_22MHz_8000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Tx_22over80MHz_4000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Tx_80MHz_1000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Tx_80MHz_2000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Tx_80MHz_4000ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxiqpar.c	/^static const MyByte8T NA5TR1_Tx_80MHz_500ns[] PROGMEM =$/;"	v	file:
+PROGMEM	ntrxutil.c	/^MyByte8T ntrxInitShadowReg[] PROGMEM =$/;"	v
+PROGMEM	ntrxutil.c	/^\/*const*\/ NTRXRegCmdT regCmd[] PROGMEM =$/;"	v
+PROGMEM	ntrxutil.c	/^const MyByte8T NTRXInitTable1[] PROGMEM =$/;"	v
+PROGMEM	ntrxutil.c	/^const MyByte8T NTRXInitTable2rx[] PROGMEM =$/;"	v
+PROGMEM	ntrxutil.c	/^const MyByte8T NTRXInitTable3rx[] PROGMEM =$/;"	v
+PROGMEM	ntrxutil.c	/^const MyByte8T NTRXInitTable4[] PROGMEM =$/;"	v
+PROGMEM	ntrxutil.c	/^const unsigned char NAInitTable3tx[] PROGMEM =$/;"	v
+PROGMEM	ntrxutil.c	/^const unsigned char NAInitTxTable2tx[] PROGMEM =$/;"	v
+PWROUTTYPE	h/ntrxutil.h	/^enum PWROUTTYPE$/;"	g
+PollApplication	app.c	/^void	PollApplication(void)$/;"	f
+RAAC_L	h/bm.h	/^	RAAC_L,$/;"	e	enum:DS2782_REG
+RAAC_M	h/bm.h	/^	RAAC_M,$/;"	e	enum:DS2782_REG
+RANGING_ANSWER1	ntrxdil.c	51;"	d	file:
+RANGING_ANSWER2	ntrxdil.c	53;"	d	file:
+RANGING_READY	ntrxdil.c	47;"	d	file:
+RANGING_START	ntrxdil.c	49;"	d	file:
+RANGING_SUCCESSFULL	ntrxdil.c	55;"	d	file:
+RANGING_TIMEOUT	ntrxdil.c	45;"	d	file:
+RARC	h/bm.h	/^	RARC,		$/;"	e	enum:DS2782_REG
+READ_CMD	h/nnspi.h	/^    READ_CMD = 0x00,                          \/* SPI read command *\/$/;"	e	enum:__anon9
+RECALL_B0	h/bm.h	/^	RECALL_B0 = 0xB2,$/;"	e	enum:DS2782_CMD
+RECALL_B1	h/bm.h	/^	RECALL_B1 = 0xB4,$/;"	e	enum:DS2782_CMD
+RECEIVER_STATE	h/ntrxdil.h	/^} RECEIVER_STATE;$/;"	t	typeref:enum:__anon1
+RF_ENABLE	main.c	27;"	d	file:
+RF_LDO_CE	h/ymote2_io.h	93;"	d
+RF_PONRESET	h/ymote2_io.h	82;"	d
+RF_POWER_OFF	h/common_def.h	28;"	d
+RF_POWER_ON	h/common_def.h	39;"	d
+RF_SPICLK	h/ymote2_io.h	103;"	d
+RF_SPIRXD	h/ymote2_io.h	101;"	d
+RF_SPISSN	h/ymote2_io.h	79;"	d
+RF_SPITXD	h/ymote2_io.h	102;"	d
+RF_TXRX	h/ymote2_io.h	67;"	d
+RF_UCIRQ	h/ymote2_io.h	80;"	d
+RF_UCRESET	h/ymote2_io.h	64;"	d
+RF_frac	app.c	/^int16_t RF_frac = 0, RF_number = 0;$/;"	v
+RF_number	app.c	/^int16_t RF_frac = 0, RF_number = 0;$/;"	v
+RF_seq	app.c	/^uint32_t RF_seq = 0;$/;"	v
+RSAC_L	h/bm.h	/^	RSAC_L,		\/\/ 5$/;"	e	enum:DS2782_REG
+RSAC_M	h/bm.h	/^	RSAC_M,$/;"	e	enum:DS2782_REG
+RSRC	h/bm.h	/^	RSRC,$/;"	e	enum:DS2782_REG
+RST	h/ina219.h	/^	uint16_t	RST:1; 	\/\/ Same Power On reset$/;"	m	struct:INA219_CONFIGURE_BIT
+RSV	h/bm.h	/^	RSV = 0,$/;"	e	enum:DS2782_REG
+RXARQMODE_T	h/ntrxdil.h	/^} RXARQMODE_T;$/;"	t	typeref:enum:__anon5
+RXFTYPE_T	h/ntrxdil.h	/^} RXFTYPE_T;$/;"	t	typeref:enum:__anon2
+RX_BUF_MASK	gps.c	19;"	d	file:
+RX_BUF_SIZE	gps.c	18;"	d	file:
+RX_Buffer	gps.c	/^static volatile char	RX_Buffer[ RX_BUF_SIZE ];$/;"	v	file:
+RX_HeadPtr	gps.c	/^static volatile int		RX_HeadPtr;$/;"	v	file:
+RX_IRQ_MASK	ntrxdil.c	114;"	d	file:
+RX_TailPtr	gps.c	/^static volatile int		RX_TailPtr;$/;"	v	file:
+RXstat	h/ntrxdil.h	/^typedef struct RXstat$/;"	s
+RangingCallback_Ack	ntrxranging.c	/^void RangingCallback_Ack(MyByte8T arqCount)$/;"	f
+RangingCallback_Rx	ntrxranging.c	/^void RangingCallback_Rx(MyByte8T *payload, MyByte8T len)$/;"	f
+RangingMode	ntrxranging.c	/^void RangingMode(MyAddrT dest)$/;"	f
+ReadCompassCREGA	compass.c	/^uint8_t ReadCompassCREGA(void)$/;"	f
+ReadCompassCREGB	compass.c	/^uint8_t ReadCompassCREGB(void)$/;"	f
+ReadCompassIREGA	compass.c	/^uint8_t ReadCompassIREGA(void)$/;"	f
+ReadCompassIREGB	compass.c	/^uint8_t ReadCompassIREGB(void)$/;"	f
+ReadCompassIREGC	compass.c	/^uint8_t ReadCompassIREGC(void)$/;"	f
+ReadCompassMODEREG	compass.c	/^uint8_t ReadCompassMODEREG(void)$/;"	f
+ReadCompassStatusReg	compass.c	/^uint8_t ReadCompassStatusReg(void)$/;"	f
+ReadCompassXAxis	compass.c	/^uint16_t ReadCompassXAxis(void)$/;"	f
+ReadCompassYAxis	compass.c	/^uint16_t ReadCompassYAxis(void)$/;"	f
+ReadCompassZAxis	compass.c	/^uint16_t ReadCompassZAxis(void)$/;"	f
+ReadDS2782ACRLReg	bm.c	/^uint16_t ReadDS2782ACRLReg(void)$/;"	f
+ReadDS2782ACRReg	bm.c	/^uint32_t ReadDS2782ACRReg(void)$/;"	f
+ReadDS2782AEReg	bm.c	/^uint16_t ReadDS2782AEReg(void)$/;"	f
+ReadDS2782ASReg	bm.c	/^uint8_t ReadDS2782ASReg(void)$/;"	f
+ReadDS2782CURRENTReg	bm.c	/^int32_t ReadDS2782CURRENTReg(void)$/;"	f
+ReadDS2782EEPROMREG	bm.c	/^uint8_t ReadDS2782EEPROMREG(void)$/;"	f
+ReadDS2782FULLReg	bm.c	/^uint16_t ReadDS2782FULLReg(void)$/;"	f
+ReadDS2782IAVGReg	bm.c	/^int32_t ReadDS2782IAVGReg(void)$/;"	f
+ReadDS2782RAACReg	bm.c	/^uint16_t ReadDS2782RAACReg(void)$/;"	f
+ReadDS2782RARCReg	bm.c	/^uint8_t ReadDS2782RARCReg(void)$/;"	f
+ReadDS2782RSACReg	bm.c	/^uint16_t ReadDS2782RSACReg(void)$/;"	f
+ReadDS2782RSRCReg	bm.c	/^uint8_t ReadDS2782RSRCReg(void)$/;"	f
+ReadDS2782SEReg	bm.c	/^uint16_t ReadDS2782SEReg(void)$/;"	f
+ReadDS2782SFRReg	bm.c	/^uint8_t ReadDS2782SFRReg(void)$/;"	f
+ReadDS2782StatusReg	bm.c	/^uint8_t ReadDS2782StatusReg(void)$/;"	f
+ReadDS2782TEMPReg	bm.c	/^uint16_t ReadDS2782TEMPReg(void)$/;"	f
+ReadDS2782VOLTReg	bm.c	/^int16_t ReadDS2782VOLTReg(void)$/;"	f
+ReadI2CDeviceREG	i2c.c	/^char ReadI2CDeviceREG(char SlaveAddress, char SlaveRegAddress, int ReadCnt, unsigned char *pReadBuf)$/;"	f
+ReadINA219BusVoltReg	ina219.c	/^uint16_t ReadINA219BusVoltReg(int8_t SlaveAddress)$/;"	f
+ReadINA219CalibrationReg	ina219.c	/^uint16_t ReadINA219CalibrationReg(int8_t SlaveAddress)$/;"	f
+ReadINA219ConfigReg	ina219.c	/^uint16_t ReadINA219ConfigReg(int8_t SlaveAddress)$/;"	f
+ReadINA219CurrentReg	ina219.c	/^uint16_t ReadINA219CurrentReg(int8_t SlaveAddress)$/;"	f
+ReadINA219PowerReg	ina219.c	/^uint16_t ReadINA219PowerReg(int8_t SlaveAddress)$/;"	f
+ReadINA219ShuntVoltReg	ina219.c	/^int32_t ReadINA219ShuntVoltReg(int8_t SlaveAddress)$/;"	f
+ReadRomByte	h/ntrxutil.h	75;"	d
+ReadRomByte	h/ntrxutil.h	80;"	d
+ReadRomWord	h/ntrxutil.h	76;"	d
+ReadRomWord	h/ntrxutil.h	81;"	d
+Receiver_off	h/ntrxdil.h	/^    Receiver_off,$/;"	e	enum:__anon1
+Receiver_on	h/ntrxdil.h	/^    Receiver_on$/;"	e	enum:__anon1
+RfTxOutputPowerData_DEFAULT	h/ntrxutil.h	55;"	d
+RfTxOutputPowerReq_DEFAULT	h/ntrxutil.h	56;"	d
+RxCAL	h/ntrxutil.h	66;"	d
+RxEND	ntrxdil.c	110;"	d	file:
+RxOVERFLOW	ntrxdil.c	111;"	d	file:
+SADC	h/ina219.h	/^	uint16_t	SADC:4;	\/\/ 0x00: 9bit, 0x01: 10bit, 0x02: 11bit, 0x03: 12bit ...$/;"	m	struct:INA219_CONFIGURE_BIT
+SAPALLOCERR	h/ntrxdil.h	28;"	d
+SAPALLOCID	h/ntrxdil.h	29;"	d
+SCIDebugExtSelect	main.c	/^void SCIDebugExtSelect(uint8_t Type)$/;"	f
+SCI_BT	h/common_def.h	14;"	d
+SCI_DEBUG	h/common_def.h	12;"	d
+SCI_EXT	h/common_def.h	13;"	d
+SCI_GPS	h/common_def.h	15;"	d
+SETTXRXSWORD	h/ntrxutil.h	/^enum SETTXRXSWORD$/;"	g
+SE_L	h/bm.h	/^	SE_L,		\/\/ 1B$/;"	e	enum:DS2782_REG
+SE_M	h/bm.h	/^	SE_M,$/;"	e	enum:DS2782_REG
+SFR	h/bm.h	/^	SFR,		$/;"	e	enum:DS2782_REG
+SHADOWREGCOUNT	h/ntrxutil.h	49;"	d
+SHUNT_RESISTOR	bm.c	16;"	d	file:
+SHUNT_VOLT	h/ina219.h	/^	SHUNT_VOLT,$/;"	e	enum:INA219_REG
+SIZE	makefile	/^SIZE = $(CROSS_COMPILE)size$/;"	m
+SPEED_OF_AIR	ntrxranging.c	44;"	d	file:
+SPEED_OF_CABLE	ntrxranging.c	45;"	d	file:
+STATUS	h/bm.h	/^	STATUS,$/;"	e	enum:DS2782_REG
+STATUSREG	h/compass.h	/^	STATUSREG,		\/\/Status Register$/;"	e	enum:HMC5843
+SWCnt	timer.c	/^uint16_t SWCnt = 0;$/;"	v
+SW_DELAY	timer.c	11;"	d	file:
+SYM	makefile	/^SYM := $(MAINEXE).sym$/;"	m
+SendMsgUp	ntrxdil.c	102;"	d	file:
+SetRxStart	ntrxutil.c	/^void SetRxStart (void)$/;"	f
+SetRxStop	ntrxutil.c	/^void SetRxStop (void)$/;"	f
+SetUSART0_SPI_MODE	util.c	/^void SetUSART0_SPI_MODE()$/;"	f
+SetUSART0_UART_MODE	util.c	/^void SetUSART0_UART_MODE()$/;"	f
+Settings	h/ntrxutil.h	/^typedef struct Settings$/;"	s
+SettingsT	h/ntrxutil.h	/^}SettingsT;$/;"	t	typeref:struct:Settings
+SetupSPI	nnspi.c	/^void SetupSPI (void)$/;"	f
+TARGET_DCO_DELTA	dco.c	14;"	d	file:
+TARGET_DCO_KHZ	dco.c	13;"	d	file:
+TARGET_DELTA	dco.c	16;"	d	file:
+TEMP_L	h/bm.h	/^	TEMP_L,		$/;"	e	enum:DS2782_REG
+TEMP_M	h/bm.h	/^	TEMP_M,		\/\/ 0A$/;"	e	enum:DS2782_REG
+TOAOFFSETMEANACK_H	ntrxranging.c	30;"	d	file:
+TOAOFFSETMEANACK_L	ntrxranging.c	29;"	d	file:
+TOAOFFSETMEANDATA_H	ntrxranging.c	35;"	d	file:
+TOAOFFSETMEANDATA_L	ntrxranging.c	34;"	d	file:
+TRACE	h/usart.h	16;"	d
+TRACE	h/usart.h	43;"	d
+TRACE_BUFFER_SIZE	h/nnspi.h	51;"	d
+TRACE_DATA_LEN	h/nnspi.h	50;"	d
+TRACE_FAST	h/usart.h	21;"	d
+TRACE_MAX_BUFFER_SIZE	h/usart.h	13;"	d
+TRIGGER_LED0	ntrxdil.c	70;"	d	file:
+TRIGGER_LED0	ntrxdil.c	90;"	d	file:
+TRIGGER_LED1	ntrxdil.c	73;"	d	file:
+TRIGGER_LED1	ntrxdil.c	91;"	d	file:
+TRIGGER_LED2	ntrxdil.c	76;"	d	file:
+TRIGGER_LED2	ntrxdil.c	92;"	d	file:
+TRIGGER_LED3	ntrxdil.c	79;"	d	file:
+TRIGGER_LED3	ntrxdil.c	93;"	d	file:
+TRUE	h/common_def.h	5;"	d
+TRUE	h/ntrxtypes.h	/^	TRUE = 1$/;"	e	enum:__anon8
+TRUE	h/ntrxtypes.h	87;"	d
+TRUE	h/types.h	14;"	d
+TRX_ADJ	h/ntrxutil.h	/^    TRX_ADJ,$/;"	e	enum:__anon7
+TRX_CHIRP_GEN_DATA	h/ntrxutil.h	/^    TRX_CHIRP_GEN_DATA,$/;"	e	enum:__anon7
+TRX_DELAY	h/ntrxutil.h	/^    TRX_DELAY,$/;"	e	enum:__anon7
+TRX_SYNC_WORD	ntrxinit.c	/^const MyByte8T TRX_SYNC_WORD[] = {0xAB,0x69,0xCA,0x94,0x92,0xD5,0x2C,0xAB};$/;"	v
+TXPOWER_10dBm	h/ntrxdil.h	31;"	d
+TXRESPTIME_H	ntrxranging.c	32;"	d	file:
+TXRESPTIME_L	ntrxranging.c	31;"	d	file:
+TXWAIT	h/ntrxdil.h	30;"	d
+TX_IRQ_MASK	ntrxdil.c	113;"	d	file:
+TXstat	h/ntrxdil.h	/^typedef struct TXstat$/;"	s
+TestFlag	main.c	/^char TestFlag = 0;$/;"	v
+Tick1S	timer.c	/^uint16_t Tick1S = 0;$/;"	v
+TxARQorgVal	ntrxdil.c	/^MyBoolT TxARQorgVal;$/;"	v
+TxCAL	h/ntrxutil.h	65;"	d
+TxEND	ntrxdil.c	109;"	d	file:
+TxIDLE	h/ntrxutil.h	60;"	d
+TxPrintf	usart.c	/^void TxPrintf(char *Form, ...)$/;"	f
+TxSEND	h/ntrxutil.h	61;"	d
+TxWAIT	h/ntrxutil.h	62;"	d
+URXD0	h/ymote2_io.h	87;"	d
+USR_SW	h/ymote2_io.h	66;"	d
+UTXD0	h/ymote2_io.h	86;"	d
+Uart0GetByte	gps.c	/^char Uart0GetByte(char *c)$/;"	f
+UartType	main.c	/^uint8_t UartType = 0;$/;"	v
+Ubyte	h/types.h	/^typedef unsigned char 	Ubyte;$/;"	t
+Uint16	h/types.h	/^typedef unsigned int	Uint16;$/;"	t
+Uint32	h/types.h	/^typedef unsigned long	Uint32;$/;"	t
+UpdateLEDs	ntrxdil.c	82;"	d	file:
+UpdateLEDs	ntrxdil.c	94;"	d	file:
+VOLT_L	h/bm.h	/^	VOLT_L,$/;"	e	enum:DS2782_REG
+VOLT_M	h/bm.h	/^	VOLT_M,$/;"	e	enum:DS2782_REG
+WAIT_ADC	h/adc.h	26;"	d
+WRITE_CMD	h/nnspi.h	/^    WRITE_CMD = 0x80                          \/* SPI write command *\/$/;"	e	enum:__anon9
+WriteCompassCREGA	compass.c	/^void WriteCompassCREGA(uint8_t Buf)$/;"	f
+WriteCompassCREGB	compass.c	/^void WriteCompassCREGB(uint8_t Buf)$/;"	f
+WriteCompassMODEREG	compass.c	/^void WriteCompassMODEREG(uint8_t Buf)$/;"	f
+WriteDS2782ACRReg	bm.c	/^void WriteDS2782ACRReg(uint16_t Data)$/;"	f
+WriteDS2782ASReg	bm.c	/^void WriteDS2782ASReg(uint8_t Data)$/;"	f
+WriteDS2782EEPROMREG	bm.c	/^void WriteDS2782EEPROMREG(uint8_t Data)$/;"	f
+WriteDS2782SFRReg	bm.c	/^void WriteDS2782SFRReg(uint8_t Data)$/;"	f
+WriteDS2782StatusReg	bm.c	/^void WriteDS2782StatusReg(uint8_t Data)$/;"	f
+WriteI2CDeviceREG	i2c.c	/^void WriteI2CDeviceREG(char SlaveAddress, char SlaveRegAddress, int WriteCnt, unsigned char *pWriteBuf)$/;"	f
+WriteINA219CalibrationReg	ina219.c	/^void WriteINA219CalibrationReg(int8_t SlaveAddress, uint16_t Data)$/;"	f
+WriteINA219ConfigReg	ina219.c	/^void WriteINA219ConfigReg(int8_t SlaveAddress, uint16_t Data)$/;"	f
+X_AXIS_LSBREG	h/compass.h	/^	X_AXIS_LSBREG,	\/\/Data output X LSB Register$/;"	e	enum:HMC5843
+X_AXIS_MSBREG	h/compass.h	/^	X_AXIS_MSBREG,	\/\/Data output X MSB Register$/;"	e	enum:HMC5843
+Y_AXIS_LSBREG	h/compass.h	/^	Y_AXIS_LSBREG,	\/\/Data output Y LSB Register$/;"	e	enum:HMC5843
+Y_AXIS_MSBREG	h/compass.h	/^	Y_AXIS_MSBREG,	\/\/Data output Y MSB Register$/;"	e	enum:HMC5843
+Z_AXIS_LSBREG	h/compass.h	/^	Z_AXIS_LSBREG,	\/\/Data output Z LSB Register$/;"	e	enum:HMC5843
+Z_AXIS_MSBREG	h/compass.h	/^	Z_AXIS_MSBREG,	\/\/Data output Z MSB Register$/;"	e	enum:HMC5843
+_CONFIG_H	h/config.h	2;"	d
+_DCO_H_	h/dco.h	4;"	d
+_DELAY_H_	h/delay.h	3;"	d
+_HBM2X1M_H_	hbm2x1m.h	2;"	d
+_HWCLOCK_H	h/hwclock.h	21;"	d
+_KEYS_H	h/keys.h	19;"	d
+_LED_H_	h/led.h	2;"	d
+_NNSPI_H	h/nnspi.h	21;"	d
+_NTRXDIL_H	h/ntrxdil.h	21;"	d
+_NTRXTYPES_H	h/ntrxtypes.h	21;"	d
+_PIN_MACROS_H_	h/pinmacros.h	2;"	d
+_USART_H_	h/usart.h	2;"	d
+_UTIL_H_	h/util.h	2;"	d
+__ADC_H__	h/adc.h	2;"	d
+__BM_H__	h/bm.h	2;"	d
+__COMMON_DEF_H__	h/common_def.h	2;"	d
+__COMPASS_H__	h/compass.h	2;"	d
+__GPS_H__	h/gps.h	2;"	d
+__I2C_H__	h/i2c.h	2;"	d
+__INA219_H__	h/ina219.h	2;"	d
+__MAIN_H__	h/main.h	5;"	d
+__NA5TR1_H__	h/na5tr1.h	2;"	d
+__OPTIMIZE__	hwclock.c	25;"	d	file:
+__TIMER_H__	h/timer.h	2;"	d
+__TYPES_H__	h/types.h	2;"	d
+__YMOTE2_IO_H__	h/ymote2_io.h	2;"	d
+__make_critical_section	util.c	/^uint16_t __make_critical_section()$/;"	f
+__quit_critical_section	util.c	/^void __quit_critical_section(uint16_t __critical_section)$/;"	f
+_ppslistt_	h/ntrxtypes.h	/^typedef	struct	_ppslistt_	{$/;"	s
+_tm_	h/ntrxtypes.h	/^typedef	struct	_tm_	{$/;"	s
+adc_get	adc.c	/^uint8_t adc_get(uint8_t channel)$/;"	f
+adc_sensor_init	adc.c	/^void adc_sensor_init()$/;"	f
+addr	h/nnspi.h	/^	unsigned char addr;$/;"	m	struct:traceS
+addrHi	h/ntrxutil.h	/^    MyByte8T addrHi;$/;"	m	struct:NTRXRegCmd
+addrLo	h/ntrxutil.h	/^    MyByte8T addrLo;$/;"	m	struct:NTRXRegCmd
+all	h/compass.h	/^	uint8_t	all;$/;"	m	union:HMC5843_CREGA_REG
+all	h/compass.h	/^	uint8_t all;$/;"	m	union:HMC5843_CREGB_REG
+all	h/compass.h	/^	uint8_t all;$/;"	m	union:HMC5843_MODEREG_REG
+all	h/ina219.h	/^	uint16_t	all;$/;"	m	union:INA219_CONFigure_REG
+allCount	h/ntrxdil.h	/^    MyDword32T   allCount;$/;"	m	struct:RXstat
+allCount	h/ntrxdil.h	/^    MyDword32T   allCount;$/;"	m	struct:TXstat
+app	app.c	/^appMemT *app;$/;"	v
+appM	app.c	/^appMemT appM;$/;"	v
+appMemS	app.c	/^typedef struct appMemS$/;"	s	file:
+appMemT	app.c	/^} appMemT;$/;"	t	typeref:struct:appMemS	file:
+arqModeCrc1	h/ntrxutil.h	/^    arqModeCrc1 = NA_RxArqModeCrc1_VC_C,$/;"	e	enum:ARQMODE
+arqModeCrc2	h/ntrxutil.h	/^    arqModeCrc2 = NA_RxArqModeCrc2_VC_C$/;"	e	enum:ARQMODE
+arqModeNone	h/ntrxutil.h	/^    arqModeNone = NA_RxArqModeNone_VC_C,$/;"	e	enum:ARQMODE
+arqMode_crc1	h/ntrxdil.h	/^    arqMode_crc1,$/;"	e	enum:__anon5
+arqMode_off	h/ntrxdil.h	/^    arqMode_off,$/;"	e	enum:__anon5
+arq_Mode_crc2	h/ntrxdil.h	/^    arq_Mode_crc2$/;"	e	enum:__anon5
+bRxCrc2Mode	ntrxutil.c	/^MyBoolT bRxCrc2Mode=FALSE;$/;"	v
+bbIrq	ntrxdil.c	/^MyByte8T bbIrq;$/;"	v
+bbtimerStatus	ntrxdil.c	/^MyByte8T bbtimerStatus;$/;"	v
+bit	h/compass.h	/^	struct HMC5843_CREGA_BITS bit;$/;"	m	union:HMC5843_CREGA_REG	typeref:struct:HMC5843_CREGA_REG::HMC5843_CREGA_BITS
+bit	h/compass.h	/^	struct HMC5843_CREGB_BITS bit;$/;"	m	union:HMC5843_CREGB_REG	typeref:struct:HMC5843_CREGB_REG::HMC5843_CREGB_BITS
+bit	h/compass.h	/^	struct HMC5843_MODEREG_BITS bit;$/;"	m	union:HMC5843_MODEREG_REG	typeref:struct:HMC5843_MODEREG_REG::HMC5843_MODEREG_BITS
+bit	h/ina219.h	/^	struct		INA219_CONFIGURE_BIT bit;$/;"	m	union:INA219_CONFigure_REG	typeref:struct:INA219_CONFigure_REG::INA219_CONFIGURE_BIT
+bogo_mips	hwclock.c	/^static	MyDword32T	bogo_mips = 0;$/;"	v	file:
+bt_send_cmd	hbm2x1m.c	/^void bt_send_cmd(const char *cmd_str)$/;"	f
+buff_rx	ntrxdil.c	/^MyByte8T buff_rx[128];$/;"	v
+busy_calibrate_dco	dco.c	/^void busy_calibrate_dco()$/;"	f
+bw	h/ntrxutil.h	/^        MyByte8T    bw;$/;"	m	struct:Settings
+byte	h/types.h	/^typedef char			byte;$/;"	t
+calDelay	ntrxdil.c	/^MyDword32T calDelay = CONFIG_NTRX_RECAL_DELAY;$/;"	v
+chirpByte0	h/ntrxutil.h	/^    chirpByte0 = 0x02,$/;"	e	enum:CHIRPBYTE
+chirpByte1	h/ntrxutil.h	/^    chirpByte1 = 0x04,$/;"	e	enum:CHIRPBYTE
+chirpByte2	h/ntrxutil.h	/^    chirpByte2 = 0x08$/;"	e	enum:CHIRPBYTE
+chirpSymb0	h/ntrxutil.h	/^    chirpSymb0 = 0,$/;"	e	enum:DILPRETRAILSYMBOLS
+chirpSymb1	h/ntrxutil.h	/^    chirpSymb1 = 1,$/;"	e	enum:DILPRETRAILSYMBOLS
+chirpSymb2	h/ntrxutil.h	/^    chirpSymb2 = 2,$/;"	e	enum:DILPRETRAILSYMBOLS
+chirpSymb3	h/ntrxutil.h	/^    chirpSymb3 = 3$/;"	e	enum:DILPRETRAILSYMBOLS
+clbLED	ntrxdil.c	/^MyDword32T clbLED;$/;"	v
+cmd	h/nnspi.h	/^	unsigned char cmd;$/;"	m	struct:traceS
+corrBitErrCount	h/ntrxdil.h	/^    MyDword32T   corrBitErrCount;$/;"	m	struct:RXstat
+crc2_1	h/ntrxdil.h	/^    crc2_1,$/;"	e	enum:__anon3
+crc2_2	h/ntrxdil.h	/^    crc2_2,$/;"	e	enum:__anon3
+crc2_3	h/ntrxdil.h	/^    crc2_3$/;"	e	enum:__anon3
+cs_off	h/ntrxdil.h	/^    cs_off,$/;"	e	enum:__anon4
+cs_rssi	h/ntrxdil.h	/^    cs_rssi,$/;"	e	enum:__anon4
+cs_symb_rssi	h/ntrxdil.h	/^    cs_symb_rssi$/;"	e	enum:__anon4
+cs_symbols	h/ntrxdil.h	/^    cs_symbols,$/;"	e	enum:__anon4
+curCh	ntrxutil.c	/^MyByte8T   curCh = 0;$/;"	v
+data	h/nnspi.h	/^	unsigned char data[TRACE_DATA_LEN];$/;"	m	struct:traceS
+data_rate_1mps	h/ntrxdil.h	/^    data_rate_1mps$/;"	e	enum:__anon6
+data_rate_500kps	h/ntrxdil.h	/^    data_rate_500kps,$/;"	e	enum:__anon6
+deadtime	ntrxiqpar.c	/^    MyByte8T deadtime;$/;"	m	struct:NTRXagcValSt	file:
+delay	ntrxranging.c	/^MyDouble32T delay(MyByte8T *p)$/;"	f
+dest	app.c	/^	MyAddrT    dest;$/;"	m	struct:appMemS	file:
+dev_leds_init	h/led.h	/^static inline void dev_leds_init(void)$/;"	f
+dev_leds_off	h/led.h	/^static inline void dev_leds_off(uint16_t bit)$/;"	f
+dev_leds_on	h/led.h	/^static inline void dev_leds_on(uint16_t bit)$/;"	f
+disp_led	util.c	/^void disp_led(uint8_t val)$/;"	f
+dist	ntrxranging.c	/^MyDouble32T dist(MyByte8T *p1, MyByte8T *p2) $/;"	f
+errLED	ntrxdil.c	/^MyDword32T errLED;$/;"	v
+error_handler	util.c	/^void	error_handler(uint16_t led, uint16_t delay)$/;"	f
+fdma	h/ntrxutil.h	/^        MyByte8T    fdma;$/;"	m	struct:Settings
+first	ntrxinit.c	/^MyBoolT	first = TRUE;$/;"	v
+firstTime	ntrxutil.c	/^static MyByte8T firstTime = 0;$/;"	v	file:
+fixnmap	h/ntrxutil.h	/^        MyByte8T    fixnmap;$/;"	m	struct:Settings
+frameBroadcast	h/ntrxdil.h	/^    frameBroadcast,$/;"	e	enum:__anon2
+frameTimeB	h/ntrxdil.h	/^    frameTimeB$/;"	e	enum:__anon2
+frmTypeAck	h/ntrxutil.h	/^    frmTypeAck     = NA_TypeCodeAck_VC_C,$/;"	e	enum:FRMTYPE
+frmTypeBrdcast	h/ntrxutil.h	/^    frmTypeBrdcast = NA_TypeCodeBrdcast_VC_C,$/;"	e	enum:FRMTYPE
+frmTypeClr2s	h/ntrxutil.h	/^    frmTypeClr2s   = NA_TypeCodeClr2s_VC_C,$/;"	e	enum:FRMTYPE
+frmTypeData	h/ntrxutil.h	/^    frmTypeData    = NA_TypeCodeData_VC_C,$/;"	e	enum:FRMTYPE
+frmTypeReq2s	h/ntrxutil.h	/^    frmTypeReq2s   = NA_TypeCodeReq2s_VC_C,$/;"	e	enum:FRMTYPE
+frmTypeTimeB	h/ntrxutil.h	/^    frmTypeTimeB   = NA_TypeCodeTimeB_VC_C,$/;"	e	enum:FRMTYPE
+frmTypeUndef	h/ntrxutil.h	/^    frmTypeUndef   = NA_TypeCodeUndef_VC_C$/;"	e	enum:FRMTYPE
+getDistance	ntrxranging.c	/^MyDouble32T getDistance(void)$/;"	f
+gpsAvailable	gps.c	/^static char				gpsAvailable=0;$/;"	v	file:
+gpsHDOP	gps.c	/^float   gpsHDOP = 0;$/;"	v
+gpsKORTimeD	gps.c	/^static char			gpsKORTimeD=0;\/\/day$/;"	v	file:
+gpsKORTimeHH	gps.c	/^static char			gpsKORTimeHH=0;\/\/hour$/;"	v	file:
+gpsKORTimeM	gps.c	/^static char			gpsKORTimeM=0;\/\/month$/;"	v	file:
+gpsKORTimeMM	gps.c	/^static char			gpsKORTimeMM=0;\/\/minute$/;"	v	file:
+gpsKORTimeSS	gps.c	/^static char			gpsKORTimeSS=0;\/\/second$/;"	v	file:
+gpsKORTimeY	gps.c	/^static char			gpsKORTimeY=0;\/\/year$/;"	v	file:
+gpsSATUse	gps.c	/^char   	gpsSATUse = 0;$/;"	v
+gpsUTCTime	gps.c	/^static int			gpsUTCTime=0;$/;"	v	file:
+halt	util.c	/^void halt()$/;"	f
+hwclock	hwclock.c	/^MyDword32T	hwclock(void)$/;"	f
+hwclockRestart	hwclock.c	/^void hwclockRestart (MyDword32T start)$/;"	f
+hwclock_init	hwclock.c	/^void hwclock_init(void)$/;"	f
+hwdelay	delay.c	/^inline void hwdelay(uint32_t us)$/;"	f
+iVal	ntrxinit.c	/^const MyByte8T iVal[] = {0x12, 0x03, 0x55, 0x05, 0x66, 0x06, 0x77, 0x07};$/;"	v
+id	h/nnspi.h	/^	int	id;$/;"	m	struct:traceS
+initValue	h/ntrxutil.h	/^    MyByte8T initValue;$/;"	m	struct:NTRXRegCmd
+int16	h/types.h	/^typedef int				int16;$/;"	t
+int32	h/types.h	/^typedef long			int32;$/;"	t
+interrupt	adc.c	/^interrupt(ADC12_VECTOR) adc_int(void)$/;"	f
+interrupt	gps.c	/^interrupt(USART0RX_VECTOR) Uart0Rx(void)$/;"	f
+interrupt	i2c.c	/^interrupt(USART0TX_VECTOR) ISR_I2C(void)$/;"	f
+interrupt	timer.c	/^interrupt(TIMERA0_VECTOR) TIMERA0(void)$/;"	f
+inttime	ntrxiqpar.c	/^    MyInt16T inttime;$/;"	m	struct:NTRXagcValSt	file:
+is_adc_busy	adc.c	/^static uint8_t is_adc_busy = 0;$/;"	v	file:
+is_pending	main.c	/^int	 is_pending = 0;$/;"	v
+jiffies	hwclock.c	/^static	MyDword32T	jiffies = 0;$/;"	v	file:
+key_k1	h/keys.h	29;"	d
+key_k2	h/keys.h	30;"	d
+key_k3	h/keys.h	31;"	d
+lState	ntrxdil.c	/^MyByte8T lState,rState,rDest;$/;"	v
+lastRSSI	h/ntrxdil.h	/^    MyByte8T     lastRSSI;$/;"	m	struct:RXstat
+led1_off	h/led.h	/^static inline void led1_off() { leds_set(1 << 0, LEDS_OFF); }$/;"	f
+led1_on	h/led.h	/^static inline void led1_on() { leds_set(1 << 0, LEDS_ON); }$/;"	f
+led1_toggle	h/led.h	/^static inline void led1_toggle() { leds_set(1 << 0, LEDS_TOGGLE); }$/;"	f
+led2_off	h/led.h	/^static inline void led2_off() { leds_set(1 << 1, LEDS_OFF); }$/;"	f
+led2_on	h/led.h	/^static inline void led2_on() { leds_set(1 << 1, LEDS_ON); }$/;"	f
+led2_toggle	h/led.h	/^static inline void led2_toggle() { leds_set(1 << 1, LEDS_TOGGLE); }$/;"	f
+led3_off	h/led.h	/^static inline void led3_off() { leds_set(1 << 2, LEDS_OFF); }$/;"	f
+led3_on	h/led.h	/^static inline void led3_on() { leds_set(1 << 2, LEDS_ON); }$/;"	f
+led3_toggle	h/led.h	/^static inline void led3_toggle() { leds_set(1 << 2, LEDS_TOGGLE); }$/;"	f
+led4_off	h/led.h	/^static inline void led4_off() { leds_set(1 << 3, LEDS_OFF); }$/;"	f
+led4_on	h/led.h	/^static inline void led4_on() { leds_set(1 << 3, LEDS_ON); }$/;"	f
+led4_toggle	h/led.h	/^static inline void led4_toggle() { leds_set(1 << 3, LEDS_TOGGLE); }$/;"	f
+led5_off	h/led.h	/^static inline void led5_off() { leds_set(1 << 4, LEDS_OFF); }$/;"	f
+led5_on	h/led.h	/^static inline void led5_on() { leds_set(1 << 4, LEDS_ON); }$/;"	f
+led5_toggle	h/led.h	/^static inline void led5_toggle() { leds_set(1 << 4, LEDS_TOGGLE); }$/;"	f
+leds_set	led.c	/^void leds_set(uint16_t bit, uint16_t mode)$/;"	f
+leds_val	led.c	/^uint16_t leds_val = 0;$/;"	v
+len	h/nnspi.h	/^	unsigned char len;$/;"	m	struct:traceS
+liData	h/ntrxtypes.h	/^	void				*liData;$/;"	m	struct:_ppslistt_
+liNext	h/ntrxtypes.h	/^	struct	_ppslistt_	*liNext;$/;"	m	struct:_ppslistt_	typeref:struct:_ppslistt_::_ppslistt_
+liPrev	h/ntrxtypes.h	/^	struct	_ppslistt_	*liPrev;$/;"	m	struct:_ppslistt_	typeref:struct:_ppslistt_::_ppslistt_
+logCh	ntrxutil.c	/^static const MyByte8T logCh[6][2] ={{0x68, 0x5a}, \/* Channel 0: 2.44175 GHz, center of the band, $/;"	v	file:
+lrv	ntrxranging.c	/^static MyByte8T lrv[ARRYLEN]; \/* Local ranging values  *\/$/;"	v	file:
+main	main.c	/^int	main()$/;"	f
+mask	h/ntrxutil.h	/^    MyByte8T mask;$/;"	m	struct:NTRXRegCmd
+memcpy_P	h/ntrxutil.h	78;"	d
+mod2ary	h/ntrxutil.h	/^    mod2ary = NA_ModulationSystem2ary_BC_C,$/;"	e	enum:DILMODSYSTEM
+mod4ary	h/ntrxutil.h	/^    mod4ary = NA_ModulationSystem4ary_BC_C$/;"	e	enum:DILMODSYSTEM
+msdelay	delay.c	/^inline void msdelay(uint16_t ms)$/;"	f
+msp430_calib_prev	dco.c	/^uint16_t msp430_calib_prev;$/;"	v
+msp430_port2_handler	ntrxdil.c	/^void __attribute((interrupt(2))) msp430_port2_handler()$/;"	f
+msp430_timer_init	dco.c	/^void msp430_timer_init()$/;"	f
+nanoInterrupt	ntrxdil.c	/^inline void nanoInterrupt (void)$/;"	f
+nanosetIRQ	nnspi.c	/^void nanosetIRQ(MyBoolT value)$/;"	f
+nreg	ntrxiqpar.c	/^    MyByte8T nreg;$/;"	m	struct:NTRXagcValSt	file:
+ntrxArqCount	ntrxdil.c	/^MyByte8T ntrxArqCount;$/;"	v
+ntrxCal	ntrxutil.c	/^MyByte8T   ntrxCal;$/;"	v
+ntrxIrqStatus	ntrxutil.c	/^MyByte8T ntrxIrqStatus[2];$/;"	v
+ntrxMacAddr	ntrxutil.c	/^MyAddressT ntrxMacAddr;$/;"	v
+ntrxRun	ntrxutil.c	/^MyBoolT  ntrxRun;$/;"	v
+ntrxShadowReg	ntrxutil.c	/^MyByte8T ntrxShadowReg[SHADOWREGCOUNT];$/;"	v
+ntrxState	ntrxutil.c	/^MyByte8T   ntrxState;$/;"	v
+ntrxTxPoll	ntrxdil.c	/^MyBoolT  ntrxTxPoll;$/;"	v
+operation	h/ntrxutil.h	/^    MyByte8T operation;$/;"	m	struct:NTRXRegCmd
+orunCount	h/ntrxdil.h	/^    MyDword32T   orunCount;$/;"	m	struct:RXstat
+pI2CBuffer	i2c.c	/^static volatile unsigned char	*pI2CBuffer 	 = 0;$/;"	v	file:
+phCarrSensOff	h/ntrxutil.h	/^    phCarrSensOff     = NA_TxPhCarrSensModeOff_VC_C,$/;"	e	enum:PHCARRSENSMODE
+phCarrSensRSSI	h/ntrxutil.h	/^    phCarrSensRSSI    = NA_TxPhCarrSensModeRssi_VC_C,$/;"	e	enum:PHCARRSENSMODE
+phCarrSensSymRSSI	h/ntrxutil.h	/^    phCarrSensSymRSSI = NA_TxPhCarrSensModeSymbolsRssi_VC_C$/;"	e	enum:PHCARRSENSMODE
+phCarrSensSymbols	h/ntrxutil.h	/^    phCarrSensSymbols = NA_TxPhCarrSensModeSymbols_VC_C,$/;"	e	enum:PHCARRSENSMODE
+pwrOutData	h/ntrxutil.h	/^    pwrOutData = 0,$/;"	e	enum:PWROUTTYPE
+pwrOutReqst	h/ntrxutil.h	/^    pwrOutReqst = 1$/;"	e	enum:PWROUTTYPE
+rDest	ntrxdil.c	/^MyByte8T lState,rState,rDest;$/;"	v
+rState	ntrxdil.c	/^MyByte8T lState,rState,rDest;$/;"	v
+rangingConst	h/ntrxutil.h	/^	MyDouble32T    rangingConst;$/;"	m	struct:Settings
+rate1MS	h/ntrxutil.h	/^    rate1MS = NA_SymbolRate1MSymbols_VC_C$/;"	e	enum:DILDATARATE
+rate500kS	h/ntrxutil.h	/^    rate500kS = NA_SymbolRate500kSymbols_VC_C,$/;"	e	enum:DILDATARATE
+rcwd	ntrxdil.c	/^static MyInt16T rcwd = 0;$/;"	v	file:
+regId	h/ntrxutil.h	/^    MyByte8T regId;$/;"	m	struct:NTRXRegCmd
+rrv	ntrxranging.c	/^static MyByte8T rrv[ARRYLEN]; \/* Remote ranging values *\/$/;"	v	file:
+rxIrq	ntrxdil.c	/^MyByte8T rxIrq;$/;"	v
+rxIrqStatus	h/ntrxutil.h	85;"	d
+rxLED	ntrxdil.c	/^MyDword32T rxLED;$/;"	v
+rxLoAdjValues	ntrxutil.c	/^static const MyByte8T rxLoAdjValues[2] = {0x48, 0x0f}; \/* start value for Lo Adjust *\/$/;"	v	file:
+rxStart	ntrxutil.c	/^static MyBoolT rxStart = FALSE;$/;"	v	file:
+sWordRx	h/ntrxutil.h	/^    sWordRx = 1$/;"	e	enum:SETTXRXSWORD
+sWordTx	h/ntrxutil.h	/^    sWordTx = 0,$/;"	e	enum:SETTXRXSWORD
+sd	h/ntrxutil.h	/^        MyByte8T    sd;$/;"	m	struct:Settings
+set1	ntrxranging.c	/^static MyByte8T set1[ARRYLEN], set2[ARRYLEN]; \/* this holds the collected data for calc *\/$/;"	v	file:
+set2	ntrxranging.c	/^static MyByte8T set1[ARRYLEN], set2[ARRYLEN]; \/* this holds the collected data for calc *\/$/;"	v	file:
+set_dco_calib	dco.c	/^void set_dco_calib(int calib)$/;"	f
+settingVal	ntrxutil.c	/^SettingsT settingVal;$/;"	v
+shadow	h/ntrxutil.h	/^    MyByte8T shadow;$/;"	m	struct:NTRXRegCmd
+sr	h/ntrxutil.h	/^        MyByte8T    sr;$/;"	m	struct:Settings
+src	app.c	/^	MyAddrT    src;$/;"	m	struct:appMemS	file:
+staAdd0	h/ntrxutil.h	/^    staAdd0 = 0,$/;"	e	enum:DILSTAADDNO
+staAdd1	h/ntrxutil.h	/^    staAdd1 = 1$/;"	e	enum:DILSTAADDNO
+successCount	h/ntrxdil.h	/^    MyDword32T   successCount;$/;"	m	struct:RXstat
+successCount	h/ntrxdil.h	/^    MyDword32T   successCount;$/;"	m	struct:TXstat
+tbccr0_handler	hwclock.c	/^interrupt(26) tbccr0_handler()  $/;"	f
+test_calib_busywait_delta	dco.c	/^uint16_t test_calib_busywait_delta(int calib)$/;"	f
+thresh1	ntrxiqpar.c	/^    MyByte8T thresh1;$/;"	m	struct:NTRXagcValSt	file:
+thresh2	ntrxiqpar.c	/^    MyByte8T thresh2;$/;"	m	struct:NTRXagcValSt	file:
+tiRecal	ntrxdil.c	/^MyDword32T tiRecal;$/;"	v
+tm_hour	h/ntrxtypes.h	/^	MyInt16T	tm_hour;$/;"	m	struct:_tm_
+tm_isdst	h/ntrxtypes.h	/^	MyInt16T	tm_isdst;$/;"	m	struct:_tm_
+tm_mday	h/ntrxtypes.h	/^	MyInt16T	tm_mday;$/;"	m	struct:_tm_
+tm_min	h/ntrxtypes.h	/^	MyInt16T	tm_min;$/;"	m	struct:_tm_
+tm_mon	h/ntrxtypes.h	/^	MyInt16T	tm_mon;$/;"	m	struct:_tm_
+tm_sec	h/ntrxtypes.h	/^	MyInt16T	tm_sec;$/;"	m	struct:_tm_
+tm_wday	h/ntrxtypes.h	/^	MyInt16T	tm_wday;$/;"	m	struct:_tm_
+tm_yday	h/ntrxtypes.h	/^	MyInt16T	tm_yday;$/;"	m	struct:_tm_
+tm_year	h/ntrxtypes.h	/^	MyInt16T	tm_year;$/;"	m	struct:_tm_
+traceS	h/nnspi.h	/^typedef struct traceS$/;"	s
+traceT	h/nnspi.h	/^} traceT;$/;"	t	typeref:struct:traceS
+trxPollMode	ntrxdil.c	/^static MyBoolT trxPollMode = TRUE;$/;"	v	file:
+txIrq	ntrxdil.c	/^MyByte8T txIrq;$/;"	v
+txIrqStatus	h/ntrxutil.h	84;"	d
+txLED	ntrxdil.c	/^MyDword32T txLED;$/;"	v
+txLoAdjValues	ntrxutil.c	/^static const MyByte8T txLoAdjValues[2] = {0x0b, 0x09}; \/* start value *\/$/;"	v	file:
+uart_init	usart.c	/^void uart_init()$/;"	f
+urunCount	h/ntrxdil.h	/^    MyDword32T   urunCount;$/;"	m	struct:TXstat
+usdelay	delay.c	/^inline void usdelay(uint16_t us)$/;"	f
