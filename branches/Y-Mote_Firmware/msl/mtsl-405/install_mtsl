@@ -1,0 +1,7 @@
+make hmotena
+make hmotena install com=2
+make hmotena install com=3
+make hmotena install com=4
+make hmotena install com=5
+
+
