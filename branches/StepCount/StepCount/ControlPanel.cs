@@ -1076,10 +1076,10 @@ namespace StepCount
                                                             int bM = (stageIndexR_tilt - 1 < 0) ? (stageSize + (stageIndexR_tilt - 1)) : (stageIndexR_tilt - 1);
                                                             int bbM = (stageIndexR_tilt - 2 < 0) ? (stageSize + (stageIndexR_tilt - 2)) : (stageIndexR_tilt - 2);
 
-                                                            int curX = (int)(xcR_tilt[bM] / 2.0f);
-                                                            int curY = (int)(ycR_tilt[bM] / 2.0f);
-                                                            int beforeX = (int)(xcR_tilt[bbM] / 2.0f);
-                                                            int beforeY = (int)(ycR_tilt[bbM] / 2.0f);
+                                                            int curX = (int)(xcR_tilt[bM]);
+                                                            int curY = (int)(ycR_tilt[bM]);
+                                                            int beforeX = (int)(xcR_tilt[bbM]);
+                                                            int beforeY = (int)(ycR_tilt[bbM]);
 
                                                             if (curX != beforeX || curY != beforeY)
                                                             {
@@ -1525,14 +1525,14 @@ namespace StepCount
                     movingDistanceErrorMD = error_receive;
                     movingDistanceErrorM = error_receive;
 
-                    xcM[stageIndexM] = x_receive * 2.0f;
-                    ycM[stageIndexM] = y_receive * 2.0f;
+                    xcM[stageIndexM] = (float)x_receive;
+                    ycM[stageIndexM] = (float)y_receive;
                     stageIndexM++;
                     if (stageIndexM >= stageSize)
                         stageIndexM = 0;
 
-                    xcR_tilt[stageIndexR_tilt] = x_receive * 2.0f;
-                    ycR_tilt[stageIndexR_tilt] = y_receive * 2.0f;
+                    xcR_tilt[stageIndexR_tilt] = (float)x_receive;
+                    ycR_tilt[stageIndexR_tilt] = (float)y_receive;
                     stageIndexR_tilt++;
                     if (stageIndexR_tilt >= stageSize)
                         stageIndexR_tilt = 0;
