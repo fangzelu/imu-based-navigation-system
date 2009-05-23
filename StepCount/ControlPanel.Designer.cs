@@ -46,6 +46,8 @@
             this.StepIntervalLabel = new System.Windows.Forms.Label();
             this.StepCountLabel = new System.Windows.Forms.Label();
             this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.mErrorD = new System.Windows.Forms.Label();
+            this.mErrorM = new System.Windows.Forms.Label();
             this.mErrorMD = new System.Windows.Forms.Label();
             this.mErrorEulerD = new System.Windows.Forms.Label();
             this.mErrorTestD = new System.Windows.Forms.Label();
@@ -104,8 +106,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TrainingDone = new System.Windows.Forms.Button();
             this.TraningStart = new System.Windows.Forms.Button();
-            this.mErrorM = new System.Windows.Forms.Label();
-            this.mErrorD = new System.Windows.Forms.Label();
+            this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.sPosition_3 = new System.Windows.Forms.RadioButton();
+            this.sPosition_2 = new System.Windows.Forms.RadioButton();
+            this.sPosition_1 = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -128,6 +132,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.StartY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StartX)).BeginInit();
             this.groupBox19.SuspendLayout();
+            this.groupBox17.SuspendLayout();
             this.SuspendLayout();
             // 
             // Connect_Bt
@@ -239,7 +244,7 @@
             this.groupBox4.Controls.Add(this.groupBox7);
             this.groupBox4.Controls.Add(this.groupBox6);
             this.groupBox4.Controls.Add(this.groupBox5);
-            this.groupBox4.Location = new System.Drawing.Point(12, 114);
+            this.groupBox4.Location = new System.Drawing.Point(12, 164);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(430, 314);
             this.groupBox4.TabIndex = 9;
@@ -330,6 +335,24 @@
             this.groupBox16.TabIndex = 8;
             this.groupBox16.TabStop = false;
             this.groupBox16.Text = "Error";
+            // 
+            // mErrorD
+            // 
+            this.mErrorD.Location = new System.Drawing.Point(14, 105);
+            this.mErrorD.Name = "mErrorD";
+            this.mErrorD.Size = new System.Drawing.Size(50, 13);
+            this.mErrorD.TabIndex = 7;
+            this.mErrorD.Text = "-";
+            this.mErrorD.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // mErrorM
+            // 
+            this.mErrorM.Location = new System.Drawing.Point(14, 74);
+            this.mErrorM.Name = "mErrorM";
+            this.mErrorM.Size = new System.Drawing.Size(50, 13);
+            this.mErrorM.TabIndex = 6;
+            this.mErrorM.Text = "-";
+            this.mErrorM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // mErrorMD
             // 
@@ -849,7 +872,7 @@
             this.groupBox19.Controls.Add(this.label1);
             this.groupBox19.Controls.Add(this.TrainingDone);
             this.groupBox19.Controls.Add(this.TraningStart);
-            this.groupBox19.Location = new System.Drawing.Point(12, 435);
+            this.groupBox19.Location = new System.Drawing.Point(12, 485);
             this.groupBox19.Name = "groupBox19";
             this.groupBox19.Size = new System.Drawing.Size(430, 64);
             this.groupBox19.TabIndex = 11;
@@ -912,29 +935,60 @@
             this.TraningStart.UseVisualStyleBackColor = true;
             this.TraningStart.Click += new System.EventHandler(this.TraningStart_Click);
             // 
-            // mErrorM
+            // groupBox17
             // 
-            this.mErrorM.Location = new System.Drawing.Point(14, 74);
-            this.mErrorM.Name = "mErrorM";
-            this.mErrorM.Size = new System.Drawing.Size(50, 13);
-            this.mErrorM.TabIndex = 6;
-            this.mErrorM.Text = "-";
-            this.mErrorM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.groupBox17.Controls.Add(this.sPosition_3);
+            this.groupBox17.Controls.Add(this.sPosition_2);
+            this.groupBox17.Controls.Add(this.sPosition_1);
+            this.groupBox17.Location = new System.Drawing.Point(12, 114);
+            this.groupBox17.Name = "groupBox17";
+            this.groupBox17.Size = new System.Drawing.Size(430, 44);
+            this.groupBox17.TabIndex = 12;
+            this.groupBox17.TabStop = false;
+            this.groupBox17.Text = "Start Position";
             // 
-            // mErrorD
+            // sPosition_3
             // 
-            this.mErrorD.Location = new System.Drawing.Point(14, 105);
-            this.mErrorD.Name = "mErrorD";
-            this.mErrorD.Size = new System.Drawing.Size(50, 13);
-            this.mErrorD.TabIndex = 7;
-            this.mErrorD.Text = "-";
-            this.mErrorD.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.sPosition_3.AutoSize = true;
+            this.sPosition_3.Location = new System.Drawing.Point(175, 22);
+            this.sPosition_3.Name = "sPosition_3";
+            this.sPosition_3.Size = new System.Drawing.Size(71, 16);
+            this.sPosition_3.TabIndex = 2;
+            this.sPosition_3.TabStop = true;
+            this.sPosition_3.Text = "왼쪽아래";
+            this.sPosition_3.UseVisualStyleBackColor = true;
+            this.sPosition_3.CheckedChanged += new System.EventHandler(this.sPosition_3_CheckedChanged);
+            // 
+            // sPosition_2
+            // 
+            this.sPosition_2.AutoSize = true;
+            this.sPosition_2.Location = new System.Drawing.Point(91, 22);
+            this.sPosition_2.Name = "sPosition_2";
+            this.sPosition_2.Size = new System.Drawing.Size(55, 16);
+            this.sPosition_2.TabIndex = 1;
+            this.sPosition_2.TabStop = true;
+            this.sPosition_2.Text = "A관쪽";
+            this.sPosition_2.UseVisualStyleBackColor = true;
+            this.sPosition_2.CheckedChanged += new System.EventHandler(this.sPosition_2_CheckedChanged);
+            // 
+            // sPosition_1
+            // 
+            this.sPosition_1.AutoSize = true;
+            this.sPosition_1.Location = new System.Drawing.Point(7, 21);
+            this.sPosition_1.Name = "sPosition_1";
+            this.sPosition_1.Size = new System.Drawing.Size(47, 16);
+            this.sPosition_1.TabIndex = 0;
+            this.sPosition_1.TabStop = true;
+            this.sPosition_1.Text = "로비";
+            this.sPosition_1.UseVisualStyleBackColor = true;
+            this.sPosition_1.CheckedChanged += new System.EventHandler(this.sPosition_1_CheckedChanged);
             // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(457, 511);
+            this.ClientSize = new System.Drawing.Size(457, 564);
+            this.Controls.Add(this.groupBox17);
             this.Controls.Add(this.groupBox19);
             this.Controls.Add(this.groupBox18);
             this.Controls.Add(this.groupBox4);
@@ -967,6 +1021,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.StartY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.StartX)).EndInit();
             this.groupBox19.ResumeLayout(false);
+            this.groupBox17.ResumeLayout(false);
+            this.groupBox17.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1051,6 +1107,10 @@
         private System.Windows.Forms.Label mErrorEulerD;
         private System.Windows.Forms.Label mErrorD;
         private System.Windows.Forms.Label mErrorM;
+        private System.Windows.Forms.GroupBox groupBox17;
+        private System.Windows.Forms.RadioButton sPosition_3;
+        private System.Windows.Forms.RadioButton sPosition_2;
+        private System.Windows.Forms.RadioButton sPosition_1;
     }
 }
 

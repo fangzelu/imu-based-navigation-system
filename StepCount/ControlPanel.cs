@@ -1542,6 +1542,27 @@ namespace StepCount
 
             base.WndProc(ref m);
         }
+
+        private void sPosition_1_CheckedChanged(object sender, EventArgs e)
+        {
+            StartX.Value = 20;
+            StartY.Value = 4;
+        }
+
+        private void sPosition_2_CheckedChanged(object sender, EventArgs e)
+        {
+            StartX.Value = -26;
+            StartY.Value = 20;
+        }
+
+        private void sPosition_3_CheckedChanged(object sender, EventArgs e)
+        {
+            StartX.Value = -26;
+            StartY.Value = -29;
+        }
+
+
+
     }
 
     public class Axis
