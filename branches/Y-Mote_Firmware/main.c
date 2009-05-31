@@ -166,26 +166,22 @@ int	main()
 */
 //===========================================
 
-		if(bt_status != BTConsole)
+		if(BTConsole == OFF)
 		{
-			if(BTConsole == OFF)
-			{
-				_DINT();
-				uart_init();
-				_EINT();
-				SCIDebugExtSelect(SCI_DEBUG);
-				led3_off();				
-			}
-			else
-			{
-				_DINT();
-				InitBTUart();
-				_EINT();
-				SCIDebugExtSelect(SCI_BT);
-				led3_on();
-			}
+			_DINT();
+			uart_init();
+			_EINT();
+			SCIDebugExtSelect(SCI_DEBUG);
+			led3_off();				
 		}
-		bt_status = BTConsole;
+		else
+		{
+			_DINT();
+			InitBTUart();
+			_EINT();
+			SCIDebugExtSelect(SCI_BT);
+			led3_on();
+		}
 
 		TxBinary(&(imu.start_char), (uint8_t)sizeof(char));
 
