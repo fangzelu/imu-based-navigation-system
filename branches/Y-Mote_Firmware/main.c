@@ -66,6 +66,8 @@ int	main()
 
 	uint8_t i;
 
+	uint16_t bt_status = BTConsole;
+
 	imu_packet imu;
 	imu.start_char = '*';
 	imu.end_char = '%';
@@ -164,22 +166,26 @@ int	main()
 */
 //===========================================
 
-		if(BTConsole == OFF)
+		if(bt_status != BTConsole)
 		{
-			_DINT();
-			uart_init();
-			_EINT();
-			SCIDebugExtSelect(SCI_DEBUG);
-			led3_off();
+			if(BTConsole == OFF)
+			{
+				_DINT();
+				uart_init();
+				_EINT();
+				SCIDebugExtSelect(SCI_DEBUG);
+				led3_off();				
+			}
+			else
+			{
+				_DINT();
+				InitBTUart();
+				_EINT();
+				SCIDebugExtSelect(SCI_BT);
+				led3_on();
+			}
 		}
-		else
-		{
-			_DINT();
-			InitBTUart();
-			_EINT();
-			SCIDebugExtSelect(SCI_BT);
-			led3_on();
-		}
+		bt_status = BTConsole;
 
 		TxBinary(&(imu.start_char), (uint8_t)sizeof(char));
 
