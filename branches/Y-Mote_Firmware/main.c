@@ -30,7 +30,7 @@
 
 #define		GYRO_ENABLE		ON
 #define		ACCEL_ENABLE	ON
-#define		COMPASS_ENABLE	OFF
+#define		COMPASS_ENABLE	ON
 #define		GPS_ENABLE		OFF
 
 //nanoloc//////
@@ -211,14 +211,17 @@ int	main()
 		//WAIT_ADC();
 #endif
 
-		TxBinary(&(imu.end_char), (uint8_t)sizeof(char));
 
 #if COMPASS_ENABLE == ON
 		CompassX = ReadCompassXAxis();
+		TxBinary(&CompassX, (uint8_t)sizeof(uint16_t));
 		CompassY = ReadCompassYAxis();
+		TxBinary(&CompassY, (uint8_t)sizeof(uint16_t));
 		CompassZ = ReadCompassZAxis();
+		TxBinary(&CompassZ, (uint8_t)sizeof(uint16_t));
 #endif
 
+		TxBinary(&(imu.end_char), (uint8_t)sizeof(char));
 
 
 #if RF_ENABLE == ON

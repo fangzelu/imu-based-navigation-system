@@ -100,7 +100,7 @@ interrupt(USART0RX_VECTOR) Uart0Rx(void)
 
 	else if(UartType == SCI_BT)
 	{
-		//led1_toggle();
+		led2_toggle();
 	}
 
 }
