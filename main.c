@@ -30,7 +30,7 @@
 
 #define		GYRO_ENABLE		ON
 #define		ACCEL_ENABLE	ON
-#define		COMPASS_ENABLE	ON
+#define		COMPASS_ENABLE	OFF
 #define		GPS_ENABLE		OFF
 
 //nanoloc//////
@@ -195,8 +195,8 @@ int	main()
 		adc_get(ACC_Z_CHANNEL);
 		TxBinary(&(ADCResult[ACC_Z_CHANNEL]), (uint8_t)sizeof(uint16_t));
 		//WAIT_ADC();
-		led1_toggle();
-		TxPrintf("Accel Done\r\n");
+		//led1_toggle();
+		//TxPrintf("Accel Done\r\n");
 #endif
 
 #if GYRO_ENABLE == ON
@@ -211,8 +211,8 @@ int	main()
 		adc_get(GYRO2_Y_CHANNEL);
 		TxBinary(&(ADCResult[GYRO2_Y_CHANNEL]), (uint8_t)sizeof(uint16_t));
 		//WAIT_ADC();
-		led2_toggle();
-		TxPrintf("Gyro Done\r\n");
+		//led2_toggle();
+		//TxPrintf("Gyro Done\r\n");
 #endif
 
 
@@ -224,8 +224,8 @@ int	main()
 		CompassZ = ReadCompassZAxis();
 		TxBinary(&CompassZ, (uint8_t)sizeof(uint16_t));
 
-		led4_toggle();
-		TxPrintf("Compass Done\r\n");
+		//led4_toggle();
+		//TxPrintf("Compass Done\r\n");
 #endif
 
 		TxBinary(&(imu.end_char), (uint8_t)sizeof(char));
