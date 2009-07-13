@@ -196,6 +196,7 @@ int	main()
 		TxBinary(&(ADCResult[ACC_Z_CHANNEL]), (uint8_t)sizeof(uint16_t));
 		//WAIT_ADC();
 		led1_toggle();
+		TxPrintf("Accel Done\r\n");
 #endif
 
 #if GYRO_ENABLE == ON
@@ -211,6 +212,7 @@ int	main()
 		TxBinary(&(ADCResult[GYRO2_Y_CHANNEL]), (uint8_t)sizeof(uint16_t));
 		//WAIT_ADC();
 		led2_toggle();
+		TxPrintf("Gyro Done\r\n");
 #endif
 
 
@@ -223,6 +225,7 @@ int	main()
 		TxBinary(&CompassZ, (uint8_t)sizeof(uint16_t));
 
 		led4_toggle();
+		TxPrintf("Compass Done\r\n");
 #endif
 
 		TxBinary(&(imu.end_char), (uint8_t)sizeof(char));
